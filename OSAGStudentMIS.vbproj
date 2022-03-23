@@ -92,6 +92,9 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="homepages\memberHome.aspx" />
+    <Content Include="homepages\memberHome.aspx.cs" />
+    <Content Include="homepages\memberHome.aspx.designer.cs" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
