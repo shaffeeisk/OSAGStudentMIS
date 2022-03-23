@@ -106,6 +106,7 @@
     <Compile Include="templates\ViewTable.Master.designer.cs">
       <DependentUpon>ViewTable.Master</DependentUpon>
     </Compile>
+    <Compile Include="_appcode\PasswordHash.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -122,7 +123,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="admin\" />
     <Folder Include="homepages\" />
+    <Folder Include="internships\" />
+    <Folder Include="jobs\" />
+    <Folder Include="login\" />
+    <Folder Include="mentor\" />
+    <Folder Include="opportunities\" />
+    <Folder Include="profiles\" />
+    <Folder Include="student\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
