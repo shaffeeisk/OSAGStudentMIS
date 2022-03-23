@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Lab2
+namespace OSAG
 {
-    public partial class viewTableTemplate : System.Web.UI.MasterPage
+    public partial class ViewTable : System.Web.UI.MasterPage
     {
         // on page load kick user from ALL pages requiring login
         // otherwise populate login bar with username

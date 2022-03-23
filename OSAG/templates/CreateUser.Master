@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="createUserTemplate.Master.cs" Inherits="Lab2.createTemplate" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CreateUser.Master.cs" Inherits="OSAG.CreateUser" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        Created by Emily Rohde & Shaffee Iskandar
+        Created by Madison Solutions
         <br />
         <br />
         <asp:Label Text="Change Page" runat="server" />

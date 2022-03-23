@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="homeTemplate.Master.cs" Inherits="Lab2.homeTemplate" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.Master.cs" Inherits="OSAG.Home" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        Created by Emily Rohde & Shaffee Iskandar
+        Created by Madison Solutions
         <br />
         <br />
         <div style="margin-left: auto; margin-right: auto; text-align: center;">

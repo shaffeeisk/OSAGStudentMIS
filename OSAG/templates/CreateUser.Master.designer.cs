@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lab2
+namespace OSAG
 {
 
 
-    public partial class createTemplate
+    public partial class CreateUser
     {
 
         /// <summary>

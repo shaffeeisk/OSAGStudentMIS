@@ -1,16 +1,16 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="memberTemplate.Master.cs" Inherits="Lab2.memberTemplate" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Edit.Master.cs" Inherits="OSAG.Edit" %>
 
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
-    <title>DukeGroup</title>
+    <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        Created by Emily Rohde & Shaffee Iskandar
+        Created by Madison Solutions
         <div style="margin-left: auto; margin-right: auto; text-align: right">
             <asp:Image ID="imgUser" runat="server" ImageUrl="/images/user.png" Width="50" Height="50" />
             <asp:Label ID="lblUsername" runat="server" Text="" />
@@ -24,7 +24,6 @@
             <asp:ListItem Text=" "></asp:ListItem>
             <asp:ListItem Text="Homepage"></asp:ListItem>
             <asp:ListItem Text="View Profile"></asp:ListItem>
-            <asp:ListItem Text="View Student Profiles"></asp:ListItem>
             <asp:ListItem Text="View Scholarships"></asp:ListItem>
             <asp:ListItem Text="View Internships"></asp:ListItem>
             <asp:ListItem Text="View Jobs"></asp:ListItem>
@@ -36,11 +35,6 @@
             <br />
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-            <br />
-            <br />
-            <br />
-            <asp:Button ID="btnReturnHome" runat="server" Text="Return To Member Home" OnClick="btnReturnHome_Click"
-                BackColor="LightSteelBlue" />
         </div>
     </form>
 </body>

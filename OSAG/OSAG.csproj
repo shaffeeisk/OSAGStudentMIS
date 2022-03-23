@@ -71,49 +71,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="templates\createUserTemplate.Master.cs">
-      <DependentUpon>createUserTemplate.Master</DependentUpon>
+    <Compile Include="templates\CreateUser.Master.cs">
+      <DependentUpon>CreateUser.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="templates\createUserTemplate.Master.designer.cs">
-      <DependentUpon>createUserTemplate.Master</DependentUpon>
+    <Compile Include="templates\CreateUser.Master.designer.cs">
+      <DependentUpon>CreateUser.Master</DependentUpon>
     </Compile>
-    <Compile Include="templates\editTemplate.Master.cs">
-      <DependentUpon>editTemplate.Master</DependentUpon>
+    <Compile Include="templates\Edit.Master.cs">
+      <DependentUpon>Edit.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="templates\editTemplate.Master.designer.cs">
-      <DependentUpon>editTemplate.Master</DependentUpon>
+    <Compile Include="templates\Edit.Master.designer.cs">
+      <DependentUpon>Edit.Master</DependentUpon>
     </Compile>
-    <Compile Include="templates\homeTemplate.Master.cs">
-      <DependentUpon>homeTemplate.Master</DependentUpon>
+    <Compile Include="templates\Home.Master.cs">
+      <DependentUpon>Home.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="templates\homeTemplate.Master.designer.cs">
-      <DependentUpon>homeTemplate.Master</DependentUpon>
+    <Compile Include="templates\Home.Master.designer.cs">
+      <DependentUpon>Home.Master</DependentUpon>
     </Compile>
-    <Compile Include="templates\memberTemplate.Master.cs">
-      <DependentUpon>memberTemplate.Master</DependentUpon>
+    <Compile Include="templates\Member.Master.cs">
+      <DependentUpon>Member.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="templates\memberTemplate.Master.designer.cs">
-      <DependentUpon>memberTemplate.Master</DependentUpon>
+    <Compile Include="templates\Member.Master.designer.cs">
+      <DependentUpon>Member.Master</DependentUpon>
     </Compile>
-    <Compile Include="templates\viewTableTemplate.Master.cs">
-      <DependentUpon>viewTableTemplate.Master</DependentUpon>
+    <Compile Include="templates\ViewTable.Master.cs">
+      <DependentUpon>ViewTable.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="templates\viewTableTemplate.Master.designer.cs">
-      <DependentUpon>viewTableTemplate.Master</DependentUpon>
+    <Compile Include="templates\ViewTable.Master.designer.cs">
+      <DependentUpon>ViewTable.Master</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="templates\createUserTemplate.Master" />
-    <Content Include="templates\editTemplate.Master" />
-    <Content Include="templates\homeTemplate.Master" />
-    <Content Include="templates\memberTemplate.Master" />
-    <Content Include="templates\viewTableTemplate.Master" />
+    <Content Include="templates\CreateUser.Master" />
+    <Content Include="templates\Edit.Master" />
+    <Content Include="templates\Home.Master" />
+    <Content Include="templates\Member.Master" />
+    <Content Include="templates\ViewTable.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

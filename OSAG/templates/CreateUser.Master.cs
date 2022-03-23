@@ -10,9 +10,9 @@ using System.Data.SqlClient;
 // web.config imports
 using System.Web.Configuration;
 
-namespace Lab2
+namespace OSAG
 {
-    public partial class createTemplate : System.Web.UI.MasterPage
+    public partial class CreateUuser : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

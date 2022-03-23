@@ -1,16 +1,16 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="viewTableTemplate.Master.cs" Inherits="Lab2.viewTableTemplate" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Member.Master.cs" Inherits="OSAG.Member" %>
 
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
-    <title></title>
+    <title>DukeGroup</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-             Created by Emily Rohde & Shaffee Iskandar
+        Created by Madison Solutions
         <div style="margin-left: auto; margin-right: auto; text-align: right">
             <asp:Image ID="imgUser" runat="server" ImageUrl="/images/user.png" Width="50" Height="50" />
             <asp:Label ID="lblUsername" runat="server" Text="" />
@@ -23,7 +23,8 @@
         <asp:DropDownList ID="navigation" runat="server" OnSelectedIndexChanged="navigation_SelectedIndexChanged" AutoPostBack="true">
             <asp:ListItem Text=" "></asp:ListItem>
             <asp:ListItem Text="Homepage"></asp:ListItem>
-            <asp:ListItem Text="View Student Profiles" ID="viewStudent"></asp:ListItem>
+            <asp:ListItem Text="View Profile"></asp:ListItem>
+            <asp:ListItem Text="View Student Profiles"></asp:ListItem>
             <asp:ListItem Text="View Scholarships"></asp:ListItem>
             <asp:ListItem Text="View Internships"></asp:ListItem>
             <asp:ListItem Text="View Jobs"></asp:ListItem>

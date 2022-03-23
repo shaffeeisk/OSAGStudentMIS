@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lab3
+namespace OSAG
 {
 
 
-    public partial class editTemplate
+    public partial class ViewTable
     {
 
         /// <summary>
@@ -69,6 +69,15 @@ namespace Lab3
         protected global::System.Web.UI.WebControls.DropDownList navigation;
 
         /// <summary>
+        /// viewStudent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListItem viewStudent;
+
+        /// <summary>
         /// Image1 control.
         /// </summary>
         /// <remarks>
@@ -85,5 +94,14 @@ namespace Lab3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+
+        /// <summary>
+        /// btnReturnHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReturnHome;
     }
 }
