@@ -12,7 +12,7 @@ using System.Web.Configuration;
 
 namespace OSAG
 {
-    public partial class CreateUuser : System.Web.UI.MasterPage
+    public partial class CreateUser : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
