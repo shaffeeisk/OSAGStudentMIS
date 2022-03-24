@@ -20,19 +20,19 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) // so data does not replace itself when clicking button to commit changes
-            {                // i forgot button clicks cause postback.
-                try
-                {
-                    populatePage();
-                }
-                catch (SqlException)
-                {
-                    Session["MustLogIn"] = "You must log in to access that page.";
-                    Response.Redirect("/login/Login.aspx");
-                    throw;
-                }
-            }
+            //if (!IsPostBack) // so data does not replace itself when clicking button to commit changes
+            //{                // i forgot button clicks cause postback.
+            //    try
+            //    {
+            //        populatePage();
+            //    }
+            //    catch (SqlException)
+            //    {
+            //        Session["MustLogIn"] = "You must log in to access that page.";
+            //        Response.Redirect("/login/Login.aspx");
+            //        throw;
+            //    }
+            //}
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)

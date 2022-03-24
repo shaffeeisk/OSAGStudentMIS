@@ -20,17 +20,17 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                if (!IsPostBack)
-                    populatePage();
-            }
-            catch (SqlException)
-            {
-                Session["MustLogIn"] = "You must log in to access that page.";
-                Response.Redirect("/login/Login.aspx");
-                throw;
-            }
+            //try
+            //{
+            //    if (!IsPostBack)
+            //        populatePage();
+            //}
+            //catch (SqlException)
+            //{
+            //    Session["MustLogIn"] = "You must log in to access that page.";
+            //    Response.Redirect("/login/Login.aspx");
+            //    throw;
+            //}
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)

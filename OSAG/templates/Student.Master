@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Student.master.cs" Inherits="OSAG.Student" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Student.Master.cs" Inherits="OSAG.Student" %>
 
 <!DOCTYPE html>
 
@@ -14,12 +14,12 @@
             <asp:Image ID="imgUser" runat="server" ImageUrl="/_images/user.png" Width="50" Height="50" />
             <asp:Label ID="lblUsername" runat="server" Text="" />
             <br />
-            <asp:Button ID="btnLogOut" runat="server" Text="<- Log Out" OnClick="btnLogOut_Click" BackColor="Tomato" />
+            <asp:Button ID="btnLogOut" runat="server" Text="<- Log Out" OnClick="btnLogOut_Click"    BackColor="Tomato" />
         </div>
         <br />
         <asp:Label Text="Change Page" runat="server" />
         <br />
-        <asp:DropDownList ID="navigation" runat="server" OnSelectedIndexChanged="navigation_SelectedIndexChanged" AutoPostBack="true">
+        <asp:DropDownList ID="navigation" runat="server" OnSelectedIndexChanged="navigation_SelectedIndexChanged"   AutoPostBack="true">
             <asp:ListItem Text=" "></asp:ListItem>
             <asp:ListItem Text="Homepage"></asp:ListItem>
             <asp:ListItem Text="View Profile"></asp:ListItem>
@@ -37,7 +37,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="btnReturnHome" runat="server" Text="Return To Student Home" OnClick="btnReturnHome_Click"
+            <asp:Button ID="btnReturnHome" runat="server" Text="Return To Student Home" OnClick="btnReturnHome_Click"   
                 BackColor="LightSkyBlue" />
         </div>
 
