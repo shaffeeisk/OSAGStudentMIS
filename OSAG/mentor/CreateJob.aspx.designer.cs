@@ -69,22 +69,22 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.DropDownList ddlTime;
 
         /// <summary>
-        /// lblEmployer control.
+        /// lblCompany control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmployer;
+        protected global::System.Web.UI.WebControls.Label lblCompany;
 
         /// <summary>
-        /// ddlEmployer control.
+        /// ddlCompany control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmployer;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCompany;
 
         /// <summary>
         /// btnSaveJob control.
@@ -114,12 +114,12 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.Button btnClear;
 
         /// <summary>
-        /// sqlsrcListEmployers control.
+        /// sqlsrcListCompanys control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcListEmployers;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcListCompanys;
     }
 }

@@ -20,12 +20,12 @@ namespace OSAG.mentor
 
         }
 
-        protected void btnSaveJob_Click()
+        protected void btnSaveJob_Click(object sender, EventArgs e)
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
-            String sqlQuery = "INSERT INTO Job (Position, Salary, TimeReq, EmployerID) " +
-                "VALUES (@Position, @Salary, @TimeReq, @EmployerID);";
+            String sqlQuery = "INSERT INTO Job (Position, Salary, TimeReq, CompanyID) " +
+                "VALUES (@Position, @Salary, @TimeReq, @CompanyID);";
 
             // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -36,7 +36,7 @@ namespace OSAG.mentor
             // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
             sqlCommand.Parameters.AddWithValue("@Position", validate(enterJobName.Value.ToString()));
             sqlCommand.Parameters.AddWithValue("@Salary", validate(enterSalary.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@EmployerID", ddlEmployer.SelectedValue.ToString());
+            sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
             if (ddlTime.SelectedValue.ToString() == "0") // handle null entry
                 sqlCommand.Parameters.AddWithValue("@TimeReq", DBNull.Value);
             else
@@ -52,7 +52,7 @@ namespace OSAG.mentor
             ClearJobData();
         }
 
-        protected void btnClear_Click()
+        protected void btnClear_Click(object sender, EventArgs e)
         {
             ClearJobData();
             // force postback to update table
@@ -64,7 +64,7 @@ namespace OSAG.mentor
             enterJobName.Value = "";
             enterSalary.Value = "";
             ddlTime.SelectedValue = "";
-            ddlEmployer.SelectedValue = "";
+            ddlCompany.SelectedValue = "";
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.

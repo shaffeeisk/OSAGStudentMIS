@@ -24,8 +24,8 @@ namespace OSAG.mentor
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
-            String sqlQuery = "INSERT INTO Internship (Position, PayStatus, EmployerID) " +
-                "VALUES (@Position, @PayStatus, @EmployerID);";
+            String sqlQuery = "INSERT INTO Internship (Position, PayStatus, CompanyID) " +
+                "VALUES (@Position, @PayStatus, @CompanyID);";
 
             // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -36,7 +36,7 @@ namespace OSAG.mentor
             // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
             sqlCommand.Parameters.AddWithValue("@Position", validate(enterInternshipName.Value.ToString()));
             sqlCommand.Parameters.AddWithValue("@PayStatus", ddlPay.SelectedValue.ToString());
-            sqlCommand.Parameters.AddWithValue("@EmployerID", ddlEmployer.SelectedValue.ToString());
+            sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -52,7 +52,7 @@ namespace OSAG.mentor
         {
             enterInternshipName.Value = "";
             ddlPay.SelectedValue = "";
-            ddlEmployer.SelectedValue = "(Select a Company)";
+            ddlCompany.SelectedValue = "(Select a Company)";
         }
 
         protected void btnClear_Click1(object sender, EventArgs e)

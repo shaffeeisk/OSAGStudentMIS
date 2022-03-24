@@ -20,7 +20,7 @@ namespace OSAG.mentor
 
         }
 
-        protected void btnSaveSchol_Click()
+        protected void btnSaveSchol_Click(object sender, EventArgs e)
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
@@ -47,9 +47,8 @@ namespace OSAG.mentor
             ClearScholData();
         }
 
-        protected void btnClear_Click()
+        protected void btnClear_Click(object sender, EventArgs e)
         {
-
             ClearScholData();
             // force postback to update table
             Response.Redirect("/mentor/CreateScholarship.aspx");

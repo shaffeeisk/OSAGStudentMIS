@@ -10,7 +10,7 @@
     <input id="enterAmount" type="number" max="2147483647" runat="server" />
     <br />
     <br />
-    <asp:Button ID="btnSaveSchol" Text="Save ->" runat="server" OnClick="btnSaveSchol_Click"     />
+    <asp:Button ID="btnSaveSchol" Text="Save ->" runat="server" OnClick="btnSaveSchol_Click" />
     <br />
     <br />
     <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>

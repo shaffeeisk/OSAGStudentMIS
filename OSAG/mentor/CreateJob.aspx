@@ -19,11 +19,11 @@
         </asp:DropDownList>
         <br />
         <br />
-        <asp:Label ID="lblEmployer" runat="server" Text="Choose Company:"></asp:Label>
-        <asp:DropDownList ID="ddlEmployer" runat="server" AutoPostBack="true" Width="177px"
-        DataSourceID="sqlsrcListEmployers"
-        DataTextField="EmpName"
-        DataValueField="EmployerID"
+        <asp:Label ID="lblCompany" runat="server" Text="Choose Company:"></asp:Label>
+        <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="177px"
+        DataSourceID="sqlsrcListCompanys"
+        DataTextField="CompanyName"
+        DataValueField="CompanyID"
         AppendDataBoundItems="true">
         <asp:ListItem Selected="True" Text="(Select a company)" Value=""></asp:ListItem>
     </asp:DropDownList>
@@ -37,8 +37,8 @@
         <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click"  Font-Bold="true" BackColor="OrangeRed" />
     </div>
  <asp:SqlDataSource
-        ID="sqlsrcListEmployers"
+        ID="sqlsrcListCompanys"
         runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT EmpName, EmployerID FROM Employer;"></asp:SqlDataSource>
+        SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>
 </asp:Content>

@@ -33,7 +33,7 @@ namespace OSAG.admin
         protected void btnApprove_Click(object sender, EventArgs e)
         {
             // update user
-            String sqlQuery = "UPDATE @UserType SET ##APPROVAL BINARY?## =  WHERE Username = @Username;";
+            String sqlQuery = "UPDATE @UserType SET IsApproved = 1 WHERE Username = @Username;";
 
             // def connections, create commands and insert parameters
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
