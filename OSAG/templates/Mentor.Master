@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Member.Master.cs" Inherits="OSAG.Member" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Mentor.Master.cs" Inherits="OSAG.Member" %>
 
 <!DOCTYPE html>
 

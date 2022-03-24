@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace OSAG
 {
-    public partial class Member : System.Web.UI.MasterPage
+    public partial class Mentor : System.Web.UI.MasterPage
     {
         // on page load kick user from ALL pages requiring member login
         protected void Page_Load(object sender, EventArgs e)

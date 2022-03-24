@@ -11,7 +11,7 @@ namespace OSAG
 {
 
 
-    public partial class Member
+    public partial class Mentor
     {
 
         /// <summary>

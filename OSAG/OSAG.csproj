@@ -92,12 +92,12 @@
     <Compile Include="templates\Home.Master.designer.cs">
       <DependentUpon>Home.Master</DependentUpon>
     </Compile>
-    <Compile Include="templates\Member.Master.cs">
-      <DependentUpon>Member.Master</DependentUpon>
+    <Compile Include="templates\Mentor.Master.cs">
+      <DependentUpon>Mentor.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="templates\Member.Master.designer.cs">
-      <DependentUpon>Member.Master</DependentUpon>
+    <Compile Include="templates\Mentor.Master.designer.cs">
+      <DependentUpon>Mentor.Master</DependentUpon>
     </Compile>
     <Compile Include="templates\ViewTable.Master.cs">
       <DependentUpon>ViewTable.Master</DependentUpon>
@@ -113,7 +113,7 @@
     <Content Include="templates\CreateUser.Master" />
     <Content Include="templates\Edit.Master" />
     <Content Include="templates\Home.Master" />
-    <Content Include="templates\Member.Master" />
+    <Content Include="templates\Mentor.Master" />
     <Content Include="templates\ViewTable.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
