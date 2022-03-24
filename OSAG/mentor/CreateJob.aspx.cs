@@ -4,6 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// SQL imports
+using System.Data;
+using System.Data.SqlClient;
+// web.config imports
+using System.Web.Configuration;
+using System.Web.UI.HtmlControls;
 
 namespace OSAG.mentor
 {
@@ -14,7 +20,7 @@ namespace OSAG.mentor
 
         }
 
-        protected System.Void btnSaveJob_Click()
+        protected void btnSaveJob_Click()
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
@@ -46,7 +52,7 @@ namespace OSAG.mentor
             ClearJobData();
         }
 
-        protected System.Void btnClear_Click()
+        protected void btnClear_Click()
         {
             ClearJobData();
             // force postback to update table

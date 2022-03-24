@@ -4,6 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// SQL imports
+using System.Data;
+using System.Data.SqlClient;
+// web.config imports
+using System.Web.Configuration;
+using System.Web.UI.HtmlControls;
 
 namespace OSAG.mentor
 {
@@ -14,7 +20,7 @@ namespace OSAG.mentor
 
         }
 
-        protected System.Void btnSaveSchol_Click()
+        protected void btnSaveSchol_Click()
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string

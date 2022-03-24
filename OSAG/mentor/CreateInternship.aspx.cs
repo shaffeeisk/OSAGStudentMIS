@@ -4,6 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// SQL imports
+using System.Data;
+using System.Data.SqlClient;
+// web.config imports
+using System.Web.Configuration;
+using System.Web.UI.HtmlControls;
 
 namespace OSAG.mentor
 {
@@ -14,14 +20,14 @@ namespace OSAG.mentor
 
         }
 
-        protected System.Void btnClear_Click()
+        protected void btnClear_Click()
         {
             ClearInternData();
             // force postback to update table
             Response.Redirect("/mentor/createInternship.aspx");
         }
 
-        protected System.Void btnSaveIntern_Click()
+        protected void btnSaveIntern_Click()
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
