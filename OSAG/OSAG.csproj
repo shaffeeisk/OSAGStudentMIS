@@ -72,6 +72,11 @@
     <Content Include="mentor\CreateInternship.aspx" />
     <Content Include="mentor\CreateJob.aspx" />
     <Content Include="mentor\CreateScholarship.aspx" />
+    <Content Include="mentor\ViewStudentInterests.aspx" />
+    <Content Include="profiles\EditMentorProfile.aspx" />
+    <Content Include="profiles\EditStudentProfile.aspx" />
+    <Content Include="profiles\MentorProfile.aspx" />
+    <Content Include="profiles\StudentProfile.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +115,41 @@
     <Compile Include="mentor\CreateScholarship.aspx.designer.cs">
       <DependentUpon>CreateScholarship.aspx</DependentUpon>
     </Compile>
+    <Compile Include="mentor\ViewStudentInterests.aspx.cs">
+      <DependentUpon>ViewStudentInterests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mentor\ViewStudentInterests.aspx.designer.cs">
+      <DependentUpon>ViewStudentInterests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiles\EditMentorProfile.aspx.cs">
+      <DependentUpon>EditMentorProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\EditMentorProfile.aspx.designer.cs">
+      <DependentUpon>EditMentorProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiles\EditStudentProfile.aspx.cs">
+      <DependentUpon>EditStudentProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\EditStudentProfile.aspx.designer.cs">
+      <DependentUpon>EditStudentProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiles\MentorProfile.aspx.cs">
+      <DependentUpon>MentorProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\MentorProfile.aspx.designer.cs">
+      <DependentUpon>MentorProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiles\StudentProfile.aspx.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\StudentProfile.aspx.designer.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="templates\CreateUser.Master.cs">
       <DependentUpon>CreateUser.Master</DependentUpon>
@@ -139,6 +179,12 @@
     <Compile Include="templates\Mentor.Master.designer.cs">
       <DependentUpon>Mentor.Master</DependentUpon>
     </Compile>
+    <Compile Include="templates\Student.Master.cs">
+      <DependentUpon>Student.Master</DependentUpon>
+    </Compile>
+    <Compile Include="templates\Student.Master.designer.cs">
+      <DependentUpon>Student.Master</DependentUpon>
+    </Compile>
     <Compile Include="templates\ViewTable.Master.cs">
       <DependentUpon>ViewTable.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -155,6 +201,7 @@
     <Content Include="templates\Home.Master" />
     <Content Include="templates\Mentor.Master" />
     <Content Include="templates\ViewTable.Master" />
+    <Content Include="templates\Student.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -168,7 +215,6 @@
     <Folder Include="jobs\" />
     <Folder Include="login\" />
     <Folder Include="opportunities\" />
-    <Folder Include="profiles\" />
     <Folder Include="student\" />
     <Folder Include="_images\" />
   </ItemGroup>
