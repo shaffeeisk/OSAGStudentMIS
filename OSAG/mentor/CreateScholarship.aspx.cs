@@ -7,26 +7,19 @@ using System.Web.UI.WebControls;
 
 namespace OSAG.mentor
 {
-    public partial class CreateInternship : System.Web.UI.Page
+    public partial class CreateScholarship : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected System.Void btnClear_Click()
-        {
-            ClearInternData();
-            // force postback to update table
-            Response.Redirect("/mentor/createInternship.aspx");
-        }
-
-        protected System.Void btnSaveIntern_Click()
+        protected System.Void btnSaveSchol_Click()
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
-            String sqlQuery = "INSERT INTO Internship (Position, PayStatus, EmployerID) " +
-                "VALUES (@Position, @PayStatus, @EmployerID);";
+            String sqlQuery = "INSERT INTO Scholarship (AwardName, DollarAmount) " +
+                "VALUES (@AwardName, @DollarAmount);";
 
             // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -35,25 +28,30 @@ namespace OSAG.mentor
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
 
             // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
-            sqlCommand.Parameters.AddWithValue("@Position", validate(enterInternshipName.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@PayStatus", ddlPay.SelectedValue.ToString());
-            sqlCommand.Parameters.AddWithValue("@EmployerID", ddlEmployer.SelectedValue.ToString());
+            sqlCommand.Parameters.AddWithValue("@AwardName", validate(enterScholName.Value.ToString()));
+            sqlCommand.Parameters.AddWithValue("@DollarAmount", validate(enterAmount.Value.ToString()));
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
-            lblSuccess.Text = "New internship(s) successfully created";
+            lblSuccess.Text = "New scholarship successfully created";
 
             // force postback by refreshing page (updates table via Page_Load method)
-            Response.Redirect("/mentor/CreateInternship.aspx");
+            Response.Redirect("/mentor/CreateScholarship.aspx");
             // reset for next click
-            ClearInternData();
+            ClearScholData();
         }
 
-        protected void ClearInternData()
+        protected System.Void btnClear_Click()
         {
-            enterInternshipName.Value = "";
-            ddlPay.SelectedValue = "";
-            ddlEmployer.SelectedValue = "(Select a Company)";
+
+            ClearScholData();
+            // force postback to update table
+            Response.Redirect("/mentor/CreateScholarship.aspx");
+        }
+        protected void ClearScholData()
+        {
+            enterScholName.Value = "";
+            enterAmount.Value = "";
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.

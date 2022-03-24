@@ -71,6 +71,7 @@
     <Content Include="admin\AssignMentor.aspx" />
     <Content Include="mentor\CreateInternship.aspx" />
     <Content Include="mentor\CreateJob.aspx" />
+    <Content Include="mentor\CreateScholarship.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,13 @@
     </Compile>
     <Compile Include="mentor\CreateJob.aspx.designer.cs">
       <DependentUpon>CreateJob.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mentor\CreateScholarship.aspx.cs">
+      <DependentUpon>CreateScholarship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mentor\CreateScholarship.aspx.designer.cs">
+      <DependentUpon>CreateScholarship.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="templates\CreateUser.Master.cs">

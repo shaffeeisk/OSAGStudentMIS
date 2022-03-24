@@ -41,7 +41,7 @@ namespace OSAG.mentor
             lblSuccess.Text = "New job successfully created";
 
             // force postback by refreshing page (updates table via Page_Load method)
-            Response.Redirect("createJob.aspx");
+            Response.Redirect("/mentor/CreateJob.aspx");
             // reset for next click
             ClearJobData();
         }
