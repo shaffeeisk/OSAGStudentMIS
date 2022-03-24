@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// SQL imports
+using System.Data;
+using System.Data.SqlClient;
 
 namespace OSAG.profiles
 {
@@ -13,18 +16,18 @@ namespace OSAG.profiles
         {
             try
             {
-                sqlsrcMemberQuery.SelectCommand = "SELECT Username, FirstName, LastName, Email, StAddress, City, M_State, ZipCode " +
+                sqlsrcMentorQuery.SelectCommand = "SELECT Username, FirstName, LastName, Email, StAddress, City, M_State, ZipCode " +
                     "FROM Mentor WHERE Username = '" + (String)Session["Username"] + "';";
             }
             catch (SqlException)
             {
                 Session["MustLogIn"] = "You must log in to access that page.";
-                Response.Redirect("/login/Login.aspx");
+                Response.Redirect("/login/LogIn.aspx");
                 throw;
             }
         }
 
-        protected System.Void btnEdit_Click()
+        protected void btnEdit_Click()
         {
             Response.Redirect("/profiles/EditMentorProfile.aspx");
         }

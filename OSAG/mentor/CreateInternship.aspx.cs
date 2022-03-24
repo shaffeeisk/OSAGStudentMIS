@@ -20,13 +20,6 @@ namespace OSAG.mentor
 
         }
 
-        protected void btnClear_Click()
-        {
-            ClearInternData();
-            // force postback to update table
-            Response.Redirect("/mentor/createInternship.aspx");
-        }
-
         protected void btnSaveIntern_Click()
         {
             // create string from input, send to DB, clear dat.
@@ -60,6 +53,13 @@ namespace OSAG.mentor
             enterInternshipName.Value = "";
             ddlPay.SelectedValue = "";
             ddlEmployer.SelectedValue = "(Select a Company)";
+        }
+
+        protected void btnClear_Click1(object sender, EventArgs e)
+        {
+            ClearInternData();
+            // force postback to update table
+            Response.Redirect("/mentor/createInternship.aspx");
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.

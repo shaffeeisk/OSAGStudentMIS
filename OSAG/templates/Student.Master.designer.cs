@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OSAG.templates
+namespace OSAG
 {
 
 

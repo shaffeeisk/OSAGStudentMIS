@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// SQL imports
+using System.Data;
+using System.Data.SqlClient;
 
 namespace OSAG.profiles
 {
@@ -13,13 +16,7 @@ namespace OSAG.profiles
         {
             try
             {
-                "SELECT Student.FirstName + ' ' + Student.LastName AS StuName, " +
-               "Student.Email AS StuEmail, GraduationDate, " +
-               "Member.FirstName + ' ' + Member.LastName AS MembName, Member.Email AS MembEmail, EmpName " +
-               "FROM Member RIGHT JOIN Student ON Member.MemberID = Student.MemberID " +
-               "LEFT JOIN Employer ON Employer.EmployerID = Student.EmployerID " +
-               "WHERE Student.Username = @Username;";
-                sqlsrcMemberQuery.SelectCommand = "SELECT Student.FirstName + ' ' + Student.LastName AS StuName, Student.Email AS StuEmail, GraduationDate, " +
+                sqlsrcStudentQuery.SelectCommand = "SELECT Student.FirstName + ' ' + Student.LastName AS StuName, Student.Email AS StuEmail, GraduationDate, " +
                "Member.FirstName + ' ' + Member.LastName AS MembName, Member.Email AS MembEmail, EmpName " +
                "FROM Member RIGHT JOIN Student ON Member.MemberID = Student.MemberID LEFT JOIN Employer ON Employer.EmployerID = Student.EmployerID " +
                     "FROM Student WHERE Username = '" + (String)Session["Username"] + "';";
@@ -27,12 +24,12 @@ namespace OSAG.profiles
             catch (SqlException)
             {
                 Session["MustLogIn"] = "You must log in to access that page.";
-                Response.Redirect("/login/Login.aspx");
+                Response.Redirect("/login/LogIn.aspx");
                 throw;
             }
         }
 
-        protected System.Void btnEdit_Click()
+        protected void btnEdit_Click()
         {
             Response.Redirect("/profiles/EditStudentProfile");
         }

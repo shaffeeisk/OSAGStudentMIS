@@ -47,7 +47,7 @@ namespace OSAG.mentor
             ClearScholData();
         }
 
-        protected System.Void btnClear_Click()
+        protected void btnClear_Click()
         {
 
             ClearScholData();
