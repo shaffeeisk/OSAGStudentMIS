@@ -5,19 +5,10 @@
         <h2>Edit Student Data:</h2>
     <br />
     <asp:Label ID="lblFirstName" runat="server" Text="First Name: "></asp:Label>
-    <input id="firstName" type="text" runat="server" />
-    <br />
+    <asp:Label ID="lblFN" runat="server" Text="First Name: "></asp:Label>
     <br />
     <asp:Label ID="lblLastName" runat="server" Text="Last Name: "></asp:Label>
-    <input id="lastName" type="text" runat="server" />
-    <br />
-    <br />
-    <asp:Label ID="lblEmail" runat="server" Text="Email: "></asp:Label>
-    <input id="email" type="text" runat="server" />
-    <br />
-    <br />
-    <asp:Label ID="lblGradDate" runat="server" Text="Graduation Date: "></asp:Label>
-    <input id="gradDate" type="date" runat="server" />
+    <asp:Label ID="lblLN" runat="server" Text="Last Name: "></asp:Label>
     <br />
     <br />
     <asp:Label ID="lblMentor" runat="server" Text="Mentor: "></asp:Label>

@@ -24,13 +24,13 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.Label lblFirstName;
 
         /// <summary>
-        /// firstName control.
+        /// lblFN control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText firstName;
+        protected global::System.Web.UI.WebControls.Label lblFN;
 
         /// <summary>
         /// lblLastName control.
@@ -42,49 +42,13 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.Label lblLastName;
 
         /// <summary>
-        /// lastName control.
+        /// lblLN control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lastName;
-
-        /// <summary>
-        /// lblEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
-
-        /// <summary>
-        /// email control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText email;
-
-        /// <summary>
-        /// lblGradDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGradDate;
-
-        /// <summary>
-        /// gradDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl gradDate;
+        protected global::System.Web.UI.WebControls.Label lblLN;
 
         /// <summary>
         /// lblMentor control.
