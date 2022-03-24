@@ -14,7 +14,7 @@
         <br />
         <br />
         <div style="margin-left: auto; margin-right: auto; text-align: center;">
-            <asp:Image ID="Image1" runat="server" ImageUrl="/images/jmu.jfif"
+            <asp:Image ID="Image1" runat="server" ImageUrl="/_images/jmu.jfif"
                 Width="1000" Height="200" />
             <br />
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

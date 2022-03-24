@@ -12,7 +12,7 @@
     <form id="form1" runat="server">
              Created by Madison Solutions
         <div style="margin-left: auto; margin-right: auto; text-align: right">
-            <asp:Image ID="imgUser" runat="server" ImageUrl="/images/user.png" Width="50" Height="50" />
+            <asp:Image ID="imgUser" runat="server" ImageUrl="/_images/user.png" Width="50" Height="50" />
             <asp:Label ID="lblUsername" runat="server" Text="" />
             <br />
             <asp:Button ID="btnLogOut" runat="server" Text="<- Log Out" OnClick="btnLogOut_Click" BackColor="Tomato" />
@@ -30,7 +30,7 @@
         </asp:DropDownList>
 
         <div style="margin-left: auto; margin-right: auto; text-align: center;">
-            <asp:Image ID="Image1" runat="server" ImageUrl="/images/jmu.jfif"
+            <asp:Image ID="Image1" runat="server" ImageUrl="/_images/jmu.jfif"
                 Width="1000" Height="200" />
             <br />
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

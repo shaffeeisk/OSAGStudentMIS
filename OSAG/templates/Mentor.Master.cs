@@ -12,20 +12,20 @@ namespace OSAG
         // on page load kick user from ALL pages requiring member login
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Username"] == null)
-            {
-                Session["MustLogin"] = "You must log in to access that page.";
-                Response.Redirect("logIn.aspx");
-            }
-            else if ((String)Session["UserType"] != "member")
-            {
-                Session["AccessDenied"] = "You do not have access to that page.";
-                Response.Redirect("studentHome.aspx");
-            }
-            else
-            {
-                lblUsername.Text = Session["Username"].ToString();
-            }
+            //if (Session["Username"] == null)
+            //{
+            //    Session["MustLogin"] = "You must log in to access that page.";
+            //    Response.Redirect("logIn.aspx");
+            //}
+            //else if ((String)Session["UserType"] != "member")
+            //{
+            //    Session["AccessDenied"] = "You do not have access to that page.";
+            //    Response.Redirect("studentHome.aspx");
+            //}
+            //else
+            //{
+            //    lblUsername.Text = Session["Username"].ToString();
+            //}
         }
 
         // populate nav bar dropdown list
