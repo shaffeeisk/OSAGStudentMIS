@@ -58,7 +58,7 @@ namespace OSAG.profiles
                "GraduationDate = @GradDate, " +
                "EmployerID = @EmpID " +
                "WHERE Username = @Username;";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["Lab3"].ConnectionString);
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", (String)Session["Username"]);
             sqlCommand.Parameters.AddWithValue("@FN", validate(firstName.Value.ToString()));
