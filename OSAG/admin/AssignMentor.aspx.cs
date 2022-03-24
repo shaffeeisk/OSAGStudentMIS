@@ -25,7 +25,7 @@ namespace OSAG.admin
             {
                 try
                 {
-                    if ((String)Session["UserType"] == "Mentor" && Session["Username"] != null)
+                    if ((String)Session["UserType"] == "mentor" && Session["Username"] != null)
                         populatePage(); // goal of Page_Load
                     else if (Session["Username"] == null)
                     {   // user not logged in, go to LogIn
@@ -41,7 +41,7 @@ namespace OSAG.admin
                 catch (SqlException)
                 {
                     Session["AccessDenied"] = "Access Denied: An unknown error occurred.";
-                    //Response.Redirect("MentorHome.aspx");
+                    //Response.Redirect("MentorHome.aspx"); // UNCOMMENT WHEN PAGE ADDED
                     throw;
                 }
             }
@@ -57,19 +57,11 @@ namespace OSAG.admin
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             String sqlQuery = "UPDATE Student SET " +
-                "FirstName = @FN, " +
-                "LastName = @LN, " +
-                "Email = @Email, " +
-                "GraduationDate = @GradDate, " +
                 "MentorID = @MembID " +
                 "WHERE Username = @Username;";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["Lab3"].ConnectionString);
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", (String)Session["InstanceStudent"]);
-            sqlCommand.Parameters.AddWithValue("@FN", validate(firstName.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@LN", validate(lastName.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@Email", validate(email.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@GradDate", validate(gradDate.Value.ToString()));
             if (ddlMentor.SelectedValue.ToString() == "0") // if no mentor is assigned, set ID to null
                 sqlCommand.Parameters.AddWithValue("@MembID", DBNull.Value); // blank box value is set to "0"
             else // take input as param
@@ -83,36 +75,22 @@ namespace OSAG.admin
         // helper method to populate page with data
         protected void populatePage()
         {
-            String sqlQuery = "SELECT FirstName, LastName, Email, GraduationDate, MentorID " +
+            String sqlQuery = "SELECT FirstName, LastName, MentorID " +
                             "FROM Student WHERE Username = @Username;";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["Lab3"].ConnectionString);
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", (String)Session["InstanceStudent"]);
             sqlConnect.Open();
             SqlDataReader queryResults = sqlCommand.ExecuteReader();
             queryResults.Read();
-            firstName.Value = queryResults["FirstName"].ToString();
-            lastName.Value = queryResults["LastName"].ToString();
-            email.Value = queryResults["Email"].ToString();
-            gradDate.Value = DateTime.Parse(queryResults["GraduationDate"].ToString()).ToString("yyyy-MM-dd"); // why
+            lblFN.Text = queryResults["FirstName"].ToString();
+            lblLN.Text = queryResults["LastName"].ToString();
             if (queryResults["MentorID"] == DBNull.Value)
                 ddlMentor.SelectedValue = "0";
             else
                 ddlMentor.SelectedValue = queryResults["MentorID"].ToString();
             queryResults.Close();
             sqlConnect.Close();
-        }
-
-        // helper method to validate data. trims input string of leading/trailing white space.
-        // then returns null if user input is empty. otherwise, returns the trimmed string.
-        // allows data integrity to allow querying null input (also saves disk space :D)
-        // (e.g. display students who don't have graduation dates so mentor can help them figure out when they should graduate)
-        private object validate(String s)
-        {
-            s = s.Trim();
-            if (s == "")
-                return (object)DBNull.Value;
-            return s;
         }
     }
 }

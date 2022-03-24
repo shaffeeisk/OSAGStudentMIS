@@ -15,6 +15,6 @@
         ID="sqlsrcNewUsers"
         runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT Username FROM Student WHERE Pass IS NULL
-         UNION SELECT Username FROM Mentor WHERE Pass IS NULL;"></asp:SqlDataSource>
+        SelectCommand="SELECT Username FROM Student WHERE IsApproved = 0
+         UNION SELECT Username FROM Mentor WHERE IsApproved = 0;"></asp:SqlDataSource>
 </asp:Content>
