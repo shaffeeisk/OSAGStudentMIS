@@ -29,7 +29,7 @@ namespace OSAG.profiles
             }
         }
 
-        protected void btnEdit_Click()
+        protected void btnEdit_Click(object sender, EventArgs e)
         {
             Response.Redirect("/profiles/EditStudentProfile");
         }

@@ -4,6 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// sql imports
+using System.Data;
+using System.Data.SqlClient;
+// web.config imports
+using System.Web.Configuration;
+// colored response import
+using System.Drawing;
+// For File read
+using System.IO;
 
 namespace OSAG.profiles
 {
@@ -24,7 +33,7 @@ namespace OSAG.profiles
             }
         }
 
-        protected System.Void btnUpdate_Click()
+        protected void btnUpdate_Click(object sender, EventArgs e)
         {
             String sqlQuery = "UPDATE Member SET " +
                "FirstName = @FN, " +
@@ -51,7 +60,7 @@ namespace OSAG.profiles
             lblUpdateStatus.Text = "Profile successfully updated.";
         }
 
-        protected System.Void btnBack_Click()
+        protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("/profiles/MentorProfile.aspx");
         }
