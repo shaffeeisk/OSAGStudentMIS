@@ -30,7 +30,7 @@
         <br />
         <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
         <br />
-        <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click" Font-Bold="true" BackColor="OrangeRed" />
+        <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click"  Font-Bold="true" BackColor="OrangeRed" />
     </div>
      <asp:SqlDataSource
         ID="sqlsrcListCompanys"

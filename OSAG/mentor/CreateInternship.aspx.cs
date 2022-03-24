@@ -20,7 +20,7 @@ namespace OSAG.mentor
 
         }
 
-        protected void btnSaveIntern_Click()
+        protected void btnSaveIntern_Click(object sender, EventArgs e)
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
@@ -48,18 +48,18 @@ namespace OSAG.mentor
             ClearInternData();
         }
 
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearInternData();
+            // force postback to update table
+            Response.Redirect("/mentor/createInternship.aspx");
+        }
+
         protected void ClearInternData()
         {
             enterInternshipName.Value = "";
             ddlPay.SelectedValue = "";
             ddlCompany.SelectedValue = "(Select a Company)";
-        }
-
-        protected void btnClear_Click1(object sender, EventArgs e)
-        {
-            ClearInternData();
-            // force postback to update table
-            Response.Redirect("/mentor/createInternship.aspx");
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.
