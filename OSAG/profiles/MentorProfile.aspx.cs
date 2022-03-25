@@ -14,22 +14,7 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                sqlsrcMentorQuery.SelectCommand = "SELECT Username, FirstName, LastName, Email, StAddress, City, M_State, ZipCode " +
-                    "FROM Mentor WHERE Username = '" + (String)Session["Username"] + "';";
-            }
-            catch (SqlException)
-            {
-                Session["MustLogIn"] = "You must log in to access that page.";
-                Response.Redirect("/login/LogIn.aspx");
-                throw;
-            }
-        }
-
-        protected void btnEdit_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("/profiles/EditMentorProfile.aspx");
+            Response.Redirect("UserProfile.aspx");
         }
     }
 }

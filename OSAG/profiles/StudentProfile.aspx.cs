@@ -14,24 +14,7 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                sqlsrc.SelectCommand = "SELECT Student.FirstName + ' ' + Student.LastName AS StuName, Student.Email AS StuEmail, GraduationDate, " +
-               "Member.FirstName + ' ' + Member.LastName AS MembName, Member.Email AS MembEmail, EmpName " +
-               "FROM Mentor LEFT JOIN Student ON Member.MemberID = Student.MemberID LEFT JOIN Employer ON Employer.EmployerID = Student.EmployerID " +
-                    " WHERE Username = '" + (String)Session["Username"] + "';";
-            }
-            catch (SqlException)
-            {
-                Session["MustLogIn"] = "You must log in to access that page.";
-                Response.Redirect("/login/LogIn.aspx");
-                throw;
-            }
-        }
-
-        protected void btnEdit_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("/profiles/EditStudentProfile");
+            Response.Redirect("UserProfile.aspx");
         }
     }
 }
