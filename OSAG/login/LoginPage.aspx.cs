@@ -33,7 +33,7 @@ namespace OSAG.login
             if (!isApproved(txtUsername.Text))
             {
                 Session["MustLogin"] = "Your account is pending approval. Please try again at a later time.";
-                Response.Redirect("login/LoginPage.aspx");
+                Response.Redirect("LoginPage.aspx");
                 return;
             }
 

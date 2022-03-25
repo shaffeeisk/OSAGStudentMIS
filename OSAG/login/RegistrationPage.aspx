@@ -9,36 +9,42 @@
 <body>
     <form id="form1" runat="server">
         <div style="margin-left: auto; margin-right: auto; text-align: center;">
-            <asp:LinkButton ID="lnkLogin" runat="server" OnClick="lnkLogin_Click">Login</asp:LinkButton>
+            <asp:LinkButton ID="lnkLogin" runat="server" OnClick="lnkLogin_Click" >Login</asp:LinkButton>
             <br />
             <br />
             <strong>Create User</strong><br />
-            Student or Member:
-            <asp:TextBox ID="txtUserType" runat="server"></asp:TextBox>
+            Student or Mentor:
+            <asp:DropDownList ID="ddlUserType" runat="server" >
+                <asp:ListItem Text="Student" Value="Student" />
+                <asp:ListItem Text="Mentor" Value="Mentor" />
+            </asp:DropDownList>
+            <br />
             <br />
             First Name:&nbsp;
             <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
             <br />
+            <br />
             Last Name:
             <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
             <br />
-            Email:
-            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-            <br />
-            PhoneNumber:
-            <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
             <br />
             Username:
             <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
             <br />
+            <br />
             Password:
             <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+            <br />
             <br />
             <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
             <br />
             <asp:Label ID="lblStatus" runat="server"></asp:Label>
             <br />
-            <asp:LinkButton ID="lnkAnother" runat="server" OnClick="lnkAnother_Click" Visible="False">Create Another</asp:LinkButton>
+            <br />
+            <asp:Button ID="btnClear" runat="server" Text="Clear Text Fields" OnClick="btnClear_Click" />
+            <br />
+            <br />
+            <asp:Button ID="btnReturn" runat="server" Text="Return to Home Page" OnClick="btnReturn_Click"/>
         </div>
     </form>
 </body>
