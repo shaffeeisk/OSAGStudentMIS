@@ -11,7 +11,13 @@ namespace OSAG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblUsername.Text = Session["Username"].ToString();
+            if (Session["Username"] == null)
+            {
+                Session["MustLogin"] = "You must log in to access that page.";
+                Response.Redirect("/login/LoginPage.aspx");
+            }
+            else
+                lblUsername.Text = Session["Username"].ToString();
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

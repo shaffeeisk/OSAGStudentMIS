@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\ApproveRegistration.aspx" />
+    <Content Include="admin\AssignMentor_OLD.aspx" />
     <Content Include="admin\AssignMentor.aspx" />
     <Content Include="homepages\HomePage.aspx" />
     <Content Include="internships\InternshipDetails.aspx" />
@@ -102,6 +103,13 @@
     </Compile>
     <Compile Include="admin\ApproveRegistration.aspx.designer.cs">
       <DependentUpon>ApproveRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AssignMentor_OLD.aspx.cs">
+      <DependentUpon>AssignMentor_OLD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AssignMentor_OLD.aspx.designer.cs">
+      <DependentUpon>AssignMentor_OLD.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\AssignMentor.aspx.cs">
       <DependentUpon>AssignMentor.aspx</DependentUpon>
