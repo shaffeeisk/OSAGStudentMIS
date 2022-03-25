@@ -31,7 +31,7 @@ namespace OSAG.profiles
             System.Data.SqlClient.SqlConnection sc = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             if (!IsPostBack)
             {
-                if (Session["UserType"].ToString() == "Student")
+                if (Session["UserType"].ToString() == "student")
                 {
                     sc.Open();
                     System.Data.SqlClient.SqlCommand findPass = new System.Data.SqlClient.SqlCommand();
@@ -49,7 +49,7 @@ namespace OSAG.profiles
                             string first = reader["FirstName"].ToString();
                             string last = reader["LastName"].ToString();
                             string email = reader["Email"].ToString();
-                            string grad = reader["GradDate"].ToString();
+                            string grad = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
                             string major = reader["Major"].ToString();
 
                             txtFirstName.Text = first;
@@ -62,7 +62,7 @@ namespace OSAG.profiles
 
                     sc.Close();
                 }
-                if (Session["UserType"].ToString() == "Mentor")
+                if (Session["UserType"].ToString() == "mentor")
                 {
                     sc.Open();
                     System.Data.SqlClient.SqlCommand findPass = new System.Data.SqlClient.SqlCommand();

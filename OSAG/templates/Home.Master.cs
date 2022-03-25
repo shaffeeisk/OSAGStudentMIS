@@ -11,8 +11,15 @@ namespace OSAG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblUsername.Text = Session["Username"].ToString();
         }
 
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            // Redirect the client's browser 
+
+            Response.Redirect("/login/LoginPage.aspx?loggedout=true");
+        }
     }
 }

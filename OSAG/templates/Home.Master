@@ -10,6 +10,27 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <a href="UserProfile.aspx">Profile</a>&nbsp
+         <% if (Session["UserType"].ToString() == "student")
+             { %>
+        <a href="/jobs/Jobs.aspx">Jobs</a>&nbsp
+           <a href="/internships/Internships.aspx">Internships</a>&nbsp
+        <a href="/opportunities/Opportunities.aspx">Opportunities</a>&nbsp
+        <a href="/student/Bookmarks.aspx">Bookmarks</a>&nbsp
+            <% } %>
+            <% if (Session["UserType"].ToString() == "mentor")
+                { %>
+                <a href="/admin/ApproveRegistration.aspx">Approve Registrations</a>&nbsp
+        <a href="/admin/AssignMentor.aspx">Assign Mentors</a>&nbsp
+        <a href="/mentor/CreateJob.aspx">Create Jobs</a>&nbsp
+        <a href="/mentor/CreateInternship.aspx">Create Internships</a>&nbsp
+        <a href="/mentor/CreateScholarship.aspx">Create Opportunities</a>&nbsp
+            <% } %>
+        <br />
+        Current User:
+        <asp:Label ID="lblUsername" runat="server"></asp:Label>
+        <asp:Button ID="btnLogout" runat="server" Text="<-- Logout" OnClick="btnLogout_Click" />
+        <br />
         Created by Madison Solutions
         <br />
         <br />
