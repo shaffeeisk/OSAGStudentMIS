@@ -8,8 +8,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-             <asp:LinkButton ID="lnkCreate" runat="server"  OnClick="lnkCreate_Click">Create User</asp:LinkButton>
+        <div style="margin-left: auto; margin-right: auto; text-align: center;">
+            <asp:LinkButton ID="lnkCreate" runat="server" OnClick="lnkCreate_Click">Create User</asp:LinkButton>
             <br />
             <br />
             <strong>Login</strong><br />
