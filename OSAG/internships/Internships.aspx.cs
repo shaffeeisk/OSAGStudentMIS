@@ -46,14 +46,13 @@ namespace OSAG.internships
             sqlConnection.Close();
 
             //Insert bookmark into database
-            String sqlQuery2 = "INSERT INTO InternshipMatch (isBookmark, StudentID, InternshipID) VALUES (1, @StudentID, @InternshipID)";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            SqlCommand sqlCommand2 = new SqlCommand(sqlQuery2, sqlConnect);
-            sqlCommand2.Parameters.AddWithValue("@StudentID", StudentID);
-            sqlCommand2.Parameters.AddWithValue("@InternshipID", InternshipID);
-            sqlConnect.Open();
-            sqlCommand2.ExecuteScalar();
-            sqlConnect.Close();
+            sqlQuery = "INSERT INTO InternshipMatch (IsBookmark, StudentID, InternshipID) VALUES (1, @StudentID, @InternshipID)";
+            sqlCommand.CommandText = sqlQuery;
+            sqlCommand.Parameters.AddWithValue("@StudentID", StudentID);
+            sqlCommand.Parameters.AddWithValue("@InternshipID", InternshipID);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
         }
 
         protected void btnView_Click(object sender, EventArgs e)

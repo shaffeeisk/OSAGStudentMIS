@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls;
 //Sql Imports
 using System.Data;
 using System.Data.SqlClient;
@@ -17,7 +16,7 @@ namespace OSAG.opportunities
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["Username"] = "jcrew";
         }
 
         protected void btnView_Click(object sender, EventArgs e)
@@ -34,65 +33,34 @@ namespace OSAG.opportunities
             int OpportunityID = 0;
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            String OpportunityName = gvr.Cells[0].Text;
+            String AwardName = gvr.Cells[0].Text;
             String AwardAmount = gvr.Cells[1].Text;
-
-            //Retrieve StudentID of user
-            //Query
-            String sqlQuery = "Select StudentID FROM Student Where UserName = '" + Session["Username"] + "'";
 
             // Define the Connection
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
 
-            //Create and Format the Command
-            SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.CommandType = CommandType.Text;
-            sqlCommand.CommandText = sqlQuery;
-
-            // Execute the Query and get results
+            // Retrieve StudentID of user
+            String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
-            SqlDataReader queryResults = sqlCommand.ExecuteReader();
-            while (queryResults.Read())
-            {
-                StudentID = (int)queryResults["StudentID"];
-            }
+            StudentID = (int)sqlCommand.ExecuteScalar();
             sqlConnection.Close();
 
-            //Retrieve Opportunity ID of posting
-            //Query
-            String sqlQuery3 = "Select OpportunityID FROM Opportunity Where AwardName = '" + OpportunityName + "'";
-
-            // Define the Connection
-            SqlConnection sqlConnection2 = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-            //Create and Format the Command
-            SqlCommand sqlCommand3 = new SqlCommand();
-            sqlCommand3.Connection = sqlConnection2;
-            sqlCommand3.CommandType = CommandType.Text;
-            sqlCommand3.CommandText = sqlQuery3;
-
-            // Execute the Query and get results
-            sqlConnection2.Open();
-            SqlDataReader queryResults2 = sqlCommand.ExecuteReader();
-            while (queryResults.Read())
-            {
-                OpportunityID = (int)queryResults2["OpportunityID"];
-            }
-            sqlConnection2.Close();
+            // Retrieve Opportunity ID of posting
+            sqlQuery = "SELECT OpportunityID FROM Opportunity WHERE AwardName = '" + AwardName + "'";
+            sqlCommand.CommandText = sqlQuery;
+            sqlConnection.Open();
+            OpportunityID = (int)sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
 
             //Insert bookmark into database
-            String sqlQuery2 = "INSERT INTO OpportunityMatch(isBookmark,StudentID,OpportunityID) VALUES(1,'" + StudentID + "','" + OpportunityID + "')";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-            SqlCommand sqlCommand2 = new SqlCommand();
-            sqlCommand2.Connection = sqlConnect;
-            sqlCommand2.CommandType = CommandType.Text;
-            sqlCommand2.CommandText = sqlQuery2;
-
-            sqlConnect.Open();
-            sqlCommand2.ExecuteScalar();
-            sqlConnect.Close();
+            sqlQuery = "INSERT INTO OpportunityMatch (IsBookmark, StudentID, OpportunityID) VALUES (1, @StudentID, @OpportunityID)";
+            sqlCommand.CommandText = sqlQuery;
+            sqlCommand.Parameters.AddWithValue("@StudentID", StudentID);
+            sqlCommand.Parameters.AddWithValue("@OpportunityID", OpportunityID);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
         }
     }
 }
