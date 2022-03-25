@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h3>Bookmarked Jobs</h3>
+    <h3>Bookmarked Jobs:</h3>
     <asp:GridView ID="grdvwJobs" 
                 runat="server" 
                 DataSourceID="sqlsrc" 
@@ -23,7 +23,7 @@
             ConnectionString="<%$ ConnectionStrings:OSAG %>"  ></asp:SqlDataSource> 
     <br />
     <br />
-    <h3>Bookmarked Internships</h3>
+    <h3>Bookmarked Internships:</h3>
     <asp:GridView ID="grdvwInternships" 
                 runat="server" 
                 DataSourceID="sqlsrc2" 
@@ -44,7 +44,7 @@
             ConnectionString="<%$ ConnectionStrings:OSAG %>" ></asp:SqlDataSource> 
     <br />
     <br />
-    <h3>Bookmarked Opportunities</h3>
+    <h3>Bookmarked Opportunities:</h3>
     <asp:GridView ID="grdvwOpportunities" 
                 runat="server" 
                 DataSourceID="sqlsrc3" 
