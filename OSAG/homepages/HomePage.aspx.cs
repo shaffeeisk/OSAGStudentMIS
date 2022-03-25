@@ -14,19 +14,14 @@ namespace OSAG.homepages
             if (Session["AccessDenied"] != null)
                 lblStatus.Text = Session["AccessDenied"].ToString();
         }
-        protected void btnMemberRegistration_Click(object sender, EventArgs e)
+        protected void btnRegistration_Click(object sender, EventArgs e)
         {
-            Response.Redirect("createMemberUser.aspx");
-        }
-
-        protected void btnStudentRegistration_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("createStudentUser.aspx");
+            Response.Redirect("/login/RegistrationPage.aspx");
         }
 
         protected void btnLogIn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("logIn.aspx");
+            Response.Redirect("/login/LoginPage.aspx");
         }
     }
 }

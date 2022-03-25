@@ -74,6 +74,8 @@
     <Content Include="internships\Internships.aspx" />
     <Content Include="jobs\JobDetails.aspx" />
     <Content Include="jobs\Jobs.aspx" />
+    <Content Include="login\LoginPage.aspx" />
+    <Content Include="login\RegistrationPage.aspx" />
     <Content Include="mentor\CreateInternship.aspx" />
     <Content Include="mentor\CreateJob.aspx" />
     <Content Include="mentor\CreateScholarship.aspx" />
@@ -141,6 +143,20 @@
     </Compile>
     <Compile Include="jobs\Jobs.aspx.designer.cs">
       <DependentUpon>Jobs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login\LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login\RegistrationPage.aspx.cs">
+      <DependentUpon>RegistrationPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\RegistrationPage.aspx.designer.cs">
+      <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="mentor\CreateInternship.aspx.cs">
       <DependentUpon>CreateInternship.aspx</DependentUpon>
@@ -306,7 +322,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="login\" />
     <Folder Include="_images\" />
   </ItemGroup>
   <PropertyGroup>
