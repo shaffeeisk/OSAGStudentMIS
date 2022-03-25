@@ -17,17 +17,17 @@ namespace OSAG.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if ((String)Session["Username"] != "admin")
-            //{
-            //    Session["AccessDenied"] = "You do not have access to that page.";
-            //    if ((String)Session["UserType"] == "student")
-            //        Response.Redirect("studentHome.aspx");
-            //    else if ((String)Session["UserType"] == "member")
-            //        Response.Redirect("memberHome.aspx");
-            //    else
-            //        Response.Redirect("homePage.aspx");
-            //}
 
+            if ((String)Session["Username"] == null)
+            {
+                Session["MustLogin"] = "You must log in to access that page.";
+                Response.Redirect("/login/LoginPage.aspx");
+            }
+            else if ((String)Session["UserType"] == "student")
+            {
+                Session["AccessDenied"] = "You do not have access to that page.";
+                Response.Redirect("/profiles/StudentProfile.aspx");
+            }
         }
 
         protected void btnApprove_Click(object sender, EventArgs e)

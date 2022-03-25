@@ -21,9 +21,6 @@ namespace OSAG.admin
         // contents, it overrides .Master for some reason so the rest of the if/else if is required.
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["InstanceStudent"] = "jcrew"; //FOR TESTING GET RID
-            Session["Username"] = "patel3f";
-            Session["UserType"] = "mentor";
             if (!IsPostBack) // so data does not replace itself when clicking button to commit changes
             {
                 try
@@ -33,18 +30,18 @@ namespace OSAG.admin
                     else if (Session["Username"] == null)
                     {   // user not logged in, go to LogIn
                         Session["MustLogIn"] = "You must log in to access that page";
-                        //Response.Redirect("logIn.aspx");
+                        Response.Redirect("/login/LoginPage.aspx");
                     }
                     else if ((String)Session["UserType"] == "student")
                     {   // not Mentor, go to Student Home
                         Session["AccessDenied"] = "You do not have access to that page.";
-                        Response.Redirect("studentHome.aspx");
+                        Response.Redirect("/profiles/StudentProfile.aspx");
                     }
                 }
                 catch (SqlException)
                 {
                     Session["AccessDenied"] = "Access Denied: An unknown error occurred.";
-                    //Response.Redirect("MentorHome.aspx"); // UNCOMMENT WHEN PAGE ADDED
+                    Response.Redirect("profiles/MentorProfile.aspx");
                     throw;
                 }
             }
