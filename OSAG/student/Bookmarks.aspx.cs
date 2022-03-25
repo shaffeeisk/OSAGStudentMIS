@@ -34,7 +34,7 @@ namespace OSAG.student
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             Session["View"] = gvr.Cells[0].Text + gvr.Cells[1].Text;
-            Response.Redirect("JobDetails.aspx");
+            Response.Redirect("/jobs/JobDetails.aspx");
         }
 
         // internships bookmarked
@@ -43,7 +43,7 @@ namespace OSAG.student
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             Session["View"] = gvr.Cells[0].Text + gvr.Cells[1].Text;
-            Response.Redirect("InternshipDetails.aspx");
+            Response.Redirect("/internships/InternshipDetails.aspx");
         }
 
         // opportunities bookmarked
@@ -52,7 +52,7 @@ namespace OSAG.student
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
             Session["View"] = gvr.Cells[0].Text;
-            Response.Redirect("OpportunityDetails.aspx");
+            Response.Redirect("/opportunities/OpportunityDetails.aspx");
         }
     }
 }
