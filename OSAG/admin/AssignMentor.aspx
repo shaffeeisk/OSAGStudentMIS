@@ -5,10 +5,10 @@
         <h2>Edit Student Data:</h2>
     <br />
     <asp:Label ID="lblFirstName" runat="server" Text="First Name: "></asp:Label>
-    <asp:Label ID="lblFN" runat="server" Text="First Name: "></asp:Label>
+    <asp:Label ID="lblFN" runat="server" Text=""></asp:Label>
     <br />
     <asp:Label ID="lblLastName" runat="server" Text="Last Name: "></asp:Label>
-    <asp:Label ID="lblLN" runat="server" Text="Last Name: "></asp:Label>
+    <asp:Label ID="lblLN" runat="server" Text=""></asp:Label>
     <br />
     <br />
     <asp:Label ID="lblMentor" runat="server" Text="Mentor: "></asp:Label>

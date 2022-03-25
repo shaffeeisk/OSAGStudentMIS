@@ -21,6 +21,7 @@ namespace OSAG.admin
         // contents, it overrides .Master for some reason so the rest of the if/else if is required.
         protected void Page_Load(object sender, EventArgs e)
         {
+          
             if (!IsPostBack) // so data does not replace itself when clicking button to commit changes
             {
                 try
@@ -57,15 +58,15 @@ namespace OSAG.admin
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             String sqlQuery = "UPDATE Student SET " +
-                "MentorID = @MembID " +
+                "MentorID = @MentorID " +
                 "WHERE Username = @Username;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", (String)Session["InstanceStudent"]);
             if (ddlMentor.SelectedValue.ToString() == "0") // if no mentor is assigned, set ID to null
-                sqlCommand.Parameters.AddWithValue("@MembID", DBNull.Value); // blank box value is set to "0"
+                sqlCommand.Parameters.AddWithValue("@MentorID", DBNull.Value); // blank box value is set to "0"
             else // take input as param
-                sqlCommand.Parameters.AddWithValue("@MembID", ddlMentor.SelectedValue); 
+                sqlCommand.Parameters.AddWithValue("@MentorID", ddlMentor.SelectedValue); 
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -75,6 +76,9 @@ namespace OSAG.admin
         // helper method to populate page with data
         protected void populatePage()
         {
+            Session["InstanceStudent"] = "jcrew"; //FOR TESTING GET RID
+            Session["Username"] = "patel3f";
+            Session["UserType"] = "mentor";
             String sqlQuery = "SELECT FirstName, LastName, MentorID " +
                             "FROM Student WHERE Username = @Username;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
