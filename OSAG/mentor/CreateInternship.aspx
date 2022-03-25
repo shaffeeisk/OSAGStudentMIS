@@ -38,5 +38,10 @@
         <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
         <br />
         <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click"  Font-Bold="true" BackColor="OrangeRed" />
+         <asp:SqlDataSource
+        ID="sqlsrcListCompanys"
+        runat="server"
+        ConnectionString="<%$ ConnectionStrings:OSAG %>"
+        SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>
     </div>
 </asp:Content>
