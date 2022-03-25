@@ -103,13 +103,6 @@
         ControlToValidate="txtCity"
         Text="(Required)"
         runat="server" />
-    <br />
-    <asp:Label ID="lblAddress" runat="server" Text="Address"></asp:Label>
-    <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator
-        ID="RequiredFieldValidator9"
-        ControlToValidate="txtAddress"
-        Text="(Required)"
-        runat="server" />
+    
     <% } %>
 </asp:Content>

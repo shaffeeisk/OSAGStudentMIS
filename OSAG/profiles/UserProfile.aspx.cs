@@ -98,7 +98,7 @@ namespace OSAG.profiles
         }
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Session["UserType"].ToString() == "Student")
+            if (Session["UserType"].ToString() == "student")
             {
                 String sqlQuery = "UPDATE [Student] SET [FirstName] = '" + txtFirstName.Text + "', [LastName] = '" + txtLastName.Text + "'," +
                 "[Email] = '" + txtEmail.Text + "'," +
@@ -116,12 +116,11 @@ namespace OSAG.profiles
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
-            if (Session["UserType"].ToString() == "Mentor")
+            if (Session["UserType"].ToString() == "mentor")
             {
                 String sqlQuery = "UPDATE [Mentor] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
                 "[Email] = '" + txtMentorEmail.Text + "'," +
                 "[M_State] = '" + txtState.Text + "'," +
-                "[StAddress] = '" + txtAddress.Text + "'," +
                 "[City] = '" + txtCity.Text + "' " +
                 " WHERE[Username] = '" + Session["UserName"].ToString() + "'";
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
