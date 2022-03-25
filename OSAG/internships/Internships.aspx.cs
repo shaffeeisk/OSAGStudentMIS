@@ -15,7 +15,7 @@ namespace OSAG.internships
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnBookmark_Click(object sender, EventArgs e)
@@ -27,59 +27,30 @@ namespace OSAG.internships
             String InternshipName = gvr.Cells[0].Text;
             String CompanyName = gvr.Cells[1].Text;
 
-            //Retrieve StudentID of user
-            //Query
-            String sqlQuery = "Select StudentID FROM Student Where UserName = '" + Session["Username"] + "'";
 
             // Define the Connection
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
 
-            //Create and Format the Command
-            SqlCommand sqlCommand = new SqlCommand();
-            sqlCommand.Connection = sqlConnection;
-            sqlCommand.CommandType = CommandType.Text;
-            sqlCommand.CommandText = sqlQuery;
-
-            // Execute the Query and get results
+            // Retrieve StudentID of user
+            String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
-            SqlDataReader queryResults = sqlCommand.ExecuteReader();
-            while (queryResults.Read())
-            {
-                StudentID = (int)queryResults["StudentID"];
-            }
+            StudentID = (int)sqlCommand.ExecuteScalar();
             sqlConnection.Close();
 
-            //Retrieve Internship ID of posting
-            //Query
-            String sqlQuery3 = "Select InternshipID FROM Internship Where InternshipName = '" + InternshipName + "'";
-
-            // Define the Connection
-            SqlConnection sqlConnection2 = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-            //Create and Format the Command
-            SqlCommand sqlCommand3 = new SqlCommand();
-            sqlCommand3.Connection = sqlConnection2;
-            sqlCommand3.CommandType = CommandType.Text;
-            sqlCommand3.CommandText = sqlQuery3;
-
-            // Execute the Query and get results
-            sqlConnection2.Open();
-            SqlDataReader queryResults2 = sqlCommand3.ExecuteReader();
-            while (queryResults2.Read())
-            {
-                InternshipID = (int)queryResults2["InternshipID"];
-            }
-            sqlConnection2.Close();
+            // Retrieve Internship ID of posting
+            sqlQuery = "SELECT InternshipID FROM Internship WHERE InternshipName = '" + InternshipName + "'";
+            sqlCommand.CommandText = sqlQuery;
+            sqlConnection.Open();
+            InternshipID = (int)sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
 
             //Insert bookmark into database
-            String sqlQuery2 = "INSERT INTO InternshipMatch(isBookmark,StudentID,InternshipID) VALUES(1,'" + StudentID + "','" + InternshipID + "')";
+            String sqlQuery2 = "INSERT INTO InternshipMatch (isBookmark, StudentID, InternshipID) VALUES (1, @StudentID, @InternshipID)";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-            SqlCommand sqlCommand2 = new SqlCommand();
-            sqlCommand2.Connection = sqlConnect;
-            sqlCommand2.CommandType = CommandType.Text;
-            sqlCommand2.CommandText = sqlQuery2;
-
+            SqlCommand sqlCommand2 = new SqlCommand(sqlQuery2, sqlConnect);
+            sqlCommand2.Parameters.AddWithValue("@StudentID", StudentID);
+            sqlCommand2.Parameters.AddWithValue("@InternshipID", InternshipID);
             sqlConnect.Open();
             sqlCommand2.ExecuteScalar();
             sqlConnect.Close();
