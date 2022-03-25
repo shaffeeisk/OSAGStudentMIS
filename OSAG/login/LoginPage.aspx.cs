@@ -75,7 +75,7 @@ namespace OSAG.login
             }
             else // user is member (not found in Student table)
             {
-                Session["UserType"] = "member";
+                Session["UserType"] = "mentor";
                 Response.Redirect("/profiles/MentorProfile.aspx");
             }
         }

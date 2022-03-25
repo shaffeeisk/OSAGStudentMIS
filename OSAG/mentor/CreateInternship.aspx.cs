@@ -24,8 +24,8 @@ namespace OSAG.mentor
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
-            String sqlQuery = "INSERT INTO Internship (Position, PayStatus, CompanyID) " +
-                "VALUES (@Position, @PayStatus, @CompanyID);";
+            String sqlQuery = "INSERT INTO Internship (InternshipName, InternshipDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
+                "VALUES (@InternshipName, @InternshipDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
 
             // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -34,10 +34,13 @@ namespace OSAG.mentor
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
 
             // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
-            sqlCommand.Parameters.AddWithValue("@Position", validate(enterInternshipName.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@PayStatus", ddlPay.SelectedValue.ToString());
+            sqlCommand.Parameters.AddWithValue("@InternshipName", txtInternshipName.Text);
+            sqlCommand.Parameters.AddWithValue("@InternshipDescription", validate(txtInternshipDescription.Text));
+            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
+            sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStartDate.Text));
+            sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtWeeklyHours.Text));
+            sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
             sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
-            sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
             lblSuccess.Text = "New internship(s) successfully created";
@@ -57,9 +60,12 @@ namespace OSAG.mentor
 
         protected void ClearInternData()
         {
-            enterInternshipName.Value = "";
-            ddlPay.SelectedValue = "";
-            ddlCompany.SelectedValue = "(Select a Company)";
+            txtInternshipName.Text = "";
+            txtInternshipDescription.Text = "";
+            txtApplicationDeadline.Text = "";
+            txtStartDate.Text = "";
+            txtWeeklyHours.Text = "";
+            txtPayment.Text = "";
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.
