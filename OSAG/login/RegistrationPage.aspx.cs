@@ -39,8 +39,8 @@ namespace OSAG.login
             }
 
             // run query based on user input
-            String sqlQuery = "INSERT INTO " + ddlUserType.SelectedValue + "(Username, Pass, FirstName, LastName) " +
-                "VALUES (@Username, @Pass, @FirstName, @LastName);";
+            String sqlQuery = "INSERT INTO " + ddlUserType.SelectedValue + "(Username, Pass, FirstName, LastName, IsApproved) " +
+                "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE');";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
