@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Mentor.Master" AutoEventWireup="true" CodeBehind="ApproveRegistration.aspx.cs" Inherits="OSAG.admin.ApproveRegistration" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ApproveRegistration.aspx.cs" Inherits="OSAG.admin.ApproveRegistration" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
