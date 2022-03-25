@@ -21,7 +21,9 @@ namespace OSAG.admin
         // contents, it overrides .Master for some reason so the rest of the if/else if is required.
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+            Session["InstanceStudent"] = "jcrew"; //FOR TESTING GET RID
+            Session["Username"] = "patel3f";
+            Session["UserType"] = "mentor";
             if (!IsPostBack) // so data does not replace itself when clicking button to commit changes
             {
                 try
@@ -76,9 +78,7 @@ namespace OSAG.admin
         // helper method to populate page with data
         protected void populatePage()
         {
-            Session["InstanceStudent"] = "jcrew"; //FOR TESTING GET RID
-            Session["Username"] = "patel3f";
-            Session["UserType"] = "mentor";
+            
             String sqlQuery = "SELECT FirstName, LastName, MentorID " +
                             "FROM Student WHERE Username = @Username;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
