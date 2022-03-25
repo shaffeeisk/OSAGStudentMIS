@@ -33,6 +33,15 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.TextBox txtJobName;
 
         /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -69,6 +78,15 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.TextBox txtApplicationDeadline;
 
         /// <summary>
+        /// CompareValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+
+        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,15 @@ namespace OSAG.mentor
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStartDate;
+
+        /// <summary>
+        /// CompareValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
 
         /// <summary>
         /// Label4 control.
