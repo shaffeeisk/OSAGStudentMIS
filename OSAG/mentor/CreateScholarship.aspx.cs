@@ -24,8 +24,8 @@ namespace OSAG.mentor
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
-            String sqlQuery = "INSERT INTO Scholarship (AwardName, DollarAmount) " +
-                "VALUES (@AwardName, @DollarAmount);";
+            String sqlQuery = "INSERT INTO Scholarship (AwardName, AwardAmount, AwardDescription) " +
+                "VALUES (@AwardName, @AwardAmount,@AwardDescription);";
 
             // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -34,8 +34,9 @@ namespace OSAG.mentor
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
 
             // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
-            sqlCommand.Parameters.AddWithValue("@AwardName", validate(enterScholName.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@DollarAmount", validate(enterAmount.Value.ToString()));
+            sqlCommand.Parameters.AddWithValue("@AwardName", validate(txtAwardName.Text));
+            sqlCommand.Parameters.AddWithValue("@DollarAmount", validate(txtAmount.Text));
+            sqlCommand.Parameters.AddWithValue("@AwardDescription", validate(txtDescription.Text));
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -55,8 +56,9 @@ namespace OSAG.mentor
         }
         protected void ClearScholData()
         {
-            enterScholName.Value = "";
-            enterAmount.Value = "";
+            txtAwardName.Text = "";
+            txtAmount.Text = "";
+            txtDescription.Text = "";
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.

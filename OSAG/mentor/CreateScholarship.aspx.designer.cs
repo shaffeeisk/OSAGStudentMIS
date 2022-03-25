@@ -15,22 +15,22 @@ namespace OSAG.mentor
     {
 
         /// <summary>
-        /// lblScholName control.
+        /// lblAwardName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblScholName;
+        protected global::System.Web.UI.WebControls.Label lblAwardName;
 
         /// <summary>
-        /// enterScholName control.
+        /// txtAwardName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText enterScholName;
+        protected global::System.Web.UI.WebControls.TextBox txtAwardName;
 
         /// <summary>
         /// lblAmount control.
@@ -42,13 +42,31 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.Label lblAmount;
 
         /// <summary>
-        /// enterAmount control.
+        /// txtAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl enterAmount;
+        protected global::System.Web.UI.WebControls.TextBox txtAmount;
+
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// txtDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
 
         /// <summary>
         /// btnSaveSchol control.

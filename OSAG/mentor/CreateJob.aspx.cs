@@ -24,8 +24,8 @@ namespace OSAG.mentor
         {
             // create string from input, send to DB, clear dat.
             // placeholder parts to be replaced included in string
-            String sqlQuery = "INSERT INTO Job (Position, Salary, TimeReq, CompanyID) " +
-                "VALUES (@Position, @Salary, @TimeReq, @CompanyID);";
+            String sqlQuery = "INSERT INTO Job (JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
+                "VALUES (@JobName, @JobDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
 
             // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -34,13 +34,13 @@ namespace OSAG.mentor
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
 
             // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
-            sqlCommand.Parameters.AddWithValue("@Position", validate(enterJobName.Value.ToString()));
-            sqlCommand.Parameters.AddWithValue("@Salary", validate(enterSalary.Value.ToString()));
+            sqlCommand.Parameters.AddWithValue("@JobName", txtJobName.Text);
+            sqlCommand.Parameters.AddWithValue("@JobDescription", validate(txtJobDescription.Text));
+            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
+            sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStartDate.Text));
+            sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtWeeklyHours.Text));
+            sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
             sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
-            if (ddlTime.SelectedValue.ToString() == "0") // handle null entry
-                sqlCommand.Parameters.AddWithValue("@TimeReq", DBNull.Value);
-            else
-                sqlCommand.Parameters.AddWithValue("@TimeReq", ddlTime.SelectedValue);
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -61,10 +61,12 @@ namespace OSAG.mentor
 
         protected void ClearJobData()
         {
-            enterJobName.Value = "";
-            enterSalary.Value = "";
-            ddlTime.SelectedValue = "";
-            ddlCompany.SelectedValue = "";
+            txtJobName.Text = "";
+            txtJobDescription.Text = "";
+            txtApplicationDeadline.Text = "";
+            txtStartDate.Text = "";
+            txtWeeklyHours.Text = "";
+            txtPayment.Text = "";
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.
