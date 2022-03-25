@@ -12,8 +12,6 @@ namespace OSAG.student
         // set select commands based on session variables
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Username"] = "bsterling"; // TESTING PURPOSES ONLY
-
             sqlsrc.SelectCommand = "SELECT JobName, CompanyName FROM Job " +
                 "LEFT JOIN Company ON Job.CompanyID = Company.CompanyID " +
                 "LEFT JOIN JobMatch ON JobMatch.JobID = Job.JobID " +
