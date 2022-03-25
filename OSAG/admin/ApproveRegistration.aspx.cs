@@ -32,23 +32,40 @@ namespace OSAG.admin
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            // update user
-            String sqlQuery = "UPDATE @UserType SET IsApproved = 1 WHERE Username = @Username;";
+            // update command, helper method used to determine table to be used
+            String sqlQuery = "UPDATE USERTYPE SET IsApproved = 'TRUE' WHERE Username = @Username;";
+            sqlQuery = sqlQuery.Replace("USERTYPE", ParamUserType(lstSelectNewUser.SelectedValue));
 
-            // def connections, create commands and insert parameters
+            // def connections, create commands, insert parameter, and execute query
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", lstSelectNewUser.SelectedValue);
-            sqlCommand.Parameters.AddWithValue("@UserType", "student"); // how to pull usertype?
-
-            // execute query
             sqlConnect.Open();
-            String s = (String)sqlCommand.ExecuteScalar();
+            sqlCommand.ExecuteScalar();
             sqlConnect.Close();
 
             // refresh page and inform the user (admin) that the user was successfully approved
             Response.Redirect("ApproveRegistration.aspx");
             lblStatus.Text = "User successfully approved.";
+        }
+
+        // queries Student table, returns "Student" if student is found, "Mentor" if not
+        protected String ParamUserType(String s)
+        {
+            // create and execute query
+            String sqlQuery = "SELECT COUNT(*) FROM Student WHERE Username = @Username;";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", lstSelectNewUser.SelectedValue);
+            sqlConnect.Open();
+            int userType = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            sqlConnect.Close();
+
+            // return String value
+            if (userType == 1) // user is student (found in Student table)
+                return "Student";
+            else // user is mentor (not found in Student table)
+                return "Mentor";
         }
     }
 }
