@@ -16,7 +16,7 @@ namespace OSAG.opportunities
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Username"] = "jcrew";
+            
         }
 
         protected void btnView_Click(object sender, EventArgs e)
