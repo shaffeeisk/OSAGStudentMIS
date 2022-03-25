@@ -15,13 +15,16 @@ namespace OSAG.login
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblStatus.Text = "Welcome! Please enter your new profile information.";
+            if(!IsPostBack)
+                lblStatus.Text = "Welcome! Please enter your new profile information.";
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (txtUsername.Text == "" || txtPassword.Text == "" || txtFirstName.Text == "" || txtLastName.Text == "")
             {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Font.Bold = true;
                 lblStatus.Text = "Please fill out all fields.";
                 return;
             }
@@ -53,6 +56,8 @@ namespace OSAG.login
             // reset for next click
             ClearData();
             // inform user that the new user has been successfully created
+            lblStatus.ForeColor = Color.Black;
+            lblStatus.Font.Bold = false;
             lblStatus.Text = "New user successfully created";
         }
 
