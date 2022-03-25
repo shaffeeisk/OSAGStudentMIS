@@ -57,6 +57,7 @@ namespace OSAG.opportunities
             {
                 StudentID = (int)queryResults["StudentID"];
             }
+            sqlConnection.Close();
 
             //Retrieve Opportunity ID of posting
             //Query
@@ -72,15 +73,16 @@ namespace OSAG.opportunities
             sqlCommand3.CommandText = sqlQuery3;
 
             // Execute the Query and get results
-            sqlConnection.Open();
+            sqlConnection2.Open();
             SqlDataReader queryResults2 = sqlCommand.ExecuteReader();
             while (queryResults.Read())
             {
                 OpportunityID = (int)queryResults2["OpportunityID"];
             }
+            sqlConnection2.Close();
 
             //Insert bookmark into database
-            String sqlQuery2 = "INSERT INTO OpportunityMatch(isBookmark,StudentID,OpportunityID) VALUES(1,'" + StudentID + "','" + OpportunityID + "'";
+            String sqlQuery2 = "INSERT INTO OpportunityMatch(isBookmark,StudentID,OpportunityID) VALUES(1,'" + StudentID + "','" + OpportunityID + "')";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
 
             SqlCommand sqlCommand2 = new SqlCommand();

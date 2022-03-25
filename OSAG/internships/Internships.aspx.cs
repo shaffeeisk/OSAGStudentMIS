@@ -47,6 +47,7 @@ namespace OSAG.internships
             {
                 StudentID = (int)queryResults["StudentID"];
             }
+            sqlConnection.Close();
 
             //Retrieve Internship ID of posting
             //Query
@@ -62,15 +63,16 @@ namespace OSAG.internships
             sqlCommand3.CommandText = sqlQuery3;
 
             // Execute the Query and get results
-            sqlConnection.Open();
-            SqlDataReader queryResults2 = sqlCommand.ExecuteReader();
-            while (queryResults.Read())
+            sqlConnection2.Open();
+            SqlDataReader queryResults2 = sqlCommand3.ExecuteReader();
+            while (queryResults2.Read())
             {
                 InternshipID = (int)queryResults2["InternshipID"];
             }
+            sqlConnection2.Close();
 
             //Insert bookmark into database
-            String sqlQuery2 = "INSERT INTO InternshipMatch(isBookmark,StudentID,InternshipID) VALUES(1,'" + StudentID + "','" + InternshipID + "'";
+            String sqlQuery2 = "INSERT INTO InternshipMatch(isBookmark,StudentID,InternshipID) VALUES(1,'" + StudentID + "','" + InternshipID + "')";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
 
             SqlCommand sqlCommand2 = new SqlCommand();

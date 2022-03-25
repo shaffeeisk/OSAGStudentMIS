@@ -48,14 +48,11 @@ namespace OSAG
 
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
-            /********************************************
-            *  Any user data that you need to work with *
-            *  do here before you abandon session       *
-            *********************************************/
-
-            // wipe user session data (user bubble gets popped)
             Session.Abandon();
-            Response.Redirect("homePage.aspx");
+            // Redirect the client's browser 
+
+            Response.Redirect("/login/LoginPage.aspx?loggedout=true");
+
         }
 
         protected void btnReturnHome_Click(object sender, EventArgs e)

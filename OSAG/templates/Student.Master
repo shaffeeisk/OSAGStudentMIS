@@ -22,10 +22,10 @@
         <asp:DropDownList ID="navigation" runat="server" OnSelectedIndexChanged="navigation_SelectedIndexChanged"   AutoPostBack="true">
             <asp:ListItem Text=" "></asp:ListItem>
             <asp:ListItem Text="Homepage"></asp:ListItem>
-            <asp:ListItem Text="View Profile"></asp:ListItem>
-            <asp:ListItem Text="View Scholarships"></asp:ListItem>
-            <asp:ListItem Text="View Internships"></asp:ListItem>
             <asp:ListItem Text="View Jobs"></asp:ListItem>
+            <asp:ListItem Text="View Internships"></asp:ListItem>
+            <asp:ListItem Text="View Opportunities"></asp:ListItem>
+            <asp:ListItem Text="View Bookmarks"></asp:ListItem>
         </asp:DropDownList>
 
         <div style="margin-left: auto; margin-right: auto; text-align: center;">

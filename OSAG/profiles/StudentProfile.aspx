@@ -17,7 +17,7 @@
         <br />
         <asp:Button ID="btnEdit" runat="server" Text="Edit Profile" OnClick="btnEdit_Click"   />
     </div>
-    <asp:SqlDataSource ID="sqlsrcStudentQuery" runat="server"
+    <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
         SelectCommand=""></asp:SqlDataSource>
 </asp:Content>

@@ -16,10 +16,10 @@ namespace OSAG.profiles
         {
             try
             {
-                sqlsrcStudentQuery.SelectCommand = "SELECT Student.FirstName + ' ' + Student.LastName AS StuName, Student.Email AS StuEmail, GraduationDate, " +
+                sqlsrc.SelectCommand = "SELECT Student.FirstName + ' ' + Student.LastName AS StuName, Student.Email AS StuEmail, GraduationDate, " +
                "Member.FirstName + ' ' + Member.LastName AS MembName, Member.Email AS MembEmail, EmpName " +
-               "FROM Member RIGHT JOIN Student ON Member.MemberID = Student.MemberID LEFT JOIN Employer ON Employer.EmployerID = Student.EmployerID " +
-                    "FROM Student WHERE Username = '" + (String)Session["Username"] + "';";
+               "FROM Mentor LEFT JOIN Student ON Member.MemberID = Student.MemberID LEFT JOIN Employer ON Employer.EmployerID = Student.EmployerID " +
+                    " WHERE Username = '" + (String)Session["Username"] + "';";
             }
             catch (SqlException)
             {

@@ -47,6 +47,7 @@ namespace OSAG.jobs
             {
                 StudentID = (int)queryResults["StudentID"];
             }
+            sqlConnection.Close();
 
             //Retrieve Job ID of posting
             //Query
@@ -62,15 +63,16 @@ namespace OSAG.jobs
             sqlCommand3.CommandText = sqlQuery3;
 
             // Execute the Query and get results
-            sqlConnection.Open();
+            sqlConnection2.Open();
             SqlDataReader queryResults2 = sqlCommand.ExecuteReader();
             while (queryResults.Read())
             {
                 JobID = (int)queryResults2["JobID"];
             }
+            sqlConnection2.Close();
 
             //Insert bookmark into database
-            String sqlQuery2 = "INSERT INTO JobMatch(isBookmark,StudentID,JobID) VALUES(1,'" + StudentID + "','" + JobID + "'";
+            String sqlQuery2 = "INSERT INTO JobMatch(isBookmark,StudentID,JobID) VALUES(1,'" + StudentID + "','" + JobID + "')";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
 
             SqlCommand sqlCommand2 = new SqlCommand();
