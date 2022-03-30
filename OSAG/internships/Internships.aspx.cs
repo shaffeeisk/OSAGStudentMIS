@@ -15,7 +15,7 @@ namespace OSAG.internships
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnBookmark_Click(object sender, EventArgs e)
@@ -41,11 +41,15 @@ namespace OSAG.internships
             // Retrieve InternshipID from gridview
             InternshipID = (int)grdvwInternships.DataKeys[gvr.RowIndex]["InternshipID"];
 
-            //Insert bookmark into database
-            sqlQuery = "INSERT INTO InternshipMatch (IsBookmark, StudentID, InternshipID) VALUES (1, @StudentID, @InternshipID)";
+            // Insert/Remove bookmark
+            int[] matchRecord = getMatch(StudentID, InternshipID);
+            if (matchRecord == null)
+                sqlQuery = "INSERT INTO InternshipMatch (IsBookmark, StudentID, InternshipID) VALUES (1, " + StudentID + ", " + InternshipID + ")";
+            else if (matchRecord[1] == 0)
+                sqlQuery = "UPDATE InternshipMatch SET IsBookmark = 1 WHERE InternshipMatchID = " + matchRecord[0] + ";";
+            else
+                sqlQuery = "UPDATE InternshipMatch SET IsBookmark = 0 WHERE InternshipMatchID = " + matchRecord[0] + ";";
             sqlCommand.CommandText = sqlQuery;
-            sqlCommand.Parameters.AddWithValue("@StudentID", StudentID);
-            sqlCommand.Parameters.AddWithValue("@InternshipID", InternshipID);
             sqlConnection.Open();
             sqlCommand.ExecuteScalar();
             sqlConnection.Close();
@@ -55,8 +59,35 @@ namespace OSAG.internships
         {
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            Session["View"] = gvr.Cells[0].Text+gvr.Cells[1].Text;
+            Session["View"] = gvr.Cells[0].Text + gvr.Cells[1].Text;
             Response.Redirect("InternshipDetails.aspx");
+        }
+
+        // helper method to get matchID and bookmark status
+        public int[] getMatch(int stuID, int itemID)
+        {
+            // query for match ID and bookmark status
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            String sqlQuery = "SELECT InternshipMatchID, IsBookmark FROM InternshipMatch WHERE StudentID = " + stuID + " AND InternshipID = " + itemID + ";";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader queryResults = sqlCommand.ExecuteReader();
+
+            try
+            {   // returns integer array with match ID at index 0 and bookmark status at index 1
+                queryResults.Read();
+                int[] intArr = new int[2];
+                intArr[0] = (int)queryResults["InternshipMatchID"];
+                intArr[1] = Convert.ToInt32(queryResults["IsBookmark"]); // SQL BIT is treated as Boolean, C# does not handle Boolean as T/F = 0/1
+                queryResults.Close();
+                sqlConnection.Close();
+                return intArr;
+            }
+            catch(InvalidOperationException)
+            {   // if query results is empty, return null for main method handling
+                return null;
+                throw;
+            }
         }
     }
 }
