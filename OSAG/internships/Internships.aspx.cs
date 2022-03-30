@@ -66,16 +66,16 @@ namespace OSAG.internships
         // helper method to get matchID and bookmark status
         public int[] getMatch(int stuID, int itemID)
         {
-            // query for match ID and bookmark status
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            String sqlQuery = "SELECT InternshipMatchID, IsBookmark FROM InternshipMatch WHERE StudentID = " + stuID + " AND InternshipID = " + itemID + ";";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            SqlDataReader queryResults = sqlCommand.ExecuteReader();
-
             try
-            {   // returns integer array with match ID at index 0 and bookmark status at index 1
+            {
+                // query for match ID and bookmark status
+                SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                String sqlQuery = "SELECT InternshipMatchID, IsBookmark FROM InternshipMatch WHERE StudentID = " + stuID + " AND InternshipID = " + itemID + ";";
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+                sqlConnection.Open();
+                SqlDataReader queryResults = sqlCommand.ExecuteReader();
                 queryResults.Read();
+                // returns integer array with match ID at index 0 and bookmark status at index 1
                 int[] intArr = new int[2];
                 intArr[0] = (int)queryResults["InternshipMatchID"];
                 intArr[1] = Convert.ToInt32(queryResults["IsBookmark"]); // SQL BIT is treated as Boolean, C# does not handle Boolean as T/F = 0/1
@@ -83,7 +83,7 @@ namespace OSAG.internships
                 sqlConnection.Close();
                 return intArr;
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {   // if query results is empty, return null for main method handling
                 return null;
                 throw;
