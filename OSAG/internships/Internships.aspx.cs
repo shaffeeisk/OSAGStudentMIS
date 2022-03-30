@@ -38,12 +38,8 @@ namespace OSAG.internships
             StudentID = (int)sqlCommand.ExecuteScalar();
             sqlConnection.Close();
 
-            // Retrieve Internship ID of posting
-            sqlQuery = "SELECT InternshipID FROM Internship WHERE InternshipName = '" + InternshipName + "'";
-            sqlCommand.CommandText = sqlQuery;
-            sqlConnection.Open();
-            InternshipID = (int)sqlCommand.ExecuteScalar();
-            sqlConnection.Close();
+            // Retrieve InternshipID from gridview
+            InternshipID = (int)grdvwInternships.DataKeys[gvr.RowIndex]["InternshipID"];
 
             //Insert bookmark into database
             sqlQuery = "INSERT INTO InternshipMatch (IsBookmark, StudentID, InternshipID) VALUES (1, @StudentID, @InternshipID)";

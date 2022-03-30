@@ -37,12 +37,8 @@ namespace OSAG.jobs
             StudentID = (int)sqlCommand.ExecuteScalar();
             sqlConnection.Close();
 
-            // Retrieve Job ID of posting
-            sqlQuery = "SELECT JobID FROM Job WHERE JobName = '" + JobName + "'";
-            sqlCommand.CommandText = sqlQuery;
-            sqlConnection.Open();
-            JobID = (int)sqlCommand.ExecuteScalar();
-            sqlConnection.Close();
+            // Retrieve JobID from gridview
+            JobID = (int)grdvwJobs.DataKeys[gvr.RowIndex]["JobID"];
 
             //Insert bookmark into database
             sqlQuery = "INSERT INTO JobMatch (IsBookmark, StudentID, JobID) VALUES (1, @StudentID, @JobID)";

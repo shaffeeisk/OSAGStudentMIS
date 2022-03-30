@@ -46,12 +46,8 @@ namespace OSAG.opportunities
             StudentID = (int)sqlCommand.ExecuteScalar();
             sqlConnection.Close();
 
-            // Retrieve Opportunity ID of posting
-            sqlQuery = "SELECT OpportunityID FROM Opportunity WHERE AwardName = '" + AwardName + "'";
-            sqlCommand.CommandText = sqlQuery;
-            sqlConnection.Open();
-            OpportunityID = (int)sqlCommand.ExecuteScalar();
-            sqlConnection.Close();
+            // Retrieve InternshipID from gridview
+            OpportunityID = (int)grdvwOpportunities.DataKeys[gvr.RowIndex]["OpportunityID"];
 
             //Insert bookmark into database
             sqlQuery = "INSERT INTO OpportunityMatch (IsBookmark, StudentID, OpportunityID) VALUES (1, @StudentID, @OpportunityID)";
