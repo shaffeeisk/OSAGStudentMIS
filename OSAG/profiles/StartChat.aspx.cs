@@ -11,6 +11,11 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["Username"] == null)
+            {
+                Session["MustLogin"] = "You must log in to access that page.";
+                Response.Redirect("/login/LoginPage.aspx");
+            }
             sqlsrcStudent.SelectCommand = "Select StudentID,FirstName,LastName FROM Student where Username != '" + Session["Username"].ToString() + "'";
             sqlsrcMentor.SelectCommand = "Select MentorID,FirstName,LastName FROM Mentor where Username != '" + Session["Username"].ToString() + "'";
         }
