@@ -83,12 +83,10 @@
     <Content Include="mentor\ViewStudentInterests.aspx" />
     <Content Include="opportunities\Opportunities.aspx" />
     <Content Include="opportunities\OpportunityDetails.aspx" />
-    <Content Include="profiles\EditMentorProfile.aspx" />
-    <Content Include="profiles\EditStudentProfile.aspx" />
-    <Content Include="profiles\MentorProfile.aspx" />
-    <Content Include="profiles\StudentProfile.aspx" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="profiles\ListUsers.aspx" />
     <Content Include="profiles\UserProfile.aspx" />
+    <Content Include="profiles\ViewProfile.aspx" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
@@ -209,33 +207,12 @@
     <Compile Include="opportunities\OpportunityDetails.aspx.designer.cs">
       <DependentUpon>OpportunityDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="profiles\EditMentorProfile.aspx.cs">
-      <DependentUpon>EditMentorProfile.aspx</DependentUpon>
+    <Compile Include="profiles\ListUsers.aspx.cs">
+      <DependentUpon>ListUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="profiles\EditMentorProfile.aspx.designer.cs">
-      <DependentUpon>EditMentorProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="profiles\EditStudentProfile.aspx.cs">
-      <DependentUpon>EditStudentProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="profiles\EditStudentProfile.aspx.designer.cs">
-      <DependentUpon>EditStudentProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="profiles\MentorProfile.aspx.cs">
-      <DependentUpon>MentorProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="profiles\MentorProfile.aspx.designer.cs">
-      <DependentUpon>MentorProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="profiles\StudentProfile.aspx.cs">
-      <DependentUpon>StudentProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="profiles\StudentProfile.aspx.designer.cs">
-      <DependentUpon>StudentProfile.aspx</DependentUpon>
+    <Compile Include="profiles\ListUsers.aspx.designer.cs">
+      <DependentUpon>ListUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="profiles\UserProfile.aspx.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
@@ -243,6 +220,13 @@
     </Compile>
     <Compile Include="profiles\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiles\ViewProfile.aspx.cs">
+      <DependentUpon>ViewProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\ViewProfile.aspx.designer.cs">
+      <DependentUpon>ViewProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="student\Bookmarks.aspx.cs">

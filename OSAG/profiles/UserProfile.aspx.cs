@@ -17,121 +17,113 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["Username"] == null)
+            if (Session["Username"] == null)
             {
                 Session["MustLogin"] = "You must log in to access that page.";
                 Response.Redirect("/login/LoginPage.aspx");
             }
 
-            String fpath = Request.PhysicalApplicationPath + "textfiles\\" +
-            Session["Username"].ToString() + ".pdf";
-            if (File.Exists(fpath))
-            {
-                ltEmbed.Visible = true;
-                string embed = "<object data=\"{0}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
-                embed += "If you are unable to view file, you can download from <a href = \"{0}\">here</a>";
-                embed += " or download <a target = \"_blank\" href = \"http://get.adobe.com/reader/\">Adobe PDF Reader</a> to view the file.";
-                embed += "</object>";
-                ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["Username"].ToString() + ".pdf"));
-            }
-            SqlConnection sc = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
+            // only when loading page for the first time
             if (!IsPostBack)
             {
+                // define connection to DB and query String
+                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
+                String sqlQuery;
+
                 if (Session["UserType"].ToString() == "student")
                 {
-                    sc.Open();
-                    SqlCommand findPass = new SqlCommand();
-                    findPass.Connection = sc;
-                    findPass.CommandText = "SELECT FirstName,LastName,Email,GradDate, Major FROM Student WHERE Username = @Username";
-                    findPass.Parameters.Add(new SqlParameter("@Username", Session["Username"].ToString()));
+                    sqlQuery = "SELECT FirstName,LastName,Email,GradDate, Major FROM Student WHERE Username = " + Session["ViewProfileUsername"].ToString() + ";";
+                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                    sqlConnect.Open();
 
-                    SqlDataReader reader = findPass.ExecuteReader(); // create a reader
-
-                    if (reader.HasRows) // if the username exists, it will continue
+                    // read data onto page
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    while (reader.Read()) // this will read the single record that matches the entered username
                     {
-                        while (reader.Read()) // this will read the single record that matches the entered username
-                        {
-                            txtFirstName.Text = reader["FirstName"].ToString();
-                            txtLastName.Text = reader["LastName"].ToString();
-                            txtEmail.Text = reader["Email"].ToString();
-                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
-                            txtMajor.Text = reader["Major"].ToString();
-                        }
+                        txtFirstName.Text = reader["FirstName"].ToString();
+                        txtLastName.Text = reader["LastName"].ToString();
+                        txtEmail.Text = reader["Email"].ToString();
+                        txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                        txtMajor.Text = reader["Major"].ToString();
                     }
+                    sqlConnect.Close();
 
-                    sc.Close();
+                    // populate resume embed
+                    String fpath = Request.PhysicalApplicationPath + "textfiles\\" + Session["Username"].ToString() + ".pdf";
+                    if (File.Exists(fpath))
+                    {
+                        ltEmbed.Visible = true;
+                        string embed = "<object data=\"{0}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
+                        embed += "If you are unable to view file, you can download from <a href = \"{0}\">here</a>";
+                        embed += " or download <a target = \"_blank\" href = \"http://get.adobe.com/reader/\">Adobe PDF Reader</a> to view the file.";
+                        embed += "</object>";
+                        ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["Username"].ToString() + ".pdf"));
+                    }
                 }
-                else if (Session["UserType"].ToString() == "mentor")
+                else if (Session["UserType"].ToString() == "mentor") // in case there is coder error
                 {
-                    sc.Open();
-                    SqlCommand findPass = new SqlCommand();
-                    findPass.Connection = sc;
-                    findPass.CommandText = "SELECT FirstName,LastName,Email,City,M_State FROM Mentor WHERE Username = @Username";
-                    findPass.Parameters.Add(new SqlParameter("@Username", Session["Username"].ToString()));
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Mentor WHERE Username =  " + Session["ViewProfileUsername"].ToString() + "; ";
+                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                    sqlConnect.Open();
 
-                    SqlDataReader reader = findPass.ExecuteReader(); // create a reader
-
-                    if (reader.HasRows) // if the username exists, it will continue
+                    // read data onto page
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read()) // this will read the single record that matches the entered username
-                        {
-                            mtxtFirstName.Text = reader["FirstName"].ToString();
-                            mtxtLastName.Text = reader["LastName"].ToString();
-                            txtMentorEmail.Text = reader["Email"].ToString();
-                            txtCity.Text = reader["City"].ToString();
-                            txtState.Text = reader["M_State"].ToString();
-                        }
+                        mtxtFirstName.Text = reader["FirstName"].ToString();
+                        mtxtLastName.Text = reader["LastName"].ToString();
+                        txtMentorEmail.Text = reader["Email"].ToString();
+                        txtCity.Text = reader["City"].ToString();
+                        txtState.Text = reader["M_State"].ToString();
                     }
-                    sc.Close();
+                    sqlConnect.Close();
                 }
             }
         }
+
+        // event handler for profile update. if/else depends on user type
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
+            // define connection to DB and query String
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            String sqlQuery;
+
             if (Session["UserType"].ToString() == "student")
             {
-                String sqlQuery = "UPDATE [Student] SET [FirstName] = '" + txtFirstName.Text + "', [LastName] = '" + txtLastName.Text + "'," +
+                sqlQuery = "UPDATE [Student] SET [FirstName] = '" + txtFirstName.Text + "', [LastName] = '" + txtLastName.Text + "'," +
                 "[Email] = '" + txtEmail.Text + "'," +
                 "[Major] = '" + txtMajor.Text + "'," +
                 "[GradDate] = '" + txtGradDate.Text + "' " +
                 " WHERE[Username] = '" + Session["Username"].ToString() + "'";
-                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-                SqlCommand sqlCommand = new SqlCommand();
-                sqlCommand.Connection = sqlConnect;
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = sqlQuery;
-
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlConnect.Open();
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
             else if (Session["UserType"].ToString() == "mentor")
             {
-                String sqlQuery = "UPDATE [Mentor] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
+                sqlQuery = "UPDATE [Mentor] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
                 "[Email] = '" + txtMentorEmail.Text + "'," +
                 "[M_State] = '" + txtState.Text + "'," +
                 "[City] = '" + txtCity.Text + "' " +
                 " WHERE[Username] = '" + Session["Username"].ToString() + "'";
-                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-                SqlCommand sqlCommand = new SqlCommand();
-                sqlCommand.Connection = sqlConnect;
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = sqlQuery;
-
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlConnect.Open();
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
         }
+
+        // event handler for resume upload button
         protected void btnUpload_Click(object sender, EventArgs e)
         {
+            // set embed visibility to true
             ltEmbed.Visible = true;
+            // check if file exists
             if (!Directory.Exists(Server.MapPath("~/Files")))
-            {
                 Directory.CreateDirectory(Server.MapPath("~/Files"));
-            }
+
+            // upload resume if a file was uploaded
             if (fileUploadText.HasFile)
             {
                 String fpath = Request.PhysicalApplicationPath + "textfiles\\" +
