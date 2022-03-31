@@ -32,7 +32,7 @@ namespace OSAG.profiles
 
                 if (Session["UserType"].ToString() == "student")
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,GradDate, Major FROM Student WHERE Username = " + Session["ViewProfileUsername"].ToString() + ";";
+                    sqlQuery = "SELECT FirstName,LastName,Email,GradDate, Major FROM Student WHERE Username = " + Session["Username"].ToString() + ";";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
@@ -62,7 +62,7 @@ namespace OSAG.profiles
                 }
                 else if (Session["UserType"].ToString() == "mentor") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Mentor WHERE Username =  " + Session["ViewProfileUsername"].ToString() + "; ";
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Mentor WHERE Username =  " + Session["Username"].ToString() + "; ";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
