@@ -16,7 +16,15 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            // handle invalid access
+            if (Session["Username"] == null)
+                return;
+            else if(Session["UserChatType"] == null || Session["UserChatID"] == null)
+            {
+                Session["AccessDenied"] = "Access Denied: An unknown error occurred.";
+                Response.Redirect("UserProfile.aspx");
+            }
+            // otherwise set select command
             sqlsrc.SelectCommand = "Select MessageID, DateCreated, MessageText, SenderName FROM ChatMessage WHERE (" +
                 Session["UserType"].ToString() + "SenderID = '" + getID() + "' AND " +
                  Session["UserChatType"].ToString() + "ReceiverID = " + Session["UserChatID"] + ") OR (" +
@@ -35,9 +43,14 @@ namespace OSAG.profiles
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
+            // if already on ViewChat page u *can* instead use GridView.Databind()
             Response.Redirect("ViewChat.aspx");
         }
 
+        // might be a better way than querying for ID and Name EVERY message send
+        // maybe run these helper methods in page_load and compare/set with Session variables
+        // reader not needed, selecting one column entry (can use ExecuteScalar)
+        // FYI ExecuteScalar() returns First Column of First Row of query result
         protected String getID()
         {
             String ID = "";
@@ -66,6 +79,9 @@ namespace OSAG.profiles
             return ID;
         }
 
+        // also, is sender name even needed in the SQL? since you have ID you should be able
+        // to databound display the name. either way idk how it affects performance but generally i think
+        // it would be better coding practice to do *not this* (Reminder: im only speculating)
         protected String getName()
         {
             String Name = "";
