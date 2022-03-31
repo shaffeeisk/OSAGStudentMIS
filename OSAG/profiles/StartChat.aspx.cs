@@ -13,6 +13,7 @@ namespace OSAG.profiles
         {
             if(Session["Username"] == null)
             {
+                // return; <-- alternative solution (Master Page_Load runs instead)
                 Session["MustLogin"] = "You must log in to access that page.";
                 Response.Redirect("/login/LoginPage.aspx");
             }
