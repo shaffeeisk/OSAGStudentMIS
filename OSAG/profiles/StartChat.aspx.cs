@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace OSAG.profiles
 {
+    // can probably copy over logic/code from ListUsers search functionality
     public partial class StartChat : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
