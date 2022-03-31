@@ -91,5 +91,10 @@ namespace OSAG.profiles
                 }
             }
         }
+
+        protected void btnReturn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ListUsers.aspx");
+        }
     }
 }

@@ -41,4 +41,7 @@
     <asp:TextBox ID="txtCity" runat="server" Enabled="false"></asp:TextBox>
     
     <% } %>
+    <br />
+    <br />
+    <asp:Button ID="btnReturn" runat="server" Text="Return to User List" OnClick="btnReturn_Click" />
 </asp:Content>
