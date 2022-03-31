@@ -11,8 +11,7 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Username"] = "bsterling";
-            Session["UserType"] = "student";
+            
         }
 
         // event handler to search student

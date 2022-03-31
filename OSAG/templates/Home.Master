@@ -17,6 +17,7 @@
            <a href="/internships/Internships.aspx">Internships</a>&nbsp
         <a href="/opportunities/Opportunities.aspx">Opportunities</a>&nbsp
         <a href="/student/Bookmarks.aspx">Bookmarks</a>&nbsp
+        <a href="/profiles/ListUsers.aspx">User List</a>&nbsp
             <% } %>
             <% if (Session["UserType"].ToString() == "mentor")
                 { %>
@@ -25,6 +26,7 @@
         <a href="/mentor/CreateJob.aspx">Create Jobs</a>&nbsp
         <a href="/mentor/CreateInternship.aspx">Create Internships</a>&nbsp
         <a href="/mentor/CreateScholarship.aspx">Create Opportunities</a>&nbsp
+        <a href="/profiles/ListUsers.aspx">User List</a>&nbsp
             <% } %>
         <br />
         Current User:
