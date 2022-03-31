@@ -85,7 +85,9 @@
     <Content Include="opportunities\OpportunityDetails.aspx" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="profiles\ListUsers.aspx" />
+    <Content Include="profiles\StartChat.aspx" />
     <Content Include="profiles\UserProfile.aspx" />
+    <Content Include="profiles\ViewChat.aspx" />
     <Content Include="profiles\ViewProfile.aspx" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -214,12 +216,26 @@
     <Compile Include="profiles\ListUsers.aspx.designer.cs">
       <DependentUpon>ListUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="profiles\StartChat.aspx.cs">
+      <DependentUpon>StartChat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\StartChat.aspx.designer.cs">
+      <DependentUpon>StartChat.aspx</DependentUpon>
+    </Compile>
     <Compile Include="profiles\UserProfile.aspx.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="profiles\UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiles\ViewChat.aspx.cs">
+      <DependentUpon>ViewChat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\ViewChat.aspx.designer.cs">
+      <DependentUpon>ViewChat.aspx</DependentUpon>
     </Compile>
     <Compile Include="profiles\ViewProfile.aspx.cs">
       <DependentUpon>ViewProfile.aspx</DependentUpon>

@@ -11,6 +11,7 @@
 <body>
     <form id="form1" runat="server">
         <a href="/profiles/UserProfile.aspx">Profile</a>&nbsp
+        <a href="/profiles/StartChat.aspx">Chat</a>&nbsp
          <% if (Session["UserType"].ToString() == "student")
              { %>
         <a href="/jobs/Jobs.aspx">Jobs</a>&nbsp
