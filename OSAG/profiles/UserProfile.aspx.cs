@@ -17,8 +17,14 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["Username"] == null)
+            {
+                Session["MustLogin"] = "You must log in to access that page.";
+                Response.Redirect("/login/LoginPage.aspx");
+            }
+
             String fpath = Request.PhysicalApplicationPath + "textfiles\\" +
-            Session["UserName"].ToString() + ".pdf";
+            Session["Username"].ToString() + ".pdf";
             if (File.Exists(fpath))
             {
                 ltEmbed.Visible = true;
@@ -26,17 +32,16 @@ namespace OSAG.profiles
                 embed += "If you are unable to view file, you can download from <a href = \"{0}\">here</a>";
                 embed += " or download <a target = \"_blank\" href = \"http://get.adobe.com/reader/\">Adobe PDF Reader</a> to view the file.";
                 embed += "</object>";
-                ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["UserName"].ToString() + ".pdf"));
+                ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["Username"].ToString() + ".pdf"));
             }
-            System.Data.SqlClient.SqlConnection sc = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
+            SqlConnection sc = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             if (!IsPostBack)
             {
                 if (Session["UserType"].ToString() == "student")
                 {
                     sc.Open();
-                    System.Data.SqlClient.SqlCommand findPass = new System.Data.SqlClient.SqlCommand();
+                    SqlCommand findPass = new SqlCommand();
                     findPass.Connection = sc;
-                    // SELECT PASSWORD STRING WHERE THE ENTERED USERNAME MATCHES
                     findPass.CommandText = "SELECT FirstName,LastName,Email,GradDate, Major FROM Student WHERE Username = @Username";
                     findPass.Parameters.Add(new SqlParameter("@Username", Session["Username"].ToString()));
 
@@ -46,28 +51,21 @@ namespace OSAG.profiles
                     {
                         while (reader.Read()) // this will read the single record that matches the entered username
                         {
-                            string first = reader["FirstName"].ToString();
-                            string last = reader["LastName"].ToString();
-                            string email = reader["Email"].ToString();
-                            string grad = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
-                            string major = reader["Major"].ToString();
-
-                            txtFirstName.Text = first;
-                            txtLastName.Text = last;
-                            txtEmail.Text = email;
-                            txtGradDate.Text = grad;
-                            txtMajor.Text = major;
+                            txtFirstName.Text = reader["FirstName"].ToString();
+                            txtLastName.Text = reader["LastName"].ToString();
+                            txtEmail.Text = reader["Email"].ToString();
+                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                            txtMajor.Text = reader["Major"].ToString();
                         }
                     }
 
                     sc.Close();
                 }
-                if (Session["UserType"].ToString() == "mentor")
+                else if (Session["UserType"].ToString() == "mentor")
                 {
                     sc.Open();
-                    System.Data.SqlClient.SqlCommand findPass = new System.Data.SqlClient.SqlCommand();
+                    SqlCommand findPass = new SqlCommand();
                     findPass.Connection = sc;
-                    // SELECT PASSWORD STRING WHERE THE ENTERED USERNAME MATCHES
                     findPass.CommandText = "SELECT FirstName,LastName,Email,City,M_State FROM Mentor WHERE Username = @Username";
                     findPass.Parameters.Add(new SqlParameter("@Username", Session["Username"].ToString()));
 
@@ -77,23 +75,15 @@ namespace OSAG.profiles
                     {
                         while (reader.Read()) // this will read the single record that matches the entered username
                         {
-                            string first = reader["FirstName"].ToString();
-                            string last = reader["LastName"].ToString();
-                            string MentorEmail = reader["Email"].ToString();
-                            string MentorCity = reader["City"].ToString();
-                            string MentorState = reader["M_State"].ToString();
-
-                            mtxtFirstName.Text = first;
-                            mtxtLastName.Text = last;
-                            txtMentorEmail.Text = MentorEmail;
-                            txtCity.Text = MentorCity;
-                            txtState.Text = MentorState;
+                            mtxtFirstName.Text = reader["FirstName"].ToString();
+                            mtxtLastName.Text = reader["LastName"].ToString();
+                            txtMentorEmail.Text = reader["Email"].ToString();
+                            txtCity.Text = reader["City"].ToString();
+                            txtState.Text = reader["M_State"].ToString();
                         }
                     }
-
                     sc.Close();
                 }
-
             }
         }
         protected void btnUpdate_Click(object sender, EventArgs e)
@@ -104,7 +94,7 @@ namespace OSAG.profiles
                 "[Email] = '" + txtEmail.Text + "'," +
                 "[Major] = '" + txtMajor.Text + "'," +
                 "[GradDate] = '" + txtGradDate.Text + "' " +
-                " WHERE[Username] = '" + Session["UserName"].ToString() + "'";
+                " WHERE[Username] = '" + Session["Username"].ToString() + "'";
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
 
                 SqlCommand sqlCommand = new SqlCommand();
@@ -116,13 +106,13 @@ namespace OSAG.profiles
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
-            if (Session["UserType"].ToString() == "mentor")
+            else if (Session["UserType"].ToString() == "mentor")
             {
                 String sqlQuery = "UPDATE [Mentor] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
                 "[Email] = '" + txtMentorEmail.Text + "'," +
                 "[M_State] = '" + txtState.Text + "'," +
                 "[City] = '" + txtCity.Text + "' " +
-                " WHERE[Username] = '" + Session["UserName"].ToString() + "'";
+                " WHERE[Username] = '" + Session["Username"].ToString() + "'";
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
 
                 SqlCommand sqlCommand = new SqlCommand();
@@ -138,20 +128,20 @@ namespace OSAG.profiles
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             ltEmbed.Visible = true;
-            if (!System.IO.Directory.Exists(Server.MapPath("~/Files")))
+            if (!Directory.Exists(Server.MapPath("~/Files")))
             {
-                System.IO.Directory.CreateDirectory(Server.MapPath("~/Files"));
+                Directory.CreateDirectory(Server.MapPath("~/Files"));
             }
             if (fileUploadText.HasFile)
             {
                 String fpath = Request.PhysicalApplicationPath + "textfiles\\" +
-                 Session["UserName"].ToString() + ".pdf";
+                 Session["Username"].ToString() + ".pdf";
                 fileUploadText.SaveAs(fpath);
                 if (File.Exists(fpath))
                 {
                     string embed = "<object data=\"{0}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
                     embed += "</object>";
-                    ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["UserName"].ToString() + ".pdf"));
+                    ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["Username"].ToString() + ".pdf"));
                 }
             }
         }
