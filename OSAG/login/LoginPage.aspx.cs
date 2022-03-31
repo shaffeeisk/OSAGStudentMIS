@@ -69,15 +69,10 @@ namespace OSAG.login
             sqlConnect.Close();
 
             if (userType == 1) // user is student (found in Student table)
-            {
                 Session["UserType"] = "student";
-                Response.Redirect("/profiles/StudentProfile.aspx");
-            }
             else // user is member (not found in Student table)
-            {
                 Session["UserType"] = "mentor";
-                Response.Redirect("/profiles/MentorProfile.aspx");
-            }
+            Response.Redirect("/profiles/UserProfile.aspx");
         }
 
 
