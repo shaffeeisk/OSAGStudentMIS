@@ -70,10 +70,10 @@ namespace OSAG.profiles
                     }
                 }
 
-                // otherwise querying mentor
-                else if (Session["ViewProfileUserType"].ToString() == "mentor") // in case there is coder error
+                // otherwise querying member
+                else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Mentor WHERE Username =  '" + Session["ViewProfileUsername"].ToString() + "'; ";
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Member WHERE Username =  '" + Session["ViewProfileUsername"].ToString() + "'; ";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
@@ -83,7 +83,7 @@ namespace OSAG.profiles
                     {
                         mtxtFirstName.Text = reader["FirstName"].ToString();
                         mtxtLastName.Text = reader["LastName"].ToString();
-                        txtMentorEmail.Text = reader["Email"].ToString();
+                        txtMemberEmail.Text = reader["Email"].ToString();
                         txtCity.Text = reader["City"].ToString();
                         txtState.Text = reader["M_State"].ToString();
                     }

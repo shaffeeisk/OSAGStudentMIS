@@ -70,7 +70,7 @@ namespace OSAG.profiles
                 }
                 else
                 {
-                    ID = reader["MentorID"].ToString();
+                    ID = reader["MemberID"].ToString();
 
                 }
 

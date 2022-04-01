@@ -60,9 +60,9 @@ namespace OSAG.profiles
                         ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["Username"].ToString() + ".pdf"));
                     }
                 }
-                else if (Session["UserType"].ToString() == "mentor") // in case there is coder error
+                else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Mentor WHERE Username =  '" + Session["Username"].ToString() + "'; ";
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Member WHERE Username =  '" + Session["Username"].ToString() + "'; ";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
@@ -72,7 +72,7 @@ namespace OSAG.profiles
                     {
                         mtxtFirstName.Text = reader["FirstName"].ToString();
                         mtxtLastName.Text = reader["LastName"].ToString();
-                        txtMentorEmail.Text = reader["Email"].ToString();
+                        txtMemberEmail.Text = reader["Email"].ToString();
                         txtCity.Text = reader["City"].ToString();
                         txtState.Text = reader["M_State"].ToString();
                     }
@@ -100,10 +100,10 @@ namespace OSAG.profiles
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
-            else if (Session["UserType"].ToString() == "mentor")
+            else if (Session["UserType"].ToString() == "member")
             {
-                sqlQuery = "UPDATE [Mentor] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
-                "[Email] = '" + txtMentorEmail.Text + "'," +
+                sqlQuery = "UPDATE [Member] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
+                "[Email] = '" + txtMemberEmail.Text + "'," +
                 "[M_State] = '" + txtState.Text + "'," +
                 "[City] = '" + txtCity.Text + "' " +
                 " WHERE[Username] = '" + Session["Username"].ToString() + "'";

@@ -19,7 +19,7 @@ namespace OSAG.profiles
                 Response.Redirect("/login/LoginPage.aspx");
             }
             sqlsrcStudent.SelectCommand = "Select StudentID,FirstName,LastName FROM Student where Username != '" + Session["Username"].ToString() + "'";
-            sqlsrcMentor.SelectCommand = "Select MentorID,FirstName,LastName FROM Mentor where Username != '" + Session["Username"].ToString() + "'";
+            sqlsrcMember.SelectCommand = "Select MemberID,FirstName,LastName FROM Member where Username != '" + Session["Username"].ToString() + "'";
         }
 
         protected void btn_studentChat_Click(object sender, EventArgs e)
@@ -31,12 +31,12 @@ namespace OSAG.profiles
             Response.Redirect("ViewChat.aspx");
         }
 
-        protected void btn_mentorChat_Click(object sender, EventArgs e)
+        protected void btn_memberChat_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            Session["UserChatID"] = grdvMentor.DataKeys[gvr.RowIndex].Value;
-            Session["UserChatType"] = "Mentor";
+            Session["UserChatID"] = grdvMember.DataKeys[gvr.RowIndex].Value;
+            Session["UserChatType"] = "Member";
             Response.Redirect("ViewChat.aspx");
         }
     }

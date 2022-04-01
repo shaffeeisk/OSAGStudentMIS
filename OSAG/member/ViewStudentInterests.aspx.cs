@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace OSAG.mentor
+namespace OSAG.member
 {
     public partial class ViewStudentInterests : System.Web.UI.Page
     {

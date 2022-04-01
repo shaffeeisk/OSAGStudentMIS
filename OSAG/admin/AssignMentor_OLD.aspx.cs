@@ -14,10 +14,10 @@ using System.Drawing;
 
 namespace OSAG.admin
 {
-    public partial class AssignMentor_OLD : System.Web.UI.Page
+    public partial class AssignMember_OLD : System.Web.UI.Page
     {
         // populatePage() requires Session["InstanceStudent"]. This does not get checked in Master Page
-        // so try/catch is required to redirect Mentors to the correct place. Also, since Page_Load has
+        // so try/catch is required to redirect Members to the correct place. Also, since Page_Load has
         // contents, it overrides .Master for some reason so the rest of the if/else if is required.
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,7 +25,7 @@ namespace OSAG.admin
             {
                 try
                 {
-                    if ((String)Session["UserType"] == "mentor" && Session["Username"] != null)
+                    if ((String)Session["UserType"] == "member" && Session["Username"] != null)
                         populatePage(); // goal of Page_Load
                     else if (Session["Username"] == null)
                     {   // user not logged in, go to LogIn
@@ -33,7 +33,7 @@ namespace OSAG.admin
                         Response.Redirect("/login/LoginPage.aspx");
                     }
                     else if ((String)Session["UserType"] == "student")
-                    {   // not Mentor, go to Student Home
+                    {   // not Member, go to Student Home
                         Session["AccessDenied"] = "You do not have access to that page.";
                         Response.Redirect("/profiles/StudentProfile.aspx");
                     }
@@ -41,7 +41,7 @@ namespace OSAG.admin
                 catch (SqlException)
                 {
                     Session["AccessDenied"] = "Access Denied: An unknown error occurred.";
-                    Response.Redirect("profiles/MentorProfile.aspx");
+                    Response.Redirect("profiles/MemberProfile.aspx");
                     throw;
                 }
             }
@@ -57,15 +57,15 @@ namespace OSAG.admin
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             String sqlQuery = "UPDATE Student SET " +
-                "MentorID = @MentorID " +
+                "MemberID = @MemberID " +
                 "WHERE Username = @Username;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", (String)Session["InstanceStudent"]);
-            if (ddlMentor.SelectedValue.ToString() == "0") // if no mentor is assigned, set ID to null
-                sqlCommand.Parameters.AddWithValue("@MentorID", DBNull.Value); // blank box value is set to "0"
+            if (ddlMember.SelectedValue.ToString() == "0") // if no member is assigned, set ID to null
+                sqlCommand.Parameters.AddWithValue("@MemberID", DBNull.Value); // blank box value is set to "0"
             else // take input as param
-                sqlCommand.Parameters.AddWithValue("@MentorID", ddlMentor.SelectedValue); 
+                sqlCommand.Parameters.AddWithValue("@MemberID", ddlMember.SelectedValue); 
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -75,7 +75,7 @@ namespace OSAG.admin
         // helper method to populate page with data
         protected void populatePage()
         {
-            String sqlQuery = "SELECT FirstName, LastName, MentorID " +
+            String sqlQuery = "SELECT FirstName, LastName, MemberID " +
                             "FROM Student WHERE Username = @Username;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
@@ -85,10 +85,10 @@ namespace OSAG.admin
             queryResults.Read();
             lblFN.Text = queryResults["FirstName"].ToString();
             lblLN.Text = queryResults["LastName"].ToString();
-            if (queryResults["MentorID"] == DBNull.Value)
-                ddlMentor.SelectedValue = "0";
+            if (queryResults["MemberID"] == DBNull.Value)
+                ddlMember.SelectedValue = "0";
             else
-                ddlMentor.SelectedValue = queryResults["MentorID"].ToString();
+                ddlMember.SelectedValue = queryResults["MemberID"].ToString();
             queryResults.Close();
             sqlConnect.Close();
         }

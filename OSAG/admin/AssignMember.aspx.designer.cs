@@ -11,7 +11,7 @@ namespace OSAG.admin
 {
 
 
-    public partial class AssignMentor
+    public partial class AssignMember
     {
 
         /// <summary>
@@ -24,22 +24,22 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.ListBox lstStudents;
 
         /// <summary>
-        /// lblMentor control.
+        /// lblMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMentor;
+        protected global::System.Web.UI.WebControls.Label lblMember;
 
         /// <summary>
-        /// ddlMentor control.
+        /// ddlMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMentor;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMember;
 
         /// <summary>
         /// lblUpdateStatus control.
@@ -60,13 +60,13 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.Button btnUpdate;
 
         /// <summary>
-        /// sqlsrcMentorList control.
+        /// sqlsrcMemberList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMentorList;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMemberList;
 
         /// <summary>
         /// sqlsrcStudentList control.

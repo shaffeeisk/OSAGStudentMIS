@@ -29,19 +29,19 @@
         SelectCommand="SELECT Username, FirstName, LastName FROM Student WHERE FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
     <br />
     <br />
-    <h4>Mentors:</h4>
+    <h4>Members:</h4>
     <input id="searchBar2" type="text" runat="server" />
     <asp:Button ID="btnSearchMent" runat="server" Text="Search" OnClick="btnSearchMent_Click" />
     <br />
     <br />
-    <asp:GridView ID="grdvMentor" runat="server"
-        DataSourceID="sqlsrcMentorQuery"
+    <asp:GridView ID="grdvMember" runat="server"
+        DataSourceID="sqlsrcMemberQuery"
         AutoGenerateSelectButton="true"
         AutoGenerateColumns="false"
         AllowPaging="true"
         DataKeyNames="Username"
         OnRowDataBound="grdvUser_RowDataBound"
-        OnSelectedIndexChanged="grdvMentor_SelectedIndexChanged"
+        OnSelectedIndexChanged="grdvMember_SelectedIndexChanged"
         HorizontalAlign="Center"
         ShowHeaderWhenEmpty="true">
         <Columns>
@@ -50,7 +50,7 @@
             <asp:BoundField ReadOnly="true" HeaderText="Last Name" DataField="LastName" />
         </Columns>
     </asp:GridView>
-    <asp:SqlDataSource ID="sqlsrcMentorQuery" runat="server"
+    <asp:SqlDataSource ID="sqlsrcMemberQuery" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT Username, FirstName, LastName FROM Mentor WHERE FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
+        SelectCommand="SELECT Username, FirstName, LastName FROM Member WHERE FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
 </asp:Content>

@@ -14,7 +14,7 @@ using System.Drawing;
 
 namespace OSAG.admin
 {
-    public partial class AssignMentor : System.Web.UI.Page
+    public partial class AssignMember : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,29 +25,29 @@ namespace OSAG.admin
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             String sqlQuery = "UPDATE Student SET " +
-                "MentorID = @MentorID " +
+                "MemberID = @MemberID " +
                 "WHERE StudentID = @StudentID;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@StudentID", lstStudents.SelectedValue.ToString());
-            if (ddlMentor.SelectedValue.ToString() == "0") // if no mentor is assigned, set ID to null
-                sqlCommand.Parameters.AddWithValue("@MentorID", DBNull.Value); // blank box value is set to "0"
+            if (ddlMember.SelectedValue.ToString() == "0") // if no member is assigned, set ID to null
+                sqlCommand.Parameters.AddWithValue("@MemberID", DBNull.Value); // blank box value is set to "0"
             else // take input as param
-                sqlCommand.Parameters.AddWithValue("@MentorID", ddlMentor.SelectedValue); 
+                sqlCommand.Parameters.AddWithValue("@MemberID", ddlMember.SelectedValue); 
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
-            lblUpdateStatus.Text = "Mentor assignment successful.";
+            lblUpdateStatus.Text = "Member assignment successful.";
         }
 
-        // change mentor dropdown list to reflect selected student
+        // change member dropdown list to reflect selected student
         protected void lstStudents_SelectedIndexChanged(object sender, EventArgs e)
         {
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            SqlCommand sqlCommand = new SqlCommand("SELECT MentorID FROM Student WHERE StudentID = @StudentID", sqlConnect);
+            SqlCommand sqlCommand = new SqlCommand("SELECT MemberID FROM Student WHERE StudentID = @StudentID", sqlConnect);
             sqlCommand.Parameters.AddWithValue("@StudentID", lstStudents.SelectedValue);
             sqlConnect.Open();
-            ddlMentor.SelectedValue = sqlCommand.ExecuteScalar().ToString();
+            ddlMember.SelectedValue = sqlCommand.ExecuteScalar().ToString();
             sqlConnect.Close();
         }
     }

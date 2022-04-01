@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="admin\ApproveRegistration.aspx" />
     <Content Include="admin\AssignMentor_OLD.aspx" />
-    <Content Include="admin\AssignMentor.aspx" />
+    <Content Include="admin\AssignMember.aspx" />
     <Content Include="homepages\HomePage.aspx" />
     <Content Include="internships\InternshipDetails.aspx" />
     <Content Include="internships\Internships.aspx" />
@@ -77,10 +77,10 @@
     <Content Include="jobs\Jobs.aspx" />
     <Content Include="login\LoginPage.aspx" />
     <Content Include="login\RegistrationPage.aspx" />
-    <Content Include="mentor\CreateInternship.aspx" />
-    <Content Include="mentor\CreateJob.aspx" />
-    <Content Include="mentor\CreateScholarship.aspx" />
-    <Content Include="mentor\ViewStudentInterests.aspx" />
+    <Content Include="member\CreateInternship.aspx" />
+    <Content Include="member\CreateJob.aspx" />
+    <Content Include="member\CreateScholarship.aspx" />
+    <Content Include="member\ViewStudentInterests.aspx" />
     <Content Include="opportunities\Opportunities.aspx" />
     <Content Include="opportunities\OpportunityDetails.aspx" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
@@ -111,12 +111,12 @@
     <Compile Include="admin\AssignMentor_OLD.aspx.designer.cs">
       <DependentUpon>AssignMentor_OLD.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\AssignMentor.aspx.cs">
-      <DependentUpon>AssignMentor.aspx</DependentUpon>
+    <Compile Include="admin\AssignMember.aspx.cs">
+      <DependentUpon>AssignMember.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\AssignMentor.aspx.designer.cs">
-      <DependentUpon>AssignMentor.aspx</DependentUpon>
+    <Compile Include="admin\AssignMember.aspx.designer.cs">
+      <DependentUpon>AssignMember.aspx</DependentUpon>
     </Compile>
     <Compile Include="homepages\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
@@ -167,32 +167,32 @@
     <Compile Include="login\RegistrationPage.aspx.designer.cs">
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="mentor\CreateInternship.aspx.cs">
+    <Compile Include="member\CreateInternship.aspx.cs">
       <DependentUpon>CreateInternship.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="mentor\CreateInternship.aspx.designer.cs">
+    <Compile Include="member\CreateInternship.aspx.designer.cs">
       <DependentUpon>CreateInternship.aspx</DependentUpon>
     </Compile>
-    <Compile Include="mentor\CreateJob.aspx.cs">
+    <Compile Include="member\CreateJob.aspx.cs">
       <DependentUpon>CreateJob.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="mentor\CreateJob.aspx.designer.cs">
+    <Compile Include="member\CreateJob.aspx.designer.cs">
       <DependentUpon>CreateJob.aspx</DependentUpon>
     </Compile>
-    <Compile Include="mentor\CreateScholarship.aspx.cs">
+    <Compile Include="member\CreateScholarship.aspx.cs">
       <DependentUpon>CreateScholarship.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="mentor\CreateScholarship.aspx.designer.cs">
+    <Compile Include="member\CreateScholarship.aspx.designer.cs">
       <DependentUpon>CreateScholarship.aspx</DependentUpon>
     </Compile>
-    <Compile Include="mentor\ViewStudentInterests.aspx.cs">
+    <Compile Include="member\ViewStudentInterests.aspx.cs">
       <DependentUpon>ViewStudentInterests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="mentor\ViewStudentInterests.aspx.designer.cs">
+    <Compile Include="member\ViewStudentInterests.aspx.designer.cs">
       <DependentUpon>ViewStudentInterests.aspx</DependentUpon>
     </Compile>
     <Compile Include="opportunities\Opportunities.aspx.cs">

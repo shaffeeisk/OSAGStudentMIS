@@ -49,7 +49,7 @@ namespace OSAG.admin
             lblStatus.Text = "User successfully approved.";
         }
 
-        // queries Student table, returns "Student" if student is found, "Mentor" if not
+        // queries Student table, returns "Student" if student is found, "Member" if not
         protected String ParamUserType(String s)
         {
             // create and execute query
@@ -64,8 +64,8 @@ namespace OSAG.admin
             // return String value
             if (userType == 1) // user is student (found in Student table)
                 return "Student";
-            else // user is mentor (not found in Student table)
-                return "Mentor";
+            else // user is member (not found in Student table)
+                return "Member";
         }
     }
 }

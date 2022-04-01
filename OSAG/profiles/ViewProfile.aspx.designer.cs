@@ -150,22 +150,22 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.TextBox mtxtLastName;
 
         /// <summary>
-        /// lblMentorEmail control.
+        /// lblMemberEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMentorEmail;
+        protected global::System.Web.UI.WebControls.Label lblMemberEmail;
 
         /// <summary>
-        /// txtMentorEmail control.
+        /// txtMemberEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMentorEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtMemberEmail;
 
         /// <summary>
         /// lblState control.

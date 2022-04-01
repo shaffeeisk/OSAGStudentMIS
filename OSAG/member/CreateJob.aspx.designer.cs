@@ -7,30 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OSAG.mentor
+namespace OSAG.member
 {
 
 
-    public partial class CreateInternship
+    public partial class CreateJob
     {
 
         /// <summary>
-        /// lblInternshipName control.
+        /// lblJobName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInternshipName;
+        protected global::System.Web.UI.WebControls.Label lblJobName;
 
         /// <summary>
-        /// txtInternshipName control.
+        /// txtJobName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInternshipName;
+        protected global::System.Web.UI.WebControls.TextBox txtJobName;
 
         /// <summary>
         /// RequiredFieldValidator1 control.
@@ -51,13 +51,13 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// txtInternshipDescription control.
+        /// txtJobDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInternshipDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtJobDescription;
 
         /// <summary>
         /// Label2 control.
@@ -78,13 +78,13 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.TextBox txtApplicationDeadline;
 
         /// <summary>
-        /// CompareValidator2 control.
+        /// CompareValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
 
         /// <summary>
         /// Label3 control.
@@ -105,13 +105,13 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.TextBox txtStartDate;
 
         /// <summary>
-        /// CompareValidator1 control.
+        /// CompareValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
 
         /// <summary>
         /// Label4 control.
@@ -168,13 +168,13 @@ namespace OSAG.mentor
         protected global::System.Web.UI.WebControls.DropDownList ddlCompany;
 
         /// <summary>
-        /// btnSaveIntern control.
+        /// btnSaveJob control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveIntern;
+        protected global::System.Web.UI.WebControls.Button btnSaveJob;
 
         /// <summary>
         /// lblSuccess control.

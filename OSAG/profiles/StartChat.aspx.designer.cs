@@ -33,21 +33,21 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcStudent;
 
         /// <summary>
-        /// grdvMentor control.
+        /// grdvMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdvMentor;
+        protected global::System.Web.UI.WebControls.GridView grdvMember;
 
         /// <summary>
-        /// sqlsrcMentor control.
+        /// sqlsrcMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMentor;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMember;
     }
 }

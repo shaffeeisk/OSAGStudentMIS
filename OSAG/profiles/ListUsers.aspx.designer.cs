@@ -69,21 +69,21 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.Button btnSearchMent;
 
         /// <summary>
-        /// grdvMentor control.
+        /// grdvMember control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdvMentor;
+        protected global::System.Web.UI.WebControls.GridView grdvMember;
 
         /// <summary>
-        /// sqlsrcMentorQuery control.
+        /// sqlsrcMemberQuery control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMentorQuery;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMemberQuery;
     }
 }

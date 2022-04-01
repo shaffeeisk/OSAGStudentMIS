@@ -61,12 +61,12 @@ namespace OSAG.login
             lblStatus.Text = "New user successfully created";
         }
 
-        // helper method to query student and mentor tables for existing username
+        // helper method to query student and member tables for existing username
         // if count is > 0 return true, otherwise return false
         public bool usernameExists(String s)
         {
             String sqlQuery = "SELECT (SELECT COUNT(*) FROM Student WHERE Username = @Username) " +
-                "+ (SELECT COUNT(*) FROM Mentor WHERE Username = @Username)";
+                "+ (SELECT COUNT(*) FROM Member WHERE Username = @Username)";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", s);

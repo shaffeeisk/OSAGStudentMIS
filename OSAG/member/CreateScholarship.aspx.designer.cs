@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OSAG.mentor
+namespace OSAG.member
 {
 
 

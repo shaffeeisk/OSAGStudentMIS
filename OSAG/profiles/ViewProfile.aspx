@@ -23,7 +23,7 @@
     <asp:Literal ID="ltEmbed" runat="server" />
     <% } %>
 
-    <% if (Session["ViewProfileUserType"].ToString() == "mentor")
+    <% if (Session["ViewProfileUserType"].ToString() == "member")
         { %>
     <asp:Label ID="lblFirstName" runat="server" Text="FirstName"></asp:Label>
     <asp:TextBox ID="mtxtFirstName" runat="server" Enabled="false"></asp:TextBox>
@@ -31,13 +31,13 @@
     <asp:Label ID="lblLastName" runat="server" Text="   LastName"></asp:Label>
     <asp:TextBox ID="mtxtLastName" runat="server" Enabled="false"></asp:TextBox>
     <br />
-    <asp:Label ID="lblMentorEmail" runat="server" Text="MentorEmail"></asp:Label>
-    <asp:TextBox ID="txtMentorEmail" runat="server" Enabled="false"></asp:TextBox>
+    <asp:Label ID="lblMemberEmail" runat="server" Text="MemberEmail"></asp:Label>
+    <asp:TextBox ID="txtMemberEmail" runat="server" Enabled="false"></asp:TextBox>
     <br />
-    <asp:Label ID="lblState" runat="server" Text="MentorState"></asp:Label>
+    <asp:Label ID="lblState" runat="server" Text="MemberState"></asp:Label>
     <asp:TextBox ID="txtState" runat="server" Enabled="false"></asp:TextBox>
     <br />
-    <asp:Label ID="lblCity" runat="server" Text="MentorCity"></asp:Label>
+    <asp:Label ID="lblCity" runat="server" Text="MemberCity"></asp:Label>
     <asp:TextBox ID="txtCity" runat="server" Enabled="false"></asp:TextBox>
     
     <% } %>

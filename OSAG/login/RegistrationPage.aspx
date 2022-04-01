@@ -13,10 +13,10 @@
             <br />
             <br />
             <strong>Create User</strong><br />
-            Student or Mentor:
+            Student or Member:
             <asp:DropDownList ID="ddlUserType" runat="server" >
                 <asp:ListItem Text="Student" Value="Student" />
-                <asp:ListItem Text="Mentor" Value="Mentor" />
+                <asp:ListItem Text="Member" Value="Member" />
             </asp:DropDownList>
             <br />
             <br />

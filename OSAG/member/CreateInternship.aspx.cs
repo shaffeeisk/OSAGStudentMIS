@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Web.UI.HtmlControls;
 
-namespace OSAG.mentor
+namespace OSAG.member
 {
     public partial class CreateInternship : System.Web.UI.Page
     {
@@ -46,7 +46,7 @@ namespace OSAG.mentor
             lblSuccess.Text = "New internship(s) successfully created";
 
             // force postback by refreshing page (updates table via Page_Load method)
-            Response.Redirect("/mentor/CreateInternship.aspx");
+            Response.Redirect("/member/CreateInternship.aspx");
             // reset for next click
             ClearInternData();
         }
@@ -55,7 +55,7 @@ namespace OSAG.mentor
         {
             ClearInternData();
             // force postback to update table
-            Response.Redirect("/mentor/createInternship.aspx");
+            Response.Redirect("/member/createInternship.aspx");
         }
 
         protected void ClearInternData()
@@ -71,7 +71,7 @@ namespace OSAG.mentor
         // helper method to validate data. trims input string of leading/trailing white space.
         // then returns null if user input is empty. otherwise, returns the trimmed string.
         // allows data integrity to allow querying null input (also saves disk space :D)
-        // (e.g. display students who don't have graduation dates so mentor can help them figure out when they should graduate)
+        // (e.g. display students who don't have graduation dates so member can help them figure out when they should graduate)
         private object validate(String s)
         {
             s = s.Trim();

@@ -62,7 +62,7 @@
     <asp:Literal ID="ltEmbed" runat="server" />
     <% } %>
 
-    <% if (Session["UserType"].ToString() == "mentor")
+    <% if (Session["UserType"].ToString() == "member")
         { %>
     <asp:Label ID="lblFirstName" runat="server" Text="FirstName"></asp:Label>
     <asp:TextBox ID="mtxtFirstName" runat="server"></asp:TextBox>
@@ -80,15 +80,15 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="lblMentorEmail" runat="server" Text="MentorEmail"></asp:Label>
-    <asp:TextBox ID="txtMentorEmail" runat="server"></asp:TextBox>
+    <asp:Label ID="lblMemberEmail" runat="server" Text="MemberEmail"></asp:Label>
+    <asp:TextBox ID="txtMemberEmail" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator6"
-        ControlToValidate="txtMentorEmail"
+        ControlToValidate="txtMemberEmail"
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="lblState" runat="server" Text="MentorState"></asp:Label>
+    <asp:Label ID="lblState" runat="server" Text="MemberState"></asp:Label>
     <asp:TextBox ID="txtState" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator7"
@@ -96,7 +96,7 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="lblCity" runat="server" Text="MentorCity"></asp:Label>
+    <asp:Label ID="lblCity" runat="server" Text="MemberCity"></asp:Label>
     <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator8"

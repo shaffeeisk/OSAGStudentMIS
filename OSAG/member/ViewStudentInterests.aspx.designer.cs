@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace OSAG.mentor
+namespace OSAG.member
 {
     public partial class ViewStudentInterests
     {

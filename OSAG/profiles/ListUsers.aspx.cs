@@ -23,13 +23,13 @@ namespace OSAG.profiles
             grdvStudent.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
         }
 
-        // event handler to search mentor
+        // event handler to search member
         protected void btnSearchMent_Click(object sender, EventArgs e)
         {
-            String mentFilter = "SELECT Username, FirstName, LastName FROM Mentor " +
+            String membFilter = "SELECT Username, FirstName, LastName FROM Member " +
                    "WHERE FirstName + ' ' + LastName LIKE '%[Search]%';";
-            sqlsrcMentorQuery.SelectCommand = mentFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar2.Value.Trim()));
-            grdvMentor.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
+            sqlsrcMemberQuery.SelectCommand = membFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar2.Value.Trim()));
+            grdvMember.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
         }
 
         protected void grdvUser_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -49,10 +49,10 @@ namespace OSAG.profiles
             Response.Redirect("ViewProfile.aspx");
         }
         
-        protected void grdvMentor_SelectedIndexChanged(object sender, EventArgs e)
+        protected void grdvMember_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session["ViewProfileUsername"] = grdvMentor.SelectedRow.Cells[1].Text;
-            Session["ViewProfileUserType"] = "mentor";
+            Session["ViewProfileUsername"] = grdvMember.SelectedRow.Cells[1].Text;
+            Session["ViewProfileUserType"] = "member";
             Response.Redirect("ViewProfile.aspx");
         }
     }

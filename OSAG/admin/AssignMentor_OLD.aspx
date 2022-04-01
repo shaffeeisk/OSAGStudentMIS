@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="AssignMentor_OLD.aspx.cs" Inherits="OSAG.admin.AssignMentor" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="AssignMember_OLD.aspx.cs" Inherits="OSAG.admin.AssignMember" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -11,11 +11,11 @@
     <asp:Label ID="lblLN" runat="server" Text=""></asp:Label>
     <br />
     <br />
-    <asp:Label ID="lblMentor" runat="server" Text="Mentor: "></asp:Label>
-    <asp:DropDownList ID="ddlMentor" runat="server" AppendDataBoundItems="true"
-        DataSourceID="sqlsrcMentorList"
-        DataTextField="MentorName"
-        DataValueField="MentorID">
+    <asp:Label ID="lblMember" runat="server" Text="Member: "></asp:Label>
+    <asp:DropDownList ID="ddlMember" runat="server" AppendDataBoundItems="true"
+        DataSourceID="sqlsrcMemberList"
+        DataTextField="MemberName"
+        DataValueField="MemberID">
         <asp:ListItem Text=" " Value="0" />
     </asp:DropDownList>
     <br />
@@ -26,9 +26,9 @@
     <br />
     <br />
     <asp:Button ID="btnReturn" runat="server" Text="Go Back" OnClick="btnBack_Click" />
-    <asp:SqlDataSource ID="sqlsrcMentorList" runat="server"
+    <asp:SqlDataSource ID="sqlsrcMemberList" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="(SELECT MentorID, FirstName AS MentorName FROM Mentor WHERE LastName IS NULL)
-        UNION (SELECT MentorID, LastName AS MentorName FROM Mentor WHERE FirstName IS NULL)
-        UNION (SELECT MentorID, FirstName + ' ' + LastName AS MentorName FROM Mentor WHERE FirstName + LastName IS NOT NULL);" ></asp:SqlDataSource>
+        SelectCommand="(SELECT MemberID, FirstName AS MemberName FROM Member WHERE LastName IS NULL)
+        UNION (SELECT MemberID, LastName AS MemberName FROM Member WHERE FirstName IS NULL)
+        UNION (SELECT MemberID, FirstName + ' ' + LastName AS MemberName FROM Member WHERE FirstName + LastName IS NOT NULL);" ></asp:SqlDataSource>
 </asp:Content>

@@ -24,23 +24,23 @@
         <asp:SqlDataSource ID="sqlsrcStudent" runat="server" 
             ConnectionString="<%$ ConnectionStrings:OSAG %>"  ></asp:SqlDataSource> 
    
-    <h3>Mentors:</h3>
-    <asp:GridView ID="grdvMentor" 
+    <h3>Members:</h3>
+    <asp:GridView ID="grdvMember" 
                 runat="server" 
-                DataSourceID="sqlsrcMentor" 
+                DataSourceID="sqlsrcMember" 
                 AllowSorting="true" 
                 AutoGenerateSelectButton ="false"
-                 AutoGenerateColumns="false" DataKeyNames="MentorID">
+                 AutoGenerateColumns="false" DataKeyNames="MemberID">
                 <Columns>
                     <asp:BoundField HeaderText="FirstName" DataField="FirstName" SortExpression="FirstName" />
                     <asp:BoundField HeaderText="LastName" DataField="LastName" SortExpression="LastName" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button ID="btn_mentorChat" runat="server" Text="Chat" OnClick="btn_mentorChat_Click"/>
+                            <asp:Button ID="btn_memberChat" runat="server" Text="Chat" OnClick="btn_memberChat_Click"/>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView> 
-        <asp:SqlDataSource ID="sqlsrcMentor" runat="server"  
+        <asp:SqlDataSource ID="sqlsrcMember" runat="server"  
             ConnectionString="<%$ ConnectionStrings:OSAG %>"  ></asp:SqlDataSource>
 </asp:Content>
