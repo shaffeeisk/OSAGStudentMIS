@@ -64,7 +64,7 @@ namespace OSAG.profiles
             SqlDataReader reader = sqlCommand.ExecuteReader();
             while (reader.Read())
             {
-                if(Session["UserType"] == "student")
+                if(Session["UserType"].ToString() == "student")
                 {
                     ID = reader["StudentID"].ToString();
                 }
