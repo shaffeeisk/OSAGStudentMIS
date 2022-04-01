@@ -252,33 +252,12 @@
     <Compile Include="student\Bookmarks.aspx.designer.cs">
       <DependentUpon>Bookmarks.aspx</DependentUpon>
     </Compile>
-    <Compile Include="templates\Bookmark.Master.cs">
-      <DependentUpon>Bookmark.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="templates\Bookmark.Master.designer.cs">
-      <DependentUpon>Bookmark.Master</DependentUpon>
-    </Compile>
-    <Compile Include="templates\CreateUser.Master.cs">
-      <DependentUpon>CreateUser.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="templates\CreateUser.Master.designer.cs">
-      <DependentUpon>CreateUser.Master</DependentUpon>
-    </Compile>
     <Compile Include="templates\Details.Master.cs">
       <DependentUpon>Details.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="templates\Details.Master.designer.cs">
       <DependentUpon>Details.Master</DependentUpon>
-    </Compile>
-    <Compile Include="templates\Edit.Master.cs">
-      <DependentUpon>Edit.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="templates\Edit.Master.designer.cs">
-      <DependentUpon>Edit.Master</DependentUpon>
     </Compile>
     <Compile Include="templates\Home.Master.cs">
       <DependentUpon>Home.Master</DependentUpon>
@@ -287,13 +266,6 @@
     <Compile Include="templates\Home.Master.designer.cs">
       <DependentUpon>Home.Master</DependentUpon>
     </Compile>
-    <Compile Include="templates\Jobs.Master.cs">
-      <DependentUpon>Jobs.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="templates\Jobs.Master.designer.cs">
-      <DependentUpon>Jobs.Master</DependentUpon>
-    </Compile>
     <Compile Include="templates\Mentor.Master.cs">
       <DependentUpon>Mentor.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -301,35 +273,15 @@
     <Compile Include="templates\Mentor.Master.designer.cs">
       <DependentUpon>Mentor.Master</DependentUpon>
     </Compile>
-    <Compile Include="templates\Student.Master.cs">
-      <DependentUpon>Student.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="templates\Student.Master.designer.cs">
-      <DependentUpon>Student.Master</DependentUpon>
-    </Compile>
-    <Compile Include="templates\ViewTable.Master.cs">
-      <DependentUpon>ViewTable.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="templates\ViewTable.Master.designer.cs">
-      <DependentUpon>ViewTable.Master</DependentUpon>
-    </Compile>
     <Compile Include="_appcode\PasswordHash.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="templates\CreateUser.Master" />
-    <Content Include="templates\Edit.Master" />
     <Content Include="templates\Home.Master" />
     <Content Include="templates\Mentor.Master" />
-    <Content Include="templates\ViewTable.Master" />
-    <Content Include="templates\Student.Master" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
-    <Content Include="templates\Jobs.Master" />
     <Content Include="templates\Details.Master" />
-    <Content Include="templates\Bookmark.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
