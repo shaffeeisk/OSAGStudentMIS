@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <% if (Session["UserType"].ToString() == "student")
         { %>
-    <asp:Label ID="Label1" runat="server" Text="FirstName"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="Firs tName"></asp:Label>
     <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="reqField"
@@ -12,7 +12,7 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="Label2" runat="server" Text="LastName"></asp:Label>
+    <asp:Label ID="Label2" runat="server" Text="Last Name"></asp:Label>
     <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator1"
@@ -28,7 +28,7 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="Label4" runat="server" Text="GradDate"></asp:Label>
+    <asp:Label ID="Label4" runat="server" Text="Grad Date"></asp:Label>
     <asp:TextBox ID="txtGradDate" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator3"
@@ -64,7 +64,7 @@
 
     <% if (Session["UserType"].ToString() == "member")
         { %>
-    <asp:Label ID="lblFirstName" runat="server" Text="FirstName"></asp:Label>
+    <asp:Label ID="lblFirstName" runat="server" Text="First Name"></asp:Label>
     <asp:TextBox ID="mtxtFirstName" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator4"
@@ -72,7 +72,7 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="lblLastName" runat="server" Text="   LastName"></asp:Label>
+    <asp:Label ID="lblLastName" runat="server" Text="   Last Name"></asp:Label>
     <asp:TextBox ID="mtxtLastName" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator5"
@@ -80,7 +80,7 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="lblMemberEmail" runat="server" Text="MemberEmail"></asp:Label>
+    <asp:Label ID="lblMemberEmail" runat="server" Text="Member Email"></asp:Label>
     <asp:TextBox ID="txtMemberEmail" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator6"
@@ -88,7 +88,7 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="lblState" runat="server" Text="MemberState"></asp:Label>
+    <asp:Label ID="lblState" runat="server" Text="Member State"></asp:Label>
     <asp:TextBox ID="txtState" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator7"
@@ -96,13 +96,16 @@
         Text="(Required)"
         runat="server" />
     <br />
-    <asp:Label ID="lblCity" runat="server" Text="MemberCity"></asp:Label>
+    <asp:Label ID="lblCity" runat="server" Text="Member City"></asp:Label>
     <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator8"
         ControlToValidate="txtCity"
         Text="(Required)"
         runat="server" />
+    <br />
+    <br />
+    <asp:Button ID="btnUpdate2" runat="server" Text="Save Changes" CausesValidation="false" OnClick="btnUpdate_Click" />
     
     <% } %>
 </asp:Content>
