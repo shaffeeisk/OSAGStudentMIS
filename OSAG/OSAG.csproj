@@ -67,6 +67,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\AddMember.aspx" />
     <Content Include="admin\ApproveRegistration.aspx" />
     <Content Include="admin\AssignMember.aspx" />
     <Content Include="homepages\HomePage.aspx" />
@@ -96,6 +97,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\AddMember.aspx.cs">
+      <DependentUpon>AddMember.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AddMember.aspx.designer.cs">
+      <DependentUpon>AddMember.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\ApproveRegistration.aspx.cs">
       <DependentUpon>ApproveRegistration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
