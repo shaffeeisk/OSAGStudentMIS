@@ -11,7 +11,7 @@ namespace OSAG.member
 {
 
 
-    public partial class CreateScholarship
+    public partial class CreateOpportunity
     {
 
         /// <summary>

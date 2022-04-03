@@ -26,7 +26,7 @@
         <a href="/admin/AssignMember.aspx">Assign Members</a>&nbsp
         <a href="/member/CreateJob.aspx">Create Jobs</a>&nbsp
         <a href="/member/CreateInternship.aspx">Create Internships</a>&nbsp
-        <a href="/member/CreateScholarship.aspx">Create Opportunities</a>&nbsp
+        <a href="/member/CreateOpportunity.aspx">Create Opportunities</a>&nbsp
         <a href="/profiles/ListUsers.aspx">User List</a>&nbsp
             <% } %>
         <br />

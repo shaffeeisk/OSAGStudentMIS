@@ -95,7 +95,7 @@
     <Content Include="login\RegistrationPage.aspx" />
     <Content Include="member\CreateInternship.aspx" />
     <Content Include="member\CreateJob.aspx" />
-    <Content Include="member\CreateScholarship.aspx" />
+    <Content Include="member\CreateOpportunity.aspx" />
     <Content Include="member\ViewStudentInterests.aspx" />
     <Content Include="opportunities\Opportunities.aspx" />
     <Content Include="opportunities\OpportunityDetails.aspx" />
@@ -231,12 +231,12 @@
     <Compile Include="member\CreateJob.aspx.designer.cs">
       <DependentUpon>CreateJob.aspx</DependentUpon>
     </Compile>
-    <Compile Include="member\CreateScholarship.aspx.cs">
-      <DependentUpon>CreateScholarship.aspx</DependentUpon>
+    <Compile Include="member\CreateOpportunity.aspx.cs">
+      <DependentUpon>CreateOpportunity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="member\CreateScholarship.aspx.designer.cs">
-      <DependentUpon>CreateScholarship.aspx</DependentUpon>
+    <Compile Include="member\CreateOpportunity.aspx.designer.cs">
+      <DependentUpon>CreateOpportunity.aspx</DependentUpon>
     </Compile>
     <Compile Include="member\ViewStudentInterests.aspx.cs">
       <DependentUpon>ViewStudentInterests.aspx</DependentUpon>
