@@ -33,15 +33,6 @@ namespace OSAG.login
         protected global::System.Web.UI.WebControls.LinkButton lnkLogin;
 
         /// <summary>
-        /// ddlUserType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUserType;
-
-        /// <summary>
         /// txtFirstName control.
         /// </summary>
         /// <remarks>

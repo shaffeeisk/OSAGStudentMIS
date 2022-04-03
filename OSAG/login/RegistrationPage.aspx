@@ -12,14 +12,7 @@
             <asp:LinkButton ID="lnkLogin" runat="server" OnClick="lnkLogin_Click" >Login</asp:LinkButton>
             <br />
             <br />
-            <strong>Create User</strong><br />
-            Student or Member:
-            <asp:DropDownList ID="ddlUserType" runat="server" >
-                <asp:ListItem Text="Student" Value="Student" />
-                <asp:ListItem Text="Member" Value="Member" />
-            </asp:DropDownList>
-            <br />
-            <br />
+            <strong>Create Account</strong><br />
             First Name:&nbsp;
             <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
             <br />

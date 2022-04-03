@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// sql imports
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
@@ -21,6 +22,7 @@ namespace OSAG.login
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            // REPLACE WITH INPUT VALIDATOR???S??????????
             if (txtUsername.Text == "" || txtPassword.Text == "" || txtFirstName.Text == "" || txtLastName.Text == "")
             {
                 lblStatus.ForeColor = Color.Red;
@@ -38,8 +40,8 @@ namespace OSAG.login
                 return;
             }
 
-            // run query based on user input
-            String sqlQuery = "INSERT INTO " + ddlUserType.SelectedValue + "(Username, Pass, FirstName, LastName, IsApproved) " +
+            // run query (ONLY STUDENTS NOW)
+            String sqlQuery = "INSERT INTO Student (Username, Pass, FirstName, LastName, IsApproved) " +
                 "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE');";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
@@ -51,11 +53,8 @@ namespace OSAG.login
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
 
-            // force postback by refreshing page (updates table via Page_Load method)
-            Response.Redirect("/login/RegistrationPage.aspx");
-            // reset for next click
+            // clear input and display success message
             ClearData();
-            // inform user that the new user has been successfully created
             lblStatus.ForeColor = Color.Black;
             lblStatus.Font.Bold = false;
             lblStatus.Text = "New user successfully created";
