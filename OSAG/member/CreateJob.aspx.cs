@@ -19,21 +19,69 @@ namespace OSAG.member
         {
 
         }
-
         protected void btnSaveJob_Click(object sender, EventArgs e)
         {
-            // create string from input, send to DB, clear dat.
-            // placeholder parts to be replaced included in string
+            if (ddlCompany.SelectedValue == "") // ensure a company is selected to prevent sql errors
+                lblSuccess.Text = "Please select a company.";
+            else if (jobExists(txtJobName.Text, ddlCompany.SelectedValue.ToString())) // check if a similar job already exists
+            {
+                lblSuccess.Text = "A job for " + ddlCompany.SelectedItem.ToString() + " with the same name already exists. Continue adding?";
+                btnOverride.Visible = true;
+                btnCancel.Visible = true;
+                btnSaveJob.Visible = false;
+            }
+            else
+                saveJob();
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearJobData();
+        }
+
+        // event handler for override button
+        protected void btnOverride_Click(object sender, EventArgs e)
+        {
+            saveJob();
+            btnOverride.Visible = false;
+            btnCancel.Visible = false;
+            btnSaveJob.Visible = true;
+            // reset for next click
+            ClearJobData();
+        }
+
+        // event handler for cancel button
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            lblSuccess.Text = "";
+            btnOverride.Visible = false;
+            btnCancel.Visible = false;
+            btnSaveJob.Visible = true;
+        }
+
+        // helper method to determine if job exists
+        protected bool jobExists(string name, string company)
+        {
+            String sqlQuery = "SELECT COUNT(*) FROM Job WHERE JobName = @JobName AND CompanyID = '" + ddlCompany.SelectedValue + "';";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@JobName", txtJobName.Text);
+            sqlConnect.Open();
+            int i = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
+            sqlConnect.Close();
+            if (i > 0)
+                return true;
+            return false;
+        }
+
+        // helper method to save job
+        protected void saveJob()
+        {
+            // execute parameterized insert statement
             String sqlQuery = "INSERT INTO Job (JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
                 "VALUES (@JobName, @JobDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
-
-            // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-            // create sql command with the existing query and connection one liner
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-
-            // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
             sqlCommand.Parameters.AddWithValue("@JobName", txtJobName.Text);
             sqlCommand.Parameters.AddWithValue("@JobDescription", validate(txtJobDescription.Text));
             sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
@@ -44,19 +92,10 @@ namespace OSAG.member
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
-            lblSuccess.Text = "New job successfully created";
 
-            // force postback by refreshing page (updates table via Page_Load method)
-            Response.Redirect("/member/CreateJob.aspx");
-            // reset for next click
+            // display success message and reset input
+            lblSuccess.Text = "New job(s) successfully created";
             ClearJobData();
-        }
-
-        protected void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearJobData();
-            // force postback to update table
-            Response.Redirect("/member/CreateJob.aspx");
         }
 
         protected void ClearJobData()
@@ -67,6 +106,7 @@ namespace OSAG.member
             txtStartDate.Text = "";
             txtWeeklyHours.Text = "";
             txtPayment.Text = "";
+            ddlCompany.SelectedValue = "";
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.
