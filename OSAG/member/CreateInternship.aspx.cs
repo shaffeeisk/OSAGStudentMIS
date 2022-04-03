@@ -22,15 +22,9 @@ namespace OSAG.member
 
         protected void btnSaveIntern_Click(object sender, EventArgs e)
         {
-            // ensure a company is selected to prevent sql errors
-            if(ddlCompany.SelectedValue == "")
-            {
+            if (ddlCompany.SelectedValue == "") // ensure a company is selected to prevent sql errors
                 lblSuccess.Text = "Please select a company.";
-                return;
-            }
-
-            // check if a similar internship already exists
-            if (internshipExists(txtInternshipName.Text, ddlCompany.SelectedValue.ToString()))
+            else if (internshipExists(txtInternshipName.Text, ddlCompany.SelectedValue.ToString())) // check if a similar internship already exists
             {
                 lblSuccess.Text = "An internship for " + ddlCompany.SelectedItem.ToString() + " with the same name already exists. Continue adding?";
                 btnOverride.Visible = true;
@@ -38,9 +32,7 @@ namespace OSAG.member
                 btnSaveIntern.Visible = false;
             }
             else
-            {
                 saveInternship();
-            }
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
@@ -78,7 +70,7 @@ namespace OSAG.member
             sqlConnect.Open();
             int i = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
             sqlConnect.Close();
-            if (i == 1)
+            if (i > 0)
                 return true;
             return false;
         }
