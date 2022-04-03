@@ -15,8 +15,7 @@ namespace OSAG.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Username"] = "admin";
-            Session["UserType"] = "member";
+            
         }
 
         // event handler for create member account button

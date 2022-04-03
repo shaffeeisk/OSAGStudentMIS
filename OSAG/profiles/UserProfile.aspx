@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <% if (Session["UserType"].ToString() == "student")
         { %>
-    <asp:Label ID="Label1" runat="server" Text="Firs tName"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="First Name"></asp:Label>
     <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="reqField"
