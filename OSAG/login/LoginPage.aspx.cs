@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// sql imports
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
@@ -17,7 +18,7 @@ namespace OSAG.login
         {
             if (Session["MustLogin"] == null)
             {
-                lblStatus.Text = "Please login to continue!";
+                lblStatus.Text = "";
             }
             else
             {
@@ -34,6 +35,16 @@ namespace OSAG.login
             {
                 Session["MustLogin"] = "Your account is pending approval. Please try again at a later time.";
                 Response.Redirect("LoginPage.aspx");
+                return;
+            }
+
+            // Ensure username exists before trying to compare password -_-
+            // otherwise throws null reference exception in PasswordHash.cs
+            if(!usernameExists(txtUsername.Text)) // also username is parameterized in helper method
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Font.Bold = true;
+                lblStatus.Text = "Username and/or password was incorrect. Please try again.";
                 return;
             }
 
@@ -94,6 +105,22 @@ namespace OSAG.login
             return true;
         }
 
+        // helper method to determine if username exists
+        public bool usernameExists(String s)
+        {
+            String sqlQuery = "SELECT (SELECT COUNT(*) FROM Student WHERE Username = @Username) " +
+                "+ (SELECT COUNT(*) FROM Member WHERE Username = @Username)";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", s);
+            sqlConnect.Open();
+            int i = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            sqlConnect.Close();
+            if (i > 0)
+                return true;
+            return false;
+        }
+
         // runs stored procedure to declare String with value of correct pass
         protected String getHashedPass(String s)
         {
@@ -108,7 +135,7 @@ namespace OSAG.login
             return hashedPassword;
         }
 
-        protected void lnkCreate_Click(object sender, EventArgs e)
+        protected void btnCreate_Click(object sender, EventArgs e)
         {
             Response.Redirect("/login/RegistrationPage.aspx");
         }
