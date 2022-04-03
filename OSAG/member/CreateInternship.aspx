@@ -49,16 +49,19 @@
             <asp:ListItem Selected="True" Text="(Select a company)" Value=""></asp:ListItem>
         </asp:DropDownList>
 
+
         <br />
         <br />
-        <asp:Button ID="btnSaveIntern" Text="Save ->" runat="server" OnClick="btnSaveIntern_Click"  />
+        <asp:Button ID="btnSaveIntern" Text="Save ->" runat="server" OnClick="btnSaveIntern_Click" />
         <br />
         <br />
         <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
+         <br />
+         <asp:Button ID="btnOverride" Text="Yes" runat="server" OnClick="btnOverride_Click" Visible="false" /> &nbsp
+         <asp:Button ID="btnCancel" Text="No" runat="server" OnClick="btnCancel_Click" Visible="false" />
         <br />
         <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click"  Font-Bold="true" BackColor="OrangeRed" />
-         <asp:SqlDataSource
-        ID="sqlsrcListCompanys"
+         <asp:SqlDataSource ID="sqlsrcListCompanys"
         runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
         SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>

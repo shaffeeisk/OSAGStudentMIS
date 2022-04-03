@@ -22,18 +22,75 @@ namespace OSAG.member
 
         protected void btnSaveIntern_Click(object sender, EventArgs e)
         {
-            // create string from input, send to DB, clear dat.
-            // placeholder parts to be replaced included in string
+            // ensure a company is selected to prevent sql errors
+            if(ddlCompany.SelectedValue == "")
+            {
+                lblSuccess.Text = "Please select a company.";
+                return;
+            }
+
+            // check if a similar internship already exists
+            if (internshipExists(txtInternshipName.Text, ddlCompany.SelectedValue.ToString()))
+            {
+                lblSuccess.Text = "An internship for " + ddlCompany.SelectedItem.ToString() + " with the same name already exists. Continue adding?";
+                btnOverride.Visible = true;
+                btnCancel.Visible = true;
+                btnSaveIntern.Visible = false;
+            }
+            else
+            {
+                saveInternship();
+            }
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearInternData();
+        }
+
+        // event handler for override button
+        protected void btnOverride_Click(object sender, EventArgs e)
+        {
+            saveInternship();
+            btnOverride.Visible = false;
+            btnCancel.Visible = false;
+            btnSaveIntern.Visible = true;
+            // reset for next click
+            ClearInternData();
+        }
+
+        // event handler for cancel button
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            lblSuccess.Text = "";
+            btnOverride.Visible = false;
+            btnCancel.Visible = false;
+            btnSaveIntern.Visible = true;
+        }
+
+        // helper method to determine if internship exists
+        protected bool internshipExists(string name, string company)
+        {
+            String sqlQuery = "SELECT COUNT(*) FROM Internship WHERE InternshipName = @InternshipName AND CompanyID = '" + ddlCompany.SelectedValue + "';";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@InternshipName", txtInternshipName.Text);
+            sqlConnect.Open();
+            int i = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
+            sqlConnect.Close();
+            if (i == 1)
+                return true;
+            return false;
+        }
+        
+        // helper method to save internship
+        protected void saveInternship()
+        {
+            // execute parameterized insert statement
             String sqlQuery = "INSERT INTO Internship (InternshipName, InternshipDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
                 "VALUES (@InternshipName, @InternshipDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
-
-            // create sql connection with connection string one-liner
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-            // create sql command with the existing query and connection one liner
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-
-            // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
             sqlCommand.Parameters.AddWithValue("@InternshipName", txtInternshipName.Text);
             sqlCommand.Parameters.AddWithValue("@InternshipDescription", validate(txtInternshipDescription.Text));
             sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
@@ -41,21 +98,13 @@ namespace OSAG.member
             sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtWeeklyHours.Text));
             sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
             sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
+            sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
+            
+            // display success message and reset input
             lblSuccess.Text = "New internship(s) successfully created";
-
-            // force postback by refreshing page (updates table via Page_Load method)
-            Response.Redirect("/member/CreateInternship.aspx");
-            // reset for next click
             ClearInternData();
-        }
-
-        protected void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearInternData();
-            // force postback to update table
-            Response.Redirect("/member/createInternship.aspx");
         }
 
         protected void ClearInternData()
