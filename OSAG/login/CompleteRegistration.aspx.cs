@@ -4,6 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+// sql imports
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+using System.Drawing;
 
 namespace OSAG.login
 {
