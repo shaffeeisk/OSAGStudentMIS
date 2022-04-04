@@ -12,18 +12,22 @@ using System.Drawing;
 
 namespace OSAG.login
 {
-    public partial class RegistrationPage : System.Web.UI.Page
+    public partial class CompleteRegistration : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-                lblStatus.Text = "Welcome! Please enter your new profile information.";
+            if (Session["Username"] == null)
+                return; // runs .master page_load instead
+            if(isApproved(Session["Username"].ToString()) || Session["UserType"].ToString() != "member")
+            {   // send user to profile if student or acc already approved
+                Session["AccessDenied"] = "You do not have access to that page.";
+                Response.Redirect("/profiles/UserProfile.aspx");
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            // REPLACE WITH INPUT VALIDATOR???S??????????
-            if (txtUsername.Text == "" || txtPassword.Text == "" || txtFirstName.Text == "" || txtLastName.Text == "")
+            if (txtUsername.Text == "" || txtPassword.Text == "")
             {
                 lblStatus.ForeColor = Color.Red;
                 lblStatus.Font.Bold = true;
@@ -40,25 +44,41 @@ namespace OSAG.login
                 return;
             }
 
-            // run query (ONLY STUDENTS NOW)
-            String sqlQuery = "INSERT INTO Student (Username, Pass, FirstName, LastName, IsApproved, Email) " +
-                "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE', @Email);";
+            String sqlQuery = "UPDATE Member SET (Username = @Username, Pass = @Password) WHERE Username = '" + Session["Username"] + "';";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
-            sqlCommand.Parameters.AddWithValue("@Pass", PasswordHash.HashPassword(txtPassword.Text));
-            sqlCommand.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
-            sqlCommand.Parameters.AddWithValue("@LastName", txtLastName.Text);
-            sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
+            sqlCommand.Parameters.AddWithValue("@Password", txtPassword.Text); // needs to be hashed
+
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
+            Session["Username"] = txtUsername.Text;
+            lblStatus.Text = "Account successfully updated.";
+            btnSubmit.Visible = false;
+            btnContinue.Visible = true;
+        }
 
-            // clear input and display success message
-            ClearData();
-            lblStatus.ForeColor = Color.Black;
-            lblStatus.Font.Bold = false;
-            lblStatus.Text = "New user successfully created";
+        protected void btnContinue_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/profiles/UserProfile.aspx");
+        }
+
+        // helper method running query to determine if user is approved
+        protected bool isApproved(String s)
+        {
+            String sqlQuery = "EXEC dbo.OSAG_NotApproved @Username";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
+            sqlConnect.Open();
+            int i = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            sqlConnect.Close();
+
+            // return bool
+            if (i == 1)
+                return false;
+            return true;
         }
 
         // helper method to query student and member tables for existing username
@@ -76,34 +96,6 @@ namespace OSAG.login
             if (i > 0)
                 return true;
             return false;
-        }
-
-        // event handler for Login link button
-        protected void lnkLogin_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("/login/LoginPage.aspx");
-        }
-
-        // event handler for clear button
-        protected void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearData();
-            Response.Redirect("/login/RegistrationPage.aspx");
-        }
-
-        // event handler for return home button
-        protected void btnReturn_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("/homepages/HomePage.aspx");
-        }
-
-        // helper method to clear text boxes
-        protected void ClearData()
-        {
-            txtFirstName.Text = "";
-            txtLastName.Text = "";
-            txtUsername.Text = "";
-            txtPassword.Text = "";
         }
     }
 }

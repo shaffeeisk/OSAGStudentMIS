@@ -17,12 +17,12 @@
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet" />
 </head>
 <body style="background-color: #E4E0E7;">
     <form id="form1" runat="server">
-        <div id="loginpage" class="container-fluid">
+        <div class="container-fluid" style="margin-left: auto; margin-right: auto; text-align: center;">
             <div class="row">
                 <div class="logo pt-5">
                     <img class="center-block" src="/_images/logo.png" />
@@ -64,15 +64,12 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
-                    <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Login" />
-                </div>
-            </div>
+            <asp:Label ID="lblStatus" runat="server"></asp:Label>
+
 
             <div class="row">
                 <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
-                    <asp:Label ID="lblStatus" runat="server"></asp:Label>
+                    <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Login" />
                 </div>
             </div>
 

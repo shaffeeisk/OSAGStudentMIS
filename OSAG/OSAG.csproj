@@ -92,6 +92,7 @@
     <Content Include="internships\Internships.aspx" />
     <Content Include="jobs\JobDetails.aspx" />
     <Content Include="jobs\Jobs.aspx" />
+    <Content Include="login\CompleteRegistration.aspx" />
     <Content Include="login\LoginPage.aspx" />
     <Content Include="login\RegistrationPage.aspx" />
     <Content Include="member\CreateInternship.aspx" />
@@ -210,6 +211,13 @@
     </Compile>
     <Compile Include="jobs\Jobs.aspx.designer.cs">
       <DependentUpon>Jobs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login\CompleteRegistration.aspx.cs">
+      <DependentUpon>CompleteRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\CompleteRegistration.aspx.designer.cs">
+      <DependentUpon>CompleteRegistration.aspx</DependentUpon>
     </Compile>
     <Compile Include="login\LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
