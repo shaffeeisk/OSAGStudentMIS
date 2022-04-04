@@ -27,5 +27,22 @@ namespace OSAG
 
             Response.Redirect("/login/LoginPage.aspx?loggedout=true");
         }
+
+        protected void ddlNavigation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlNavigation.SelectedValue == " ")
+                return;
+            else if (ddlNavigation.SelectedValue == "PROFILE")
+                Response.Redirect("/profiles/ViewProfile.aspx");
+            else if (ddlNavigation.SelectedValue == "CHAT")
+                Response.Redirect("/profiles/StartChat.aspx");
+            else if (ddlNavigation.SelectedValue == "BOOKMARKS")
+                Response.Redirect("/student/Bookmarks.aspx");
+            else if (ddlNavigation.SelectedValue == "SIGN OUT")
+                Response.Redirect("/login/LoginPage.aspx");
+            else
+                return;
+
+        }
     }
 }

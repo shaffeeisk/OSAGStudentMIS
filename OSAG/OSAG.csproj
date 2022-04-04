@@ -87,6 +87,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="homepages\HomePage.aspx" />
+    <Content Include="homepages\LoggedInHomePage.aspx" />
     <Content Include="internships\InternshipDetails.aspx" />
     <Content Include="internships\Internships.aspx" />
     <Content Include="jobs\JobDetails.aspx" />
@@ -174,6 +175,13 @@
     </Compile>
     <Compile Include="homepages\HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="homepages\LoggedInHomePage.aspx.cs">
+      <DependentUpon>LoggedInHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="homepages\LoggedInHomePage.aspx.designer.cs">
+      <DependentUpon>LoggedInHomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="internships\InternshipDetails.aspx.cs">
       <DependentUpon>InternshipDetails.aspx</DependentUpon>
