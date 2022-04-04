@@ -12,6 +12,9 @@
             <asp:LinkButton ID="lnkLogin" runat="server" OnClick="lnkLogin_Click" >Login</asp:LinkButton>
             <br />
             <br />
+            <asp:Button ID="btnDemo" runat="server" Text="DEMO BUTTON" OnClick="btnDemo_Click" Font-Bold="true" />
+            <br />
+            <br />
             <strong>Create Account</strong><br />
             First Name:&nbsp;
             <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
