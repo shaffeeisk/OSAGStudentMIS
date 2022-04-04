@@ -44,7 +44,6 @@ namespace OSAG.admin
             sqlCommand.Parameters.AddWithValue("@M_State", validate(txtState.Text));
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
             sqlCommand.Parameters.AddWithValue("@Pass", PasswordHash.HashPassword(txtPassword.Text));
-
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
