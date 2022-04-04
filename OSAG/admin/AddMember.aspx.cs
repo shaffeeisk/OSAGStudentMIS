@@ -67,13 +67,7 @@ namespace OSAG.admin
         // helper method to return non-numeric stripped string from input
         private string validatePhone(String i)
         {
-            string o = new string(i.Where(c => char.IsDigit(c)).ToArray());
-            //if(o == "" || o.Length < 10)
-            //{
-            //    // MAYBE USE INPUT VALIDATOR INSTEAD FOR THIS, BUT USER SHOULD KNOW SOMETHING WENT WRONG
-            //    // OTHERWISE REMOVE STRING DECLARATION AND SIMPLY USE A ONE-LINE RETURN STATEMENT
-            //}
-            return o;
+            return new string(i.Where(c => char.IsDigit(c)).ToArray());
         }
     }
 }
