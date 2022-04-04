@@ -83,7 +83,10 @@ namespace OSAG.login
                 Session["UserType"] = "student";
             else // user is member (not found in Student table)
                 Session["UserType"] = "member";
-            Response.Redirect("/homepages/LoggedInHomePage.aspx");
+
+            // please dont redirect to an unfinished page, i need to be able to test code
+            //Response.Redirect("/homepages/LoggedInHomePage.aspx");
+            Response.Redirect("/profiles/UserProfile.aspx");
         }
 
 
