@@ -41,14 +41,15 @@ namespace OSAG.login
             }
 
             // run query (ONLY STUDENTS NOW)
-            String sqlQuery = "INSERT INTO Student (Username, Pass, FirstName, LastName, IsApproved) " +
-                "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE');";
+            String sqlQuery = "INSERT INTO Student (Username, Pass, FirstName, LastName, IsApproved, Email) " +
+                "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE', @Email);";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
             sqlCommand.Parameters.AddWithValue("@Pass", PasswordHash.HashPassword(txtPassword.Text));
             sqlCommand.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
             sqlCommand.Parameters.AddWithValue("@LastName", txtLastName.Text);
+            sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
