@@ -102,6 +102,35 @@
          <asp:Button ID="btnCancel" Text="No" runat="server" OnClick="btnCancel_Click" Visible="false" />
         <br />
         <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click" Font-Bold="true" BackColor="OrangeRed" />
+        <br />
+        <br />
+        <asp:GridView ID="grdvwJobs"
+            runat="server"
+            DataSourceID="sqlsrc"
+            AllowSorting="true"
+            AutoGenerateSelectButton="false"
+            AutoGenerateColumns="false"
+            DataKeyNames="JobID">
+            <Columns>
+                <asp:CommandField  ShowEditButton="true" ShowDeleteButton="true" CausesValidation="False"/>
+                <asp:BoundField HeaderText="JobName" DataField="JobName" SortExpression="JobName" />
+                <asp:BoundField HeaderText="JobDescription" DataField="JobDescription" SortExpression="JobDescription" />
+                <asp:BoundField HeaderText="ApplicationDeadline" DataField="ApplicationDeadline" SortExpression="ApplicationDeadline" />
+                <asp:BoundField HeaderText="StartDate" DataField="StartDate" SortExpression="StartDate" />
+                <asp:BoundField HeaderText="WeeklyHours" DataField="WeeklyHours" SortExpression="WeeklyHours" />
+                <asp:BoundField HeaderText="Payment" DataField="Payment" SortExpression="Payment" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+        <asp:SqlDataSource ID="sqlsrc" runat="server"
+            ConnectionString="<%$ ConnectionStrings:OSAG %>"
+            SelectCommand="SELECT JobID, JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment FROM Job" 
+            UpdateCommand="UPDATE Job SET JobName = @JobName, JobDescription = @JobDescription, ApplicationDeadline = @ApplicationDeadline, StartDate = @StartDate, WeeklyHours = @WeeklyHours, Payment = @Payment WHERE JobID=@JobID "
+            DeleteCommand="Delete from JobMatch  Where JobID = @JobID Delete FROM Job where JobID = @JobID"></asp:SqlDataSource>
     </div>
     <asp:SqlDataSource
         ID="sqlsrcListCompanys"
