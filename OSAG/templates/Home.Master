@@ -33,10 +33,30 @@
         <div class="container">
             <!--Navigation starts-->
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start pt-3">
+                <a href="/profiles/UserProfile.aspx">Profile</a>&nbsp
+        <a href="/profiles/StartChat.aspx">Chat</a>&nbsp
+         <% if (Session["UserType"].ToString() == "student")
+             { %>
+        <a href="/jobs/Jobs.aspx">Jobs</a>&nbsp
+           <a href="/internships/Internships.aspx">Internships</a>&nbsp
+        <a href="/opportunities/Opportunities.aspx">Opportunities</a>&nbsp
+        <a href="/student/Bookmarks.aspx">Bookmarks</a>&nbsp
+        <a href="/profiles/ListUsers.aspx">User List</a>&nbsp
+            <% } %>
+            <% if (Session["UserType"].ToString() == "member")
+                { %>
+                <a href="/admin/ApproveRegistration.aspx">Approve Registrations</a>&nbsp
+        <a href="/admin/AssignMember.aspx">Assign Members</a>&nbsp
+        <a href="/member/CreateJob.aspx">Create Jobs</a>&nbsp
+        <a href="/member/CreateInternship.aspx">Create Internships</a>&nbsp
+        <a href="/member/CreateOpportunity.aspx">Create Opportunities</a>&nbsp
+        <a href="/profiles/ListUsers.aspx">User List</a>&nbsp
+            <% } %>
                 <a class="navbar-brand" href="#">
                     <img src="images/logo.png" alt="Logo" width="120" height="70">
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    
                     <li>
                         <a href="#" class="nav-link px-2 link-secondary">HOME</a>
                     </li>
