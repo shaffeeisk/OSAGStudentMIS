@@ -39,7 +39,7 @@
         <asp:TextBox ID="txtWeeklyHours" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="Label5" runat="server" Text="Payment: " Width="160px"></asp:Label>
-        <asp:TextBox ID="txtPayment" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtPayment" TextMode="Number" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="Label6" runat="server" Text="CompanyID: " Width="160px"></asp:Label>
         <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="177px"
