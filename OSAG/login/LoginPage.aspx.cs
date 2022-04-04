@@ -87,8 +87,7 @@ namespace OSAG.login
         }
 
 
-        // run query, return number indiating whether password exists
-        // i = 0 if password exists. i = 1 if password does not exist
+        // run query, return number indiating whether user is approved
         protected bool isApproved(String s)
         {
             String sqlQuery = "EXEC dbo.OSAG_NotApproved @Username";
