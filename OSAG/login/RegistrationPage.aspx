@@ -29,6 +29,34 @@
             <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
             <br />
             <br />
+            Password:
+            <asp:TextBox ID="txtGPA" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Password:
+            <asp:TextBox ID="txtClass" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Password:
+            <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Password:
+            <asp:TextBox ID="txtBio" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Password:
+            <asp:TextBox ID="txtMajor" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Password:
+            <asp:TextBox ID="txtGradDate" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Password:
+            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+            <br />
+            <br />
             <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
             <br />
             <asp:Label ID="lblStatus" runat="server"></asp:Label>
