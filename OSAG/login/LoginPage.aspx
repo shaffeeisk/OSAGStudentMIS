@@ -20,63 +20,70 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet" />
 </head>
+
 <body style="background-color: #E4E0E7;">
     <form id="form1" runat="server">
-        <div class="container-fluid" style="margin-left: auto; margin-right: auto; text-align: center;">
-            <div class="row">
-                <div class="logo pt-5">
-                    <img class="center-block" src="/_images/logo.png" />
-                </div>
-            </div>
+        <div class="modal modal-tour position-static d-block bg-purple py-5" tabindex="-1" role="dialog" id="modalTour">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content rounded-5 shadow">
+                    <div class="modal-body pt-2">
 
-            <div class="row">
-                <div class="col justify-content-center pt-2 pb-2 d-grid">
-                    <h6>Scholarship | Mentorship | Community</h6>
-                </div>
-            </div>
+                        <div class="logo">
+                            <img class="center-block" src="/_images/logo.png" />
+                        </div>
 
 
-            <div id="login" class="row">
-                <div class="col justify-content-center pt-3 d-grid">
-                    <h3><strong>USER LOGIN</strong></h3>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col justify-content-center pt-3 d-grid mx-auto">
-                    <asp:TextBox ID="txtUsername" runat="server" class="form-control pb-1" placeholder="Username" aria-label="Username"></asp:TextBox>
-                    <asp:RequiredFieldValidator
-                        ID="RequiredFieldValidator1"
-                        ControlToValidate="txtUsername"
-                        Text="(Required)"
-                        runat="server" />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col justify-content-center pt-3 d-grid mx-auto">
-                    <asp:TextBox ID="txtPassword" class="form-control pb-1" placeholder="Password" aria-label="Password" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator
-                        ID="RequiredFieldValidator2"
-                        ControlToValidate="txtPassword"
-                        Text="(Required)"
-                        runat="server" />
-                </div>
-            </div>
-
-            <asp:Label ID="lblStatus" runat="server"></asp:Label>
+                        <div class="row">
+                            <div class="col justify-content-center pb-3 d-grid">
+                                <h6>Scholarship | Mentorship | Community</h6>
+                            </div>
+                        </div>
 
 
-            <div class="row">
-                <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
-                    <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Login" />
-                </div>
-            </div>
+                        <div id="login" class="row">
+                            <div class="col justify-content-center pt-1 d-grid">
+                                <h3><strong>USER LOGIN</strong></h3>
+                            </div>
+                        </div>
 
-            <div class="row">
-                <div class="col justify-content-center d-grid pt-2">
-                    <p>Don't have an account already?</p>
-                    <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" runat="server" Text="SIGN UP" OnClick="btnCreate_Click" />
+                        <div class="row">
+                            <div class="col justify-content-center pt-3 d-grid mx-auto">
+                                <asp:TextBox ID="txtUsername" runat="server" class="form-control pb-1" placeholder="Username" aria-label="Username"></asp:TextBox>
+                                <asp:RequiredFieldValidator
+                                    ID="RequiredFieldValidator1"
+                                    ControlToValidate="txtUsername"
+                                    Text="(Required)"
+                                    runat="server" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col justify-content-center pt-3 d-grid mx-auto">
+                                <asp:TextBox ID="txtPassword" class="form-control pb-1" placeholder="Password" aria-label="Password" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator
+                                    ID="RequiredFieldValidator2"
+                                    ControlToValidate="txtPassword"
+                                    Text="(Required)"
+                                    runat="server" />
+                            </div>
+                        </div>
+
+                        <asp:Label ID="lblStatus" runat="server"></asp:Label>
+
+
+                        <div class="row">
+                            <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
+                                <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Login" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col justify-content-center d-grid pt-2 pb-5">
+                                <p>Don't have an account already?</p>
+                                <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" runat="server" Text="SIGN UP" OnClick="btnCreate_Click" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

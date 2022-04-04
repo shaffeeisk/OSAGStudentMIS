@@ -38,6 +38,8 @@ namespace OSAG
                 Response.Redirect("/profiles/StartChat.aspx");
             else if (ddlNavigation.SelectedValue == "BOOKMARKS")
                 Response.Redirect("/student/Bookmarks.aspx");
+            else if (ddlNavigation.SelectedValue == "USER LIST")
+                Response.Redirect("/profiles/ListUsers.aspx");
             else if (ddlNavigation.SelectedValue == "SIGN OUT")
                 Response.Redirect("/login/LoginPage.aspx");
             else

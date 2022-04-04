@@ -33,49 +33,57 @@
         <div class="container">
             <!--Navigation starts-->
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start pt-3">
-                <a href="/profiles/UserProfile.aspx">Profile</a>&nbsp
-        <a href="/profiles/StartChat.aspx">Chat</a>&nbsp
-         <% if (Session["UserType"].ToString() == "student")
-             { %>
-        <a href="/jobs/Jobs.aspx">Jobs</a>&nbsp
-           <a href="/internships/Internships.aspx">Internships</a>&nbsp
-        <a href="/opportunities/Opportunities.aspx">Opportunities</a>&nbsp
-        <a href="/student/Bookmarks.aspx">Bookmarks</a>&nbsp
-        <a href="/profiles/ListUsers.aspx">User List</a>&nbsp
-            <% } %>
-            <% if (Session["UserType"].ToString() == "member")
-                { %>
-                <a href="/admin/ApproveRegistration.aspx">Approve Registrations</a>&nbsp
-        <a href="/admin/AssignMember.aspx">Assign Members</a>&nbsp
-        <a href="/member/CreateJob.aspx">Create Jobs</a>&nbsp
-        <a href="/member/CreateInternship.aspx">Create Internships</a>&nbsp
-        <a href="/member/CreateOpportunity.aspx">Create Opportunities</a>&nbsp
-        <a href="/profiles/ListUsers.aspx">User List</a>&nbsp
-            <% } %>
                 <a class="navbar-brand" href="#">
                     <img src="/_images/logo.png" alt="Logo" width="120" height="70">
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    
                     <li>
-                        <a href="/homepages/LoggedInHomePage.aspx" id="homeTab" class="nav-link px-2 link-secondary">HOME</a>
+                        <a href="/profiles/UserProfile.aspx" class="nav-link px-2 link-secondary">Profile</a>
+                    </li>
+                    <li>
+                        <a href="/profiles/StartChat.aspx" class="nav-link px-2 link-secondary">Chat</a>
                     </li>
 
+                    <% if (Session["UserType"].ToString() == "student")
+                        { %>
                     <li>
-                        <a href="/jobs/Jobs.aspx" id="jobTab" class="nav-link px-2 link-secondary">JOBS</a>
+                        <a href="/jobs/Jobs.aspx" class="nav-link px-2 link-secondary">Jobs</a>
+                    </li>
+                    <li>
+                        <a href="/internships/Internships.aspx" class="nav-link px-2 link-secondary">Internships</a>
+                    </li>
+                    <li>
+                        <a href="/opportunities/Opportunities.aspx" class="nav-link px-2 link-secondary">Opportunities</a>
+                    </li>
+                    <li>
+                        <a href="/student/Bookmarks.aspx" class="nav-link px-2 link-secondary">Bookmarks</a>
+                    </li>
+                    <li>
+                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">User List</a>
+                    </li>
+                    <% } %>
+                    <% if (Session["UserType"].ToString() == "member")
+                        { %>
+                    <li>
+                        <a href="/admin/ApproveRegistration.aspx" class="nav-link px-2 link-secondary">Approve Registrations</a>
+                    </li>
+                    <li>
+                        <a href="/admin/AssignMember.aspx" class="nav-link px-2 link-secondary">Assign Members</a>
+                    </li>
+                    <li>
+                        <a href="/member/CreateJob.aspx" class="nav-link px-2 link-secondary">Create Jobs</a>
+                    </li>
+                    <li>
+                        <a href="/member/CreateInternship.aspx" class="nav-link px-2 link-secondary">Create Internships</a>
+                    </li>
+                    <li>
+                        <a href="/member/CreateOpportunity.aspx" class="nav-link px-2 link-secondary">Create Opportunities</a>
+                    </li>
+                    <li>
+                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">User List</a>
                     </li>
 
-                    <li>
-                        <a href="/internships/Internships.aspx" id="internshipTab" class="nav-link px-2 link-secondary" onclick="" >INTERNSHIPS</a>
-                    </li>
-
-                    <li>
-                        <a href="/student/Bookmarks.aspx" id="bookmarkTab" class="nav-link px-2 link-secondary">BOOKMARKS</a>
-                    </li>
-
-                    <li>
-                        <a href="/profiles/ViewProfile.aspx" id="profileTab" class="nav-link px-2 link-secondary">MY PROFILE</a>
-                    </li>
+                    <% } %>
                 </ul>
 
                 <div class="dropdown text-end">
@@ -88,6 +96,7 @@
                         <asp:ListItem Text="PROFILE"></asp:ListItem>
                         <asp:ListItem Text="CHAT"></asp:ListItem>
                         <asp:ListItem Text="BOOKMARKS"></asp:ListItem>
+                        <asp:ListItem Text="USER LIST"></asp:ListItem>
                         <asp:ListItem Text="SIGN OUT"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
@@ -95,24 +104,40 @@
         </div>
         <!--Navigation ends-->
 
+
         Current User:
         <asp:Label ID="lblUsername" runat="server"></asp:Label>
         <br />
         <asp:Button ID="btnLogout" runat="server" Text="<-- Logout" OnClick="btnLogout_Click" CausesValidation="false" />
         <br />
 
+
+
         <!--Banner starts-->
-        <main>
-            <section class="py-5 text-center container">
-                <div class="row py-lg-5">
-                    <div class="col-lg-6 col-md-8 mx-auto">
-                        <h1 class="fw-light">Banner</h1>
-                        <p class="lead-text">Text</p>
-                    </div>
+        <div class="container col-lg-8 px-2 py-3">
+            <div class="row flex-lg-row-reverse align-items-center g-4 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="/_images/homepage.png" class="d-block mx-lg-auto img-fluid" alt="Header" width="2000" height="1500">
                 </div>
-            </section>
-        </main>
+
+                <div class="col-lg-6">
+                    <h1 class="header fw-bold lh-1 pt-3 pb-4">Find Your Future.</h1>
+                    <p class="headertext">
+                        A grass roots, non-profit organization envisioned by three African American James Madison University (JMU) alumni that graduated in the 1980’s.
+              
+              <p class="headertext">The Ole School Alumni Group offers a professional network and recruitment liaison for underrepresented students. </p>
+
+                    <div class="d-grid gap-2 d-lg-flex justify-content-lg-start pt-4">
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Internships</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Jobs</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <!--Banner ends-->
+
+
 
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -120,8 +145,8 @@
         </div>
 
         <!--Footer starts-->
-        <footer id="sticky-footer" class="py-4 text-center">
-            <div class="contact text-center pt-3 pb-3">
+        <footer id="sticky-footer" class="pt-5 pb-2 text-center">
+            <div class="contact text-center pt-3 pb-2">
 
                 <a href="https://www.facebook.com/jmuoleschoolers" target="_blank">
                     <i class="fab fa-facebook-f"></i>
@@ -130,7 +155,7 @@
             </div>
 
 
-            <div class="col justify-content-center d-grid pb-2">
+            <div class="col justify-content-center d-grid">
                 <p>oleschoolalumni@gmail.com</p>
                 <p>757-651-1751</p>
                 <p>&copy;2022 Ole School Alumni Scholarship Group</p>
@@ -138,6 +163,7 @@
 
         </footer>
         <!--Footer ends-->
+
     </form>
 </body>
 </html>
