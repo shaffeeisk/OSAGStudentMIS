@@ -29,31 +29,7 @@
             <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
             <br />
             <br />
-            Password:
-            <asp:TextBox ID="txtGPA" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Password:
-            <asp:TextBox ID="txtClass" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Password:
-            <asp:TextBox ID="txtPhone" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Password:
-            <asp:TextBox ID="txtBio" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Password:
-            <asp:TextBox ID="txtMajor" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Password:
-            <asp:TextBox ID="txtGradDate" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Password:
+            Email:
             <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
             <br />
             <br />
