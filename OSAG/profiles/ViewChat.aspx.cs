@@ -25,7 +25,7 @@ namespace OSAG.profiles
                 Response.Redirect("UserProfile.aspx");
             }
             // otherwise set select command
-            sqlsrc.SelectCommand = "Select MessageID, DateCreated, MessageText, SenderName FROM ChatMessage WHERE (" +
+            sqlsrc.SelectCommand = "Select DateCreated, MessageText, SenderName FROM ChatMessage WHERE (" +
                 Session["UserType"].ToString() + "SenderID = '" + getID() + "' AND " +
                  Session["UserChatType"].ToString() + "ReceiverID = " + Session["UserChatID"] + ") OR (" +
                  Session["UserType"].ToString() + "ReceiverID = '" + getID() + "' AND " +
