@@ -1,10 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="AddMember.aspx.cs" Inherits="OSAG.admin.AddMember" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="AddMember.aspx.cs" Inherits="OSAG.admin.AddMember" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <br />
-    <br />
     <strong>Create Member Account</strong>
     <br />
     <br />
@@ -39,6 +37,28 @@
     <br />
     State:&nbsp
             <asp:TextBox ID="txtState" runat="server"></asp:TextBox>
+    <br />
+    <br />
+    (Temp) Username:&nbsp
+            <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator 
+        ID="RequiredFieldValidator1"
+        ControlToValidate="txtUsername"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Button ID="btnGenerateUser" runat="server" Text="Auto-Generate Username" OnClick="btnGenerateUser_Click" CausesValidation="false" />
+    <br />
+    <br />
+    (Temp) Password:&nbsp 
+            <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator 
+        ID="RequiredFieldValidator2"
+        ControlToValidate="txtPassword"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Button ID="btnGeneratePass" runat="server" Text="Auto-Generate Password" OnClick="btnGeneratePass_Click" CausesValidation="false" />
     <br />
     <br />
     <asp:Button ID="btnCreate" runat="server" Text="Create Member Account" OnClick="btnCreate_Click" />
