@@ -7,7 +7,8 @@
         runat="server"
         DataSourceID="sqlsrc"
         AllowSorting="true"
-        AutoGenerateSelectButton="false"
+        AutoGenerateSelectButton="false" 
+        HorizontalAlign="Center"
         AutoGenerateColumns="false"
         DataKeyNames="InternshipID">
         <Columns>

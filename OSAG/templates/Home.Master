@@ -34,19 +34,27 @@
             <!--Navigation starts-->
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start pt-3">
                 <a class="navbar-brand" href="#">
-                    <img src="images/logo.png" alt="Logo" width="120" height="70">
+                    <img src="/_images/logo.png" alt="Logo" width="120" height="70">
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li>
-                        <a href="#" class="nav-link px-2 link-secondary">HOME</a>
+                        <a href="/homepages/LoggedInHomePage.aspx" id="homeTab" class="nav-link px-2 link-secondary">HOME</a>
                     </li>
 
                     <li>
-                        <a href="#" class="nav-link px-2 link-secondary">JOBS</a>
+                        <a href="/jobs/Jobs.aspx" id="jobTab" class="nav-link px-2 link-secondary">JOBS</a>
                     </li>
 
                     <li>
-                        <a href="#" class="nav-link px-2 link-secondary">INTERNSHIPS</a>
+                        <a href="/internships/Internships.aspx" id="internshipTab" class="nav-link px-2 link-secondary" onclick="" >INTERNSHIPS</a>
+                    </li>
+
+                    <li>
+                        <a href="/student/Bookmarks.aspx" id="bookmarkTab" class="nav-link px-2 link-secondary">BOOKMARKS</a>
+                    </li>
+
+                    <li>
+                        <a href="/profiles/ViewProfile.aspx" id="profileTab" class="nav-link px-2 link-secondary">MY PROFILE</a>
                     </li>
                 </ul>
 
@@ -69,6 +77,7 @@
 
         Current User:
         <asp:Label ID="lblUsername" runat="server"></asp:Label>
+        <br />
         <asp:Button ID="btnLogout" runat="server" Text="<-- Logout" OnClick="btnLogout_Click" CausesValidation="false" />
         <br />
 

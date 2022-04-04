@@ -9,6 +9,7 @@
         AllowSorting="true"
         AutoGenerateSelectButton="false"
         AutoGenerateColumns="false"
+        HorizontalAlign="Center"
         DataKeyNames="OpportunityID">
         <Columns>
             <asp:BoundField HeaderText="AwardName" DataField="AwardName" SortExpression="AwardName" />
