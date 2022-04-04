@@ -19,42 +19,32 @@ namespace OSAG.member
         {
 
         }
-
-        protected void btnSaveSchol_Click(object sender, EventArgs e)
+        
+        // event handler for save opportunity button. executes query and clears input, displaying success message
+        protected void btnSaveOpportunity_Click(object sender, EventArgs e)
         {
-            // create string from input, send to DB, clear dat.
-            // placeholder parts to be replaced included in string
-            String sqlQuery = "INSERT INTO Scholarship (AwardName, AwardAmount, AwardDescription) " +
-                "VALUES (@AwardName, @AwardAmount,@AwardDescription);";
-
-            // create sql connection with connection string one-liner
+            String sqlQuery = "INSERT INTO Opportunity (AwardName, AwardAmount, AwardDescription) " +
+                "VALUES (@AwardName, @AwardAmount, @AwardDescription);";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-            // create sql command with the existing query and connection one liner
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-
-            // parameters.AddWithValue replaces placeholder text (arg1) with data (arg2)
             sqlCommand.Parameters.AddWithValue("@AwardName", validate(txtAwardName.Text));
-            sqlCommand.Parameters.AddWithValue("@DollarAmount", validate(txtAmount.Text));
+            sqlCommand.Parameters.AddWithValue("@AwardAmount", validate(txtAmount.Text));
             sqlCommand.Parameters.AddWithValue("@AwardDescription", validate(txtDescription.Text));
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
-            lblSuccess.Text = "New scholarship successfully created";
-
-            // force postback by refreshing page (updates table via Page_Load method)
-            Response.Redirect("/member/CreateScholarship.aspx");
-            // reset for next click
-            ClearScholData();
+            ClearOpportunityData();
+            lblSuccess.Text = "New opportunity successfully created";
         }
 
+        // event handler to clear input
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            ClearScholData();
-            // force postback to update table
-            Response.Redirect("/member/CreateScholarship.aspx");
+            ClearOpportunityData();
         }
-        protected void ClearScholData()
+
+        // helper method to clear input
+        protected void ClearOpportunityData()
         {
             txtAwardName.Text = "";
             txtAmount.Text = "";

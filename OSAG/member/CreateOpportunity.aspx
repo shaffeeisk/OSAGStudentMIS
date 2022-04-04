@@ -6,12 +6,13 @@
     <asp:TextBox ID="txtAwardName" runat="server"></asp:TextBox>
     <br />
     <asp:Label ID="lblAmount" runat="server" Text="Award Amount: " Width="160px"></asp:Label>
-    <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>
+    <asp:TextBox ID="txtAmount" TextMode="Number" runat="server"></asp:TextBox>
+    
     <br />
     <asp:Label ID="Label1" runat="server" Text="Award Description: " Width="160px"></asp:Label>
     <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
     <br />
-    <asp:Button ID="btnSaveSchol" Text="Save ->" runat="server" OnClick="btnSaveSchol_Click" />
+    <asp:Button ID="btnSaveOpportunity" Text="Save ->" runat="server" OnClick="btnSaveOpportunity_Click" />
     <br />
     <br />
     <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
