@@ -32,10 +32,11 @@ namespace OSAG.profiles
 
                 if (Session["UserType"].ToString() == "student")
                 {
-                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Major FROM Student WHERE Username = '" + Session["Username"].ToString() + "';";
+                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Major, Class, Gpa, Phone, Bio, IsApproved FROM Student WHERE Username = '" + Session["Username"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
+                    String approval = "";
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the single record that matches the entered username
@@ -45,6 +46,19 @@ namespace OSAG.profiles
                         txtEmail.Text = reader["Email"].ToString();
                         txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
                         txtMajor.Text = reader["Major"].ToString();
+                        txtClass.Text = reader["Class"].ToString();
+                        txtGpa.Text = reader["Gpa"].ToString();
+                        txtPhone.Text = reader["Phone"].ToString();
+                        txtBio.Text = reader["Bio"].ToString();
+                        approval = reader["IsApproved"].ToString();
+                        if(isApproved())
+                        {
+                            lblApprove.Text = "User Profile Approved";
+                        }
+                        else 
+                        {
+                            lblApprove.Text = "User Profile Not Yet Approved";
+                        }
                     }
                     sqlConnect.Close();
 
@@ -62,10 +76,10 @@ namespace OSAG.profiles
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Member WHERE Username =  '" + Session["Username"].ToString() + "'; ";
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State,GradDate,Major,PositionTitle,Phone,Bio,IsApproved FROM Member WHERE Username =  '" + Session["Username"].ToString() + "'; ";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
-
+                    String approval = "";
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read())
@@ -75,6 +89,20 @@ namespace OSAG.profiles
                         txtMemberEmail.Text = reader["Email"].ToString();
                         txtCity.Text = reader["City"].ToString();
                         txtState.Text = reader["M_State"].ToString();
+                        txtMemberGrad.Text = reader["GradDate"].ToString();
+                        txtMemberMajor.Text = reader["Major"].ToString();
+                        txtPosition.Text = reader["PositionTitle"].ToString();
+                        txtMemberPhone.Text = reader["Phone"].ToString();
+                        txtMemberBio.Text = reader["Bio"].ToString();
+                        approval = reader["IsApproved"].ToString();
+                        if (isApproved())
+                        {
+                            lblApprove.Text = "User Profile Approved";
+                        }
+                        else
+                        {
+                            lblApprove.Text = "User Profile Not Yet Approved";
+                        }
                     }
                     sqlConnect.Close();
                 }
@@ -93,6 +121,10 @@ namespace OSAG.profiles
                 sqlQuery = "UPDATE [Student] SET [FirstName] = '" + txtFirstName.Text + "', [LastName] = '" + txtLastName.Text + "'," +
                 "[Email] = '" + txtEmail.Text + "'," +
                 "[Major] = '" + txtMajor.Text + "'," +
+                "[Phone] = '" + txtPhone.Text + "'," +
+                "[Class] = '" + txtClass.Text + "'," +
+                "[Gpa] = '" + txtGpa.Text + "'," +
+                "[Bio] = '" + txtBio.Text + "'," +
                 "[GradDate] = '" + txtGradDate.Text + "' " +
                 " WHERE[Username] = '" + Session["Username"].ToString() + "'";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
@@ -105,6 +137,11 @@ namespace OSAG.profiles
                 sqlQuery = "UPDATE [Member] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
                 "[Email] = '" + txtMemberEmail.Text + "'," +
                 "[M_State] = '" + txtState.Text + "'," +
+                "[PositionTitle] = '" + txtPosition.Text + "'," +
+                "[Phone] = '" + txtMemberPhone.Text + "'," +
+                "[Bio] = '" + txtMemberBio.Text + "'," +
+                "[GradDate] = '" + txtMemberGrad.Text + "'," +
+                "[Major] = '" + txtMemberMajor.Text + "'," +
                 "[City] = '" + txtCity.Text + "' " +
                 " WHERE[Username] = '" + Session["Username"].ToString() + "'";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
@@ -137,5 +174,21 @@ namespace OSAG.profiles
                 }
             }
         }
+        protected bool isApproved()
+        {
+            String sqlQuery = "EXEC dbo.OSAG_NotApproved @Username";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+            sqlConnect.Open();
+            int i = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            sqlConnect.Close();
+
+            // return bool
+            if (i == 1)
+                return false;
+            return true;
+        }
+
     }
 }

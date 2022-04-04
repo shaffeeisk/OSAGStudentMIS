@@ -2,7 +2,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <% if (Session["UserType"].ToString() == "student")
+     <SCRIPT language=Javascript>
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : evt.keyCode;
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;    
+         return true;
+      }
+     </SCRIPT>
+    <asp:Label ID="lblApprove" runat="server" Text=""></asp:Label>
+    <br />
+    <% if (Session["UserType"].ToString() == "student")
         { %>
     <asp:Label ID="Label1" runat="server" Text="First Name"></asp:Label>
     <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
@@ -48,6 +59,39 @@
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator10"
         ControlToValidate="txtMajor"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label8" runat="server" Text="Phone #"></asp:Label>
+    <asp:TextBox ID="txtPhone" onkeypress="return isNumberKey(event)" runat="server" ></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator11"
+        ControlToValidate="txtPhone"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label9" runat="server" Text="GPA"></asp:Label>
+    <asp:TextBox ID="txtGpa" runat="server" ></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator12"
+        ControlToValidate="txtGpa"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label10" runat="server" Text="Class"></asp:Label>
+    <asp:TextBox ID="txtClass" runat="server" ></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator13"
+        ControlToValidate="txtClass"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label7" runat="server" Text="Bio"></asp:Label>
+    <asp:TextBox ID="txtBio" runat="server" TextMode="MultiLine" 
+Rows="10" Height="100" Width="200" ></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator9"
+        ControlToValidate="txtBio"
         Text="(Required)"
         runat="server" />
     <br />
@@ -101,6 +145,54 @@
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator8"
         ControlToValidate="txtCity"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label11" runat="server" Text="GradDate"></asp:Label>
+    <asp:TextBox ID="txtMemberGrad" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator14"
+        ControlToValidate="txtMemberGrad"
+        Text="(Required)"
+        runat="server" />
+    <asp:CompareValidator
+        ID="CompareValidator2"
+        ControlToValidate="txtMemberGrad"
+        Text="Use Date Format"
+        Operator="DataTypeCheck"
+        Type="Date"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label12" runat="server" Text="Major"></asp:Label>
+    <asp:TextBox ID="txtMemberMajor" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator15"
+        ControlToValidate="txtMemberMajor"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label13" runat="server" Text="Position Title"></asp:Label>
+    <asp:TextBox ID="txtPosition" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator16"
+        ControlToValidate="txtPosition"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label14" runat="server" Text="Phone"></asp:Label>
+    <asp:TextBox ID="txtMemberPhone" onkeypress="return isNumberKey(event)" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator17"
+        ControlToValidate="txtMemberPhone"
+        Text="(Required)"
+        runat="server" />
+    <br />
+    <asp:Label ID="Label15" runat="server" Text="Bio"></asp:Label>
+    <asp:TextBox ID="txtMemberBio" TextMode="MultiLine" 
+Rows="10" Height="100" Width="200" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator18"
+        ControlToValidate="txtMemberBio"
         Text="(Required)"
         runat="server" />
     <br />
