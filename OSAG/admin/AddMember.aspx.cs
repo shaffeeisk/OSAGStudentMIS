@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Drawing;
+// import password generator
+using System.Web.Security;
 
 namespace OSAG.admin
 {
@@ -20,9 +22,17 @@ namespace OSAG.admin
 
         // event handler for create member account button
         protected void btnCreate_Click(object sender, EventArgs e)
-        {            
-            String sqlQuery = "INSERT INTO Member (MemberType, FirstName, LastName, Email, PhoneNumber, City, M_State, IsApproved) " +
-                "VALUES (@MemberType, @FirstName, @LastName, @Email, @PhoneNumber, @City, @M_State, 'FALSE')";
+        {
+            if (usernameExists(txtUsername.Text))
+            {
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Font.Bold = true;
+                lblStatus.Text = "Username " + txtUsername.Text + " is already in use.";
+                txtUsername.Text = "";
+                return;
+            }
+            String sqlQuery = "INSERT INTO Member (MemberType, FirstName, LastName, Email, PhoneNumber, City, M_State, IsApproved, Username, Pass) " +
+                "VALUES (@MemberType, @FirstName, @LastName, @Email, @PhoneNumber, @City, @M_State, 'FALSE', @Username, @Pass)";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@MemberType", ddlMemberType.SelectedValue);
@@ -32,6 +42,8 @@ namespace OSAG.admin
             sqlCommand.Parameters.AddWithValue("@PhoneNumber", validatePhone(txtPhone.Text));
             sqlCommand.Parameters.AddWithValue("@City", validate(txtCity.Text));
             sqlCommand.Parameters.AddWithValue("@M_State", validate(txtState.Text));
+            sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
+            sqlCommand.Parameters.AddWithValue("@Pass", PasswordHash.HashPassword(txtPassword.Text));
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -51,6 +63,23 @@ namespace OSAG.admin
             txtState.Text = "";
         }
 
+        // helper method to query student and member tables for existing username
+        // if count is > 0 return true, otherwise return false
+        public bool usernameExists(String s)
+        {
+            String sqlQuery = "SELECT (SELECT COUNT(*) FROM Student WHERE Username = @Username) " +
+                "+ (SELECT COUNT(*) FROM Member WHERE Username = @Username)";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", s);
+            sqlConnect.Open();
+            int i = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            sqlConnect.Close();
+            if (i > 0)
+                return true;
+            return false;
+        }
+
         // helper method to validate data. trims input string of leading/trailing white space.
         // then returns null if user input is empty. otherwise, returns the trimmed string.
         // allows data integrity to allow querying null input (also saves disk space :D)
@@ -63,10 +92,26 @@ namespace OSAG.admin
             return s;
         }
 
-        // helper method to return non-numeric stripped string from input
-        private string validatePhone(String i)
+        protected void btnGenerateUser_Click(object sender, EventArgs e)
         {
-            return new string(i.Where(c => char.IsDigit(c)).ToArray());
+            txtUsername.Text = removeNonAlpha(Membership.GeneratePassword(15, 0));
+        }
+
+        protected void btnGeneratePass_Click(object sender, EventArgs e)
+        {
+            txtPassword.Text = Membership.GeneratePassword(14, 4);
+        }
+
+        // helper method to return non-numeric stripped string from input
+        private string validatePhone(string s)
+        {
+            return new string(s.Where(c => char.IsDigit(c)).ToArray());
+        }
+
+        // helper method to return non-letter stripped string from input
+        private string removeNonAlpha(string s)
+        {
+            return new string(s.Where(c => char.IsLetter(c)).ToArray());
         }
     }
 }

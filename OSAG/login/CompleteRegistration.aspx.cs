@@ -48,13 +48,12 @@ namespace OSAG.login
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
-            sqlCommand.Parameters.AddWithValue("@Password", txtPassword.Text); // needs to be hashed
-
+            sqlCommand.Parameters.AddWithValue("@Password", PasswordHash.HashPassword(txtPassword.Text));
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
             Session["Username"] = txtUsername.Text;
-            lblStatus.Text = "Account successfully updated.";
+            lblStatus.Text = "Registration successfully completed. Click the button below to view your profile.";
             btnSubmit.Visible = false;
             btnContinue.Visible = true;
         }

@@ -69,13 +69,13 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
 
         /// <summary>
-        /// btnSaveSchol control.
+        /// btnSaveOpportunity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveSchol;
+        protected global::System.Web.UI.WebControls.Button btnSaveOpportunity;
 
         /// <summary>
         /// lblSuccess control.
@@ -94,5 +94,23 @@ namespace OSAG.member
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
+
+        /// <summary>
+        /// grdvwOpportunities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdvwOpportunities;
+
+        /// <summary>
+        /// sqlsrc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrc;
     }
 }
