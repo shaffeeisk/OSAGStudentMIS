@@ -77,7 +77,7 @@
 
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                         <li>
-                            <a class="dropdown-item" href="/profiles/ViewProfile.aspx">PROFILE</a>
+                            <a class="dropdown-item" href="/profiles/UserProfile.aspx">PROFILE</a>
                         </li>
 
                         <li>
