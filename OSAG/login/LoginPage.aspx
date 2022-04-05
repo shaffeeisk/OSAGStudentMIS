@@ -82,8 +82,9 @@
                                     <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" runat="server" Text="SIGN UP" CausesValidation="false" OnClick="btnCreate_Click" />
                                 </div>
                             </div>
-        </div>
-        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
