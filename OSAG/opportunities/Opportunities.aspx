@@ -17,7 +17,10 @@
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
+                    <%if (Session["UserType"].ToString() == "student")
+                        {%>
                     <asp:Button ID="btnBookmark" runat="server" Text="Bookmark" OnClick="btnBookmark_Click" />
+                    <%} %>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
