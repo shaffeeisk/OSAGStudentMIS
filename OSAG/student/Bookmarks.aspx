@@ -3,12 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div style="margin-left:auto;margin-right:auto;text-align:center;">
     <h3>Bookmarked Jobs:</h3>
     <asp:GridView ID="grdvwJobs"
         runat="server"
         DataSourceID="sqlsrc"
         AllowSorting="true"
         AutoGenerateSelectButton="false"
+        HorizontalAlign="Center"
         AutoGenerateColumns="false" DataKeyNames="JobName">
         <Columns>
             <asp:BoundField HeaderText="JobName" DataField="JobName" SortExpression="JobName" />
@@ -30,6 +32,7 @@
         DataSourceID="sqlsrc2"
         AllowSorting="true"
         AutoGenerateSelectButton="false"
+        HorizontalAlign="Center"
         AutoGenerateColumns="false" DataKeyNames="InternshipName">
         <Columns>
             <asp:BoundField HeaderText="InternshipName" DataField="InternshipName" SortExpression="InternshipName" />
@@ -50,7 +53,8 @@
         runat="server"
         DataSourceID="sqlsrc3"
         AllowSorting="true"
-        AutoGenerateSelectButton="false"
+        AutoGenerateSelectButton="false" 
+        HorizontalAlign="Center"
         AutoGenerateColumns="false" DataKeyNames="AwardName">
         <Columns>
             <asp:BoundField HeaderText="AwardName" DataField="AwardName" SortExpression="AwardName" />
@@ -64,4 +68,5 @@
     </asp:GridView>
     <asp:SqlDataSource ID="sqlsrc3" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"></asp:SqlDataSource>
+        </div>
 </asp:Content>
