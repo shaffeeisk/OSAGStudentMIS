@@ -51,26 +51,26 @@
 
                         <div class="row">
                             <div id="passwordHelpBlock" class="form-text col justify-content-center pt-2 d-grid mx-auto">
-                                Password should be 8-20 characters in length, and contain
+                                <p>Password should be 8-20 characters in length, and contain
                                 <br />
-                                a mix of letters, numbers and at least one special character
+                                a mix of letters, numbers and at least one special character</p>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col justify-content-center d-grid pt-4 pb-1 mx-auto">
+                            <div class="col justify-content-center d-grid pt-2 pb-1 mx-auto">
                                 <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="SIGN UP" CssClass="btn btn-primary" />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4 pb-1 mx-auto">
-                                <asp:Label ID="lblStatus" runat="server" Font-Names="Raleway" ></asp:Label>
+                                <p><asp:Label ID="lblStatus" runat="server" ></asp:Label></p>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col justify-content-center d-grid pt-4">
+                            <div class="col justify-content-center d-grid pt-2">
                                 <p>Already have an account? Login <a href="/login/LoginPage.aspx" style="color:indigo">here</a>  </p>
                             </div>
                         </div>
