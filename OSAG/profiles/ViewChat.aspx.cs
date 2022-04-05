@@ -34,6 +34,8 @@ namespace OSAG.profiles
 
         protected void btn_Send_Click(object sender, EventArgs e)
         {
+            if (txtChatBox.Text == "")
+                return;
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
             sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, " + Session["UserChatType"].ToString() + "ReceiverID, SenderName) " +
