@@ -1,25 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistrationPage.aspx.cs" Inherits="OSAG.login.RegistrationPage" %>
 
 <!DOCTYPE html>
-<html lang="en">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="UTF-8">
-    <meta name="description" content="Registration Page">
-    <meta name="author" content="Courtney Miyashiro">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Registration Page"/>
+    <meta name="author" content="Courtney Miyashiro"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Create an Account</title>
 
     <!-- Bootstrap v5.0.0-beta3 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <link href="css/custom.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="css/custom.css" rel="stylesheet" type="text/css" media="screen"/>
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet" />
 </head>
 
 <body style="background-color: #E4E0E7;">
@@ -40,11 +38,11 @@
                                  <asp:Button ID="btnDemo" runat="server" Text="DEMO BUTTON" OnClick="btnDemo_Click" Font-Bold="true" CssClass="btn btn-primary" />
 
                                 <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control pb-1" placeholder="First Name" ></asp:TextBox>
-                                <br>
+                                <br/>
                                 <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control pb-1" placeholder="Last Name"></asp:TextBox>
-                                <br>
+                                <br/>
                                 <asp:TextBox ID="txtUsername" runat="server"  CssClass="form-control pb-1" placeholder="Username"></asp:TextBox>
-                                <br>
+                                <br/>
                                 <asp:TextBox ID="txtPassword" runat="server"  CssClass="form-control pb-1" placeholder="Password"></asp:TextBox>
                             </div>
                         </div>
@@ -52,9 +50,9 @@
                         <div class="row">
                             <div id="passwordHelpBlock" class="form-text col justify-content-center pt-2 d-grid mx-auto">
                                 Must be 8-20 characters long
-                                <br>
+                                <br/>
                                 Contain letters and numbers
-                                <br>
+                                <br/>
                                 Contain a special character
                             </div>
                         </div>
