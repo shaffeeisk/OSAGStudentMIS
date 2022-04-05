@@ -65,7 +65,7 @@
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4 pb-1 mx-auto">
-                                <asp:Label ID="lblStatus" runat="server"></asp:Label>
+                                <asp:Label ID="lblStatus" runat="server" Font-Names="Raleway" ></asp:Label>
                             </div>
                         </div>
 
