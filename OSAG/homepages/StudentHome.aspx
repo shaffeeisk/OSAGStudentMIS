@@ -1,8 +1,32 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="LoggedInHomePage.aspx.cs" Inherits="OSAG.homepages.LoggedInHomePage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="StudentHome.aspx.cs" Inherits="OSAG.homepages.LoggedInHomePage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <!--Banner starts-->
+    <div class="container col-lg-8 px-2 py-3">
+        <div class="row flex-lg-row-reverse align-items-center g-4 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="/_images/homepage.png" class="d-block mx-lg-auto img-fluid" alt="Header" width="2000" height="1500">
+            </div>
+
+            <div class="col-lg-6">
+                <h1 class="header fw-bold lh-1 pt-3 pb-4">Find Your Future.</h1>
+                <p class="headertext">
+                    A grass roots, non-profit organization envisioned by three African American James Madison University (JMU) alumni that graduated in the 1980’s.
+              
+              <p class="headertext">The Ole School Alumni Group offers a professional network and recruitment liaison for underrepresented students. </p>
+
+                <div class="d-grid gap-2 d-lg-flex justify-content-lg-start pt-4">
+                    <asp:Button ID="btnInternships" runat="server" Text="Internships" CssClass="btn btn-outline-secondary btn-lg px-4" OnClick="btnInternships_Click"/>
+                    <asp:Button ID="btnJobs" runat="server" Text="Jobs" CssClass="btn btn-outline-secondary btn-lg px-4" OnClick="btnJobs_Click"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Banner ends-->
 
     <!--Internships feature starts-->
     <div class="container px-5 py-5" id="hanging-iconsInternship">
@@ -165,9 +189,22 @@
 
     <!--Opportunities starts-->
 
-    <div class="container px-5 py-5">
+    <div class="container px-5 py-4">
         <h2 class="jobs pb-2 border-bottom">OPPORTUNITIES</h2>
+
+        <div class="row">
+            <div class="col justify-content-center d-grid border-bottom py-3">
+                <h4 class="opportunity">Finding Part-Time Jobs</h4>
+                <br>
+                <h6 class="opportunitydetails">Date: April 5, 2022</h6>
+                <h6 class="opportunitydetails">Time: 2:30pm - 4:30pm EDT</h6>
+                <h6 class="opportunitydetails">Location: Student Success Center 3240</h6>
+                <br>
+                <p>Learn strategies for identifying and securing jobs on campus and in the area during this workshop.</p>
+            </div>
+        </div>
     </div>
+
     <!--Opportunities feature ends-->
 
 </asp:Content>

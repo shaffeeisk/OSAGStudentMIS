@@ -40,7 +40,7 @@ namespace OSAG.login
 
             // Ensure username exists before trying to compare password -_-
             // otherwise throws null reference exception in PasswordHash.cs
-            if(!usernameExists(txtUsername.Text)) // also username is parameterized in helper method
+            if (!usernameExists(txtUsername.Text)) // also username is parameterized in helper method
             {
                 lblStatus.ForeColor = Color.Red;
                 lblStatus.Font.Bold = true;
@@ -85,8 +85,12 @@ namespace OSAG.login
                 Session["UserType"] = "member";
 
             // please dont redirect to an unfinished page, i need to be able to test code
-            //Response.Redirect("/homepages/LoggedInHomePage.aspx");
-            Response.Redirect("/profiles/UserProfile.aspx");
+            if ((String) Session["UserType"] == "student")
+            {
+                Response.Redirect("/homepages/StudentHome.aspx");
+            } else
+                Response.Redirect("/homepages/MemberHome.aspx");
+            //Response.Redirect("/profiles/UserProfile.aspx");
         }
 
 

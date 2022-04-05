@@ -37,106 +37,112 @@
                     <img src="/_images/logo.png" alt="Logo" width="120" height="70">
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li>
-                        <a href="/profiles/UserProfile.aspx" class="nav-link px-2 link-secondary">Profile</a>
-                    </li>
-                    <li>
-                        <a href="/profiles/StartChat.aspx" class="nav-link px-2 link-secondary">Chat</a>
-                    </li>
-
                     <% if (Session["UserType"].ToString() == "student")
                         { %>
                     <li>
-                        <a href="/jobs/Jobs.aspx" class="nav-link px-2 link-secondary">Jobs</a>
-                    </li>
-                    <li>
-                        <a href="/internships/Internships.aspx" class="nav-link px-2 link-secondary">Internships</a>
-                    </li>
-                    <li>
-                        <a href="/opportunities/Opportunities.aspx" class="nav-link px-2 link-secondary">Opportunities</a>
-                    </li>
-                    <li>
-                        <a href="/student/Bookmarks.aspx" class="nav-link px-2 link-secondary">Bookmarks</a>
-                    </li>
-                    <li>
-                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">User List</a>
+                        <a href="/homepages/StudentHome.aspx" class="nav-link px-2 link-secondary">HOME</a>
                     </li>
                     <% } %>
                     <% if (Session["UserType"].ToString() == "member")
                         { %>
                     <li>
-                        <a href="/admin/ApproveRegistration.aspx" class="nav-link px-2 link-secondary">Approve Registrations</a>
+                        <a href="/homepages/MemberHome.aspx" class="nav-link px-2 link-secondary">HOME</a>
                     </li>
-                    <li>
-                        <a href="/admin/AssignMember.aspx" class="nav-link px-2 link-secondary">Assign Members</a>
-                    </li>
-                    <li>
-                        <a href="/member/CreateJob.aspx" class="nav-link px-2 link-secondary">Create Jobs</a>
-                    </li>
-                    <li>
-                        <a href="/member/CreateInternship.aspx" class="nav-link px-2 link-secondary">Create Internships</a>
-                    </li>
-                    <li>
-                        <a href="/member/CreateOpportunity.aspx" class="nav-link px-2 link-secondary">Create Opportunities</a>
-                    </li>
-                    <li>
-                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">User List</a>
-                    </li>
-
                     <% } %>
-                </ul>
 
+                    <li>
+                        <a href="/jobs/Jobs.aspx" class="nav-link px-2 link-secondary">JOBS</a>
+                    </li>
+                    <li>
+                        <a href="/internships/Internships.aspx" class="nav-link px-2 link-secondary">INTERNSHIPS</a>
+                    </li>
+                    <li>
+                        <a href="/opportunities/Opportunities.aspx" class="nav-link px-2 link-secondary">OPPORTUNITIES</a>
+                    </li>
+                    <li>
+                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">USER LIST</a>
+                    </li>
+                    <!--nav bar end-->
+
+
+                </ul>
+                Current User:&nbsp&nbsp
+        <asp:Label ID="lblUsername" runat="server"></asp:Label>&nbsp&nbsp
+                <br />
+                <!--drop down start-->
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user"></i>
                     </a>
 
-                    <asp:DropDownList ID="ddlNavigation" runat="server" OnSelectedIndexChanged="ddlNavigation_SelectedIndexChanged" AutoPostBack="true">
-                        <asp:ListItem Text="(Navigation)"></asp:ListItem>
-                        <asp:ListItem Text="PROFILE"></asp:ListItem>
-                        <asp:ListItem Text="CHAT"></asp:ListItem>
-                        <asp:ListItem Text="BOOKMARKS"></asp:ListItem>
-                        <asp:ListItem Text="USER LIST"></asp:ListItem>
-                        <asp:ListItem Text="SIGN OUT"></asp:ListItem>
-                    </asp:DropDownList>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li>
+                            <a class="dropdown-item" href="/profiles/ViewProfile.aspx">PROFILE</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="/profiles/StartChat.aspx">CHAT</a>
+                        </li>
+
+                        <!--Only students-->
+                        <% if (Session["UserType"].ToString() == "student")
+                            { %>
+                        <li>
+                            <a class="dropdown-item" href="/student/Bookmarks.aspx">BOOKMARKS</a>
+                        </li>
+                        <% } %>
+
+                        <!--Only members-->
+                        <% if (Session["UserType"].ToString() == "member")
+                            { %>
+                        <li>
+                            <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/admin/AssignMember.aspx">ASSIGN MEMBERS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/member/CreateJob.aspx">CREATE JOBS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/member/CreateInternship.aspx">CREATE INTERNSHIPS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/member/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
+                        </li>
+                        <% } %>
+
+                        <!--Only admin-->
+                        <% if (Session["UserType"].ToString() == "admin")
+                            { %>
+                        <li>
+                            <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/admin/AssignMember.aspx">ASSIGN MEMBERS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/member/CreateJob.aspx">CREATE JOBS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/member/CreateInternship.aspx">CREATE INTERNSHIPS</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/member/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
+                        </li>
+                        <% } %>
+
+                         <li>
+                            <a class="dropdown-item" href="/homepages/HomePage.aspx">SIGN OUT</a>
+                        </li>
+                    </ul>
+                    <!--drop down end-->
                 </div>
+
+
             </div>
         </div>
         <!--Navigation ends-->
-
-
-        Current User:
-        <asp:Label ID="lblUsername" runat="server"></asp:Label>
-        <br />
-        <asp:Button ID="btnLogout" runat="server" Text="<-- Logout" OnClick="btnLogout_Click" CausesValidation="false" />
-        <br />
-
-
-
-        <!--Banner starts-->
-        <div class="container col-lg-8 px-2 py-3">
-            <div class="row flex-lg-row-reverse align-items-center g-4 py-5">
-                <div class="col-10 col-sm-8 col-lg-6">
-                    <img src="/_images/homepage.png" class="d-block mx-lg-auto img-fluid" alt="Header" width="2000" height="1500">
-                </div>
-
-                <div class="col-lg-6">
-                    <h1 class="header fw-bold lh-1 pt-3 pb-4">Find Your Future.</h1>
-                    <p class="headertext">
-                        A grass roots, non-profit organization envisioned by three African American James Madison University (JMU) alumni that graduated in the 1980’s.
-              
-              <p class="headertext">The Ole School Alumni Group offers a professional network and recruitment liaison for underrepresented students. </p>
-
-                    <div class="d-grid gap-2 d-lg-flex justify-content-lg-start pt-4">
-                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Internships</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Jobs</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!--Banner ends-->
-
 
 
         <div>
