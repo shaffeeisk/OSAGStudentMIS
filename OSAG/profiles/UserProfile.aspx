@@ -41,7 +41,7 @@
         runat="server" />
     <br />
     <asp:Label ID="Label4" runat="server" Text="Grad Date"></asp:Label>
-    <asp:TextBox ID="txtGradDate" runat="server"></asp:TextBox>
+    <asp:TextBox ID="txtGradDate" TextMode="Date" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator3"
         ControlToValidate="txtGradDate"

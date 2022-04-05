@@ -9,41 +9,60 @@ h1, h2, h3 {
 h4, h5, h6, p {
     font-family: 'Roboto', sans-serif;
 }
+
 .center-block {
-    margin-left:auto;
-    margin-right:auto;
-    display:block;
-    width:220px;
-    margin-top:30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 220px;
+    margin-top: 30px;
 }
+
 #login {
-    color:black;
-    font-size:3px;
+    color: black;
+    font-size: 3px;
 }
+
 .btn-primary {
     font-family: 'Raleway', sans-serif;
-    background-color:#73637F;
-    border:none;
+    background-color: #73637F;
+    border: none;
 }
-.btn-primary:hover {
-    color:white;
-    background-color:#9D87AE;
-}
+
+    .btn-primary:hover, {
+        color: white;
+        background-color: #9D87AE;
+    }
+
+    .btn-primary:visited {
+        color: white;
+        background-color: #9D87AE;
+    }
+
+
 .btn-outline-primary, .btn-outline-secondary {
     font-family: 'Raleway', sans-serif;
-    background-color:white;
-    color:black;
-    
+    background-color: white;
+    color: black;
 }
-.btn-outline-primary:hover, .btn-outline-secondary:hover {
-    color:white;
-    background-color:#9D87AE;
-    
+
+    .btn-outline-primary:hover, .btn-outline-secondary:hover {
+        color: white;
+        background-color: #9D87AE;
+    }
+
+    .btn-outline-primary:active, .btn-outline-secondary:active {
+        color: white;
+        background-color: #9D87AE;
+    }
+
+#errorlabel {
+    font-family: 'Roboto', sans-serif;
 }
+
 .form-control {
     font-family: 'Roboto', sans-serif;
-    color:#B2B2B2;
-
+    color: #B2B2B2;
 }
 
 .nav-link {
@@ -51,22 +70,46 @@ h4, h5, h6, p {
 }
 
 a.nav-link {
-    color:black;
+    color: black;
 }
 
-.fa-envelope {
-    font-size:30px;
-    color:black;
-}
-.fa-phone {
-    font-size:30px;
-    color:black;
+.fa-user {
+    font-size: 20px;
 }
 
-#footer {
-    background-color:#E4E0E7;    
-    color:black;
+.dropdown-item {
     font-family: 'Raleway', sans-serif;
-    font-size:15px;
-    
+}
+
+.headertext {
+    font-size: 18px;
+}
+
+.internships, .jobs {
+    font-family: 'Raleway', sans-serif;
+    font-size: 25px;
+}
+
+.type {
+    font-size: 12px;
+}
+
+.opportunitydetails {
+    font-size: 15px;
+    line-height: 0.3cm;
+}
+
+
+.fa-facebook-f {
+    font-size: 25px;
+    color: #73637F;
+    padding-right: 10px;
+}
+
+
+#sticky-footer {
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    line-height: 0.2cm;
 }

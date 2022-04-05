@@ -54,11 +54,11 @@ namespace OSAG.profiles
                         txtPhone.Text = reader["Phone"].ToString();
                         txtBio.Text = reader["Bio"].ToString();
                         approval = reader["IsApproved"].ToString();
-                        if(isApproved())
+                        if (isApproved())
                         {
                             lblApprove.Text = "User Profile Approved";
                         }
-                        else 
+                        else
                         {
                             lblApprove.Text = "User Profile Not Yet Approved";
                         }
@@ -139,7 +139,7 @@ namespace OSAG.profiles
                 sqlCommand.Parameters.AddWithValue("@Major", validate(txtMajor.Text));
                 sqlCommand.Parameters.AddWithValue("@Phone", validate(txtPhone.Text));
                 sqlCommand.Parameters.AddWithValue("@Class", validate(txtClass.Text));
-                sqlCommand.Parameters.AddWithValue("@Gpa", validate(txtGpa.Text));
+                sqlCommand.Parameters.AddWithValue("@Gpa", validateGpa(txtGpa.Text));
                 sqlCommand.Parameters.AddWithValue("@Bio", validate(txtBio.Text));
                 sqlCommand.Parameters.AddWithValue("@GradDate", validate(txtGradDate.Text));
                 sqlConnect.Open();
@@ -171,7 +171,7 @@ namespace OSAG.profiles
                 sqlCommand.Parameters.AddWithValue("@PositionTitle", validate(txtPosition.Text));
                 sqlCommand.Parameters.AddWithValue("@Bio", validate(txtMemberBio.Text));
                 sqlCommand.Parameters.AddWithValue("@GradDate", validate(txtMemberGrad.Text));
-                
+
                 sqlConnect.Open();
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
@@ -229,10 +229,20 @@ namespace OSAG.profiles
             return s;
         }
 
-        // helper method to return non-numeric stripped string from input
-        private string validatePhone(string s)
+        // helper method for GPA input, since DB is configured with 4 byte floats. C# uses 4 byte float, so float.parse is (probably) optimal. 
+        // if user does not enter float-parseable data FormatException will be thrown, returning a null value similar to above.
+        private object validateGpa(string s)
         {
-            return new string(s.Where(c => char.IsDigit(c)).ToArray());
+            try
+            {
+                return float.Parse(s);
+            }
+            catch(FormatException formatException)
+            {
+                return (object)DBNull.Value;
+                throw formatException;
+            }
         }
+        
     }
 }

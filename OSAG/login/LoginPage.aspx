@@ -57,7 +57,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row; align-content-center">
                             <div class="col justify-content-center pt-3 d-grid mx-auto">
                                 <asp:TextBox ID="txtPassword" class="form-control pb-1" placeholder="Password" aria-label="Password" runat="server"></asp:TextBox>
                                 <asp:RequiredFieldValidator
@@ -65,14 +65,17 @@
                                     ControlToValidate="txtPassword"
                                     Text="(Required)"
                                     runat="server" />
-                                <br />
                             </div>
 
-                            <asp:Label ID="lblStatus" runat="server"></asp:Label>
+                            <div id="errorlabel" class="row">
+                                <div class="col justify-content-center pb-2 d-grid mx-auto">
+                                    <asp:Label ID="lblStatus" CssClass="justify-content-between" runat="server"></asp:Label>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
-                                    <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Login" />
+                                    <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="LOG IN" />
                                 </div>
                             </div>
 
@@ -82,8 +85,9 @@
                                     <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" runat="server" Text="SIGN UP" CausesValidation="false" OnClick="btnCreate_Click" />
                                 </div>
                             </div>
-        </div>
-        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
