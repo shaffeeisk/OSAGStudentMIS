@@ -22,7 +22,7 @@ namespace OSAG.jobs
             }
 
             // check each bookmark button and change text based on whether a bookmark exists
-            if (!IsPostBack) // only when first loading page
+            if (!IsPostBack && Session["UserType"].ToString() == "student") // only when first loading page
             {
                 // define database connection
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);

@@ -24,16 +24,16 @@ namespace OSAG.internships
             }
 
             // check each bookmark button and change text based on whether a bookmark exists
-            if (!IsPostBack) // only when first loading page
+            if (!IsPostBack && Session["UserType"].ToString() == "student") // only when first loading page
             {
-                // define database connection
-                SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-                // Retrieve StudentID of user
-                String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
-                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-                sqlConnection.Open();
-                int stuID = (int)sqlCommand.ExecuteScalar();
-                sqlConnection.Close();
+                    // define database connection
+                    SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                    // Retrieve StudentID of user
+                    String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
+                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+                    sqlConnection.Open();
+                    int stuID = (int)sqlCommand.ExecuteScalar();
+                    sqlConnection.Close();
 
                 // for each grid row
                 for (int i = 0; i < grdvwInternships.Rows.Count; i++)
