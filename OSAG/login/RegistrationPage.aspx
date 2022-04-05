@@ -71,7 +71,7 @@
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4">
-                                <p>Already have an account? Login <a href="/login/LoginPage.aspx" class="nav-link px-2 link-secondary">here</a>  </p>
+                                <p>Already have an account? Log in<a href="/login/LoginPage.aspx" class="px-2 link-secondary">here</a></p>
                             </div>
                         </div>
                     </div>
