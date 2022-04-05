@@ -133,7 +133,7 @@
                         <% } %>
 
                          <li>
-                            <a class="dropdown-item" href="/homepages/HomePage.aspx">SIGN OUT</a>
+                            <a class="dropdown-item" href="/login/LoginPage.aspx">SIGN OUT</a>
                         </li>
                     </ul>
                     <!--drop down end-->
