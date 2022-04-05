@@ -75,7 +75,7 @@
 
                             <div class="row">
                                 <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
-                                    <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="LOG IN" />
+                                    <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="LOGIN" />
                                 </div>
                             </div>
 
