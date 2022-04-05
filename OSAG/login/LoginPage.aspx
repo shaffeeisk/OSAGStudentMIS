@@ -73,15 +73,16 @@
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
-                                <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Login" BackColor="Indigo" BorderColor="Indigo"/>
+                                <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="Login" />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-2 pb-5">
                                 <p>Don't have an account already?</p>
-                                <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" runat="server" Text="SIGN UP" CausesValidation="false" OnClick="btnCreate_Click" 
-                                    BackColor="Indigo" BorderColor="Indigo"/>
+                                <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" 
+                                    runat="server" Text="SIGN UP" CausesValidation="false"
+                                    OnClick="btnCreate_Click" />
                             </div>
                         </div>
                     </div>

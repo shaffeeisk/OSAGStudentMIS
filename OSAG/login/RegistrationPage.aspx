@@ -41,12 +41,11 @@
                                 <br />
                                 <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control pb-1" placeholder="Last Name"></asp:TextBox>
                                 <br />
-                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control pb-1" placeholder="Email"></asp:TextBox>
-                                <br />
                                 <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control pb-1" placeholder="Username"></asp:TextBox>
                                 <br />
                                 <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control pb-1" placeholder="Password"></asp:TextBox>
-                                
+                                <br />
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control pb-1" placeholder="Email"></asp:TextBox>
                             </div>
                         </div>
 
@@ -60,7 +59,7 @@
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4 pb-1 mx-auto">
-                                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="SIGN UP" CssClass="btn btn-primary" BackColor="Indigo" BorderColor="Indigo"/>
+                                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="SIGN UP" CssClass="btn btn-primary" />
                             </div>
                         </div>
 
@@ -72,7 +71,7 @@
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4">
-                                <p>Already have an account? Login <a href="/login/LoginPage.aspx" style="color:indigo">here</a>  </p>
+                                <p>Already have an account? Login <a href="/login/LoginPage.aspx" class="nav-link px-2 link-secondary">here</a>  </p>
                             </div>
                         </div>
                     </div>
