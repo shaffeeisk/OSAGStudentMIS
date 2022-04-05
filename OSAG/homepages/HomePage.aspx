@@ -4,6 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br />
+        <h1>THIS PAGE IS NO LONGER IN USE RUN AWAY PLEASE</h1>
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <asp:Label ID="lblTitle" runat="server" Text="Wecome to DukeGroup!" Font-Size="X-Large" BorderStyle="None"></asp:Label>
         <br />

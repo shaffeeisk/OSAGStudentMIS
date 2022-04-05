@@ -13,5 +13,15 @@ namespace OSAG.homepages
         {
 
         }
+
+        protected void btnInternships_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/internships/Internships.aspx");
+        }
+
+        protected void btnJobs_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/jobs/Jobs.aspx");
+        }
     }
 }

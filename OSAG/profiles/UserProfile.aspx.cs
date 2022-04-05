@@ -44,7 +44,10 @@ namespace OSAG.profiles
                         txtFirstName.Text = reader["FirstName"].ToString();
                         txtLastName.Text = reader["LastName"].ToString();
                         txtEmail.Text = reader["Email"].ToString();
-                        txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                        if (reader["GradDate"] == DBNull.Value)
+                            txtGradDate.Text = "";
+                        else
+                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
                         txtMajor.Text = reader["Major"].ToString();
                         txtClass.Text = reader["Class"].ToString();
                         txtGpa.Text = reader["Gpa"].ToString();
