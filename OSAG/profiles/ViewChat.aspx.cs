@@ -30,6 +30,9 @@ namespace OSAG.profiles
                  Session["UserChatType"].ToString() + "ReceiverID = " + Session["UserChatID"] + ") OR (" +
                  Session["UserType"].ToString() + "ReceiverID = '" + getID() + "' AND " +
                  Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "')";
+            // convert all timestamps to local time each refresh
+            foreach(GridViewRow r in grdvChat.Rows)
+                r.Cells[0].Text = DateTime.Parse(r.Cells[0].Text).ToLocalTime().ToString();
         }
 
         protected void btn_Send_Click(object sender, EventArgs e)
