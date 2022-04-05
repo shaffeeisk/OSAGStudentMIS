@@ -121,33 +121,57 @@ namespace OSAG.profiles
 
             if (Session["UserType"].ToString() == "student")
             {
-                sqlQuery = "UPDATE [Student] SET [FirstName] = '" + txtFirstName.Text + "', [LastName] = '" + txtLastName.Text + "'," +
-                "[Email] = '" + txtEmail.Text + "'," +
-                "[Major] = '" + txtMajor.Text + "'," +
-                "[Phone] = '" + txtPhone.Text + "'," +
-                "[Class] = '" + txtClass.Text + "'," +
-                "[Gpa] = '" + txtGpa.Text + "'," +
-                "[Bio] = '" + txtBio.Text + "'," +
-                "[GradDate] = '" + txtGradDate.Text + "' " +
-                " WHERE[Username] = '" + Session["Username"].ToString() + "'";
+                sqlQuery = "UPDATE Student SET " +
+                    "FirstName = @FirstName, " +
+                    "LastName = @LastName, " +
+                    "Email = @Email, " +
+                    "Major = @Major, " +
+                    "Phone = @Phone, " +
+                    "Class = @Class, " +
+                    "Gpa = @Gpa, " +
+                    "Bio = @Bio, " +
+                    "GradDate = @GradDate " +
+                    "WHERE Username = '" + Session["Username"].ToString() + "';";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                sqlCommand.Parameters.AddWithValue("@FirstName", validate(txtFirstName.Text));
+                sqlCommand.Parameters.AddWithValue("@LastName", validate(txtLastName.Text));
+                sqlCommand.Parameters.AddWithValue("@Email", validate(txtEmail.Text));
+                sqlCommand.Parameters.AddWithValue("@Major", validate(txtMajor.Text));
+                sqlCommand.Parameters.AddWithValue("@Phone", validate(txtPhone.Text));
+                sqlCommand.Parameters.AddWithValue("@Class", validate(txtClass.Text));
+                sqlCommand.Parameters.AddWithValue("@Gpa", validate(txtGpa.Text));
+                sqlCommand.Parameters.AddWithValue("@Bio", validate(txtBio.Text));
+                sqlCommand.Parameters.AddWithValue("@GradDate", validate(txtGradDate.Text));
                 sqlConnect.Open();
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
             else if (Session["UserType"].ToString() == "member")
             {
-                sqlQuery = "UPDATE [Member] SET [FirstName] = '" + mtxtFirstName.Text + "', [LastName] = '" + mtxtLastName.Text + "'," +
-                "[Email] = '" + txtMemberEmail.Text + "'," +
-                "[M_State] = '" + txtState.Text + "'," +
-                "[PositionTitle] = '" + txtPosition.Text + "'," +
-                "[Phone] = '" + txtMemberPhone.Text + "'," +
-                "[Bio] = '" + txtMemberBio.Text + "'," +
-                "[GradDate] = '" + txtMemberGrad.Text + "'," +
-                "[Major] = '" + txtMemberMajor.Text + "'," +
-                "[City] = '" + txtCity.Text + "' " +
-                " WHERE[Username] = '" + Session["Username"].ToString() + "'";
+                sqlQuery = "UPDATE Member SET " +
+                    "FirstName = @FirstName, " +
+                    "LastName = @LastName, " +
+                    "Email = @Email, " +
+                    "Major = @Major, " +
+                    "Phone = @Phone, " +
+                    "City = @City, " +
+                    "M_State = @M_State, " +
+                    "PositionTitle = @PositionTitle, " +
+                    "Bio = @Bio, " +
+                    "GradDate = @GradDate " +
+                    "WHERE Username = '" + Session["Username"].ToString() + "';";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                sqlCommand.Parameters.AddWithValue("@FirstName", validate(mtxtFirstName.Text));
+                sqlCommand.Parameters.AddWithValue("@LastName", validate(mtxtLastName.Text));
+                sqlCommand.Parameters.AddWithValue("@Email", validate(txtMemberEmail.Text));
+                sqlCommand.Parameters.AddWithValue("@Major", validate(txtMajor.Text));
+                sqlCommand.Parameters.AddWithValue("@Phone", validate(txtPhone.Text));
+                sqlCommand.Parameters.AddWithValue("@City", validate(txtCity.Text));
+                sqlCommand.Parameters.AddWithValue("@M_State", validate(txtState.Text));
+                sqlCommand.Parameters.AddWithValue("@PositionTitle", validate(txtPosition.Text));
+                sqlCommand.Parameters.AddWithValue("@Bio", validate(txtMemberBio.Text));
+                sqlCommand.Parameters.AddWithValue("@GradDate", validate(txtMemberGrad.Text));
+                
                 sqlConnect.Open();
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
@@ -193,5 +217,22 @@ namespace OSAG.profiles
             return true;
         }
 
+        // helper method to validate data. trims input string of leading/trailing white space.
+        // then returns null if user input is empty. otherwise, returns the trimmed string.
+        // allows data integrity to allow querying null input (also saves disk space :D)
+        // (e.g. display students who don't have graduation dates so member can help them figure out when they should graduate)
+        private object validate(String s)
+        {
+            s = s.Trim();
+            if (s == "")
+                return (object)DBNull.Value;
+            return s;
+        }
+
+        // helper method to return non-numeric stripped string from input
+        private string validatePhone(string s)
+        {
+            return new string(s.Where(c => char.IsDigit(c)).ToArray());
+        }
     }
 }
