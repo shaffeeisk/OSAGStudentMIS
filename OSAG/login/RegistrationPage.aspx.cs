@@ -41,15 +41,14 @@ namespace OSAG.login
             }
 
             // run query (ONLY STUDENTS NOW)
-            String sqlQuery = "INSERT INTO Student (Username, Pass, FirstName, LastName, IsApproved, Email) " +
-                "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE', @Email);";
+            String sqlQuery = "INSERT INTO Student (Username, Pass, FirstName, LastName, IsApproved) " +
+                "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE');";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
             sqlCommand.Parameters.AddWithValue("@Pass", PasswordHash.HashPassword(txtPassword.Text));
             sqlCommand.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
             sqlCommand.Parameters.AddWithValue("@LastName", txtLastName.Text);
-            sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -84,18 +83,18 @@ namespace OSAG.login
             Response.Redirect("/login/LoginPage.aspx");
         }
 
-        // event handler for clear button
-        protected void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearData();
-            Response.Redirect("/login/RegistrationPage.aspx");
-        }
+        //// event handler for clear button
+        //protected void btnClear_Click(object sender, EventArgs e)
+        //{
+        //    ClearData();
+        //    Response.Redirect("/login/RegistrationPage.aspx");
+        //}
 
-        // event handler for return home button
-        protected void btnReturn_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("/homepages/HomePage.aspx");
-        }
+        //// event handler for return home button
+        //protected void btnReturn_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("/homepages/HomePage.aspx");
+        //}
 
         // helper method to clear text boxes
         protected void ClearData()
@@ -104,7 +103,6 @@ namespace OSAG.login
             txtLastName.Text = "";
             txtUsername.Text = "";
             txtPassword.Text = "";
-            txtEmail.Text = "";
         }
 
         protected void btnDemo_Click(object sender, EventArgs e)
@@ -113,7 +111,6 @@ namespace OSAG.login
             txtLastName.Text = "Ross";
             txtUsername.Text = "theresarossdemoaccount";
             txtPassword.Text = "webdemo12345";
-            txtEmail.Text = "theresarossdemo@fakemail.com";
         }
     }
 }

@@ -1,50 +1,90 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistrationPage.aspx.cs" Inherits="OSAG.login.RegistrationPage" %>
 
 <!DOCTYPE html>
+<html lang="en">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Registration Page">
+    <meta name="author" content="Courtney Miyashiro">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account</title>
+
+    <!-- Bootstrap v5.0.0-beta3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <link href="css/custom.css" rel="stylesheet" type="text/css" media="screen">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
-<body>
+
+<body style="background-color: #E4E0E7;">
     <form id="form1" runat="server">
-        <div style="margin-left: auto; margin-right: auto; text-align: center;">
-            <asp:LinkButton ID="lnkLogin" runat="server" OnClick="lnkLogin_Click" >Login</asp:LinkButton>
-            <br />
-            <br />
-            <asp:Button ID="btnDemo" runat="server" Text="DEMO BUTTON" OnClick="btnDemo_Click" Font-Bold="true" />
-            <br />
-            <br />
-            <strong>Create Account</strong><br />
-            First Name:&nbsp;
-            <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Last Name:
-            <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Username:
-            <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Password:
-            <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Email:
-            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
-            <br />
-            <asp:Label ID="lblStatus" runat="server"></asp:Label>
-            <br />
-            <br />
-            <asp:Button ID="btnClear" runat="server" Text="Clear Text Fields" OnClick="btnClear_Click" />
-            <br />
-            <br />
-            <asp:Button ID="btnReturn" runat="server" Text="Return to Home Page" OnClick="btnReturn_Click"/>
+        <div class="modal modal-tour position-static d-block bg-purple py-4" tabindex="-1" role="dialog" id="modalTour">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content rounded-5 shadow">
+                    <div class="modal-body">
+
+                        <div id="login" class="row">
+                            <div class="col justify-content-center pt-3 d-grid">
+                                <h3><strong>CREATE AN ACCOUNT</strong></h3>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col justify-content-center pt-3 d-grid mx-auto">
+                                 <asp:Button ID="btnDemo" runat="server" Text="DEMO BUTTON" OnClick="btnDemo_Click" Font-Bold="true" CssClass="btn btn-primary" />
+
+                                <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control pb-1" placeholder="First Name" ></asp:TextBox>
+                                <br>
+                                <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control pb-1" placeholder="Last Name"></asp:TextBox>
+                                <br>
+                                <asp:TextBox ID="txtUsername" runat="server"  CssClass="form-control pb-1" placeholder="Username"></asp:TextBox>
+                                <br>
+                                <asp:TextBox ID="txtPassword" runat="server"  CssClass="form-control pb-1" placeholder="Password"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="passwordHelpBlock" class="form-text col justify-content-center pt-2 d-grid mx-auto">
+                                Must be 8-20 characters long
+                                <br>
+                                Contain letters and numbers
+                                <br>
+                                Contain a special character
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center pt-4 pb-2">
+                            
+                            <button type="button" class="btn btn-outline-secondary btn-sm px-4">STUDENT</button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm px-4">MENTOR</button>
+                        </div>
+
+                        <div class="row">
+                            <div class="col justify-content-center d-grid pt-4 pb-1 mx-auto">
+                                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="SIGN UP" CssClass="btn btn-primary" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col justify-content-center d-grid pt-4 pb-1 mx-auto">
+                                <asp:Label ID="lblStatus" runat="server"></asp:Label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col justify-content-center d-grid pt-4">
+                                <p>Already have an account? Login <a href="/login/LoginPage.aspx" class="nav-link px-2 link-secondary">here</a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </body>
