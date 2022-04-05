@@ -90,7 +90,6 @@ namespace OSAG.login
                 Response.Redirect("/homepages/StudentHome.aspx");
             } else
                 Response.Redirect("/homepages/MemberHome.aspx");
-            //Response.Redirect("/profiles/UserProfile.aspx");
         }
 
 
