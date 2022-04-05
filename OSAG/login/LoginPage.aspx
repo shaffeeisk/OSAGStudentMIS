@@ -80,9 +80,7 @@
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-2 pb-5">
                                 <p>Don't have an account already?</p>
-                                <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" 
-                                    runat="server" Text="SIGN UP" CausesValidation="false"
-                                    OnClick="btnCreate_Click" />
+                                <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" runat="server" Text="SIGN UP" CausesValidation="false" OnClick="btnCreate_Click" />
                             </div>
                         </div>
                     </div>
