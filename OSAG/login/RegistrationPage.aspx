@@ -3,16 +3,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="UTF-8"/>
-    <meta name="description" content="Registration Page"/>
-    <meta name="author" content="Courtney Miyashiro"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Registration Page" />
+    <meta name="author" content="Courtney Miyashiro" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create an Account</title>
 
     <!-- Bootstrap v5.0.0-beta3 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <link href="css/custom.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="css/custom.css" rel="stylesheet" type="text/css" media="screen" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,32 +35,28 @@
 
                         <div class="row">
                             <div class="col justify-content-center pt-3 d-grid mx-auto">
-                                 <asp:Button ID="btnDemo" runat="server" Text="DEMO BUTTON" OnClick="btnDemo_Click" Font-Bold="true" CssClass="btn btn-primary" />
+                                <asp:Button ID="btnDemo" runat="server" Text="DEMO BUTTON" OnClick="btnDemo_Click" Font-Bold="true" CssClass="btn btn-primary" />
 
-                                <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control pb-1" placeholder="First Name" ></asp:TextBox>
-                                <br/>
+                                <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control pb-1" placeholder="First Name"></asp:TextBox>
+                                <br />
                                 <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control pb-1" placeholder="Last Name"></asp:TextBox>
-                                <br/>
-                                <asp:TextBox ID="txtUsername" runat="server"  CssClass="form-control pb-1" placeholder="Username"></asp:TextBox>
-                                <br/>
-                                <asp:TextBox ID="txtPassword" runat="server"  CssClass="form-control pb-1" placeholder="Password"></asp:TextBox>
+                                <br />
+                                <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control pb-1" placeholder="Username"></asp:TextBox>
+                                <br />
+                                <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control pb-1" placeholder="Password"></asp:TextBox>
+                                <br />
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control pb-1" placeholder="Email"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="row">
                             <div id="passwordHelpBlock" class="form-text col justify-content-center pt-2 d-grid mx-auto">
                                 Must be 8-20 characters long
-                                <br/>
+                                <br />
                                 Contain letters and numbers
-                                <br/>
+                                <br />
                                 Contain a special character
                             </div>
-                        </div>
-
-                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center pt-4 pb-2">
-                            
-                            <button type="button" class="btn btn-outline-secondary btn-sm px-4">STUDENT</button>
-                            <button type="button" class="btn btn-outline-secondary btn-sm px-4">MENTOR</button>
                         </div>
 
                         <div class="row">
@@ -77,7 +73,7 @@
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4">
-                                <p>Already have an account? Login <a href="/login/LoginPage.aspx" class="nav-link px-2 link-secondary">here</a> </p>
+                                <p>Already have an account? Login <a href="/login/LoginPage.aspx" class="nav-link px-2 link-secondary">here</a>  </p>
                             </div>
                         </div>
                     </div>
