@@ -78,11 +78,11 @@ namespace OSAG.login
             return false;
         }
 
-        //// event handler for Login link button
-        //protected void lnkLogin_Click(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("/login/LoginPage.aspx");
-        //}
+        // event handler for Login button
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/login/LoginPage.aspx");
+        }
 
         //// event handler for clear button
         //protected void btnClear_Click(object sender, EventArgs e)

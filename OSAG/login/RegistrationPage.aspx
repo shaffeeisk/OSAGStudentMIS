@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col justify-content-center pt-3 d-grid mx-auto">
                                 <asp:Button ID="btnDemo" runat="server" Text="DEMO BUTTON" OnClick="btnDemo_Click" Font-Bold="true" CssClass="btn btn-primary" />
-
+                                <br />
                                 <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control pb-1" placeholder="First Name"></asp:TextBox>
                                 <br />
                                 <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control pb-1" placeholder="Last Name"></asp:TextBox>
@@ -51,11 +51,11 @@
 
                         <div class="row">
                             <div id="passwordHelpBlock" class="form-text col justify-content-center pt-2 d-grid mx-auto">
-                                Must be 8-20 characters long
+                                Password should be 8-20 characters
                                 <br />
-                                Contain letters and numbers
+                                contain letters, numbers and at
                                 <br />
-                                Contain a special character
+                                least one special character
                             </div>
                         </div>
 
@@ -73,7 +73,10 @@
 
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4">
-                                <p>Already have an account? Login <a href="/login/LoginPage.aspx" class="nav-link px-2 link-secondary">here</a>  </p>
+                                <p>Already have an account? </p>
+                                <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" 
+                                    runat="server" Text="LOG IN" CausesValidation="false"
+                                    OnClick="btnLogin_Click" />
                             </div>
                         </div>
                     </div>
