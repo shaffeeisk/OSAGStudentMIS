@@ -8,7 +8,7 @@
         DataSourceID="sqlsrc"
         AllowSorting="true"
         AutoGenerateSelectButton="false"
-        AutoGenerateColumns="false" >
+        AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField HeaderText="DateCreated" DataField="DateCreated" SortExpression="DateCreated" />
             <asp:BoundField HeaderText="Sent By" DataField="SenderName" SortExpression="SenderName" />
