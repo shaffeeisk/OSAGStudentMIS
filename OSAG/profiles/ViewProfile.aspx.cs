@@ -41,21 +41,44 @@ namespace OSAG.profiles
                 if (Session["ViewProfileUserType"].ToString() == "student")
                 {
                     // query for student data
-                    sqlQuery = "SELECT FirstName,LastName,Email,GradDate, Major FROM Student WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
+                    sqlQuery = "SELECT s.FirstName, s.LastName, s.Email, s.GradDate, m.MajorName, IsMinor FROM Student s LEFT JOIN HasMajor h ON s.StudentID = h.StudentID " +
+                        "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
+                        " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
+                    String IsMinor = "";
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-                    while (reader.Read())
+                    if (!reader.HasRows)
+                    { }
+                    else
                     {
-                        txtFirstName.Text = reader["FirstName"].ToString();
-                        txtLastName.Text = reader["LastName"].ToString();
-                        txtEmail.Text = reader["Email"].ToString();
-                        if (reader["GradDate"] != DBNull.Value)
-                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
-                        txtMajor.Text = reader["Major"].ToString();
+                        int i = 0;
+                        while (reader.Read())
+                        {
+                            if (i == 0)
+                            {
+                                txtFirstName.Text = reader["FirstName"].ToString();
+                                txtLastName.Text = reader["LastName"].ToString();
+                                txtEmail.Text = reader["Email"].ToString();
+                                IsMinor = reader["IsMinor"].ToString();
+                                if (reader["GradDate"] != DBNull.Value)
+                                    txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                            }
+                            if (bitToBoolean(reader["IsMinor"]))
+                            {
+                                txtMinor.Text += reader["MajorName"].ToString() + ", ";
+                            }
+                            else
+                            {
+                                txtMajor.Text += reader["MajorName"].ToString() + ", ";
+                            }
+                            i++;
+                        }
                     }
+                    txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
+                    txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
 
                     // and populate embed with resume (only if student)
@@ -74,20 +97,37 @@ namespace OSAG.profiles
                 // otherwise querying member
                 else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State FROM Member WHERE Username =  '" + Session["ViewProfileUsername"].ToString() + "'; ";
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State, s.MajorName FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
+                        "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
+                        " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
-
+                    
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
+                    int i = 0;
                     while (reader.Read())
                     {
-                        mtxtFirstName.Text = reader["FirstName"].ToString();
-                        mtxtLastName.Text = reader["LastName"].ToString();
-                        txtMemberEmail.Text = reader["Email"].ToString();
-                        txtCity.Text = reader["City"].ToString();
-                        txtState.Text = reader["M_State"].ToString();
+                        if (i == 0)
+                        {
+                            mtxtFirstName.Text = reader["FirstName"].ToString();
+                            mtxtLastName.Text = reader["LastName"].ToString();
+                            txtMemberEmail.Text = reader["Email"].ToString();
+                            txtCity.Text = reader["City"].ToString();
+                            txtState.Text = reader["M_State"].ToString();
+                        }
+                        if (bitToBoolean(reader["IsMinor"]))
+                        {
+                            txtMemberMinors.Text += reader["MajorName"].ToString() + ", ";
+                        }
+                        else
+                        {
+                            txtMemberMajors.Text += reader["MajorName"].ToString() + ", ";
+                        }
+                        i++;
                     }
+                    txtMemberMajors.Text = txtMemberMajors.Text.Trim().TrimEnd(',');
+                    txtMemberMinors.Text = txtMemberMinors.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
                 }
             }
@@ -96,6 +136,13 @@ namespace OSAG.profiles
         protected void btnReturn_Click(object sender, EventArgs e)
         {
             Response.Redirect("ListUsers.aspx");
+        }
+
+        private bool bitToBoolean(object o)
+        {
+            if (o == DBNull.Value)
+                return false;
+            return (bool)o;
         }
     }
 }

@@ -21,8 +21,11 @@
         <asp:Label ID="Label4" runat="server" Text="GradDate"></asp:Label>
         <asp:TextBox ID="txtGradDate" runat="server" Enabled="false"></asp:TextBox>
         <br />
-        <asp:Label ID="Label6" runat="server" Text="Major"></asp:Label>
+        <asp:Label ID="Label6" runat="server" Text="Majors"></asp:Label>
         <asp:TextBox ID="txtMajor" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label5" runat="server" Text="Minors"></asp:Label>
+        <asp:TextBox ID="txtMinor" runat="server" Enabled="false"></asp:TextBox>
         <br />
         <br />
         <asp:Literal ID="ltEmbed" runat="server" />
@@ -44,6 +47,12 @@
         <br />
         <asp:Label ID="lblCity" runat="server" Text="MemberCity"></asp:Label>
         <asp:TextBox ID="txtCity" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label7" runat="server" Text="Majors"></asp:Label>
+        <asp:TextBox ID="txtMemberMajors" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label8" runat="server" Text="Minors"></asp:Label>
+        <asp:TextBox ID="txtMemberMinors" runat="server" Enabled="false"></asp:TextBox>
 
         <% } %>
         <br />

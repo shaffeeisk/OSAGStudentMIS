@@ -32,7 +32,10 @@ namespace OSAG.profiles
 
                 if (Session["UserType"].ToString() == "student")
                 {
-                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Major, Class, Gpa, Phone, Bio, IsApproved FROM Student WHERE Username = '" + Session["Username"].ToString() + "';";
+                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Major, Class, Gpa, Phone, Bio, IsApproved, MajorName FROM Student s" +
+                        "LEFT JOIN HasMajor h on h.StudentID = s.StudentID " +
+                        "LEFT JOIN Major m on m.MajorID = h.MajorID" +
+                        " WHERE Username = '" + Session["Username"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
@@ -62,7 +65,17 @@ namespace OSAG.profiles
                         {
                             lblApprove.Text = "User Profile Not Yet Approved";
                         }
+                        if (bitToBoolean(reader["IsMinor"]))
+                        {
+                            txtMajor.Text += reader["MajorName"].ToString() + ", ";
+                        }
+                        else
+                        {
+                            txtMinor.Text += reader["MajorName"].ToString() + ", ";
+                        }
                     }
+                    txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
+                    txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
 
                     // populate resume embed
@@ -79,7 +92,10 @@ namespace OSAG.profiles
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State,GradDate,Major,PositionTitle,Phone,Bio,IsApproved FROM Member WHERE Username =  '" + Session["Username"].ToString() + "'; ";
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State,GradDate,PositionTitle,Phone,Bio,IsApproved, MajorName FROM Member m" +
+                        "LEFT JOIN HasMajor h on h.MemberID = m.MemberID " +
+                        "LEFT JOIN Major z on z.MajorID = h.MajorID" +
+                        " WHERE Username =  '" + Session["Username"].ToString() + "'; ";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
                     String approval = "";
@@ -106,7 +122,17 @@ namespace OSAG.profiles
                         {
                             lblApprove.Text = "User Profile Not Yet Approved";
                         }
+                        if (bitToBoolean(reader["IsMinor"]))
+                        {
+                            txtMemberMajor.Text += reader["MajorName"].ToString() + ", ";
+                        }
+                        else
+                        {
+                            txtMemberMinor.Text += reader["MajorName"].ToString() + ", ";
+                        }
                     }
+                    txtMemberMajor.Text = txtMemberMajor.Text.Trim().TrimEnd(',');
+                    txtMemberMinor.Text = txtMemberMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
                 }
             }
@@ -243,6 +269,12 @@ namespace OSAG.profiles
                 throw formatException;
             }
         }
-        
+        private bool bitToBoolean(object o)
+        {
+            if (o == DBNull.Value)
+                return false;
+            return (bool)o;
+        }
+
     }
 }

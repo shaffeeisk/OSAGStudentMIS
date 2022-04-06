@@ -55,13 +55,21 @@
         Type="Date"
         runat="server" />
     <br />
-    <asp:Label ID="Label6" runat="server" Text="Major"></asp:Label>
+    <asp:Label ID="Label6" runat="server" Text="Majors"></asp:Label>
     <asp:TextBox ID="txtMajor" runat="server" ></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator10"
         ControlToValidate="txtMajor"
         Text="(Required)"
-        runat="server" />
+        runat="server" Enabled="false" />
+    <br />
+    <asp:Label ID="Label16" runat="server" Text="Minors"></asp:Label>
+    <asp:TextBox ID="txtMinor" runat="server" ></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator19"
+        ControlToValidate="txtMinor"
+        Text="(Required)"
+        runat="server" Enabled="false" />
     <br />
     <asp:Label ID="Label8" runat="server" Text="Phone #"></asp:Label>
     <asp:TextBox ID="txtPhone" onkeypress="return isNumberKey(event)" runat="server" ></asp:TextBox>
@@ -164,13 +172,21 @@ Rows="10" Height="100" Width="200" ></asp:TextBox>
         Type="Date"
         runat="server" />
     <br />
-    <asp:Label ID="Label12" runat="server" Text="Major"></asp:Label>
+    <asp:Label ID="Label12" runat="server" Text="Majors"></asp:Label>
     <asp:TextBox ID="txtMemberMajor" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator
         ID="RequiredFieldValidator15"
         ControlToValidate="txtMemberMajor"
         Text="(Required)"
-        runat="server" />
+        runat="server" Enabled="false" />
+    <br />
+    <asp:Label ID="Label17" runat="server" Text="Minors"></asp:Label>
+    <asp:TextBox ID="txtMemberMinor" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator
+        ID="RequiredFieldValidator20"
+        ControlToValidate="txtMemberMinor"
+        Text="(Required)"
+        runat="server" Enabled="false" />
     <br />
     <asp:Label ID="Label13" runat="server" Text="Position Title"></asp:Label>
     <asp:TextBox ID="txtPosition" runat="server"></asp:TextBox>
