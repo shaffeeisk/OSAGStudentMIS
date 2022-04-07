@@ -14,17 +14,22 @@ Above message is for the project collaborators only. Below is for users.
 Usage:
 -------------------------------------------------------------------------
 Start page:
-    [WebForm].aspx
+    /login/LoginPage.aspx
 Credentials:
-  [Name] Account:
-    Username: [Username]
-    Password: [Password
-  [Name2] Account:
-    Username: [Username]
-    Password: [Password]
-Etc.
+  Admin Member Account:
+    Username: admin
+    Password: password
+  Mentor Member Account:
+    Username: patel3f
+    Password: 38349vj
+  Student Account:
+    Username: bsterling
+    Password: potatoes68!
 
 
-SQL Statements for dbo.[DatabaseName]
+SQL Statements for dbo.OSAG
 -------------------------------------------------------------------------
-TEMPLATE HEADER ABOVE. Paste Here.
+OSAG_DDL - Generates tables
+OSAG_DML - Inserts test data
+OSAG_NotApproved_StoredProcedure - Stored Procedure 1
+OSAG_GivePass_StoredProcedure - Stored Procedure 2
