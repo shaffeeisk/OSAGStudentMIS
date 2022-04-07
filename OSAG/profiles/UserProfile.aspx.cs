@@ -32,7 +32,8 @@ namespace OSAG.profiles
 
                 if (Session["UserType"].ToString() == "student")
                 {
-                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Major, Class, Gpa, Phone, Bio, IsApproved, MajorName FROM Student s" +
+                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved, MajorName, IsMinor " +
+                        "FROM Student s " +
                         "LEFT JOIN HasMajor h on h.StudentID = s.StudentID " +
                         "LEFT JOIN Major m on m.MajorID = h.MajorID" +
                         " WHERE Username = '" + Session["Username"].ToString() + "';";
@@ -51,7 +52,7 @@ namespace OSAG.profiles
                             txtGradDate.Text = "";
                         else
                             txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
-                        txtMajor.Text = reader["Major"].ToString();
+                        txtMajor.Text = reader["MajorName"].ToString();
                         txtClass.Text = reader["Class"].ToString();
                         txtGpa.Text = reader["Gpa"].ToString();
                         txtPhone.Text = reader["Phone"].ToString();
@@ -92,7 +93,9 @@ namespace OSAG.profiles
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State,GradDate,PositionTitle,Phone,Bio,IsApproved, MajorName FROM Member m" +
+                    sqlQuery = "SELECT FirstName, LastName, " +
+                        "Email, City, M_State, GradDate, PositionTitle, Phone, Bio, IsApproved, MajorName, IsMinor " +
+                        "FROM Member m " +
                         "LEFT JOIN HasMajor h on h.MemberID = m.MemberID " +
                         "LEFT JOIN Major z on z.MajorID = h.MajorID" +
                         " WHERE Username =  '" + Session["Username"].ToString() + "'; ";
@@ -109,7 +112,7 @@ namespace OSAG.profiles
                         txtCity.Text = reader["City"].ToString();
                         txtState.Text = reader["M_State"].ToString();
                         txtMemberGrad.Text = reader["GradDate"].ToString();
-                        txtMemberMajor.Text = reader["Major"].ToString();
+                        txtMemberMajor.Text = reader["MajorName"].ToString();
                         txtPosition.Text = reader["PositionTitle"].ToString();
                         txtMemberPhone.Text = reader["Phone"].ToString();
                         txtMemberBio.Text = reader["Bio"].ToString();

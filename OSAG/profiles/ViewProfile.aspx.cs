@@ -46,34 +46,26 @@ namespace OSAG.profiles
                         " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
-
-                    String IsMinor = "";
-                    // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-                    if (!reader.HasRows)
-                    { }
-                    else
+                    if (reader.HasRows)
                     {
                         int i = 0;
                         while (reader.Read())
                         {
+                            // populate student attributes
                             if (i == 0)
                             {
                                 txtFirstName.Text = reader["FirstName"].ToString();
                                 txtLastName.Text = reader["LastName"].ToString();
                                 txtEmail.Text = reader["Email"].ToString();
-                                IsMinor = reader["IsMinor"].ToString();
                                 if (reader["GradDate"] != DBNull.Value)
                                     txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
                             }
+                            // populate with HasMajor data
                             if (bitToBoolean(reader["IsMinor"]))
-                            {
                                 txtMinor.Text += reader["MajorName"].ToString() + ", ";
-                            }
                             else
-                            {
                                 txtMajor.Text += reader["MajorName"].ToString() + ", ";
-                            }
                             i++;
                         }
                     }
@@ -102,33 +94,37 @@ namespace OSAG.profiles
                         " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
-                    
+
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-                    int i = 0;
-                    while (reader.Read())
+
+                    if (reader.HasRows)
                     {
-                        if (i == 0)
+                        int i = 0;
+                        while (reader.Read())
                         {
-                            mtxtFirstName.Text = reader["FirstName"].ToString();
-                            mtxtLastName.Text = reader["LastName"].ToString();
-                            txtMemberEmail.Text = reader["Email"].ToString();
-                            txtCity.Text = reader["City"].ToString();
-                            txtState.Text = reader["M_State"].ToString();
+                            if (i == 0)
+                            {
+                                mtxtFirstName.Text = reader["FirstName"].ToString();
+                                mtxtLastName.Text = reader["LastName"].ToString();
+                                txtMemberEmail.Text = reader["Email"].ToString();
+                                txtCity.Text = reader["City"].ToString();
+                                txtState.Text = reader["M_State"].ToString();
+                            }
+                            if (bitToBoolean(reader["IsMinor"]))
+                            {
+                                txtMemberMinors.Text += reader["MajorName"].ToString() + ", ";
+                            }
+                            else
+                            {
+                                txtMemberMajors.Text += reader["MajorName"].ToString() + ", ";
+                            }
+                            i++;
                         }
-                        if (bitToBoolean(reader["IsMinor"]))
-                        {
-                            txtMemberMinors.Text += reader["MajorName"].ToString() + ", ";
-                        }
-                        else
-                        {
-                            txtMemberMajors.Text += reader["MajorName"].ToString() + ", ";
-                        }
-                        i++;
+                        txtMemberMajors.Text = txtMemberMajors.Text.Trim().TrimEnd(',');
+                        txtMemberMinors.Text = txtMemberMinors.Text.Trim().TrimEnd(',');
+                        sqlConnect.Close();
                     }
-                    txtMemberMajors.Text = txtMemberMajors.Text.Trim().TrimEnd(',');
-                    txtMemberMinors.Text = txtMemberMinors.Text.Trim().TrimEnd(',');
-                    sqlConnect.Close();
                 }
             }
         }

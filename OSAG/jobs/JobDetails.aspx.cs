@@ -26,17 +26,9 @@ namespace OSAG.jobs
                 //Query
                 String sqlQuery = "Select 'Job Name: ' + JobName as Name, 'Company Name: ' + CompanyName as Company, 'Job Description: ' +  JobDescription as Description, 'Application Deadline: ' + CAST(ApplicationDeadline AS varchar) as Deadline" +
                     ", 'Start Date: ' + CAST(StartDate as varchar) as Start, 'Weekly Hours: ' + CAST(WeeklyHours AS varchar) as Hours, 'Payment: ' + FORMAT(Payment,'C') as Payment" +
-                    " from Job LEFT JOIN Company ON Company.CompanyID = Job.CompanyID where JobName+CompanyName = '" + Session["View"].ToString()
-                    + "'";
-
-                // Define the Connection
+                    " from Job LEFT JOIN Company ON Company.CompanyID = Job.CompanyID where JobID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
-                //Create and Format the Command
-                SqlCommand sqlCommand = new SqlCommand();
-                sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = sqlQuery;
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
 
                 // Execute the Query and get results
                 sqlConnection.Open();

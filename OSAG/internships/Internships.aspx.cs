@@ -59,12 +59,9 @@ namespace OSAG.internships
 
         protected void btnBookmark_Click(object sender, EventArgs e)
         {
-            int StudentID = 0;
-            int InternshipID = 0;
+            // Retrieve InternshipID from gridview and define btn
             Button btn = (Button)sender;
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            String InternshipName = gvr.Cells[0].Text;
-            String CompanyName = gvr.Cells[1].Text;
+            int InternshipID = (int)grdvwInternships.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex].Value;
 
 
             // Define the Connection
@@ -74,11 +71,8 @@ namespace OSAG.internships
             String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
-            StudentID = (int)sqlCommand.ExecuteScalar();
+            int StudentID = (int)sqlCommand.ExecuteScalar();
             sqlConnection.Close();
-
-            // Retrieve InternshipID from gridview
-            InternshipID = (int)grdvwInternships.DataKeys[gvr.RowIndex]["InternshipID"];
 
             // Insert/Remove bookmark
             int[] matchRecord = getMatch(StudentID, InternshipID);
@@ -105,9 +99,7 @@ namespace OSAG.internships
 
         protected void btnView_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            Session["View"] = gvr.Cells[0].Text + gvr.Cells[1].Text;
+            Session["View"] = grdvwInternships.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
             Response.Redirect("InternshipDetails.aspx");
         }
 

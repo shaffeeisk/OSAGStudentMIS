@@ -19,32 +19,24 @@ namespace OSAG.opportunities
             try
             {
                 if (!IsPostBack)
-                {
-                    ViewState["PreviousPage"] =
-                Request.UrlReferrer;
-                }
+                    ViewState["PreviousPage"] = Request.UrlReferrer;
+                
                 //Query
-                String sqlQuery = "Select 'Award Name: ' + AwardName as Name, 'Award Amount: ' +  FORMAT(AwardAmount,'C') as Amount, 'Award Description: ' + AwardDescription as Description from Opportunity where AwardName = '" + Session["View"].ToString()
-                    + "'";
-
-                // Define the Connection
+                String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, " +
+                    "IsScholarship, OpportunityAward FROM Opportunity WHERE Opportunity.OpportunityID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
 
-                //Create and Format the Command
-                SqlCommand sqlCommand = new SqlCommand();
-                sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = sqlQuery;
-
-                // Execute the Query and get results
+                // Execute the Query and display results
                 sqlConnection.Open();
                 SqlDataReader queryResults = sqlCommand.ExecuteReader();
-                while (queryResults.Read())
-                {
-                    lblDetails.Text = queryResults["Name"].ToString();
-                    lblDetails2.Text = queryResults["Amount"].ToString();
-                    lblDetails3.Text = queryResults["Description"].ToString();
-                }
+                queryResults.Read();
+                lblDetails1.Text = "Opportunity Name: " + queryResults["OpportunityName"].ToString();
+                lblDetails2.Text = "Description: " + queryResults["OpportunityDescription"].ToString();
+                lblDetails3.Text = "Event Date: " + queryResults["EventDate"].ToString();
+                lblDetails4.Text = "Application Deadline: " + queryResults["ApplicationDeadline"].ToString();
+                lblDetails5.Text = "Scholarship? " + queryResults["IsScholarship"].ToString();
+                lblDetails6.Text = "Scholarship Award: " + queryResults["OpportunityAward"].ToString();
             }
             catch (NullReferenceException)
             {
@@ -57,7 +49,7 @@ namespace OSAG.opportunities
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            if (ViewState["PreviousPage"] != null)  
+            if (ViewState["PreviousPage"] != null)
             {
                 Response.Redirect(ViewState["PreviousPage"].ToString());
             }

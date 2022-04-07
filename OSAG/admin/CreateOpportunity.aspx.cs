@@ -23,13 +23,21 @@ namespace OSAG.member
         // event handler for save opportunity button. executes query and clears input, displaying success message
         protected void btnSaveOpportunity_Click(object sender, EventArgs e)
         {
-            String sqlQuery = "INSERT INTO Opportunity (AwardName, AwardAmount, AwardDescription) " +
-                "VALUES (@AwardName, @AwardAmount, @AwardDescription);";
+            String sqlQuery = "INSERT INTO Opportunity " +
+                "(OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, IsScholarship, OpportunityAward) " +
+                "VALUES " +
+                "(@OpportunityName, @OpportunityDescription, @EventDate, @ApplicationDeadline, @IsScholarship, @OpportunityAward);";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@AwardName", validate(txtAwardName.Text));
-            sqlCommand.Parameters.AddWithValue("@AwardAmount", validate(txtAmount.Text));
-            sqlCommand.Parameters.AddWithValue("@AwardDescription", validate(txtDescription.Text));
+            sqlCommand.Parameters.AddWithValue("@OpportunityName", validate(txtOpportunityName.Text));
+            sqlCommand.Parameters.AddWithValue("@OpportunityDescription", validate(txtDescription.Text));
+            sqlCommand.Parameters.AddWithValue("@EventDate", validate(txtEventDate.Text));
+            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtDeadline.Text));
+            if(ckbxIsScholarship.Checked)
+                sqlCommand.Parameters.AddWithValue("@IsScholarship", true);
+            else
+                sqlCommand.Parameters.AddWithValue("@IsScholarship", false);
+            sqlCommand.Parameters.AddWithValue("@OpportunityAward", validate(txtAward.Text));
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -46,8 +54,8 @@ namespace OSAG.member
         // helper method to clear input
         protected void ClearOpportunityData()
         {
-            txtAwardName.Text = "";
-            txtAmount.Text = "";
+            txtOpportunityName.Text = "";
+            txtAward.Text = "";
             txtDescription.Text = "";
         }
 

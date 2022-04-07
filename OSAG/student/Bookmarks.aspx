@@ -11,7 +11,7 @@
         AllowSorting="true"
         AutoGenerateSelectButton="false"
         HorizontalAlign="Center"
-        AutoGenerateColumns="false" DataKeyNames="JobName">
+        AutoGenerateColumns="false" DataKeyNames="JobID">
         <Columns>
             <asp:BoundField HeaderText="JobName" DataField="JobName" SortExpression="JobName" />
             <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
@@ -33,7 +33,7 @@
         AllowSorting="true"
         AutoGenerateSelectButton="false"
         HorizontalAlign="Center"
-        AutoGenerateColumns="false" DataKeyNames="InternshipName">
+        AutoGenerateColumns="false" DataKeyNames="InternshipID">
         <Columns>
             <asp:BoundField HeaderText="InternshipName" DataField="InternshipName" SortExpression="InternshipName" />
             <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
@@ -55,10 +55,10 @@
         AllowSorting="true"
         AutoGenerateSelectButton="false" 
         HorizontalAlign="Center"
-        AutoGenerateColumns="false" DataKeyNames="AwardName">
+        AutoGenerateColumns="false" DataKeyNames="OpportunityID">
         <Columns>
-            <asp:BoundField HeaderText="AwardName" DataField="AwardName" SortExpression="AwardName" />
-            <asp:BoundField HeaderText="AwardAmount" DataField="AwardAmount" SortExpression="AwardAmount" />
+            <asp:BoundField HeaderText="Opportunity Name" DataField="OpportunityName" SortExpression="OpportunityName" />
+            <asp:BoundField HeaderText="Description" DataField="OpportunityDescription" SortExpression="OpportunityDescription" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnView3" runat="server" Text="View" OnClick="btnView3_Click" />

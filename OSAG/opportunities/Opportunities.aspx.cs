@@ -58,34 +58,23 @@ namespace OSAG.opportunities
 
         protected void btnView_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            Session["View"] = gvr.Cells[0].Text;
+            Session["View"] = grdvwOpportunities.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
             Response.Redirect("OpportunityDetails.aspx");
         }
 
         protected void btnBookmark_Click(object sender, EventArgs e)
         {
-            int StudentID = 0;
-            int OpportunityID = 0;
+            // Retrieve OpportunityID from gridview and define btn
             Button btn = (Button)sender;
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            String OpportunityName = gvr.Cells[0].Text;
-            String CompanyName = gvr.Cells[1].Text;
-
-
-            // Define the Connection
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-
+            int OpportunityID = (int)grdvwOpportunities.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex].Value;
+            
             // Retrieve StudentID of user
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
-            StudentID = (int)sqlCommand.ExecuteScalar();
+            int StudentID = (int)sqlCommand.ExecuteScalar();
             sqlConnection.Close();
-
-            // Retrieve OpportunityID from gridview
-            OpportunityID = (int)grdvwOpportunities.DataKeys[gvr.RowIndex]["OpportunityID"];
 
             // Insert/Remove bookmark
             int[] matchRecord = getMatch(StudentID, OpportunityID);

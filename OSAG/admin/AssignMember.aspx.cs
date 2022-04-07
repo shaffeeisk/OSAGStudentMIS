@@ -22,11 +22,10 @@ namespace OSAG.admin
         }
 
         // updates DB with user input data. query written to be legible
+        // TEMPORARY FIX: EVERY UPDATE CLICK CREATES A NEW MENTORSHIP. IT PROBABLY WONT WORK LOL.
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            String sqlQuery = "UPDATE Student SET " +
-                "MemberID = @MemberID " +
-                "WHERE StudentID = @StudentID;";
+            String sqlQuery = "INSERT INTO Mentorship (StudentID, MemberID) VALUES (@StudentID, @MemberID);";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@StudentID", lstStudents.SelectedValue.ToString());
@@ -41,10 +40,11 @@ namespace OSAG.admin
         }
 
         // change member dropdown list to reflect selected student
+        // TEMPORARY FIX: ONLY 1 MENTOR GETS ASSIGNED AT A TIME
         protected void lstStudents_SelectedIndexChanged(object sender, EventArgs e)
         {
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            SqlCommand sqlCommand = new SqlCommand("SELECT MemberID FROM Student WHERE StudentID = @StudentID", sqlConnect);
+            SqlCommand sqlCommand = new SqlCommand("SELECT MemberID FROM Mentorship WHERE StudentID = @StudentID", sqlConnect);
             sqlCommand.Parameters.AddWithValue("@StudentID", lstStudents.SelectedValue);
             sqlConnect.Open();
             ddlMember.SelectedValue = sqlCommand.ExecuteScalar().ToString();

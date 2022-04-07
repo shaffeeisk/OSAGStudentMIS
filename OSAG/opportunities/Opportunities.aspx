@@ -12,8 +12,8 @@
         HorizontalAlign="Center"
         DataKeyNames="OpportunityID">
         <Columns>
-            <asp:BoundField HeaderText="AwardName" DataField="AwardName" SortExpression="AwardName" />
-            <asp:BoundField HeaderText="AwardAmount" DataField="AwardAmount" SortExpression="AwardAmount" />
+            <asp:BoundField HeaderText="Opportunity Name" DataField="OpportunityName" SortExpression="OpportunityName" />
+            <asp:BoundField HeaderText="Description" DataField="OpportunityDescription" SortExpression="OpportunityDescription" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
@@ -27,5 +27,5 @@
     </asp:GridView>
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT OpportunityID, AwardName, AwardAmount FROM Opportunity"></asp:SqlDataSource>
+        SelectCommand="SELECT OpportunityID, OpportunityName, OpportunityDescription FROM Opportunity"></asp:SqlDataSource>
 </asp:Content>

@@ -26,8 +26,7 @@ namespace OSAG.internships
                 //Query
                 String sqlQuery = "Select 'Internship Name: ' + InternshipName as Name, 'Company Name: ' + CompanyName as Company, 'Internship Description: ' +  InternshipDescription as Description, 'Application Deadline: ' + CAST(ApplicationDeadline AS varchar) as Deadline" +
                     ", 'Start Date: ' + CAST(StartDate as varchar) as Start, 'Weekly Hours: ' + CAST(WeeklyHours AS varchar) as Hours, 'Payment: ' + FORMAT(Payment,'C') as Payment" +
-                    " from Internship LEFT JOIN Company ON Company.CompanyID = Internship.CompanyID where InternshipName + CompanyName = '" + Session["View"].ToString()
-                    + "'";
+                    " from Internship LEFT JOIN Company ON Company.CompanyID = Internship.CompanyID where InternshipID = '" + Session["View"].ToString() + "'";
 
                 // Define the Connection
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
