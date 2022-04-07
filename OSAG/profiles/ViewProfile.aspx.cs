@@ -89,7 +89,7 @@ namespace OSAG.profiles
                 // otherwise querying member
                 else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State, s.MajorName FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
+                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State, m.MajorName, IsMinor FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
                         "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
                         " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
