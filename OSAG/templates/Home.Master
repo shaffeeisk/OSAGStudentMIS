@@ -102,13 +102,13 @@
                             <a class="dropdown-item" href="/admin/AssignMember.aspx">ASSIGN MEMBERS</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/member/CreateJob.aspx">CREATE JOBS</a>
+                            <a class="dropdown-item" href="/admin/CreateJob.aspx">CREATE JOBS</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/member/CreateInternship.aspx">CREATE INTERNSHIPS</a>
+                            <a class="dropdown-item" href="/admin/CreateInternship.aspx">CREATE INTERNSHIPS</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/member/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
+                            <a class="dropdown-item" href="/admin/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
                         </li>
                         <% } %>
 
@@ -122,13 +122,13 @@
                             <a class="dropdown-item" href="/admin/AssignMember.aspx">ASSIGN MEMBERS</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/member/CreateJob.aspx">CREATE JOBS</a>
+                            <a class="dropdown-item" href="/admin/CreateJob.aspx">CREATE JOBS</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/member/CreateInternship.aspx">CREATE INTERNSHIPS</a>
+                            <a class="dropdown-item" href="/admin/CreateInternship.aspx">CREATE INTERNSHIPS</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/member/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
+                            <a class="dropdown-item" href="/admin/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
                         </li>
                         <% } %>
 

@@ -96,9 +96,9 @@
     <Content Include="login\CompleteRegistration.aspx" />
     <Content Include="login\LoginPage.aspx" />
     <Content Include="login\RegistrationPage.aspx" />
-    <Content Include="member\CreateInternship.aspx" />
-    <Content Include="member\CreateJob.aspx" />
-    <Content Include="member\CreateOpportunity.aspx" />
+    <Content Include="admin\CreateInternship.aspx" />
+    <Content Include="admin\CreateJob.aspx" />
+    <Content Include="admin\CreateOpportunity.aspx" />
     <Content Include="member\ViewStudentInterests.aspx" />
     <Content Include="opportunities\Opportunities.aspx" />
     <Content Include="opportunities\OpportunityDetails.aspx" />
@@ -242,25 +242,25 @@
     <Compile Include="login\RegistrationPage.aspx.designer.cs">
       <DependentUpon>RegistrationPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="member\CreateInternship.aspx.cs">
+    <Compile Include="admin\CreateInternship.aspx.cs">
       <DependentUpon>CreateInternship.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="member\CreateInternship.aspx.designer.cs">
+    <Compile Include="admin\CreateInternship.aspx.designer.cs">
       <DependentUpon>CreateInternship.aspx</DependentUpon>
     </Compile>
-    <Compile Include="member\CreateJob.aspx.cs">
+    <Compile Include="admin\CreateJob.aspx.cs">
       <DependentUpon>CreateJob.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="member\CreateJob.aspx.designer.cs">
+    <Compile Include="admin\CreateJob.aspx.designer.cs">
       <DependentUpon>CreateJob.aspx</DependentUpon>
     </Compile>
-    <Compile Include="member\CreateOpportunity.aspx.cs">
+    <Compile Include="admin\CreateOpportunity.aspx.cs">
       <DependentUpon>CreateOpportunity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="member\CreateOpportunity.aspx.designer.cs">
+    <Compile Include="admin\CreateOpportunity.aspx.designer.cs">
       <DependentUpon>CreateOpportunity.aspx</DependentUpon>
     </Compile>
     <Compile Include="member\ViewStudentInterests.aspx.cs">

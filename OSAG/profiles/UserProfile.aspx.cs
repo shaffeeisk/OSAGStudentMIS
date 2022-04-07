@@ -243,6 +243,5 @@ namespace OSAG.profiles
                 throw formatException;
             }
         }
-        
     }
 }
