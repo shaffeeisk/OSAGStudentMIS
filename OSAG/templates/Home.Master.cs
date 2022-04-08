@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*code behind for master home page*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoginPage.aspx.cs" Inherits="OSAG.login.LoginPage" %>
+﻿<%--log in page--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoginPage.aspx.cs" Inherits="OSAG.login.LoginPage" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* code behind for opportunity details*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
