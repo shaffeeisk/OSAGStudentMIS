@@ -45,42 +45,45 @@ namespace OSAG.profiles
 
                 if (Session["UserType"].ToString() == "student")
                 {
-                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved, MajorName, IsMinor " +
+                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved " +
+                        "FROM Student WHERE Username = '" + Session["Username"].ToString() + "' " +
+                        // separate into 2 result sets
+                        "SELECT MajorName, IsMinor " +
                         "FROM Student s " +
                         "LEFT JOIN HasMajor h on h.StudentID = s.StudentID " +
-                        "LEFT JOIN Major m on m.MajorID = h.MajorID" +
-                        " WHERE Username = '" + Session["Username"].ToString() + "';";
+                        "LEFT JOIN Major m on m.MajorID = h.MajorID " +
+                        "WHERE Username = '" + Session["Username"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
                     // read data onto page
-                    int i = 0;
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-                    while (reader.Read()) // this will read the single record that matches the entered username
+                    while (reader.Read()) // this will read the first record table (student info)
                     {
-                        if (i == 0)
-                        {
-                            txtFirstName.Text = reader["FirstName"].ToString();
-                            txtLastName.Text = reader["LastName"].ToString();
-                            txtEmail.Text = reader["Email"].ToString();
-                            if (reader["GradDate"] == DBNull.Value)
-                                txtGradDate.Text = "";
-                            else
-                                txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
-                            txtClass.Text = reader["Class"].ToString();
-                            txtGpa.Text = reader["Gpa"].ToString();
-                            txtPhone.Text = reader["Phone"].ToString();
-                            txtBio.Text = reader["Bio"].ToString();
+                        txtFirstName.Text = reader["FirstName"].ToString();
+                        txtLastName.Text = reader["LastName"].ToString();
+                        txtEmail.Text = reader["Email"].ToString();
+                        if (reader["GradDate"] == DBNull.Value)
+                            txtGradDate.Text = "";
+                        else
+                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                        txtClass.Text = reader["Class"].ToString();
+                        txtGpa.Text = reader["Gpa"].ToString();
+                        txtPhone.Text = reader["Phone"].ToString();
+                        txtBio.Text = reader["Bio"].ToString();
 
-                            if (bitToBoolean(reader["IsApproved"]))
-                            {
-                                lblApprove.Text = "User Profile Approved";
-                            }
-                            else
-                            {
-                                lblApprove.Text = "User Profile Not Yet Approved";
-                            }
+                        if (bitToBoolean(reader["IsApproved"]))
+                        {
+                            lblApprove.Text = "User Profile Approved";
                         }
+                        else
+                        {
+                            lblApprove.Text = "User Profile Not Yet Approved";
+                        }
+                    }
+                    reader.NextResult(); // go to bext result table (majors/IsMinor)
+                    while (reader.Read()) // this will read records of majors and input into the singular textboxes
+                    {
                         if (bitToBoolean(reader["IsMinor"]))
                         {
                             txtMinor.Text += reader["MajorName"].ToString() + ", ";
@@ -89,7 +92,6 @@ namespace OSAG.profiles
                         {
                             txtMajor.Text += reader["MajorName"].ToString() + ", ";
                         }
-                        i++;
                     }
                     txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
                     txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
@@ -109,50 +111,41 @@ namespace OSAG.profiles
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName, LastName, " +
-                        "Email, City, M_State, GradDate, PositionTitle, Phone, Bio, IsApproved, MajorName, IsMinor " +
-                        "FROM Member m " +
+                    sqlQuery = "SELECT FirstName, LastName, Email, City, M_State, GradDate, PositionTitle, Phone, Bio, IsApproved " +
+                        "FROM Member " +
+                        "WHERE Username = '" + Session["Username"].ToString() + "' " +
+                        "SELECT MajorName, IsMinor FROM Member m " +
                         "LEFT JOIN HasMajor h on h.MemberID = m.MemberID " +
                         "LEFT JOIN Major z on z.MajorID = h.MajorID" +
-                        " WHERE Username =  '" + Session["Username"].ToString() + "'; ";
+                        " WHERE Username =  '" + Session["Username"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
-                    
+
                     // read data onto page
-                    int i = 0;
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-                    while (reader.Read())
+                    while (reader.Read()) // this will read the first record table (member info)
                     {
-                        if (i == 0) // only run once (if double major/has minor)
-                        {
                             mtxtFirstName.Text = reader["FirstName"].ToString();
                             mtxtLastName.Text = reader["LastName"].ToString();
                             txtMemberEmail.Text = reader["Email"].ToString();
                             txtCity.Text = reader["City"].ToString();
                             txtState.Text = reader["M_State"].ToString();
                             txtMemberGrad.Text = reader["GradDate"].ToString();
-                            txtMemberMajor.Text = reader["MajorName"].ToString();
                             txtPosition.Text = reader["PositionTitle"].ToString();
                             txtMemberPhone.Text = reader["Phone"].ToString();
                             txtMemberBio.Text = reader["Bio"].ToString();
                             if (bitToBoolean(reader["IsApproved"]))
-                            {
                                 lblApprove.Text = "User Profile Approved";
-                            }
                             else
-                            {
                                 lblApprove.Text = "User Profile Not Yet Approved";
-                            }
-                        }
+                    }
+                    reader.NextResult(); // go to bext result table (majors/IsMinor)
+                    while (reader.Read()) // this will read records of majors and input into the singular textboxes
+                    { 
                         if (bitToBoolean(reader["IsMinor"])) // read all majors/minors
-                        {
                             txtMemberMinor.Text += reader["MajorName"].ToString() + ", ";
-                        }
                         else
-                        {
                             txtMemberMajor.Text += reader["MajorName"].ToString() + ", ";
-                        }
-                        i++;
                     }
                     txtMemberMajor.Text = txtMemberMajor.Text.Trim().TrimEnd(',');
                     txtMemberMinor.Text = txtMemberMinor.Text.Trim().TrimEnd(',');
