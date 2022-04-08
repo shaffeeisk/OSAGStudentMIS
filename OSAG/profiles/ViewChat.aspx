@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ViewChat.aspx.cs" Inherits="OSAG.profiles.ViewChat" %>
+﻿<%--View chat page--%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ViewChat.aspx.cs" Inherits="OSAG.profiles.ViewChat" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

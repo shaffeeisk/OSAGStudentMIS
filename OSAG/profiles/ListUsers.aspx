@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ListUsers.aspx.cs" Inherits="OSAG.profiles.ListUsers" %>
+﻿<%--List Users Page--%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ListUsers.aspx.cs" Inherits="OSAG.profiles.ListUsers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

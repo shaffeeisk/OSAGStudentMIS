@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Details.Master" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="OSAG.homepages.HomePage" %>
+﻿<%--Default home page--%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Details.Master" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="OSAG.homepages.HomePage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

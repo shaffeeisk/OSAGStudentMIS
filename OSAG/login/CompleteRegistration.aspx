@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="CompleteRegistration.aspx.cs" Inherits="OSAG.login.CompleteRegistration" %>
+﻿<%--Where member is directed to complete registration after temp log in--%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="CompleteRegistration.aspx.cs" Inherits="OSAG.login.CompleteRegistration" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

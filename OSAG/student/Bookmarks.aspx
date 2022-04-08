@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="Bookmarks.aspx.cs" Inherits="OSAG.student.Bookmarks" %>
+﻿<%--bookmarks page--%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="Bookmarks.aspx.cs" Inherits="OSAG.student.Bookmarks" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

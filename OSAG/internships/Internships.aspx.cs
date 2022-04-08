@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* Code behind for displaying available internships */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

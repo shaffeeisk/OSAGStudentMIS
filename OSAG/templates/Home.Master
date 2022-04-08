@@ -1,4 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.Master.cs" Inherits="OSAG.Home" %>
+﻿<%--Master Home Page--%>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.Master.cs" Inherits="OSAG.Home" %>
 
 <!DOCTYPE html>
 
