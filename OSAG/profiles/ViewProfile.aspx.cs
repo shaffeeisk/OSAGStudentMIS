@@ -69,7 +69,7 @@ namespace OSAG.profiles
                             i++;
                         }
                     }
-                    txtMajor.Text = txtMajor.Text.Substring(0, txtMajor.Text.Length - 2);
+                    txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
                     txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
 

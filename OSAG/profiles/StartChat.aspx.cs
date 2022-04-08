@@ -24,18 +24,14 @@ namespace OSAG.profiles
 
         protected void btn_studentChat_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            Session["UserChatID"] = grdvStudent.DataKeys[gvr.RowIndex].Value;
+            Session["UserChatID"] = grdvStudent.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
             Session["UserChatType"] = "Student";
             Response.Redirect("ViewChat.aspx");
         }
 
         protected void btn_memberChat_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            Session["UserChatID"] = grdvMember.DataKeys[gvr.RowIndex].Value;
+            Session["UserChatID"] = grdvMember.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
             Session["UserChatType"] = "Member";
             Response.Redirect("ViewChat.aspx");
         }
