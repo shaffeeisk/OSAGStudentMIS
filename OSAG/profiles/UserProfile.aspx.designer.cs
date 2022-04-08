@@ -321,13 +321,13 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// fileUploadText control.
+        /// fileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUploadText;
+        protected global::System.Web.UI.WebControls.FileUpload fileUpload;
 
         /// <summary>
         /// btnUpload control.
@@ -337,6 +337,15 @@ namespace OSAG.profiles
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpload;
+
+        /// <summary>
+        /// btnDownloadResume control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDownloadResume;
 
         /// <summary>
         /// ltEmbed control.

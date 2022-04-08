@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Drawing;
 using System.IO;
+// byte array import
+using System.Configuration;
 
 namespace OSAG.profiles
 {
@@ -26,6 +28,17 @@ namespace OSAG.profiles
             // only when loading page for the first time
             if (!IsPostBack)
             {
+                // Global.asax -> Application_Error Message Handler. Expected error is "File size too large."
+                //      Max file size (default) is 4MB but user is told 2MB.
+                // is in !IsPostBack because error causes Response.Redirect back to page.
+                if (Request.QueryString["Message"] != null) // Request.QueryString["key"] is the .../page.aspx?Message=message%and%etc
+                {
+                    // CODE FOR TESTING ONLY. PLEASE CHANGE. PLEASE FOR THE LOVE OF GOD.
+                    // SERIOUSLY, DO NOT OVERLOOK THIS.
+                    btnUpload.Text = Request.QueryString["Message"]; // text of querystring
+                    // fun fact: do NOT try to clear the querystring. just response.redirect :sob emoji:
+                }
+
                 // define connection to DB and query String
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
                 String sqlQuery;
@@ -41,53 +54,58 @@ namespace OSAG.profiles
                     sqlConnect.Open();
 
                     // read data onto page
+                    int i = 0;
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the single record that matches the entered username
                     {
-                        txtFirstName.Text = reader["FirstName"].ToString();
-                        txtLastName.Text = reader["LastName"].ToString();
-                        txtEmail.Text = reader["Email"].ToString();
-                        if (reader["GradDate"] == DBNull.Value)
-                            txtGradDate.Text = "";
-                        else
-                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
-                        txtMajor.Text = reader["MajorName"].ToString();
-                        txtClass.Text = reader["Class"].ToString();
-                        txtGpa.Text = reader["Gpa"].ToString();
-                        txtPhone.Text = reader["Phone"].ToString();
-                        txtBio.Text = reader["Bio"].ToString();
-                        if (isApproved())
+                        if (i == 0)
                         {
-                            lblApprove.Text = "User Profile Approved";
-                        }
-                        else
-                        {
-                            lblApprove.Text = "User Profile Not Yet Approved";
+                            txtFirstName.Text = reader["FirstName"].ToString();
+                            txtLastName.Text = reader["LastName"].ToString();
+                            txtEmail.Text = reader["Email"].ToString();
+                            if (reader["GradDate"] == DBNull.Value)
+                                txtGradDate.Text = "";
+                            else
+                                txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                            txtClass.Text = reader["Class"].ToString();
+                            txtGpa.Text = reader["Gpa"].ToString();
+                            txtPhone.Text = reader["Phone"].ToString();
+                            txtBio.Text = reader["Bio"].ToString();
+
+                            if (bitToBoolean(reader["IsApproved"]))
+                            {
+                                lblApprove.Text = "User Profile Approved";
+                            }
+                            else
+                            {
+                                lblApprove.Text = "User Profile Not Yet Approved";
+                            }
                         }
                         if (bitToBoolean(reader["IsMinor"]))
                         {
-                            txtMajor.Text += reader["MajorName"].ToString() + ", ";
+                            txtMinor.Text += reader["MajorName"].ToString() + ", ";
                         }
                         else
                         {
-                            txtMinor.Text += reader["MajorName"].ToString() + ", ";
+                            txtMajor.Text += reader["MajorName"].ToString() + ", ";
                         }
+                        i++;
                     }
                     txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
                     txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
 
-                    // populate resume embed
-                    String fpath = Request.PhysicalApplicationPath + "textfiles\\" + Session["Username"].ToString() + ".pdf";
-                    if (File.Exists(fpath))
-                    {
-                        ltEmbed.Visible = true;
-                        string embed = "<object data=\"{0}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
-                        embed += "If you are unable to view file, you can download from <a href = \"{0}\">here</a>";
-                        embed += " or download <a target = \"_blank\" href = \"http://get.adobe.com/reader/\">Adobe PDF Reader</a> to view the file.";
-                        embed += "</object>";
-                        ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["Username"].ToString() + ".pdf"));
-                    }
+                    // maybe instead put button to display or download uploaded resume
+                    // or potentially use above reader to download temp resume file.
+                    // issue with byte array stored file is turning it into a file without saving it.
+                    // see below 
+                    /****************************************
+                     *                populate              *
+                     *                 resume               *
+                     *                 embed                *
+                     *                  here                *
+                     ****************************************/
+
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
@@ -99,36 +117,42 @@ namespace OSAG.profiles
                         " WHERE Username =  '" + Session["Username"].ToString() + "'; ";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
+                    
                     // read data onto page
+                    int i = 0;
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read())
                     {
-                        mtxtFirstName.Text = reader["FirstName"].ToString();
-                        mtxtLastName.Text = reader["LastName"].ToString();
-                        txtMemberEmail.Text = reader["Email"].ToString();
-                        txtCity.Text = reader["City"].ToString();
-                        txtState.Text = reader["M_State"].ToString();
-                        txtMemberGrad.Text = reader["GradDate"].ToString();
-                        txtMemberMajor.Text = reader["MajorName"].ToString();
-                        txtPosition.Text = reader["PositionTitle"].ToString();
-                        txtMemberPhone.Text = reader["Phone"].ToString();
-                        txtMemberBio.Text = reader["Bio"].ToString();
-                        if (isApproved())
+                        if (i == 0) // only run once (if double major/has minor)
                         {
-                            lblApprove.Text = "User Profile Approved";
+                            mtxtFirstName.Text = reader["FirstName"].ToString();
+                            mtxtLastName.Text = reader["LastName"].ToString();
+                            txtMemberEmail.Text = reader["Email"].ToString();
+                            txtCity.Text = reader["City"].ToString();
+                            txtState.Text = reader["M_State"].ToString();
+                            txtMemberGrad.Text = reader["GradDate"].ToString();
+                            txtMemberMajor.Text = reader["MajorName"].ToString();
+                            txtPosition.Text = reader["PositionTitle"].ToString();
+                            txtMemberPhone.Text = reader["Phone"].ToString();
+                            txtMemberBio.Text = reader["Bio"].ToString();
+                            if (bitToBoolean(reader["IsApproved"]))
+                            {
+                                lblApprove.Text = "User Profile Approved";
+                            }
+                            else
+                            {
+                                lblApprove.Text = "User Profile Not Yet Approved";
+                            }
                         }
-                        else
-                        {
-                            lblApprove.Text = "User Profile Not Yet Approved";
-                        }
-                        if (bitToBoolean(reader["IsMinor"]))
-                        {
-                            txtMemberMajor.Text += reader["MajorName"].ToString() + ", ";
-                        }
-                        else
+                        if (bitToBoolean(reader["IsMinor"])) // read all majors/minors
                         {
                             txtMemberMinor.Text += reader["MajorName"].ToString() + ", ";
                         }
+                        else
+                        {
+                            txtMemberMajor.Text += reader["MajorName"].ToString() + ", ";
+                        }
+                        i++;
                     }
                     txtMemberMajor.Text = txtMemberMajor.Text.Trim().TrimEnd(',');
                     txtMemberMinor.Text = txtMemberMinor.Text.Trim().TrimEnd(',');
@@ -150,7 +174,6 @@ namespace OSAG.profiles
                     "FirstName = @FirstName, " +
                     "LastName = @LastName, " +
                     "Email = @Email, " +
-                    "Major = @Major, " +
                     "Phone = @Phone, " +
                     "Class = @Class, " +
                     "Gpa = @Gpa, " +
@@ -161,7 +184,6 @@ namespace OSAG.profiles
                 sqlCommand.Parameters.AddWithValue("@FirstName", validate(txtFirstName.Text));
                 sqlCommand.Parameters.AddWithValue("@LastName", validate(txtLastName.Text));
                 sqlCommand.Parameters.AddWithValue("@Email", validate(txtEmail.Text));
-                sqlCommand.Parameters.AddWithValue("@Major", validate(txtMajor.Text));
                 sqlCommand.Parameters.AddWithValue("@Phone", validate(txtPhone.Text));
                 sqlCommand.Parameters.AddWithValue("@Class", validate(txtClass.Text));
                 sqlCommand.Parameters.AddWithValue("@Gpa", validateGpa(txtGpa.Text));
@@ -177,7 +199,6 @@ namespace OSAG.profiles
                     "FirstName = @FirstName, " +
                     "LastName = @LastName, " +
                     "Email = @Email, " +
-                    "Major = @Major, " +
                     "Phone = @Phone, " +
                     "City = @City, " +
                     "M_State = @M_State, " +
@@ -189,7 +210,6 @@ namespace OSAG.profiles
                 sqlCommand.Parameters.AddWithValue("@FirstName", validate(mtxtFirstName.Text));
                 sqlCommand.Parameters.AddWithValue("@LastName", validate(mtxtLastName.Text));
                 sqlCommand.Parameters.AddWithValue("@Email", validate(txtMemberEmail.Text));
-                sqlCommand.Parameters.AddWithValue("@Major", validate(txtMajor.Text));
                 sqlCommand.Parameters.AddWithValue("@Phone", validate(txtPhone.Text));
                 sqlCommand.Parameters.AddWithValue("@City", validate(txtCity.Text));
                 sqlCommand.Parameters.AddWithValue("@M_State", validate(txtState.Text));
@@ -206,40 +226,64 @@ namespace OSAG.profiles
         // event handler for resume upload button
         protected void btnUpload_Click(object sender, EventArgs e)
         {
+            // I HAVE NO CLUE IF YOU CAN LOAD AN EMBED WITH A BYTE ARRAY TURNED INTO A FILE.
             // set embed visibility to true
             ltEmbed.Visible = true;
-            // check if file exists
-            if (!Directory.Exists(Server.MapPath("~/Files")))
-                Directory.CreateDirectory(Server.MapPath("~/Files"));
 
             // upload resume if a file was uploaded
-            if (fileUploadText.HasFile)
+            if (fileUpload.HasFile)
             {
-                String fpath = Request.PhysicalApplicationPath + "textfiles\\" +
-                 Session["Username"].ToString() + ".pdf";
-                fileUploadText.SaveAs(fpath);
-                if (File.Exists(fpath))
+                // ensure file is not too large. http error if 4MB+, handled in Global.asax.
+                // do not want to change web.config http timeout settings because DDoS = bad
+                if (fileUpload.PostedFile.ContentLength > 2097152)
                 {
-                    string embed = "<object data=\"{0}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
-                    embed += "</object>";
-                    ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["Username"].ToString() + ".pdf"));
+                    // file is too large (>2mb)
+                    txtBio.Text = "file larger than 2mb"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    return;
                 }
-            }
-        }
-        protected bool isApproved()
-        {
-            String sqlQuery = "EXEC dbo.OSAG_NotApproved @Username";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@Username", Session["Username"].ToString());
-            sqlConnect.Open();
-            int i = Convert.ToInt32(sqlCommand.ExecuteScalar());
-            sqlConnect.Close();
+                // make sure file is pdf
+                string cType = fileUpload.PostedFile.ContentType;
+                if (cType != "application/pdf")
+                {
+                    // file is not pdf
+                    txtBio.Text = "file is not pdf"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    return;
+                }
 
-            // return bool
-            if (i == 1)
-                return false;
-            return true;
+                // define filestream and create binary reader
+                Stream fs = fileUpload.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(fs);
+
+                // then insert file into Student table
+                string sqlQuery = "UPDATE Student SET ResumeFile = @ResumeFile WHERE Username = @Username;";
+                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery);
+                sqlCommand.Connection = sqlConnect;
+                sqlCommand.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+                sqlCommand.Parameters.AddWithValue("@ResumeFile", br.ReadBytes((Int32)fs.Length)); // BinaryReader converts file to byte[]
+
+                sqlConnect.Open();
+                sqlCommand.ExecuteNonQuery();
+                sqlConnect.Close();
+            }
+            else
+            {
+                // display error message or something here
+            }
+
+        }
+
+        // DOWNLAODS RESUME DIRECTLY TO CLIENT POGGGGGGGCHAMPION
+        protected void btnDownloadResume_Click(object sender, EventArgs e)
+        {
+            // have to query for resume file itself. not sure if having a column for resume is a good idea in the page_load since
+            // if theres like double major or major+minor worst case query results could be upwards of 3MB O________O (not good)
+            byte[] resumeByteArray = new byte[1]; //this is TEMPORARY!!!!!!!!!!!!!!!!
+            // THIS SHIT WORKS. SIMPLY NEED TO TURN VARBINARY INTO BYTE[]
+            Response.AddHeader("content-disposition", "attachment;filename= " + Session["Username"].ToString() + ".pdf");
+            Response.ContentType = "application/octectstream";
+            Response.BinaryWrite(resumeByteArray);
+            Response.End();
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.
@@ -262,18 +306,19 @@ namespace OSAG.profiles
             {
                 return float.Parse(s);
             }
-            catch(FormatException formatException)
+            catch (FormatException formatException)
             {
                 return (object)DBNull.Value;
                 throw formatException;
             }
         }
+
+        // SQL Server BIT -> Boolean. read above comments for more details
         private bool bitToBoolean(object o)
         {
             if (o == DBNull.Value)
                 return false;
             return (bool)o;
         }
-
     }
 }

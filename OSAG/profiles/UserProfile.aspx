@@ -109,9 +109,11 @@ Rows="10" Height="100" Width="200" ></asp:TextBox>
     <br />
     <br />
     <asp:Label ID="Label5" runat="server" Text="Upload your Resume"></asp:Label>
-    <asp:FileUpload ID="fileUploadText" runat="server" />
-    <asp:Button ID="btnUpload" type="submit" Text="Upload" runat="server" CausesValidation="false" OnClick="btnUpload_Click"></asp:Button>
+    <asp:FileUpload ID="fileUpload" runat="server" />
+    <asp:Button ID="btnUpload" type="submit" Text="Upload" runat="server" CausesValidation="false" OnClick="btnUpload_Click" ></asp:Button>
     <br />
+    <asp:Button ID="btnDownloadResume" runat="server" Text="Try to download student resume (if exists)" OnClick="btnDownloadResume_Click" />
+    <!-- code will go here to embed pdf (try adobe pdf embed api? https://opensource.adobe.com/pdfembed-sdk-docs/) -->
     <asp:Literal ID="ltEmbed" runat="server" />
     <% } %>
 
