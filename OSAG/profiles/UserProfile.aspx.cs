@@ -10,8 +10,6 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Drawing;
 using System.IO;
-// byte array import
-using System.Configuration;
 
 namespace OSAG.profiles
 {
@@ -45,6 +43,8 @@ namespace OSAG.profiles
 
                 if (Session["UserType"].ToString() == "student")
                 {
+                    // column for resume is probably not a good idea in this query. imagine thousands of page_loads
+                    // with Reader being sent in with +100-200 kb due to byte array
                     sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved " +
                         "FROM Student WHERE Username = '" + Session["Username"].ToString() + "' " +
                         // separate into 2 result sets
@@ -73,25 +73,17 @@ namespace OSAG.profiles
                         txtBio.Text = reader["Bio"].ToString();
 
                         if (bitToBoolean(reader["IsApproved"]))
-                        {
                             lblApprove.Text = "User Profile Approved";
-                        }
                         else
-                        {
                             lblApprove.Text = "User Profile Not Yet Approved";
-                        }
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
                     {
                         if (bitToBoolean(reader["IsMinor"]))
-                        {
                             txtMinor.Text += reader["MajorName"].ToString() + ", ";
-                        }
                         else
-                        {
                             txtMajor.Text += reader["MajorName"].ToString() + ", ";
-                        }
                     }
                     txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
                     txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
@@ -125,23 +117,23 @@ namespace OSAG.profiles
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the first record table (member info)
                     {
-                            mtxtFirstName.Text = reader["FirstName"].ToString();
-                            mtxtLastName.Text = reader["LastName"].ToString();
-                            txtMemberEmail.Text = reader["Email"].ToString();
-                            txtCity.Text = reader["City"].ToString();
-                            txtState.Text = reader["M_State"].ToString();
-                            txtMemberGrad.Text = reader["GradDate"].ToString();
-                            txtPosition.Text = reader["PositionTitle"].ToString();
-                            txtMemberPhone.Text = reader["Phone"].ToString();
-                            txtMemberBio.Text = reader["Bio"].ToString();
-                            if (bitToBoolean(reader["IsApproved"]))
-                                lblApprove.Text = "User Profile Approved";
-                            else
-                                lblApprove.Text = "User Profile Not Yet Approved";
+                        mtxtFirstName.Text = reader["FirstName"].ToString();
+                        mtxtLastName.Text = reader["LastName"].ToString();
+                        txtMemberEmail.Text = reader["Email"].ToString();
+                        txtCity.Text = reader["City"].ToString();
+                        txtState.Text = reader["M_State"].ToString();
+                        txtMemberGrad.Text = reader["GradDate"].ToString();
+                        txtPosition.Text = reader["PositionTitle"].ToString();
+                        txtMemberPhone.Text = reader["Phone"].ToString();
+                        txtMemberBio.Text = reader["Bio"].ToString();
+                        if (bitToBoolean(reader["IsApproved"]))
+                            lblApprove.Text = "User Profile Approved";
+                        else
+                            lblApprove.Text = "User Profile Not Yet Approved";
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
-                    { 
+                    {
                         if (bitToBoolean(reader["IsMinor"])) // read all majors/minors
                             txtMemberMinor.Text += reader["MajorName"].ToString() + ", ";
                         else
@@ -269,14 +261,37 @@ namespace OSAG.profiles
         // DOWNLAODS RESUME DIRECTLY TO CLIENT POGGGGGGGCHAMPION
         protected void btnDownloadResume_Click(object sender, EventArgs e)
         {
-            // have to query for resume file itself. not sure if having a column for resume is a good idea in the page_load since
-            // if theres like double major or major+minor worst case query results could be upwards of 3MB O________O (not good)
-            byte[] resumeByteArray = new byte[1]; //this is TEMPORARY!!!!!!!!!!!!!!!!
-            // THIS SHIT WORKS. SIMPLY NEED TO TURN VARBINARY INTO BYTE[]
-            Response.AddHeader("content-disposition", "attachment;filename= " + Session["Username"].ToString() + ".pdf");
+            byte[] resumeFile = getResumeBytes(Session["Username"].ToString());
+            // can change file download name, simply change content of filename= below
+            // cannot use original file name unless it is stored when uploading.
+            Response.AddHeader("content-disposition", "attachment;filename=resume_" + Session["Username"].ToString() + "_saved.pdf");
             Response.ContentType = "application/octectstream";
-            Response.BinaryWrite(resumeByteArray);
+            Response.BinaryWrite(resumeFile);
             Response.End();
+        }
+
+        // event handler for preview resume (HELP ME)
+        protected void btnPreview_Click(object sender, EventArgs e)
+        {
+            // literally impossible
+        }
+
+
+        // helper method that queries for resume file and returns byte array
+        protected byte[] getResumeBytes(string s)
+        {
+            byte[] fileBytes;
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("SELECT ResumeFile FROM Student WHERE Username = @Username;", sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", s);
+            sqlConnect.Open();
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader != null)
+                reader.Read();
+            fileBytes = new byte[(reader.GetBytes(0, 0, null, 0, int.MaxValue))];
+            reader.GetBytes(0, 0, fileBytes, 0, fileBytes.Length);
+            sqlConnect.Close();
+            return fileBytes;
         }
 
         // helper method to validate data. trims input string of leading/trailing white space.
@@ -299,10 +314,10 @@ namespace OSAG.profiles
             {
                 return float.Parse(s);
             }
-            catch (FormatException formatException)
+            catch (FormatException ex)
             {
                 return (object)DBNull.Value;
-                throw formatException;
+                throw ex;
             }
         }
 
