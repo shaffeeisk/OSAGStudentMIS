@@ -40,7 +40,6 @@ namespace OSAG.profiles
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
-                    String approval = "";
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the single record that matches the entered username
@@ -57,7 +56,6 @@ namespace OSAG.profiles
                         txtGpa.Text = reader["Gpa"].ToString();
                         txtPhone.Text = reader["Phone"].ToString();
                         txtBio.Text = reader["Bio"].ToString();
-                        approval = reader["IsApproved"].ToString();
                         if (isApproved())
                         {
                             lblApprove.Text = "User Profile Approved";
@@ -101,7 +99,6 @@ namespace OSAG.profiles
                         " WHERE Username =  '" + Session["Username"].ToString() + "'; ";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
-                    String approval = "";
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read())
@@ -116,7 +113,6 @@ namespace OSAG.profiles
                         txtPosition.Text = reader["PositionTitle"].ToString();
                         txtMemberPhone.Text = reader["Phone"].ToString();
                         txtMemberBio.Text = reader["Bio"].ToString();
-                        approval = reader["IsApproved"].ToString();
                         if (isApproved())
                         {
                             lblApprove.Text = "User Profile Approved";
