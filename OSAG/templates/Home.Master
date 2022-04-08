@@ -133,7 +133,8 @@
                         <% } %>
 
                          <li>
-                            <a class="dropdown-item" href="/login/LoginPage.aspx">SIGN OUT</a>
+                            <asp:LinkButton ID="lnkbtnSignOut" runat="server" class="dropdown-item" 
+                                text="SIGN OUT" OnClick="lnkbtnSignOut_Click"></asp:LinkButton>
                         </li>
                     </ul>
                     <!--drop down end-->
@@ -141,13 +142,10 @@
             </div>
         </div>
         <!--Navigation ends-->
-
-
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-
         <!--Footer starts-->
         <footer id="sticky-footer" class="pt-5 pb-2 text-center">
             <div class="contact text-center pt-3 pb-2">

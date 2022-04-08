@@ -20,5 +20,14 @@ namespace OSAG
                 lblUsername.Text = Session["Username"].ToString();
         }
 
+        protected void lnkbtnSignOut_Click(object sender, EventArgs e)
+        {
+            /********************************************
+            *  Any user data that you need to work with *
+            *  do here before you abandon session       *
+            *********************************************/
+            Session.Abandon();
+            Response.Redirect("/login/LoginPage.aspx");
+        }
     }
 }
