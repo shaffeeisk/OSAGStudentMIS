@@ -42,6 +42,15 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.DropDownList ddlMember;
 
         /// <summary>
+        /// btnUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
+
+        /// <summary>
         /// lblUpdateStatus control.
         /// </summary>
         /// <remarks>
@@ -51,13 +60,13 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.Label lblUpdateStatus;
 
         /// <summary>
-        /// btnUpdate control.
+        /// grdvwMentorships control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdate;
+        protected global::System.Web.UI.WebControls.GridView grdvwMentorships;
 
         /// <summary>
         /// sqlsrcMemberList control.
@@ -76,5 +85,14 @@ namespace OSAG.admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcStudentList;
+
+        /// <summary>
+        /// sqlsrcMentorships control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMentorships;
     }
 }
