@@ -15,7 +15,7 @@ using System.Drawing;
 
 namespace OSAG.admin
 {
-    public partial class AssignMember : System.Web.UI.Page
+    public partial class AssignMentor : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -11,7 +11,7 @@ namespace OSAG.admin
 {
 
 
-    public partial class AssignMember
+    public partial class AssignMentor
     {
 
         /// <summary>

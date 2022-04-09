@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="admin\AddMember.aspx" />
     <Content Include="admin\ApproveRegistration.aspx" />
-    <Content Include="admin\AssignMember.aspx" />
+    <Content Include="admin\AssignMentor.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -166,12 +166,12 @@
     <Compile Include="admin\ApproveRegistration.aspx.designer.cs">
       <DependentUpon>ApproveRegistration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\AssignMember.aspx.cs">
-      <DependentUpon>AssignMember.aspx</DependentUpon>
+    <Compile Include="admin\AssignMentor.aspx.cs">
+      <DependentUpon>AssignMentor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\AssignMember.aspx.designer.cs">
-      <DependentUpon>AssignMember.aspx</DependentUpon>
+    <Compile Include="admin\AssignMentor.aspx.designer.cs">
+      <DependentUpon>AssignMentor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
