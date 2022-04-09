@@ -66,7 +66,7 @@ namespace OSAG.profiles
                         if (reader["GradDate"] == DBNull.Value)
                             txtGradDate.Text = "";
                         else
-                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
                         txtClass.Text = reader["Class"].ToString();
                         txtGpa.Text = reader["Gpa"].ToString();
                         txtPhone.Text = reader["Phone"].ToString();

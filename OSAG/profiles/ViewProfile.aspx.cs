@@ -58,7 +58,7 @@ namespace OSAG.profiles
                         txtLastName.Text = reader["LastName"].ToString();
                         txtEmail.Text = reader["Email"].ToString();
                         if (reader["GradDate"] != DBNull.Value)
-                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
