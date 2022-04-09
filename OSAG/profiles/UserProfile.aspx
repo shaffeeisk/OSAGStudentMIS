@@ -113,10 +113,6 @@
         <asp:Button ID="btnUpload" type="submit" Text="Upload" runat="server" CausesValidation="false" OnClick="btnUpload_Click"></asp:Button>
         <br />
         <asp:Button ID="btnDownloadResume" runat="server" Text="Try to download student resume (if exists)" OnClick="btnDownloadResume_Click" CausesValidation="false" />
-        &emsp
-        <asp:Button ID="btnPreview" Text="Preview PDF" runat="server" OnClick="btnPreview_Click" />
-        <br />
-        <asp:Literal ID="ltEmbed" runat="server" />
         <% } %>
 
         <% if (Session["UserType"].ToString() == "member")

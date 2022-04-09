@@ -211,10 +211,6 @@ namespace OSAG.profiles
         // event handler for resume upload button
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            // I HAVE NO CLUE IF YOU CAN LOAD AN EMBED WITH A BYTE ARRAY TURNED INTO A FILE.
-            // set embed visibility to true
-            ltEmbed.Visible = true;
-
             // upload resume if a file was uploaded
             if (fileUpload.HasFile)
             {
@@ -258,10 +254,17 @@ namespace OSAG.profiles
 
         }
 
-        // DOWNLAODS RESUME DIRECTLY TO CLIENT POGGGGGGGCHAMPION
+        // writes file directly to client (no hard memory save of resume on server).
+        // some browsers will prompt client, chrome will immediately begin download.
         protected void btnDownloadResume_Click(object sender, EventArgs e)
         {
             byte[] resumeFile = getResumeBytes(Session["Username"].ToString());
+            if (resumeFile == null)
+            {
+                // ERROR MESSAGE HANDLING PLEASE (NO RESUME UPLOADED)
+                btnDownloadResume.Text = "no resume uploaded"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                return;
+            }
             // can change file download name, simply change content of filename= below
             // cannot use original file name unless it is stored when uploading.
             Response.AddHeader("content-disposition", "attachment;filename=resume_" + Session["Username"].ToString() + "_saved.pdf");
@@ -269,13 +272,6 @@ namespace OSAG.profiles
             Response.BinaryWrite(resumeFile);
             Response.End();
         }
-
-        // event handler for preview resume (HELP ME)
-        protected void btnPreview_Click(object sender, EventArgs e)
-        {
-            // literally impossible
-        }
-
 
         // helper method that queries for resume file and returns byte array
         protected byte[] getResumeBytes(string s)
@@ -286,8 +282,9 @@ namespace OSAG.profiles
             sqlCommand.Parameters.AddWithValue("@Username", s);
             sqlConnect.Open();
             SqlDataReader reader = sqlCommand.ExecuteReader();
-            if (reader != null)
-                reader.Read();
+            reader.Read();
+            if (reader["ResumeFile"] == DBNull.Value)
+                return null;
             fileBytes = new byte[(reader.GetBytes(0, 0, null, 0, int.MaxValue))];
             reader.GetBytes(0, 0, fileBytes, 0, fileBytes.Length);
             sqlConnect.Close();

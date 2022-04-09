@@ -42,55 +42,43 @@ namespace OSAG.profiles
                 if (Session["ViewProfileUserType"].ToString() == "student")
                 {
                     // query for student data
-                    sqlQuery = "SELECT s.FirstName, s.LastName, s.Email, s.GradDate, m.MajorName, IsMinor FROM Student s LEFT JOIN HasMajor h ON s.StudentID = h.StudentID " +
-                        "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
-                        " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
+                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate FROM Student " +
+                        "WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
+                        "SELECT MajorName, IsMinor FROM Student s " +
+                        "LEFT JOIN HasMajor h ON s.StudentID = h.StudentID " +
+                        "LEFT JOIN Major m ON h.MajorID = m.MajorID " +
+                        "WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-                    if (reader.HasRows)
+                    while (reader.Read()) // this will read the first record table (student info)
                     {
-                        int i = 0;
-                        while (reader.Read())
-                        {
-                            // populate student attributes
-                            if (i == 0)
-                            {
-                                txtFirstName.Text = reader["FirstName"].ToString();
-                                txtLastName.Text = reader["LastName"].ToString();
-                                txtEmail.Text = reader["Email"].ToString();
-                                if (reader["GradDate"] != DBNull.Value)
-                                    txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
-                            }
-                            // populate with HasMajor data
-                            if (bitToBoolean(reader["IsMinor"]))
-                                txtMinor.Text += reader["MajorName"].ToString() + ", ";
-                            else
-                                txtMajor.Text += reader["MajorName"].ToString() + ", ";
-                            i++;
-                        }
+                        // populate student attributes
+                        txtFirstName.Text = reader["FirstName"].ToString();
+                        txtLastName.Text = reader["LastName"].ToString();
+                        txtEmail.Text = reader["Email"].ToString();
+                        if (reader["GradDate"] != DBNull.Value)
+                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyy-MM-dd");
+                    }
+                    reader.NextResult(); // go to bext result table (majors/IsMinor)
+                    while (reader.Read()) // this will read records of majors and input into the singular textboxes
+                    {
+                        if (bitToBoolean(reader["IsMinor"]))
+                            txtMinor.Text += reader["MajorName"].ToString() + ", ";
+                        else
+                            txtMajor.Text += reader["MajorName"].ToString() + ", ";
                     }
                     txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
                     txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
-
-                    // and populate embed with resume (only if student)
-                    String fpath = Request.PhysicalApplicationPath + "textfiles\\" + Session["ViewProfileUsername"].ToString() + ".pdf";
-                    if (File.Exists(fpath))
-                    {
-                        ltEmbed.Visible = true;
-                        string embed = "<object data=\"{0}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
-                        embed += "If you are unable to view file, you can download from <a href = \"{0}\">here</a>";
-                        embed += " or download <a target = \"_blank\" href = \"http://get.adobe.com/reader/\">Adobe PDF Reader</a> to view the file.";
-                        embed += "</object>";
-                        ltEmbed.Text = string.Format(embed, ResolveUrl("~/textfiles/" + Session["ViewProfileUsername"].ToString() + ".pdf"));
-                    }
                 }
 
                 // otherwise querying member
                 else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName,LastName,Email,City,M_State, m.MajorName, IsMinor FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
+                    sqlQuery = "SELECT FirstName, LastName, Email, City, M_State, FROM Member" +
+                        " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
+                        "SELECT FirstName,LastName,Email,City,M_State, m.MajorName, IsMinor FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
                         "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
                         " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
@@ -98,41 +86,70 @@ namespace OSAG.profiles
 
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-
-                    if (reader.HasRows)
+                    while (reader.Read()) // this will read the first record table (member info)
                     {
-                        int i = 0;
-                        while (reader.Read())
-                        {
-                            if (i == 0)
-                            {
-                                mtxtFirstName.Text = reader["FirstName"].ToString();
-                                mtxtLastName.Text = reader["LastName"].ToString();
-                                txtMemberEmail.Text = reader["Email"].ToString();
-                                txtCity.Text = reader["City"].ToString();
-                                txtState.Text = reader["M_State"].ToString();
-                            }
-                            if (bitToBoolean(reader["IsMinor"]))
-                            {
-                                txtMemberMinors.Text += reader["MajorName"].ToString() + ", ";
-                            }
-                            else
-                            {
-                                txtMemberMajors.Text += reader["MajorName"].ToString() + ", ";
-                            }
-                            i++;
-                        }
-                        txtMemberMajors.Text = txtMemberMajors.Text.Trim().TrimEnd(',');
-                        txtMemberMinors.Text = txtMemberMinors.Text.Trim().TrimEnd(',');
-                        sqlConnect.Close();
+                        mtxtFirstName.Text = reader["FirstName"].ToString();
+                        mtxtLastName.Text = reader["LastName"].ToString();
+                        txtMemberEmail.Text = reader["Email"].ToString();
+                        txtCity.Text = reader["City"].ToString();
+                        txtState.Text = reader["M_State"].ToString();
                     }
+                    reader.NextResult(); // go to bext result table (majors/IsMinor)
+                    while (reader.Read()) // this will read records of majors and input into the singular textboxes
+                    {
+                        if (bitToBoolean(reader["IsMinor"]))
+                            txtMemberMinors.Text += reader["MajorName"].ToString() + ", ";
+                        else
+                            txtMemberMajors.Text += reader["MajorName"].ToString() + ", ";
+                    }
+                    txtMemberMajors.Text = txtMemberMajors.Text.Trim().TrimEnd(',');
+                    txtMemberMinors.Text = txtMemberMinors.Text.Trim().TrimEnd(',');
+                    sqlConnect.Close();
+                    btnDownloadResume.Visible = false;
                 }
             }
+        }
+
+        // writes file directly to client (no hard memory save of resume on server).
+        // some browsers will prompt client, chrome will immediately begin download.
+        protected void btnDownloadResume_Click(object sender, EventArgs e)
+        {
+            byte[] resumeFile = getResumeBytes(Session["ViewProfileUsername"].ToString());
+            if (resumeFile == null)
+            {
+                // ERROR MESSAGE HANDLING PLEASE (NO RESUME UPLOADED)
+                btnDownloadResume.Text = "no resume uploaded"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                return;
+            }
+            // can change file download name, simply change content of filename= below
+            // cannot use original file name unless it is stored when uploading.
+            Response.AddHeader("content-disposition", "attachment;filename=resume_" + Session["ViewProfileUsername"].ToString() + "_saved.pdf");
+            Response.ContentType = "application/octectstream";
+            Response.BinaryWrite(resumeFile);
+            Response.End();
         }
 
         protected void btnReturn_Click(object sender, EventArgs e)
         {
             Response.Redirect("ListUsers.aspx");
+        }
+
+        // helper method that queries for resume file and returns byte array
+        protected byte[] getResumeBytes(string s)
+        {
+            byte[] fileBytes;
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("SELECT ResumeFile FROM Student WHERE Username = @Username;", sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", s);
+            sqlConnect.Open();
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            reader.Read();
+            if (reader["ResumeFile"] == DBNull.Value)
+                return null;
+            fileBytes = new byte[(reader.GetBytes(0, 0, null, 0, int.MaxValue))];
+            reader.GetBytes(0, 0, fileBytes, 0, fileBytes.Length);
+            sqlConnect.Close();
+            return fileBytes;
         }
 
         private bool bitToBoolean(object o)

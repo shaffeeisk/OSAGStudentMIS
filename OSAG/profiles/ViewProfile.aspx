@@ -29,7 +29,7 @@
         <asp:TextBox ID="txtMinor" runat="server" Enabled="false"></asp:TextBox>
         <br />
         <br />
-        <asp:Literal ID="ltEmbed" runat="server" />
+        <asp:Button ID="btnDownloadResume" runat="server" Text="View Resume" OnClick="btnDownloadResume_Click" />
         <% } %>
 
         <% if (Session["ViewProfileUserType"].ToString() == "member")
