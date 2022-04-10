@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="OSAG.profiles.UserProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- searchable dropdown (doesnt fucking wqork) -->
+    <link href="Content/select2.min.css" rel="stylesheet" />
+    <script src="Scripts/select2.js"></script>
+    <script src="Scripts/select2.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
@@ -217,5 +221,23 @@
         <asp:Button ID="btnUpdate2" runat="server" Text="Save Changes" CausesValidation="false" OnClick="btnUpdate_Click" />
 
         <% } %>
+        <br />
+        <br />
+        <asp:DropDownList ID="ddlMajor" runat="server" AutoPostBack="true" Width="177px"
+            DataSourceID="sqlsrcListMajors"
+            DataTextField="FullMajor"
+            DataValueField="FullMajor"
+            AppendDataBoundItems="true">
+            <asp:ListItem Selected="True" Text="(Select Major)" Value=""></asp:ListItem>
+        </asp:DropDownList>
+        <asp:SqlDataSource ID="sqlsrcListMajors"
+            runat="server"
+            ConnectionString="<%$ ConnectionStrings:OSAG %>"
+            SelectCommand="SELECT DISTINCT MajorName + ' (' + Degree + ')' AS FullMajor FROM Major WHERE Degree IS NOT NULL ORDER BY FullMajor;"></asp:SqlDataSource>
+        <script>
+            $(function () {
+                $("#<%=ddlMajor.ClientID%>").select2();
+            })
+        </script>
     </div>
 </asp:Content>
