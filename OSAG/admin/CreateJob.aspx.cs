@@ -24,7 +24,7 @@ namespace OSAG.member
         {
             if (ddlCompany.SelectedValue == "") // ensure a company is selected to prevent sql errors
                 lblSuccess.Text = "Please select a company.";
-            else if (jobExists(txtJobName.Text, ddlCompany.SelectedValue.ToString())) // check if a similar job already exists
+            else if (JobExists(txtJobName.Text, ddlCompany.SelectedValue.ToString())) // check if a similar job already exists
             {
                 lblSuccess.Text = "A job for " + ddlCompany.SelectedItem.ToString() + " with the same name already exists. Continue adding?";
                 btnOverride.Visible = true;
@@ -32,7 +32,7 @@ namespace OSAG.member
                 btnSaveJob.Visible = false;
             }
             else
-                saveJob();
+                SaveJob();
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace OSAG.member
         // event handler for override button
         protected void btnOverride_Click(object sender, EventArgs e)
         {
-            saveJob();
+            SaveJob();
             btnOverride.Visible = false;
             btnCancel.Visible = false;
             btnSaveJob.Visible = true;
@@ -61,7 +61,7 @@ namespace OSAG.member
         }
 
         // helper method to determine if job exists
-        protected bool jobExists(string name, string company)
+        protected bool JobExists(string name, string company)
         {
             String sqlQuery = "SELECT COUNT(*) FROM Job WHERE JobName = @JobName AND CompanyID = '" + ddlCompany.SelectedValue + "';";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -76,7 +76,7 @@ namespace OSAG.member
         }
 
         // helper method to save job
-        protected void saveJob()
+        protected void SaveJob()
         {
             // execute parameterized insert statement
             String sqlQuery = "INSERT INTO Job (JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
@@ -95,8 +95,9 @@ namespace OSAG.member
             sqlConnect.Close();
 
             // display success message and reset input
-            lblSuccess.Text = "New job(s) successfully created";
+            lblSuccess.Text = "New job successfully created";
             ClearJobData();
+            grdvwJobs.DataBind();
         }
 
         protected void ClearJobData()

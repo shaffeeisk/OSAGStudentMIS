@@ -21,13 +21,25 @@
         <br />
         <asp:Label ID="lblAward" runat="server" Text="Opportunity Award: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtAward" TextMode="Number" runat="server"></asp:TextBox>
-
-
+        <br />
+        <asp:Label ID="Label6" runat="server" Text="CompanyID: " Width="160px"></asp:Label>
+        <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="177px"
+            DataSourceID="sqlsrcListCompanies"
+            DataTextField="CompanyName"
+            DataValueField="CompanyID"
+            AppendDataBoundItems="true">
+            <asp:ListItem Selected="True" Text="(No Company)" Value=""></asp:ListItem>
+        </asp:DropDownList>
+        <br />
         <br />
         <asp:Button ID="btnSaveOpportunity" Text="Save ->" runat="server" OnClick="btnSaveOpportunity_Click" />
         <br />
         <br />
         <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
+        <br />
+        <asp:Button ID="btnOverride" Text="Yes" runat="server" OnClick="btnOverride_Click" Visible="false" />
+        &nbsp
+         <asp:Button ID="btnCancel" Text="No" runat="server" OnClick="btnCancel_Click" Visible="false" />
         <br />
         <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click" Font-Bold="true" BackColor="OrangeRed" />
         <br />
@@ -54,6 +66,10 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+        <asp:SqlDataSource ID="sqlsrcListCompanies"
+            runat="server"
+            ConnectionString="<%$ ConnectionStrings:OSAG %>"
+            SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>
         <asp:SqlDataSource ID="sqlsrc" runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"
             SelectCommand="SELECT OpportunityID, OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, IsScholarship, OpportunityAward FROM Opportunity"

@@ -42,9 +42,9 @@
         <asp:Label ID="Label5" runat="server" Text="Payment: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtPayment" TextMode="Number" runat="server"></asp:TextBox>
         <br />
-        <asp:Label ID="Label6" runat="server" Text="CompanyID: " Width="160px"></asp:Label>
+        <asp:Label ID="Label6" runat="server" Text="Company: " Width="160px"></asp:Label>
         <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="177px"
-            DataSourceID="sqlsrcListCompanys"
+            DataSourceID="sqlsrcListCompanies"
             DataTextField="CompanyName"
             DataValueField="CompanyID"
             AppendDataBoundItems="true">
@@ -64,7 +64,7 @@
          <asp:Button ID="btnCancel" Text="No" runat="server" OnClick="btnCancel_Click" Visible="false" />
         <br />
         <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click" Font-Bold="true" BackColor="OrangeRed" />
-        <asp:SqlDataSource ID="sqlsrcListCompanys"
+        <asp:SqlDataSource ID="sqlsrcListCompanies"
             runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"
             SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>

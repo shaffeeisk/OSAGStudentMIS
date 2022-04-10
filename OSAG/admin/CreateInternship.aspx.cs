@@ -25,7 +25,7 @@ namespace OSAG.member
         {
             if (ddlCompany.SelectedValue == "") // ensure a company is selected to prevent sql errors
                 lblSuccess.Text = "Please select a company.";
-            else if (internshipExists(txtInternshipName.Text, ddlCompany.SelectedValue.ToString())) // check if a similar internship already exists
+            else if (InternshipExists(txtInternshipName.Text, ddlCompany.SelectedValue.ToString())) // check if a similar internship already exists
             {
                 lblSuccess.Text = "An internship for " + ddlCompany.SelectedItem.ToString() + " with the same name already exists. Continue adding?";
                 btnOverride.Visible = true;
@@ -33,7 +33,7 @@ namespace OSAG.member
                 btnSaveIntern.Visible = false;
             }
             else
-                saveInternship();
+                SaveInternship();
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace OSAG.member
         // event handler for override button
         protected void btnOverride_Click(object sender, EventArgs e)
         {
-            saveInternship();
+            SaveInternship();
             btnOverride.Visible = false;
             btnCancel.Visible = false;
             btnSaveIntern.Visible = true;
@@ -62,7 +62,7 @@ namespace OSAG.member
         }
 
         // helper method to determine if internship exists
-        protected bool internshipExists(string name, string company)
+        protected bool InternshipExists(string name, string company)
         {
             String sqlQuery = "SELECT COUNT(*) FROM Internship WHERE InternshipName = @InternshipName AND CompanyID = '" + ddlCompany.SelectedValue + "';";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -77,7 +77,7 @@ namespace OSAG.member
         }
         
         // helper method to save internship
-        protected void saveInternship()
+        protected void SaveInternship()
         {
             // execute parameterized insert statement
             String sqlQuery = "INSERT INTO Internship (InternshipName, InternshipDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
@@ -96,8 +96,9 @@ namespace OSAG.member
             sqlConnect.Close();
             
             // display success message and reset input
-            lblSuccess.Text = "New internship(s) successfully created";
+            lblSuccess.Text = "New internship successfully created";
             ClearInternData();
+            grdvwInternships.DataBind();
         }
 
         protected void ClearInternData()
