@@ -1,4 +1,5 @@
 ﻿<%--Page for displaying available internships--%>
+
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="Internships.aspx.cs" Inherits="OSAG.internships.Internships" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -8,7 +9,7 @@
         runat="server"
         DataSourceID="sqlsrc"
         AllowSorting="true"
-        AutoGenerateSelectButton="false" 
+        AutoGenerateSelectButton="false"
         HorizontalAlign="Center"
         AutoGenerateColumns="false"
         DataKeyNames="InternshipID">
@@ -21,6 +22,15 @@
                     <%if (Session["UserType"].ToString() == "student")
                         {%>
                     <asp:Button ID="btnBookmark" runat="server" Text="Bookmark" OnClick="btnBookmark_Click" />
+                    <br />
+                    Set Interest Level
+                    <br />
+                    <asp:RadioButton ID="rdoLow" Text="Low" runat="server" GroupName="InterestLevel" 
+                        AutoPostBack="true" OnCheckedChanged="rdoLow_CheckedChanged" /> 
+                    <asp:RadioButton ID="rdoMed" Text="Medium" runat="server" GroupName="InterestLevel" 
+                        AutoPostBack="true" OnCheckedChanged="rdoMed_CheckedChanged" /> 
+                    <asp:RadioButton ID="rdoHi" Text="High" runat="server" GroupName="InterestLevel" 
+                        AutoPostBack="true" OnCheckedChanged="rdoHi_CheckedChanged" />
                     <%} %>
                 </ItemTemplate>
             </asp:TemplateField>

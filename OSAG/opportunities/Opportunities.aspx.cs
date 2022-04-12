@@ -26,14 +26,13 @@ namespace OSAG.opportunities
             // check each bookmark button and change text based on whether a bookmark exists
             if (!IsPostBack && Session["UserType"].ToString() == "student") // only when first loading page
             {
-                // define database connection
-                SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 // Retrieve StudentID of user
-                String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
+                int StudentID = UsernameToID(Session["Username"].ToString());
+
+                // instantiate objects for queries
+                SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                string sqlQuery = "";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-                sqlConnection.Open();
-                int stuID = (int)sqlCommand.ExecuteScalar();
-                sqlConnection.Close();
 
                 // for each grid row
                 for (int i = 0; i < grdvwOpportunities.Rows.Count; i++)
@@ -43,39 +42,46 @@ namespace OSAG.opportunities
                     GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
                     // Retrieve OpportunityID from row
-                    int itemID = (int)grdvwOpportunities.DataKeys[gvr.RowIndex]["OpportunityID"];
+                    int ItemID = (int)grdvwOpportunities.DataKeys[gvr.RowIndex]["OpportunityID"];
 
-                    // check bookmark status
-                    sqlQuery = "SELECT COUNT(*) FROM OpportunityMatch WHERE StudentID = " + stuID + " AND OpportunityID = " + itemID + "AND IsBookmark = 1;";
-                    sqlCommand.CommandText = sqlQuery;
-                    sqlConnection.Open();
-                    int isBookmark = (int)sqlCommand.ExecuteScalar();
-                    sqlConnection.Close();
-                    if (isBookmark == 1)
+                    // check bookmark and interest status. get match record (if any)
+                    int[] match = getMatch(StudentID, ItemID);
+                    // go to next row if no record exists
+                    if (match == null)
+                        continue;
+                    // if bookmarked, change button text
+                    if (match[1] == 1)
                         btn.Text = "Remove Bookmark";
+                    // switch statement for IsInterest record
+                    switch (match[2])
+                    {
+                        case -1:    // NULL
+                            break;
+                        case 0:     // Low
+                            ((RadioButton)grdvwOpportunities.Rows[i].FindControl("rdoLow")).Checked = true;
+                            break;
+                        case 1:     // Medium
+                            ((RadioButton)grdvwOpportunities.Rows[i].FindControl("rdoMed")).Checked = true;
+                            break;
+                        case 2:     // High
+                            ((RadioButton)grdvwOpportunities.Rows[i].FindControl("rdoHi")).Checked = true;
+                            break;
+                    }
                 }
             }
         }
 
-        protected void btnView_Click(object sender, EventArgs e)
-        {
-            Session["View"] = grdvwOpportunities.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
-            Response.Redirect("OpportunityDetails.aspx");
-        }
-
         protected void btnBookmark_Click(object sender, EventArgs e)
         {
-            // Retrieve OpportunityID from gridview and define btn
+            // Define btn and retrieve OpportunityID from gridview
             Button btn = (Button)sender;
             int OpportunityID = (int)grdvwOpportunities.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex].Value;
-            
-            // Retrieve StudentID of user
+
+            // define database connection & retrieve StudentID of user
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            String sqlQuery = "SELECT StudentID FROM Student WHERE UserName = '" + Session["Username"] + "'";
+            int StudentID = UsernameToID(Session["Username"].ToString());
+            string sqlQuery = "";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            int StudentID = (int)sqlCommand.ExecuteScalar();
-            sqlConnection.Close();
 
             // Insert/Remove bookmark
             int[] matchRecord = getMatch(StudentID, OpportunityID);
@@ -100,6 +106,89 @@ namespace OSAG.opportunities
             sqlConnection.Close();
         }
 
+        protected void btnView_Click(object sender, EventArgs e)
+        {
+            Session["View"] = grdvwOpportunities.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
+            Response.Redirect("OpportunityDetails.aspx");
+        }
+
+        // event handler for low selection
+        protected void rdoLow_CheckedChanged(object sender, EventArgs e)
+        {
+            // Retrieve OpportunityID from gridview
+            int OpportunityID = (int)grdvwOpportunities.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
+
+            // Retrieve StudentID of user
+            int StudentID = UsernameToID(Session["Username"].ToString());
+
+            // Insert/Update interestlevel
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            string sqlQuery;
+            int[] matchRecord = getMatch(StudentID, OpportunityID);
+            if (matchRecord == null)    // student has not yet interacted with listing
+                sqlQuery = "INSERT INTO OpportunityMatch (IsInterest, StudentID, OpportunityID) VALUES (0, " + StudentID + ", " + OpportunityID + ")";
+            else  // record of interaction exists
+                sqlQuery = "UPDATE OpportunityMatch SET IsInterest = 0 WHERE OpportunityMatchID = " + matchRecord[0] + ";";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+        }
+
+        // event handler for medium selection
+        protected void rdoMed_CheckedChanged(object sender, EventArgs e)
+        {
+            // Retrieve OpportunityID from gridview
+            int OpportunityID = (int)grdvwOpportunities.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
+
+            // Retrieve StudentID of user
+            int StudentID = UsernameToID(Session["Username"].ToString());
+
+            // Insert/Update interestlevel
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            string sqlQuery;
+            int[] matchRecord = getMatch(StudentID, OpportunityID);
+            if (matchRecord == null)    // student has not yet interacted with listing
+                sqlQuery = "INSERT INTO OpportunityMatch (IsInterest, StudentID, OpportunityID) VALUES (1, " + StudentID + ", " + OpportunityID + ")";
+            else  // record of interaction exists
+                sqlQuery = "UPDATE OpportunityMatch SET IsInterest = 1 WHERE OpportunityMatchID = " + matchRecord[0] + ";";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+        }
+
+        // event handler for high selection
+        protected void rdoHi_CheckedChanged(object sender, EventArgs e)
+        {
+            // Retrieve OpportunityID from gridview
+            int OpportunityID = (int)grdvwOpportunities.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
+
+            // Retrieve StudentID of user
+            int StudentID = UsernameToID(Session["Username"].ToString());
+
+            // Insert/Update interestlevel
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            string sqlQuery;
+            int[] matchRecord = getMatch(StudentID, OpportunityID);
+            if (matchRecord == null)    // student has not yet interacted with listing
+                sqlQuery = "INSERT INTO OpportunityMatch (IsInterest, StudentID, OpportunityID) VALUES (2, " + StudentID + ", " + OpportunityID + ")";
+            else  // record of interaction exists
+                sqlQuery = "UPDATE OpportunityMatch SET IsInterest = 2 WHERE OpportunityMatchID = " + matchRecord[0] + ";";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+        }
+
+        // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
+        protected int UsernameToID(string username)
+        {
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("dbo.OSAG_UsernameToID", sqlConnect);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Username", username);
+            sqlConnect.Open();
+            return (int)sqlCommand.ExecuteScalar();
+        }
+
         // helper method to get matchID and bookmark status
         public int[] getMatch(int stuID, int itemID)
         {
@@ -107,17 +196,24 @@ namespace OSAG.opportunities
             {
                 // query for match ID and bookmark status
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-                String sqlQuery = "SELECT OpportunityMatchID, IsBookmark FROM OpportunityMatch WHERE StudentID = " + stuID + " AND OpportunityID = " + itemID + ";";
+                String sqlQuery = "SELECT OpportunityMatchID, IsBookmark, IsInterest FROM OpportunityMatch WHERE StudentID = " + stuID + " AND OpportunityID = " + itemID + ";";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
                 sqlConnection.Open();
                 SqlDataReader queryResults = sqlCommand.ExecuteReader();
                 queryResults.Read();
-                // returns integer array with match ID at index 0 and bookmark status at index 1
-                int[] intArr = new int[2];
+                // returns integer array with match ID index 0, bookmark status at 1, and interest level at 2
+                int[] intArr = new int[3];
                 intArr[0] = (int)queryResults["OpportunityMatchID"];
-                intArr[1] = Convert.ToInt32(queryResults["IsBookmark"]); // SQL BIT is treated as Boolean, C# does not handle Boolean as T/F = 0/1
-                queryResults.Close();
-                sqlConnection.Close();
+                // handles null values (null = false/0)
+                if (bitToBoolean(queryResults["IsBookmark"]))
+                    intArr[1] = 1;
+                else
+                    intArr[1] = 0;
+                // handles null values (null = -1)
+                if (queryResults["IsInterest"] == DBNull.Value)
+                    intArr[2] = -1; // for main method handling, prevents null -> int conversion error
+                else
+                    intArr[2] = Convert.ToInt32(queryResults["IsInterest"]);
                 return intArr;
             }
             catch (InvalidOperationException)
@@ -125,6 +221,14 @@ namespace OSAG.opportunities
                 return null;
                 throw;
             }
+        }
+
+        // SQL Server BIT -> Boolean. read above comments for more details
+        private bool bitToBoolean(object o)
+        {
+            if (o == DBNull.Value)
+                return false;
+            return (bool)o;
         }
     }
 }
