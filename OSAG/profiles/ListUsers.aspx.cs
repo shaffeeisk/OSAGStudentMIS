@@ -12,14 +12,25 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["Username"] == null)
+            {
+                Session["MustLogin"] = "You must log in to access that page.";
+                Response.Redirect("/login/LoginPage.aspx");
+            }else if (!IsPostBack)
+            {
+                if (Session["Username"].ToString() == "admin")
+                    sqlsrcStudentQuery.SelectCommand = "SELECT Username, FirstName, LastName FROM Student";
+            }
+
         }
 
         // event handler to search student
         protected void btnSearchStu_Click(object sender, EventArgs e)
         {
             String stuFilter = "SELECT Username, FirstName, LastName FROM Student " +
-                   "WHERE FirstName + ' ' + LastName LIKE '%[Search]%';";
+                   "WHERE FirstName + ' ' + LastName LIKE '%[Search]%'";
+            if (Session["Username"].ToString() != "admin")
+                stuFilter += " AND IsApproved = '1'";
             sqlsrcStudentQuery.SelectCommand = stuFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
             grdvStudent.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
         }
@@ -28,7 +39,9 @@ namespace OSAG.profiles
         protected void btnSearchMent_Click(object sender, EventArgs e)
         {
             String membFilter = "SELECT Username, FirstName, LastName FROM Member " +
-                   "WHERE FirstName + ' ' + LastName LIKE '%[Search]%';";
+                   "WHERE FirstName + ' ' + LastName LIKE '%[Search]%'";
+            if (Session["Username"].ToString() != "admin")
+                membFilter += " AND IsApproved = '1'";
             sqlsrcMemberQuery.SelectCommand = membFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar2.Value.Trim()));
             grdvMember.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
         }
@@ -49,7 +62,7 @@ namespace OSAG.profiles
             Session["ViewProfileUserType"] = "student";
             Response.Redirect("ViewProfile.aspx");
         }
-        
+
         protected void grdvMember_SelectedIndexChanged(object sender, EventArgs e)
         {
             Session["ViewProfileUsername"] = grdvMember.SelectedRow.Cells[1].Text;

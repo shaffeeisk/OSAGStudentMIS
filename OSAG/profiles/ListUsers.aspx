@@ -30,7 +30,7 @@
         </asp:GridView>
         <asp:SqlDataSource ID="sqlsrcStudentQuery" runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"
-            SelectCommand="SELECT Username, FirstName, LastName FROM Student WHERE FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
+            SelectCommand="SELECT Username, FirstName, LastName FROM Student WHERE IsApproved = '1' AND FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
         <br />
         <br />
         <h4>Members:</h4>
@@ -56,6 +56,6 @@
         </asp:GridView>
         <asp:SqlDataSource ID="sqlsrcMemberQuery" runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"
-            SelectCommand="SELECT Username, FirstName, LastName FROM Member WHERE FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
+            SelectCommand="SELECT Username, FirstName, LastName FROM Member WHERE IsApproved = '1' AND FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
     </div>
 </asp:Content>
