@@ -7,15 +7,49 @@
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <asp:Label ID="lblOpportunityName" runat="server" Text="Opportunity Name: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtOpportunityName" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator3"
+            ControlToValidate="txtOpportunityName"
+            Text="(Required)"
+            runat="server" />
         <br />
         <asp:Label ID="lblDescription" runat="server" Text="Description: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator4"
+            ControlToValidate="txtDescription"
+            Text="(Required)"
+            runat="server" />
         <br />
         <asp:Label ID="lblEventDate" runat="server" Text="Event Date: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtEventDate" TextMode="Date" runat="server"></asp:TextBox>
+        <asp:CompareValidator
+            ID="CompareValidator2"
+            ControlToValidate="txtEventDate"
+            Text="Use Date Format"
+            Operator="DataTypeCheck"
+            Type="Date"
+            runat="server" />
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator2"
+            ControlToValidate="txtEventDate"
+            Text="(Required)"
+            runat="server" />
         <br />
         <asp:Label ID="lblAppDeadline" runat="server" Text="Application Deadline: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtDeadline" TextMode="Date" runat="server"></asp:TextBox>
+        <asp:CompareValidator
+            ID="CompareValidator1"
+            ControlToValidate="txtDeadline"
+            Text="Use Date Format"
+            Operator="DataTypeCheck"
+            Type="Date"
+            runat="server" />
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator1"
+            ControlToValidate="txtDeadline"
+            Text="(Required)"
+            runat="server" />
         <br />
         <asp:CheckBox ID="ckbxIsScholarship" runat="server" Text="This is a Scholarship" />
         <br />

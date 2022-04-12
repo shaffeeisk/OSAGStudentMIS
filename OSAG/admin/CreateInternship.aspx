@@ -25,6 +25,11 @@
             Operator="DataTypeCheck"
             Type="Date"
             runat="server" />
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator2"
+            ControlToValidate="txtApplicationDeadline"
+            Text="(Required)"
+            runat="server" />
         <br />
         <asp:Label ID="Label3" runat="server" Text="StartDate: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtStartDate" runat="server"></asp:TextBox>
@@ -35,12 +40,41 @@
             Operator="DataTypeCheck"
             Type="Date"
             runat="server" />
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator3"
+            ControlToValidate="txtStartDate"
+            Text="(Required)"
+            runat="server" />
         <br />
         <asp:Label ID="Label4" runat="server" Text="Weekly Hours: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtWeeklyHours" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator5"
+            ControlToValidate="txtWeeklyHours"
+            Text="(Required)"
+            runat="server" />
+        <asp:RegularExpressionValidator
+            ID="RegularExpressionValidator1"
+            runat="server"
+            ControlToValidate="txtWeeklyHours"
+            ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
+            ErrorMessage="Invalid Entry">
+            </asp:RegularExpressionValidator>
         <br />
         <asp:Label ID="Label5" runat="server" Text="Payment: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtPayment" TextMode="Number" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator4"
+            ControlToValidate="txtPayment"
+            Text="(Required)"
+            runat="server" />
+        <asp:RegularExpressionValidator
+            ID="RegularExpressionValidator2"
+            runat="server"
+            ControlToValidate="txtPayment"
+            ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
+            ErrorMessage="Invalid Entry">
+            </asp:RegularExpressionValidator>
         <br />
         <asp:Label ID="Label6" runat="server" Text="Company: " Width="160px"></asp:Label>
         <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="177px"

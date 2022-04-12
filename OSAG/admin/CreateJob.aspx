@@ -66,6 +66,13 @@
             ControlToValidate="txtWeeklyHours"
             Text="(Required)"
             runat="server" />
+        <asp:RegularExpressionValidator
+            ID="RegularExpressionValidator1"
+            runat="server"
+            ControlToValidate="txtWeeklyHours"
+            ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
+            ErrorMessage="Invalid Entry">
+        </asp:RegularExpressionValidator>
         <br />
         <asp:Label ID="Label5" runat="server" Text="Payment: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtPayment" runat="server"></asp:TextBox>
