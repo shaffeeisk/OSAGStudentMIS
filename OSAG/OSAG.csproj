@@ -173,6 +173,7 @@
     <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
+    <Content Include="student\ViewApplications.aspx" />
     <Content Include="_css\custom.css" />
     <Content Include="_images\homepage.png" />
     <Content Include="_images\jmu.jfif" />
@@ -401,6 +402,13 @@
     </Compile>
     <Compile Include="student\Bookmarks.aspx.designer.cs">
       <DependentUpon>Bookmarks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\ViewApplications.aspx.cs">
+      <DependentUpon>ViewApplications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\ViewApplications.aspx.designer.cs">
+      <DependentUpon>ViewApplications.aspx</DependentUpon>
     </Compile>
     <Compile Include="templates\Details.Master.cs">
       <DependentUpon>Details.Master</DependentUpon>

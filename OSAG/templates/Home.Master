@@ -91,6 +91,9 @@
                         <li>
                             <a class="dropdown-item" href="/student/Bookmarks.aspx">BOOKMARKS</a>
                         </li>
+                        <li>
+                            <a class="dropdown-item" href="/student/ViewApplications.aspx">APPLICATIONS</a>
+                        </li>
                         <% } %>
 
                         <!--Only members-->

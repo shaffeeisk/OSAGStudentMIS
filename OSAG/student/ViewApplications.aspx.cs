@@ -1,5 +1,4 @@
-﻿/* code behind for bookmarks page*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,28 +7,27 @@ using System.Web.UI.WebControls;
 
 namespace OSAG.student
 {
-    public partial class Bookmarks : System.Web.UI.Page
+    public partial class ViewApplications : System.Web.UI.Page
     {
-        // set select commands based on session variables
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Username"] == null || Session["UserType"].ToString() != "student")
                 return;
-            sqlsrc.SelectCommand = "SELECT Job.JobID, JobName, CompanyName FROM Job " +
+            sqlsrc.SelectCommand = "SELECT Job.JobID, JobName, CompanyName, AppStatus FROM Job " +
                 "LEFT JOIN Company ON Job.CompanyID = Company.CompanyID " +
                 "LEFT JOIN JobMatch ON JobMatch.JobID = Job.JobID " +
                 "LEFT JOIN Student ON Student.StudentID = JobMatch.StudentID " +
-                "WHERE JobMatch.isBookmark = 1 AND Student.Username = '" + Session["Username"] + "'";
-            sqlsrc2.SelectCommand = "SELECT Internship.InternshipID, InternshipName, CompanyName FROM Internship " +
+                "WHERE AppStatus IS NOT NULL AND Student.Username = '" + Session["Username"] + "'";
+            sqlsrc2.SelectCommand = "SELECT Internship.InternshipID, InternshipName, CompanyName, AppStatus FROM Internship " +
                 "LEFT JOIN Company ON Internship.CompanyID = Company.CompanyID " +
                 "LEFT JOIN InternshipMatch ON InternshipMatch.InternshipID = Internship.InternshipID " +
                 "LEFT JOIN Student ON Student.StudentID = InternshipMatch.StudentID " +
-                "WHERE InternshipMatch.IsBookmark = 1 AND Student.Username = '" + Session["Username"] + "'";
-            sqlsrc3.SelectCommand = "SELECT Opportunity.OpportunityID, OpportunityName, OpportunityDescription FROM Opportunity " +
+                "WHERE AppStatus IS NOT NULL AND Student.Username = '" + Session["Username"] + "'";
+            sqlsrc3.SelectCommand = "SELECT Opportunity.OpportunityID, OpportunityName, OpportunityDescription, AppStatus FROM Opportunity " +
                 "LEFT JOIN Company ON Opportunity.CompanyID = Company.CompanyID " +
                 "LEFT JOIN OpportunityMatch ON OpportunityMatch.OpportunityID = Opportunity.OpportunityID " +
                 "LEFT JOIN Student ON Student.StudentID = OpportunityMatch.StudentID " +
-                "WHERE OpportunityMatch.IsBookmark = 1 AND Student.Username = '" + Session["Username"] + "'";
+                "WHERE AppStatus IS NOT NULL AND Student.Username = '" + Session["Username"] + "'";
         }
 
         // jobs bookmarked
