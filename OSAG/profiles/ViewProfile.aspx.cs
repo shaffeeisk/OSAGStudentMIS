@@ -42,7 +42,7 @@ namespace OSAG.profiles
                 if (Session["ViewProfileUserType"].ToString() == "student")
                 {
                     // query for student data
-                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate FROM Student " +
+                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Phone, Class, Gpa, Bio FROM Student " +
                         "WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
                         "SELECT MajorName, IsMinor FROM Student s " +
                         "LEFT JOIN HasMajor h ON s.StudentID = h.StudentID " +
@@ -59,6 +59,10 @@ namespace OSAG.profiles
                         txtEmail.Text = reader["Email"].ToString();
                         if (reader["GradDate"] != DBNull.Value)
                             txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
+                        txtPhone.Text = reader["Phone"].ToString();
+                        txtClass.Text = reader["Class"].ToString();
+                        txtGPA.Text = reader["Gpa"].ToString();
+                        txtBio.Text = reader["Bio"].ToString();
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
@@ -76,7 +80,7 @@ namespace OSAG.profiles
                 // otherwise querying member
                 else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName, LastName, Email, City, M_State, FROM Member" +
+                    sqlQuery = "SELECT FirstName, LastName, Email, City, M_State, Phone, GradDate, PositionTitle, Bio FROM Member" +
                         " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
                         "SELECT FirstName,LastName,Email,City,M_State, m.MajorName, IsMinor FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
                         "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
@@ -93,6 +97,11 @@ namespace OSAG.profiles
                         txtMemberEmail.Text = reader["Email"].ToString();
                         txtCity.Text = reader["City"].ToString();
                         txtState.Text = reader["M_State"].ToString();
+                        txtMemberPhone.Text = reader["Phone"].ToString();
+                        if (reader["GradDate"] != DBNull.Value)
+                            txtMemberGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
+                        txtPositionTitle.Text = reader["PositionTitle"].ToString();
+                        txtMemberBio.Text = reader["Bio"].ToString();
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes

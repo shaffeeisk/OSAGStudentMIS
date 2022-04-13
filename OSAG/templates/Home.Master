@@ -135,7 +135,7 @@
 
                          <li>
                             <asp:LinkButton ID="lnkbtnSignOut" runat="server" class="dropdown-item" 
-                                text="SIGN OUT" OnClick="lnkbtnSignOut_Click"></asp:LinkButton>
+                                text="SIGN OUT" OnClick="lnkbtnSignOut_Click" CausesValidation ="false"></asp:LinkButton>
                         </li>
                     </ul>
                     <!--drop down end-->

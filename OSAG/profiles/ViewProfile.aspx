@@ -28,6 +28,18 @@
         <asp:Label ID="Label5" runat="server" Text="Minors"></asp:Label>
         <asp:TextBox ID="txtMinor" runat="server" Enabled="false"></asp:TextBox>
         <br />
+        <asp:Label ID="Label13" runat="server" Text="Phone"></asp:Label>
+        <asp:TextBox ID="txtPhone" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label14" runat="server" Text="Class"></asp:Label>
+        <asp:TextBox ID="txtClass" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label15" runat="server" Text="GPA"></asp:Label>
+        <asp:TextBox ID="txtGPA" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label16" runat="server" Text="Bio"></asp:Label>
+        <asp:TextBox ID="txtBio" runat="server" Enabled="false"></asp:TextBox>
+        <br />
         <br />
         <asp:Button ID="btnDownloadResume" runat="server" Text="View Resume" OnClick="btnDownloadResume_Click" />
         <% } %>
@@ -54,6 +66,18 @@
         <br />
         <asp:Label ID="Label8" runat="server" Text="Minors"></asp:Label>
         <asp:TextBox ID="txtMemberMinors" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label9" runat="server" Text="Phone"></asp:Label>
+        <asp:TextBox ID="txtMemberPhone" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label10" runat="server" Text="Graduation Date"></asp:Label>
+        <asp:TextBox ID="txtMemberGradDate" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label11" runat="server" Text="Position Title"></asp:Label>
+        <asp:TextBox ID="txtPositionTitle" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label12" runat="server" Text="Bio"></asp:Label>
+        <asp:TextBox ID="txtMemberBio" runat="server" Enabled="false"></asp:TextBox>
 
         <% } %>
         <br />
