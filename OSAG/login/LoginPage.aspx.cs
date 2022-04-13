@@ -34,7 +34,7 @@ namespace OSAG.login
             // check to make sure user is approved first, if not do not attempt login
             if (!isApproved(txtUsername.Text))
             {
-                Session["Username"] = txtUsername.Text;
+                Session["TempUsername"] = txtUsername.Text;
                 declareUnapprovedUserType(txtUsername.Text);
                 Session["MustLogin"] = "Your account is pending approval. Please try again at a later time.";
                 Response.Redirect("/profiles/UnapprovedUserProfile.aspx");

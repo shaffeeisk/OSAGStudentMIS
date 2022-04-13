@@ -16,7 +16,7 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Username"] == null)
+            if (Session["TempUsername"] == null)
             {
                 Session["MustLogin"] = "You must log in to access that page.";
                 Response.Redirect("/login/LoginPage.aspx");
@@ -45,13 +45,13 @@ namespace OSAG.profiles
                     // column for resume is probably not a good idea in this query. imagine thousands of page_loads
                     // with Reader being sent in with +100-200 kb due to byte array
                     sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved " +
-                        "FROM Student WHERE Username = '" + Session["Username"].ToString() + "' " +
+                        "FROM Student WHERE Username = '" + Session["TempUsername"].ToString() + "' " +
                         // separate into 2 result sets
                         "SELECT MajorName, IsMinor " +
                         "FROM Student s " +
                         "LEFT JOIN HasMajor h on h.StudentID = s.StudentID " +
                         "LEFT JOIN Major m on m.MajorID = h.MajorID " +
-                        "WHERE Username = '" + Session["Username"].ToString() + "';";
+                        "WHERE Username = '" + Session["TempUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
@@ -104,11 +104,11 @@ namespace OSAG.profiles
                 {
                     sqlQuery = "SELECT FirstName, LastName, Email, City, M_State, GradDate, PositionTitle, Phone, Bio, IsApproved " +
                         "FROM Member " +
-                        "WHERE Username = '" + Session["Username"].ToString() + "' " +
+                        "WHERE Username = '" + Session["TempUsername"].ToString() + "' " +
                         "SELECT MajorName, IsMinor FROM Member m " +
                         "LEFT JOIN HasMajor h on h.MemberID = m.MemberID " +
                         "LEFT JOIN Major z on z.MajorID = h.MajorID" +
-                        " WHERE Username =  '" + Session["Username"].ToString() + "';";
+                        " WHERE Username =  '" + Session["TempUsername"].ToString() + "';";
                     SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
@@ -163,7 +163,7 @@ namespace OSAG.profiles
                     "Gpa = @Gpa, " +
                     "Bio = @Bio, " +
                     "GradDate = @GradDate " +
-                    "WHERE Username = '" + Session["Username"].ToString() + "';";
+                    "WHERE Username = '" + Session["TempUsername"].ToString() + "';";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@FirstName", validate(txtFirstName.Text));
                 sqlCommand.Parameters.AddWithValue("@LastName", validate(txtLastName.Text));
@@ -189,7 +189,7 @@ namespace OSAG.profiles
                     "PositionTitle = @PositionTitle, " +
                     "Bio = @Bio, " +
                     "GradDate = @GradDate " +
-                    "WHERE Username = '" + Session["Username"].ToString() + "';";
+                    "WHERE Username = '" + Session["TempUsername"].ToString() + "';";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@FirstName", validate(mtxtFirstName.Text));
                 sqlCommand.Parameters.AddWithValue("@LastName", validate(mtxtLastName.Text));
@@ -239,7 +239,7 @@ namespace OSAG.profiles
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery);
                 sqlCommand.Connection = sqlConnect;
-                sqlCommand.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+                sqlCommand.Parameters.AddWithValue("@Username", Session["TempUsername"].ToString());
                 sqlCommand.Parameters.AddWithValue("@ResumeFile", br.ReadBytes((Int32)fs.Length)); // BinaryReader converts file to byte[]
 
                 sqlConnect.Open();
@@ -257,7 +257,7 @@ namespace OSAG.profiles
         // some browsers will prompt client, chrome will immediately begin download.
         protected void btnDownloadResume_Click(object sender, EventArgs e)
         {
-            byte[] resumeFile = getResumeBytes(Session["Username"].ToString());
+            byte[] resumeFile = getResumeBytes(Session["TempUsername"].ToString());
             if (resumeFile == null)
             {
                 // ERROR MESSAGE HANDLING PLEASE (NO RESUME UPLOADED)
@@ -266,7 +266,7 @@ namespace OSAG.profiles
             }
             // can change file download name, simply change content of filename= below
             // cannot use original file name unless it is stored when uploading.
-            Response.AddHeader("content-disposition", "attachment;filename=resume_" + Session["Username"].ToString() + "_saved.pdf");
+            Response.AddHeader("content-disposition", "attachment;filename=resume_" + Session["TempUsername"].ToString() + "_saved.pdf");
             Response.ContentType = "application/octectstream";
             Response.BinaryWrite(resumeFile);
             Response.End();
