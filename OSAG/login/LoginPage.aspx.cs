@@ -34,8 +34,10 @@ namespace OSAG.login
             // check to make sure user is approved first, if not do not attempt login
             if (!isApproved(txtUsername.Text))
             {
+                Session["Username"] = txtUsername.Text;
+                declareUnapprovedUserType(txtUsername.Text);
                 Session["MustLogin"] = "Your account is pending approval. Please try again at a later time.";
-                Response.Redirect("LoginPage.aspx");
+                Response.Redirect("/profiles/UnapprovedUserProfile.aspx");
                 return;
             }
 
@@ -91,6 +93,22 @@ namespace OSAG.login
                 Response.Redirect("/homepages/StudentHome.aspx");
             } else
                 Response.Redirect("/homepages/MemberHome.aspx");
+        }
+
+        protected void declareUnapprovedUserType(String s)
+        {
+            String sqlQuery = "SELECT COUNT(*) FROM Student WHERE Username = @Username;";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
+            sqlConnect.Open();
+            int userType = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            sqlConnect.Close();
+
+            if (userType == 1) // user is student (found in Student table)
+                Session["UserType"] = "student";
+            else // user is member (not found in Student table)
+                Session["UserType"] = "member";
         }
 
 

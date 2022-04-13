@@ -105,6 +105,7 @@
     <Content Include="member\ViewStudentInterests.aspx" />
     <Content Include="opportunities\Opportunities.aspx" />
     <Content Include="opportunities\OpportunityDetails.aspx" />
+    <Content Include="profiles\UnapprovedUserProfile.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -364,6 +365,13 @@
     </Compile>
     <Compile Include="profiles\StartChat.aspx.designer.cs">
       <DependentUpon>StartChat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiles\UnapprovedUserProfile.aspx.cs">
+      <DependentUpon>UnapprovedUserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\UnapprovedUserProfile.aspx.designer.cs">
+      <DependentUpon>UnapprovedUserProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="profiles\UserProfile.aspx.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
