@@ -18,10 +18,10 @@ namespace OSAG.internships
         {
             try
             {
-                if (!IsPostBack) //check if the webpage is loaded for the first time.
+                if (!IsPostBack) // check if the webpage is loaded for the first time.
                 {
                     ViewState["PreviousPage"] =
-                Request.UrlReferrer;//Saves the Previous page url in ViewState
+                Request.UrlReferrer;// Saves the Previous page url in ViewState
                 }
                 // Query to populate page with data
                 String sqlQuery = "Select 'Internship Name: ' + InternshipName as Name, 'Company Name: ' + CompanyName as Company, 'Internship Description: ' +  InternshipDescription as Description, 'Application Deadline: ' + CAST(ApplicationDeadline AS varchar) as Deadline" +
@@ -43,7 +43,10 @@ namespace OSAG.internships
                     lblDetails6.Text = queryResults["Payment"].ToString();
                     // give the linkbutton the stored URL
                     if (queryResults["InternshipLink"] != DBNull.Value)
+                    {
+                        lnkbtnApply.Visible = true;
                         lnkbtnApply.OnClientClick = "Navigate('" + queryResults["InternshipLink"].ToString() + "')";
+                    }
                 }
             }
             catch (NullReferenceException)
@@ -116,7 +119,7 @@ namespace OSAG.internships
         public bool MatchExists(int stuID, int itemID)
         {
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            String sqlQuery = "SELECT COUNT(*) FROM InternshipMatch WHERE StudentID = " + stuID + " AND InternshipID = " + itemID + ";";
+            String sqlQuery = "SELECT COUNT(*) FROM InternshipMatch WHERE StudentID = '" + stuID + "' AND InternshipID = '" + itemID + "';";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
             if ((int)sqlCommand.ExecuteScalar() < 1)

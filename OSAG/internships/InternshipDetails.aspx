@@ -22,7 +22,7 @@
     <br />
     <asp:Label ID="lblDetails6" runat="server" Text=""></asp:Label>
     <br />
-    <asp:LinkButton ID="lnkbtnApply" runat="server" OnClick="lnkbtnApply_Click">Apply Here</asp:LinkButton>
+    <asp:LinkButton ID="lnkbtnApply" runat="server" Visible="false" OnClick="lnkbtnApply_Click">Apply Here</asp:LinkButton>
     <br />
     <asp:Label ID="lblStatus" Text="Did you complete your application?" runat="server" Visible="false" />
     <br />
