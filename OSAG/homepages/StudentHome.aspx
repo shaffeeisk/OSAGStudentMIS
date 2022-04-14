@@ -23,7 +23,6 @@
                     <asp:Button ID="btnInternships" runat="server" Text="Internships" CssClass="btn btn-outline-secondary btn-lg px-4" OnClick="btnInternships_Click"/>
                     <asp:Button ID="btnJobs" runat="server" Text="Jobs" CssClass="btn btn-outline-secondary btn-lg px-4" OnClick="btnJobs_Click"/>
                 </div>
-
             </div>
         </div>
     </div>

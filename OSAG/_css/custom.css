@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* Add your custom CSS declarations below  */
 
+.loginbackground {
+    background-image: url(/_images/jmubackground.png);
+    background-position: left;
+}
 
 h1, h2, h3 {
     font-family: 'Raleway', sans-serif;
