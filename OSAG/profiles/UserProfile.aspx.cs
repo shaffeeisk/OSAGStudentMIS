@@ -46,7 +46,7 @@ namespace OSAG.profiles
                 {
                     // column for resume is probably not a good idea in this query. imagine thousands of page_loads
                     // with Reader being sent in with +100-200 kb due to byte array
-                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved " +
+                    sqlQuery = "SELECT StudentID, RegistrationYear, FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved " +
                         "FROM Student WHERE Username = '" + Session["Username"].ToString() + "' " +
                         // separate into 2 result sets
                         "SELECT MajorName, IsMinor " +
@@ -54,7 +54,7 @@ namespace OSAG.profiles
                         "LEFT JOIN HasMajor h on h.StudentID = s.StudentID " +
                         "LEFT JOIN Major m on m.MajorID = h.MajorID " +
                         "WHERE Username = '" + Session["Username"].ToString() + "';";
-                    sqlCommand  = new SqlCommand(sqlQuery, sqlConnect);
+                    sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
                     // read data onto page
@@ -77,6 +77,13 @@ namespace OSAG.profiles
                             lblApprove.Text = "User Profile Approved";
                         else
                             lblApprove.Text = "User Profile Not Yet Approved";
+
+                        // load pfp onto page
+                        String fpath = "\\_images\\sPFP\\" + reader["RegistrationYear"].ToString() + "\\" + reader["StudentID"].ToString() + ".jpg";
+                        if (File.Exists(Request.PhysicalApplicationPath + fpath))
+                            imgProfile.ImageUrl = fpath;
+                        else
+                            imgProfile.ImageUrl = "\\_images\\user.png"; // default profile pic
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
@@ -273,6 +280,62 @@ namespace OSAG.profiles
             Response.End();
         }
 
+        // on click enable picture upload visibility
+        protected void imgProfile_Click(object sender, ImageClickEventArgs e)
+        {
+            lblPFP.Visible = true;
+            filePFP.Visible = true;
+            btnPFP.Visible = true;
+        }
+
+
+        // event handler for profile pic upload
+        protected void btnPFP_Click(object sender, EventArgs e)
+        {
+            // upload resume if a file was uploaded
+            if (filePFP.HasFile)
+            {
+                // ensure file is not too large. http error if 4MB+, handled in Global.asax.
+                // do not want to change web.config http timeout settings because DDoS = bad
+                if (filePFP.PostedFile.ContentLength > 2097152)
+                {
+                    // file is too large (>2mb)
+                    lblPFP.Text = "file larger than 2mb"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    return;
+                }
+                // make sure file is jpg
+                string cType = filePFP.PostedFile.ContentType;
+                if (cType != "image/jpeg")
+                {
+                    // file is not jpg
+                    lblPFP.Text = "file must be jpeg"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    return;
+                }
+                // upload profile picture
+                int[] arr = UsernameToIDAndRegYear(Session["Username"].ToString()); // arr[0] = studentID, arr[1] = regYear
+                String fpath = Request.PhysicalApplicationPath + "_images\\sPFP\\" + arr[1];
+                Directory.CreateDirectory(fpath);
+                fpath += "\\" + arr[0] + ".jpg";
+                if (File.Exists(fpath)) // delete existing file if exists
+                {
+                    imgProfile.ImageUrl = ""; // reset img url cuz browsers cache aggressively
+                    File.Delete(fpath);
+                    Response.Cache.SetLastModified(DateTime.Now); // provide constant messages to browser
+                }
+                filePFP.SaveAs(fpath); // save upload
+                Response.Cache.SetLastModified(DateTime.Now); // constantly tell browser cache is being worked on
+                filePFP.Visible = false;
+                btnPFP.Visible = false;
+                imgProfile.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // set image again
+                lblPFP.Text = "Profile picture successfully changed.";
+            }
+            else
+            {
+                // display error message or something here
+                lblPFP.Text = "no image uploaded";
+            }
+        }
+
         // helper method that queries for resume file and returns byte array
         protected byte[] getResumeBytes(string s)
         {
@@ -324,6 +387,21 @@ namespace OSAG.profiles
             if (o == DBNull.Value)
                 return false;
             return (bool)o;
+        }
+
+        // helper method for file upload (STUDENT ONLY)
+        protected int[] UsernameToIDAndRegYear(string studentUsername)
+        {
+            int[] arr = new int[2];
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("SELECT StudentID, RegistrationYear FROM Student WHERE Username = @Username;", sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@Username", studentUsername);
+            sqlConnect.Open();
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            reader.Read();
+            arr[0] = (int)reader["StudentID"];
+            arr[1] = (int)(short)reader["RegistrationYear"];
+            return arr;
         }
     }
 }

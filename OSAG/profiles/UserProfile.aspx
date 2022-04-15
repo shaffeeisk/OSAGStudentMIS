@@ -14,6 +14,13 @@
         </script>
         <asp:Label ID="lblApprove" runat="server" Text=""></asp:Label>
         <br />
+        <asp:ImageButton ID="imgProfile" runat="server" Height="100px" Width="100px" CssClass="img-thumbnail" 
+            OnClick="imgProfile_Click" CausesValidation="false" />
+        <br />
+        <asp:Label ID="lblPFP" runat="server" Text="Upload Profile Picture (JPG/JPEG only)" Visible="false"></asp:Label>
+        <asp:FileUpload ID="filePFP" runat="server" Visible="false" />
+        <asp:Button ID="btnPFP" type="submit" Text="Upload" runat="server" CausesValidation="false" OnClick="btnPFP_Click" Visible="false"></asp:Button>
+        <br />
         <% if (Session["UserType"].ToString() == "student")
             { %>
         <asp:Label ID="Label1" runat="server" Text="First Name"></asp:Label>
