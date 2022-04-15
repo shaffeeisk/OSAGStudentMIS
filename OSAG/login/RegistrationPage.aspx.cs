@@ -42,12 +42,13 @@ namespace OSAG.login
             }
 
             // run query (ONLY STUDENTS NOW)
-            String sqlQuery = "INSERT INTO Student (Username, Pass, FirstName, LastName, IsApproved, Email) " +
-                "VALUES (@Username, @Pass, @FirstName, @LastName, 'FALSE', @Email);";
+            String sqlQuery = "INSERT INTO Student (Username, Pass, RegistrationYear, FirstName, LastName, IsApproved, Email) " +
+                "VALUES (@Username, @Pass, @RegistrationYear, @FirstName, @LastName, 'FALSE', @Email);";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
             sqlCommand.Parameters.AddWithValue("@Pass", PasswordHash.HashPassword(txtPassword.Text));
+            sqlCommand.Parameters.AddWithValue("@RegistrationYear", DateTime.Now.Year);
             sqlCommand.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
             sqlCommand.Parameters.AddWithValue("@LastName", txtLastName.Text);
             sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
@@ -84,19 +85,6 @@ namespace OSAG.login
         {
             Response.Redirect("/login/LoginPage.aspx");
         }
-
-        //// event handler for clear button
-        //protected void btnClear_Click(object sender, EventArgs e)
-        //{
-        //    ClearData();
-        //    Response.Redirect("/login/RegistrationPage.aspx");
-        //}
-
-        //// event handler for return home button
-        //protected void btnReturn_Click(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("/homepages/HomePage.aspx");
-        //}
 
         // helper method to clear text boxes
         protected void ClearData()
