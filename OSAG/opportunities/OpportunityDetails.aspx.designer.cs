@@ -60,24 +60,6 @@ namespace OSAG.opportunities
         protected global::System.Web.UI.WebControls.Label lblDetails4;
 
         /// <summary>
-        /// lblDetails5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDetails5;
-
-        /// <summary>
-        /// lblDetails6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDetails6;
-
-        /// <summary>
         /// lnkbtnApply control.
         /// </summary>
         /// <remarks>

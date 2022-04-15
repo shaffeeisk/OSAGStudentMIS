@@ -85,20 +85,15 @@ namespace OSAG.member
         protected void SaveOpportunity()
         {
             String sqlQuery = "INSERT INTO Opportunity " +
-                "(OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, IsScholarship, OpportunityAward, CompanyID) " +
+                "(OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, CompanyID) " +
                 "VALUES " +
-                "(@OpportunityName, @OpportunityDescription, @EventDate, @ApplicationDeadline, @IsScholarship, @OpportunityAward, @CompanyID);";
+                "(@OpportunityName, @OpportunityDescription, @EventDate, @ApplicationDeadline, @CompanyID);";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@OpportunityName", validate(txtOpportunityName.Text));
             sqlCommand.Parameters.AddWithValue("@OpportunityDescription", validate(txtDescription.Text));
             sqlCommand.Parameters.AddWithValue("@EventDate", validate(txtEventDate.Text));
             sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtDeadline.Text));
-            if (ckbxIsScholarship.Checked)
-                sqlCommand.Parameters.AddWithValue("@IsScholarship", true);
-            else
-                sqlCommand.Parameters.AddWithValue("@IsScholarship", false);
-            sqlCommand.Parameters.AddWithValue("@OpportunityAward", validate(txtAward.Text));
             sqlCommand.Parameters.AddWithValue("@CompanyID", validate(ddlCompany.SelectedValue));
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
@@ -114,7 +109,6 @@ namespace OSAG.member
         protected void ClearOpportunityData()
         {
             txtOpportunityName.Text = "";
-            txtAward.Text = "";
             txtDescription.Text = "";
             txtDeadline.Text = "";
             txtEventDate.Text = "";

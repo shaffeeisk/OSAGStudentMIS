@@ -51,11 +51,6 @@
             Text="(Required)"
             runat="server" />
         <br />
-        <asp:CheckBox ID="ckbxIsScholarship" runat="server" Text="This is a Scholarship" />
-        <br />
-        <asp:Label ID="lblAward" runat="server" Text="Opportunity Award: " Width="160px"></asp:Label>
-        <asp:TextBox ID="txtAward" TextMode="Number" runat="server"></asp:TextBox>
-        <br />
         <asp:Label ID="Label6" runat="server" Text="CompanyID: " Width="160px"></asp:Label>
         <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="177px"
             DataSourceID="sqlsrcListCompanies"
@@ -92,8 +87,6 @@
                 <asp:BoundField HeaderText="OpportunityDescription" DataField="OpportunityDescription" SortExpression="OpportunityDescription" />
                 <asp:BoundField HeaderText="EventDate" DataField="EventDate" SortExpression="EventDate" />
                 <asp:BoundField HeaderText="ApplicationDeadline" DataField="ApplicationDeadline" SortExpression="ApplicationDeadline" />
-                <asp:BoundField HeaderText="IsScholarship" DataField="IsScholarship" SortExpression="IsScholarship" />
-                <asp:BoundField HeaderText="OpportunityAward" DataField="OpportunityAward" SortExpression="OpportunityAward" />
                 <asp:TemplateField>
                     <ItemTemplate>
                     </ItemTemplate>
@@ -106,8 +99,8 @@
             SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>
         <asp:SqlDataSource ID="sqlsrc" runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"
-            SelectCommand="SELECT OpportunityID, OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, IsScholarship, OpportunityAward FROM Opportunity"
-            UpdateCommand="UPDATE Opportunity SET OpportunityName = @OpportunityName, OpportunityDescription = @OpportunityDescription, , EventDate = @EventDate, ApplicationDeadline = @ApplicationDeadline, IsScholarship = @IsScholarship, OpportunityAward = @OpportunityAward WHERE OpportunityID= @OpportunityID "
+            SelectCommand="SELECT OpportunityID, OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline FROM Opportunity"
+            UpdateCommand="UPDATE Opportunity SET OpportunityName = @OpportunityName, OpportunityDescription = @OpportunityDescription, , EventDate = @EventDate, ApplicationDeadline = @ApplicationDeadline, WHERE OpportunityID= @OpportunityID "
             DeleteCommand="DELETE from OpportunityMatch WHERE OpportunityID = @OpportunityID DELETE FROM Opportunity where OpportunityID = @OpportunityID"></asp:SqlDataSource>
     </div>
 </asp:Content>

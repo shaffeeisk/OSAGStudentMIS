@@ -40,6 +40,7 @@ namespace OSAG.profiles
                 // define connection to DB and query String
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
                 String sqlQuery;
+                SqlCommand sqlCommand;
 
                 if (Session["UserType"].ToString() == "student")
                 {
@@ -53,7 +54,7 @@ namespace OSAG.profiles
                         "LEFT JOIN HasMajor h on h.StudentID = s.StudentID " +
                         "LEFT JOIN Major m on m.MajorID = h.MajorID " +
                         "WHERE Username = '" + Session["Username"].ToString() + "';";
-                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                    sqlCommand  = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
                     // read data onto page
@@ -99,7 +100,6 @@ namespace OSAG.profiles
                      *                 embed                *
                      *                  here                *
                      ****************************************/
-
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
@@ -108,9 +108,9 @@ namespace OSAG.profiles
                         "WHERE Username = '" + Session["Username"].ToString() + "' " +
                         "SELECT MajorName, IsMinor FROM Member m " +
                         "LEFT JOIN HasMajor h on h.MemberID = m.MemberID " +
-                        "LEFT JOIN Major z on z.MajorID = h.MajorID" +
-                        " WHERE Username =  '" + Session["Username"].ToString() + "';";
-                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                        "LEFT JOIN Major z on z.MajorID = h.MajorID " +
+                        "WHERE Username =  '" + Session["Username"].ToString() + "';";
+                    sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
                     // read data onto page

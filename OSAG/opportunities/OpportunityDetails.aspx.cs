@@ -22,8 +22,8 @@ namespace OSAG.opportunities
                     ViewState["PreviousPage"] = Request.UrlReferrer;
 
                 // Query to populate page with data
-                String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, OpportunityLink, " +
-                    "IsScholarship, OpportunityAward FROM Opportunity WHERE Opportunity.OpportunityID = '" + Session["View"].ToString() + "'";
+                String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, OpportunityLink " +
+                    "FROM Opportunity WHERE Opportunity.OpportunityID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
 
@@ -35,8 +35,6 @@ namespace OSAG.opportunities
                 lblDetails2.Text = "Description: " + queryResults["OpportunityDescription"].ToString();
                 lblDetails3.Text = "Event Date: " + queryResults["EventDate"].ToString();
                 lblDetails4.Text = "Application Deadline: " + queryResults["ApplicationDeadline"].ToString();
-                lblDetails5.Text = "Scholarship? " + queryResults["IsScholarship"].ToString();
-                lblDetails6.Text = "Scholarship Award: " + queryResults["OpportunityAward"].ToString();
                 // give the linkbutton the stored URL
                 if (queryResults["OpportunityLink"] != DBNull.Value)
                 {
