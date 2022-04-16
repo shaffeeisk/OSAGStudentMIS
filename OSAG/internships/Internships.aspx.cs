@@ -30,20 +30,14 @@ namespace OSAG.internships
                 // Retrieve StudentID of user
                 int StudentID = UsernameToID(Session["Username"].ToString());
 
-                // instantiate objects for queries
-                SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-                string sqlQuery;
-                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-
                 // for each grid row
                 for (int i = 0; i < grdvwInternships.Rows.Count; i++)
                 {
                     // define button to be changed and gridview row being used
                     Button btn = (Button)grdvwInternships.Rows[i].FindControl("btnBookmark");
-                    GridViewRow gvr = (GridViewRow)btn.NamingContainer;
 
                     // Retrieve InternshipID from row
-                    int ItemID = (int)grdvwInternships.DataKeys[gvr.RowIndex]["InternshipID"];
+                    int ItemID = (int)grdvwInternships.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex]["InternshipID"];
 
                     // check bookmark. get match record (if any)
                     int[] match = getMatch(StudentID, ItemID);
