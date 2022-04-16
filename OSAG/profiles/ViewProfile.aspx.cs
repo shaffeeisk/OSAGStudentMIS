@@ -42,7 +42,7 @@ namespace OSAG.profiles
                 if (Session["ViewProfileUserType"].ToString() == "student")
                 {
                     // query for student data
-                    sqlQuery = "SELECT FirstName, LastName, Email, GradDate, Phone, Class, Gpa, Bio FROM Student " +
+                    sqlQuery = "SELECT StudentID, RegistrationYear, FirstName, LastName, Email, GradDate, Phone, Class, Gpa, Bio FROM Student " +
                         "WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
                         "SELECT MajorName, IsMinor FROM Student s " +
                         "LEFT JOIN HasMajor h ON s.StudentID = h.StudentID " +
@@ -63,6 +63,13 @@ namespace OSAG.profiles
                         txtClass.Text = reader["Class"].ToString();
                         txtGPA.Text = reader["Gpa"].ToString();
                         txtBio.Text = reader["Bio"].ToString();
+                        
+                        // load pfp onto page
+                        String fpath = "\\_images\\sPFP\\" + reader["RegistrationYear"].ToString() + "\\" + reader["StudentID"].ToString() + ".jpg";
+                        if (File.Exists(Request.PhysicalApplicationPath + fpath))
+                            imgProfile.ImageUrl = fpath;
+                        else
+                            imgProfile.ImageUrl = "\\_images\\user.png"; // default profile pic
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
@@ -80,7 +87,7 @@ namespace OSAG.profiles
                 // otherwise querying member
                 else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName, LastName, Email, City, M_State, Phone, GradDate, PositionTitle, Bio FROM Member" +
+                    sqlQuery = "SELECT MemberID, FirstName, LastName, Email, City, M_State, Phone, GradDate, PositionTitle, Bio FROM Member" +
                         " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
                         "SELECT FirstName,LastName,Email,City,M_State, m.MajorName, IsMinor FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
                         "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
@@ -102,6 +109,13 @@ namespace OSAG.profiles
                             txtMemberGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
                         txtPositionTitle.Text = reader["PositionTitle"].ToString();
                         txtMemberBio.Text = reader["Bio"].ToString();
+
+                        // load pfp onto page
+                        String fpath = "\\_images\\mPFP\\" + reader["MemberID"].ToString() + ".jpg";
+                        if (File.Exists(Request.PhysicalApplicationPath + fpath))
+                            imgProfile.ImageUrl = fpath;
+                        else
+                            imgProfile.ImageUrl = "\\_images\\user.png"; // default profile pic
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes

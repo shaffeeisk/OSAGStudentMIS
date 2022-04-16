@@ -8,6 +8,8 @@
     <br />
     <br />
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
+        <asp:Image ID="imgProfile" runat="server" Height="100px" Width="100px" CssClass="img-thumbnail" />
+        <br />
         <% if (Session["ViewProfileUserType"].ToString() == "student")
             { %>
         <asp:Label ID="Label1" runat="server" Text="FirstName"></asp:Label>
