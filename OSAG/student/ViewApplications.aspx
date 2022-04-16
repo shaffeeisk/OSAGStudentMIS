@@ -8,14 +8,26 @@
         <asp:GridView ID="grdvwJobs"
             runat="server"
             DataSourceID="sqlsrc"
+            OnRowDataBound="grdvwJobs_RowDataBound"
             AllowSorting="true"
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
-            AutoGenerateColumns="false" DataKeyNames="JobID">
+            AutoGenerateColumns="false"
+            DataKeyNames="JobID, AppStatus">
             <Columns>
-                <asp:BoundField HeaderText="JobName" DataField="JobName" SortExpression="JobName" />
-                <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
-                <asp:BoundField HeaderText="Status" DataField="AppStatus" SortExpression="AppStatus" />
+                <asp:BoundField HeaderText="Position" DataField="JobName" SortExpression="JobName" />
+                <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
+                <asp:TemplateField HeaderText="Application Status">
+                    <ItemTemplate>
+                        <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
+                            <asp:ListItem Text="Applied" Value="Applied"></asp:ListItem>
+                            <asp:ListItem Text="Interviewing" Value="Interviewing"></asp:ListItem>
+                            <asp:ListItem Text="Offered" Value="Offered"></asp:ListItem>
+                            <asp:ListItem Text="Accepted" Value="Accepted"></asp:ListItem>
+                            <asp:ListItem Text="Declined" Value="Declined"></asp:ListItem>
+                        </asp:DropDownList>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
@@ -31,17 +43,30 @@
         <asp:GridView ID="grdvwInternships"
             runat="server"
             DataSourceID="sqlsrc2"
+            OnRowDataBound="grdvwInternships_RowDataBound"
             AllowSorting="true"
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
-            AutoGenerateColumns="false" DataKeyNames="InternshipID">
+            AutoGenerateColumns="false"
+            DataKeyNames="InternshipID, AppStatus">
             <Columns>
-                <asp:BoundField HeaderText="InternshipName" DataField="InternshipName" SortExpression="InternshipName" />
-                <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
+                <asp:BoundField HeaderText="Position" DataField="InternshipName" SortExpression="InternshipName" />
+                <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
                 <asp:BoundField HeaderText="Status" DataField="AppStatus" SortExpression="AppStatus" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnView2" runat="server" Text="View" OnClick="btnView2_Click" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:DropDownList ID="ddlStatus2" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus2_SelectedIndexChanged">
+                            <asp:ListItem Text="Applied" Value="Applied"></asp:ListItem>
+                            <asp:ListItem Text="Interviewing" Value="Interviewing"></asp:ListItem>
+                            <asp:ListItem Text="Offered" Value="Offered"></asp:ListItem>
+                            <asp:ListItem Text="Accepted" Value="Accepted"></asp:ListItem>
+                            <asp:ListItem Text="Declined" Value="Declined"></asp:ListItem>
+                        </asp:DropDownList>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -54,17 +79,31 @@
         <asp:GridView ID="grdvwOpportunities"
             runat="server"
             DataSourceID="sqlsrc3"
+            OnRowDataBound="grdvwOpportunities_RowDataBound"
             AllowSorting="true"
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
-            AutoGenerateColumns="false" DataKeyNames="OpportunityID">
+            AutoGenerateColumns="false" 
+            DataKeyNames="OpportunityID, AppStatus">
             <Columns>
-                <asp:BoundField HeaderText="Opportunity Name" DataField="OpportunityName" SortExpression="OpportunityName" />
-                <asp:BoundField HeaderText="Description" DataField="OpportunityDescription" SortExpression="OpportunityDescription" />
+                <asp:BoundField HeaderText="Opportunity" DataField="OpportunityName" SortExpression="OpportunityName" />
+                <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />
                 <asp:BoundField HeaderText="Status" DataField="AppStatus" SortExpression="AppStatus" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnView3" runat="server" Text="View" OnClick="btnView3_Click" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:DropDownList ID="ddlStatus3" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus3_SelectedIndexChanged">
+                            <asp:ListItem Text="N/A" Value=""></asp:ListItem>
+                            <asp:ListItem Text="Applied" Value="Applied"></asp:ListItem>
+                            <asp:ListItem Text="Interviewing" Value="Interviewing"></asp:ListItem>
+                            <asp:ListItem Text="Offered" Value="Offered"></asp:ListItem>
+                            <asp:ListItem Text="Accepted" Value="Accepted"></asp:ListItem>
+                            <asp:ListItem Text="Declined" Value="Declined"></asp:ListItem>
+                        </asp:DropDownList>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
