@@ -23,6 +23,9 @@ namespace OSAG.profiles
                 Response.Redirect("/login/LoginPage.aspx");
             }
 
+            // try to stop browser from caching images
+            Response.Cache.SetNoStore();
+
             // only when loading page for the first time
             if (!IsPostBack)
             {
@@ -110,7 +113,7 @@ namespace OSAG.profiles
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT FirstName, LastName, Email, City, M_State, GradDate, PositionTitle, Phone, Bio, IsApproved " +
+                    sqlQuery = "SELECT MemberID, FirstName, LastName, Email, City, M_State, GradDate, PositionTitle, Phone, Bio, IsApproved " +
                         "FROM Member " +
                         "WHERE Username = '" + Session["Username"].ToString() + "' " +
                         "SELECT MajorName, IsMinor FROM Member m " +
@@ -137,6 +140,13 @@ namespace OSAG.profiles
                             lblApprove.Text = "User Profile Approved";
                         else
                             lblApprove.Text = "User Profile Not Yet Approved";
+
+                        // load pfp onto page
+                        String fpath = "\\_images\\mPFP\\" + reader["MemberID"].ToString() + ".jpg";
+                        if (File.Exists(Request.PhysicalApplicationPath + fpath))
+                            imgProfile.ImageUrl = fpath;
+                        else
+                            imgProfile.ImageUrl = "\\_images\\user.png"; // default profile pic
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
@@ -311,22 +321,44 @@ namespace OSAG.profiles
                     lblPFP.Text = "file must be jpeg"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
                     return;
                 }
+
+                // try to get client browser to clear cache
+                Response.Cache.SetExpires(DateTime.Now.AddSeconds(.05));
+
                 // upload profile picture
-                int[] arr = UsernameToIDAndRegYear(Session["Username"].ToString()); // arr[0] = studentID, arr[1] = regYear
-                String fpath = Request.PhysicalApplicationPath + "_images\\sPFP\\" + arr[1];
-                Directory.CreateDirectory(fpath);
-                fpath += "\\" + arr[0] + ".jpg";
-                if (File.Exists(fpath)) // delete existing file if exists
+                if (Session["UserType"].ToString() == "student")
                 {
-                    imgProfile.ImageUrl = ""; // reset img url cuz browsers cache aggressively
-                    File.Delete(fpath);
-                    Response.Cache.SetLastModified(DateTime.Now); // provide constant messages to browser
+                    int[] arr = UsernameToIDAndRegYear(Session["Username"].ToString()); // arr[0] = studentID, arr[1] = regYear
+                    string fpath = Request.PhysicalApplicationPath + "_images\\sPFP\\" + arr[1];
+                    Directory.CreateDirectory(fpath);
+                    fpath += "\\" + arr[0] + ".jpg";
+                    if (File.Exists(fpath)) // delete existing file if exists
+                    {
+                        File.Delete(fpath);
+                        imgProfile.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // make client look for deleted image
+                    }
+                    filePFP.SaveAs(fpath); // save upload
+                    Response.Cache.SetLastModified(DateTime.Now); // tell client cached image was modified
+                    imgProfile.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // make client look for new image
                 }
-                filePFP.SaveAs(fpath); // save upload
-                Response.Cache.SetLastModified(DateTime.Now); // constantly tell browser cache is being worked on
+                else // user is Member
+                {
+                    int id = UsernameToID(Session["Username"].ToString());
+                    string fpath = Request.PhysicalApplicationPath + "_images\\sPFP\\" + id + ".jpg";
+                    if (File.Exists(fpath))
+                    {
+                        File.Delete(fpath);
+                        Response.Cache.SetLastModified(DateTime.Now); // tell client cached image was modified
+                        imgProfile.ImageUrl = "\\_images\\mPFP\\" + id + ".jpg"; // make client look for deleted image
+                    }
+                    filePFP.SaveAs(fpath); // save upload
+                    Response.Cache.SetLastModified(DateTime.Now); // tell client cached image was modified
+                    imgProfile.ImageUrl = "\\_images\\mPFP\\" + id + ".jpg"; // set image again
+                }
+                
+                // remove file upload controls and display success message
                 filePFP.Visible = false;
                 btnPFP.Visible = false;
-                imgProfile.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // set image again
                 lblPFP.Text = "Profile picture successfully changed.";
             }
             else
@@ -388,6 +420,18 @@ namespace OSAG.profiles
                 return false;
             return (bool)o;
         }
+
+        // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
+        protected int UsernameToID(string username)
+        {
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("dbo.OSAG_UsernameToID", sqlConnect);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Username", username);
+            sqlConnect.Open();
+            return (int)sqlCommand.ExecuteScalar();
+        }
+
 
         // helper method for file upload (STUDENT ONLY)
         protected int[] UsernameToIDAndRegYear(string studentUsername)
