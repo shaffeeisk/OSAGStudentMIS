@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Drawing;
 using System.IO;
+using System.Data;
 
 namespace OSAG.profiles
 {
@@ -25,20 +26,21 @@ namespace OSAG.profiles
                 Session["AccessDenied"] = "Access Denied: An unknown error occurred.";
                 Response.Redirect("UserProfile.aspx");
             }
-            // otherwise set select command
-            sqlsrc.SelectCommand = "Select DateCreated, MessageText, SenderName, IsRead FROM ChatMessage WHERE (" +
-                Session["UserType"].ToString() + "SenderID = '" + getID() + "' AND " +
-                 Session["UserChatType"].ToString() + "ReceiverID = " + Session["UserChatID"] + ") OR (" +
-                 Session["UserType"].ToString() + "ReceiverID = '" + getID() + "' AND " +
-                 Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "')";
 
+            // otherwise set select command
+            int userID = UsernameToID(Session["Username"].ToString());
+            sqlsrc.SelectCommand = "Select DateCreated, MessageText, SenderName, IsRead FROM ChatMessage WHERE (" +
+                Session["UserType"].ToString() + "SenderID = '" + userID + "' AND " +
+                 Session["UserChatType"].ToString() + "ReceiverID = " + Session["UserChatID"] + ") OR (" +
+                 Session["UserType"].ToString() + "ReceiverID = '" + userID + "' AND " +
+                 Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "')";
+            // and set page messages to read
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
             sqlQuery = "UPDATE ChatMessage SET IsRead = 1 WHERE " +
-                Session["UserType"].ToString() + "ReceiverID = '" + getID() + "' AND " +
+                Session["UserType"].ToString() + "ReceiverID = '" + userID + "' AND " +
                  Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "'";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
@@ -51,7 +53,7 @@ namespace OSAG.profiles
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
             sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, " + Session["UserChatType"].ToString() + "ReceiverID, SenderName, IsRead) " +
-                "VALUES (@MessageText, '" + getID() + "', '" + Session["UserChatID"].ToString() + "', '" + getName() + "', 0)";
+                "VALUES (@MessageText, '" + UsernameToID(Session["Username"].ToString()) + "', '" + Session["UserChatID"].ToString() + "', '" + getName() + "', 0)";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
             sqlConnect.Open();
@@ -61,36 +63,15 @@ namespace OSAG.profiles
             Response.Redirect("ViewChat.aspx");
         }
 
-        // might be a better way than querying for ID and Name EVERY message send
-        // maybe run these helper methods in page_load and compare/set with Session variables
-        // reader not needed, selecting one column entry (can use ExecuteScalar)
-        // FYI ExecuteScalar() returns First Column of First Row of query result
-        protected String getID()
+        // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
+        protected int UsernameToID(string username)
         {
-            String ID = "";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
-            String sqlQuery;
-            sqlQuery = "SELECT " + Session["UserType"] + "ID FROM " + Session["UserType"] + " WHERE Username = '" + Session["Username"].ToString() + "';";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("dbo.OSAG_UsernameToID", sqlConnect);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Username", username);
             sqlConnect.Open();
-
-            // read data onto page
-            SqlDataReader reader = sqlCommand.ExecuteReader();
-            while (reader.Read())
-            {
-                if(Session["UserType"].ToString() == "student")
-                {
-                    ID = reader["StudentID"].ToString();
-                }
-                else
-                {
-                    ID = reader["MemberID"].ToString();
-
-                }
-
-            }
-
-            return ID;
+            return (int)sqlCommand.ExecuteScalar();
         }
 
         // also, is sender name even needed in the SQL? since you have ID you should be able
@@ -98,30 +79,14 @@ namespace OSAG.profiles
         // it would be better coding practice to do *not this* (Reminder: im only speculating)
         protected String getName()
         {
-            String Name = "";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
             sqlQuery = "SELECT FirstName + ' ' + LastName as Name FROM " + Session["UserType"] + " WHERE Username = '" + Session["Username"].ToString() + "';";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlConnect.Open();
-
-            // read data onto page
             SqlDataReader reader = sqlCommand.ExecuteReader();
-            while (reader.Read())
-            {
-                Name = reader["Name"].ToString();
-            }
-
-            return Name;
+            reader.Read();
+            return reader["Name"].ToString();
         }
-
-        //// converts all timestamps in gridview to local time each refresh
-        //public void updateTimes()
-        //{
-            
-        //    foreach (GridViewRow r in grdvChat.Rows)
-        //        r.Cells[0].Text = DateTime.Parse(r.Cells[0].Text).ToLocalTime().ToString();
-        //}
-
     }
 }

@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Drawing;
 using System.IO;
+using System.Data;
 
 namespace OSAG.profiles
 {
@@ -42,12 +43,16 @@ namespace OSAG.profiles
         {
             if (txtChatBox.Text == "")
                 return;
+
+            string senderName = getName();
+            int senderID = UsernameToID(Session["Username"].ToString());
+
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
             for(int i = 0; i < s; i++)
             {
                 sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, StudentReceiverID, SenderName, IsRead) " +
-                                "VALUES (@MessageText, '" + getID() + "', '" + studentRecipients[i].ToString() + "', '" + getName() + "', 0)";
+                                "VALUES (@MessageText, '" + senderID + "', '" + studentRecipients[i].ToString() + "', '" + senderName + "', 0)";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
                 sqlConnect.Open();
@@ -57,7 +62,7 @@ namespace OSAG.profiles
             for(int i = 0; i < m; i++)
             {
                 sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, MemberReceiverID, SenderName, IsRead) " +
-                                "VALUES (@MessageText, '" + getID() + "', '" + memberRecipients[i].ToString() + "', '" + getName() + "', 0)";
+                                "VALUES (@MessageText, '" + senderID + "', '" + memberRecipients[i].ToString() + "', '" + senderName + "', 0)";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
                 sqlConnect.Open();
@@ -88,8 +93,6 @@ namespace OSAG.profiles
             }
             else
                 lblMemberMax.Text = "Error: Can only select 10 members at a time.";
-
-
         }
 
         protected void ddl_StudentRecipient_SelectedIndexChanged(object sender, EventArgs e)
@@ -105,52 +108,29 @@ namespace OSAG.profiles
             }
             else
                 lblStudentMax.Text = "Error: Can only select 10 Students at a time.";
-
         }
-        protected String getID()
+
+        // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
+        protected int UsernameToID(string username)
         {
-            String ID = "";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
-            String sqlQuery;
-            sqlQuery = "SELECT " + Session["UserType"] + "ID FROM " + Session["UserType"] + " WHERE Username = '" + Session["Username"].ToString() + "';";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("dbo.OSAG_UsernameToID", sqlConnect);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Username", username);
             sqlConnect.Open();
-
-            // read data onto page
-            SqlDataReader reader = sqlCommand.ExecuteReader();
-            while (reader.Read())
-            {
-                if (Session["UserType"].ToString() == "student")
-                {
-                    ID = reader["StudentID"].ToString();
-                }
-                else
-                {
-                    ID = reader["MemberID"].ToString();
-
-                }
-
-            }
-
-            return ID;
+            return (int)sqlCommand.ExecuteScalar();
         }
+
         protected String getName()
         {
-            String Name = "";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
             sqlQuery = "SELECT FirstName + ' ' + LastName as Name FROM " + Session["UserType"] + " WHERE Username = '" + Session["Username"].ToString() + "';";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlConnect.Open();
-
-            // read data onto page
             SqlDataReader reader = sqlCommand.ExecuteReader();
-            while (reader.Read())
-            {
-                Name = reader["Name"].ToString();
-            }
-
-            return Name;
+            reader.Read();
+            return reader["Name"].ToString();
         }
     }
 }
