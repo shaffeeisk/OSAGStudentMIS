@@ -46,8 +46,8 @@ namespace OSAG.profiles
             String sqlQuery;
             for(int i = 0; i < s; i++)
             {
-                sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, StudentReceiverID, SenderName) " +
-                                "VALUES (@MessageText, '" + getID() + "', '" + studentRecipients[i].ToString() + "', '" + getName() + "')";
+                sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, StudentReceiverID, SenderName, IsRead) " +
+                                "VALUES (@MessageText, '" + getID() + "', '" + studentRecipients[i].ToString() + "', '" + getName() + "', 0)";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
                 sqlConnect.Open();
@@ -56,8 +56,8 @@ namespace OSAG.profiles
             }
             for(int i = 0; i < m; i++)
             {
-                sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, MemberReceiverID, SenderName) " +
-                                "VALUES (@MessageText, '" + getID() + "', '" + memberRecipients[i].ToString() + "', '" + getName() + "')";
+                sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, MemberReceiverID, SenderName, IsRead) " +
+                                "VALUES (@MessageText, '" + getID() + "', '" + memberRecipients[i].ToString() + "', '" + getName() + "', 0)";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
                 sqlConnect.Open();

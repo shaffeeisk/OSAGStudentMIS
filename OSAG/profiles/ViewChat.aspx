@@ -16,6 +16,7 @@
                 <asp:BoundField HeaderText="DateCreated" DataField="DateCreated" SortExpression="DateCreated" />
                 <asp:BoundField HeaderText="Sent By" DataField="SenderName" SortExpression="SenderName" />
                 <asp:BoundField HeaderText="MessageText" DataField="MessageText" SortExpression="MessageText" />
+                <asp:BoundField HeaderText="IsRead" DataField="IsRead" SortExpression="IsRead" />
                 <asp:TemplateField>
                     <ItemTemplate>
                     </ItemTemplate>

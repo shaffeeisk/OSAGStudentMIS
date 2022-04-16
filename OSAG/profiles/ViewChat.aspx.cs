@@ -26,11 +26,22 @@ namespace OSAG.profiles
                 Response.Redirect("UserProfile.aspx");
             }
             // otherwise set select command
-            sqlsrc.SelectCommand = "Select DateCreated, MessageText, SenderName FROM ChatMessage WHERE (" +
+            sqlsrc.SelectCommand = "Select DateCreated, MessageText, SenderName, IsRead FROM ChatMessage WHERE (" +
                 Session["UserType"].ToString() + "SenderID = '" + getID() + "' AND " +
                  Session["UserChatType"].ToString() + "ReceiverID = " + Session["UserChatID"] + ") OR (" +
                  Session["UserType"].ToString() + "ReceiverID = '" + getID() + "' AND " +
                  Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "')";
+
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
+            String sqlQuery;
+            sqlQuery = "UPDATE ChatMessage SET IsRead = 1 WHERE " +
+                Session["UserType"].ToString() + "ReceiverID = '" + getID() + "' AND " +
+                 Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "'";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
+            sqlConnect.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
         }
 
         protected void btn_Send_Click(object sender, EventArgs e)
@@ -39,8 +50,8 @@ namespace OSAG.profiles
                 return;
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
-            sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, " + Session["UserChatType"].ToString() + "ReceiverID, SenderName) " +
-                "VALUES (@MessageText, '" + getID() + "', '" + Session["UserChatID"].ToString() + "', '" + getName() + "')";
+            sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, " + Session["UserChatType"].ToString() + "ReceiverID, SenderName, IsRead) " +
+                "VALUES (@MessageText, '" + getID() + "', '" + Session["UserChatID"].ToString() + "', '" + getName() + "', 0)";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
             sqlConnect.Open();
