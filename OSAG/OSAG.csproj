@@ -103,6 +103,7 @@
     <Content Include="admin\CreateJob.aspx" />
     <Content Include="admin\CreateOpportunity.aspx" />
     <Content Include="login\SignUpComplete.aspx" />
+    <Content Include="member\ViewMentorships.aspx" />
     <Content Include="member\ViewStudentInterests.aspx" />
     <Content Include="opportunities\Opportunities.aspx" />
     <Content Include="opportunities\OpportunityDetails.aspx" />
@@ -341,6 +342,13 @@
     </Compile>
     <Compile Include="login\SignUpComplete.aspx.designer.cs">
       <DependentUpon>SignUpComplete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="member\ViewMentorships.aspx.cs">
+      <DependentUpon>ViewMentorships.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="member\ViewMentorships.aspx.designer.cs">
+      <DependentUpon>ViewMentorships.aspx</DependentUpon>
     </Compile>
     <Compile Include="member\ViewStudentInterests.aspx.cs">
       <DependentUpon>ViewStudentInterests.aspx</DependentUpon>

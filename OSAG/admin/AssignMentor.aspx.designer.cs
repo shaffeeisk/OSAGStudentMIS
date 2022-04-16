@@ -15,6 +15,42 @@ namespace OSAG.admin
     {
 
         /// <summary>
+        /// btnToggleRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnToggleRequests;
+
+        /// <summary>
+        /// lblMentorshipRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMentorshipRequests;
+
+        /// <summary>
+        /// grdvMentorshipRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdvMentorshipRequests;
+
+        /// <summary>
+        /// sqlsrcMentorshipRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMentorshipRequests;
+
+        /// <summary>
         /// lstStudents control.
         /// </summary>
         /// <remarks>

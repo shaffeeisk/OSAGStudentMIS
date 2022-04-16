@@ -58,7 +58,8 @@ namespace OSAG.admin
             sqlsrcMentorships.SelectCommand =
                 "SELECT FirstName + ' ' + LastName AS FullName, EndDate, x.MemberID " +
                 "FROM Member x JOIN Mentorship y ON x.MemberID = y.MemberID " +
-                "WHERE StudentID = '" + lstStudents.SelectedValue + "';";
+                "WHERE StudentID = '" + lstStudents.SelectedValue + "' " +
+                "AND IsRequest != 1;";
             sqlsrcMemberList.SelectCommand =
                 "WITH listMentors AS (" +
                 "(SELECT MemberID, FirstName AS MemberName FROM Member WHERE LastName IS NULL) " +
@@ -107,6 +108,42 @@ namespace OSAG.admin
             sqlConnect.Close();
             // refreshes gridview & DDL since DataBind() makes it disappear (note: btn text is assigned on gridview creation)
             lstStudents_SelectedIndexChanged(btn, e);
+        }
+
+        protected void btnApprove_Click(object sender, EventArgs e)
+        {
+            // approve mentorship
+            Button btn = (Button)sender;
+            string sqlQuery = "UPDATE Mentorship SET IsApproved = NULL, EndDate = NULL WHERE StudentID = @StudentID AND MemberID = @MemberID;";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@StudentID", grdvMentorshipRequests.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex]["StudentID"]);
+            sqlCommand.Parameters.AddWithValue("@MemberID", grdvMentorshipRequests.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex]["MemberID"]);
+            sqlConnect.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
+            grdvMentorshipRequests.DataBind();
+        }
+
+        protected void btnDeny_Click(object sender, EventArgs e)
+        {
+            // deny mentorship
+            Button btn = (Button)sender;
+            string sqlQuery = "UPDATE Mentorship SET IsRequest = 0 WHERE StudentID = @StudentID AND MemberID = @MemberID;";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@StudentID", grdvMentorshipRequests.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex]["StudentID"]);
+            sqlCommand.Parameters.AddWithValue("@MemberID", grdvMentorshipRequests.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex]["MemberID"]);
+            sqlConnect.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
+            grdvMentorshipRequests.DataBind();
+        }
+
+        protected void btnToggleRequests_Click(object sender, EventArgs e)
+        {
+            lblMentorshipRequests.Visible = !lblMentorshipRequests.Visible;
+            grdvMentorshipRequests.Visible = !grdvMentorshipRequests.Visible;
         }
     }
 }
