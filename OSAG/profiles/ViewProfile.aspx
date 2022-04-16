@@ -80,6 +80,9 @@
         <br />
         <asp:Label ID="Label12" runat="server" Text="Bio"></asp:Label>
         <asp:TextBox ID="txtMemberBio" runat="server" Enabled="false"></asp:TextBox>
+        <br />
+        <asp:Button ID="btnRequest" runat="server" Text="Request Mentor" Visible="false" OnClick="btnRequest_Click" />
+        <asp:Label ID="lblRequestStatus" Text="" runat="server" />
 
         <% } %>
         <br />

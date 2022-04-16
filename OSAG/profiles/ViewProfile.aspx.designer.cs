@@ -411,6 +411,24 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.TextBox txtMemberBio;
 
         /// <summary>
+        /// btnRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRequest;
+
+        /// <summary>
+        /// lblRequestStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRequestStatus;
+
+        /// <summary>
         /// btnReturn control.
         /// </summary>
         /// <remarks>

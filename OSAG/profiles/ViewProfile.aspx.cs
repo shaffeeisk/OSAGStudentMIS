@@ -87,7 +87,7 @@ namespace OSAG.profiles
                 // otherwise querying member
                 else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT MemberID, FirstName, LastName, Email, City, M_State, Phone, GradDate, PositionTitle, Bio FROM Member" +
+                    sqlQuery = "SELECT MemberID, MemberType, FirstName, LastName, Email, City, M_State, Phone, GradDate, PositionTitle, Bio FROM Member" +
                         " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
                         "SELECT FirstName,LastName,Email,City,M_State, m.MajorName, IsMinor FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
                         "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
@@ -116,6 +116,13 @@ namespace OSAG.profiles
                             imgProfile.ImageUrl = fpath;
                         else
                             imgProfile.ImageUrl = "\\_images\\user.png"; // default profile pic
+
+                        // if User is student and member is Mentor+, display "request mentor" button
+                        if (Session["UserType"].ToString() == "student")
+                        {
+                            if ((byte)reader["MemberType"] < 4) // byte used b/c TINYINT in SQL
+                                btnRequest.Visible = true; // enable request as mentor
+                        }
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
@@ -152,6 +159,26 @@ namespace OSAG.profiles
             Response.End();
         }
 
+        protected void btnRequest_Click(object sender, EventArgs e)
+        {
+            string sqlQuery = "IF NOT EXISTS(SELECT * FROM Mentorship WHERE StudentID = @StudentID AND MemberID = @MemberID) " +
+                "BEGIN " +
+                "INSERT INTO Mentorship (StudentID, MemberID, IsRequest) VALUES (@StudentID, @MemberID, 1) " +
+                "END " +
+                "ELSE " +
+                "BEGIN " +
+                "UPDATE Mentorship SET IsRequest = 1 WHERE StudentID = @StudentID AND MemberID = @MemberID " +
+                "AND (EndDate IS NOT NULL OR EndDate < GETDATE()) " +
+                "END";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@StudentID", UsernameToID(Session["Username"].ToString()));
+            sqlCommand.Parameters.AddWithValue("@MemberID", UsernameToID(Session["ViewProfileUsername"].ToString()));
+            sqlConnect.Open();
+            sqlCommand.ExecuteScalar();
+            lblRequestStatus.Text = "Request submitted.";
+        }
+
         protected void btnReturn_Click(object sender, EventArgs e)
         {
             Response.Redirect("ListUsers.aspx");
@@ -180,6 +207,17 @@ namespace OSAG.profiles
             if (o == DBNull.Value)
                 return false;
             return (bool)o;
+        }
+
+        // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
+        protected int UsernameToID(string username)
+        {
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("dbo.OSAG_UsernameToID", sqlConnect);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Username", username);
+            sqlConnect.Open();
+            return (int)sqlCommand.ExecuteScalar();
         }
     }
 }
