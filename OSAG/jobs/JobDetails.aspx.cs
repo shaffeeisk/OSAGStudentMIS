@@ -20,19 +20,23 @@ namespace OSAG.jobs
             {
                 if (!IsPostBack) // check if the webpage is loaded for the first time.
                 {
-                    ViewState["PreviousPage"] =
-                Request.UrlReferrer;// Saves the Previous page url in ViewState
+                    ViewState["PreviousPage"] = Request.UrlReferrer; // Saves the Previous page url in ViewState
                 }
                 // Query to populate page with data
-                String sqlQuery = "Select 'Job Name: ' + JobName as Name, 'Company Name: ' + CompanyName as Company, 'Job Description: ' +  JobDescription as Description, 'Application Deadline: ' + CAST(ApplicationDeadline AS varchar) as Deadline" +
-                    ", 'Start Date: ' + CAST(StartDate as varchar) as Start, 'Weekly Hours: ' + CAST(WeeklyHours AS varchar) as Hours, 'Payment: ' + FORMAT(Payment,'C') as Payment, JobLink" +
-                    " from Job LEFT JOIN Company ON Company.CompanyID = Job.CompanyID where JobID = '" + Session["View"].ToString() + "'";
+                String sqlQuery = "Select 'Job Name: ' + JobName AS Name, " +
+                    "'Company Name: ' + CompanyName AS Company, " +
+                    "'Job Description: ' +  JobDescription AS Description, " +
+                    "'Application Deadline: ' + CAST(ApplicationDeadline AS VARCHAR) AS Deadline, " +
+                    "'Start Date: ' + CAST(StartDate AS VARCHAR) AS Start, " +
+                    "'Weekly Hours: ' + CAST(WeeklyHours AS VARCHAR) AS Hours, " +
+                    "'Payment: ' + FORMAT(Payment,'C') AS Payment, " +
+                    "JobLink " +
+                    "FROM Job LEFT JOIN Company ON Company.CompanyID = Job.CompanyID WHERE JobID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-
-                // Execute the Query and get results
                 sqlConnection.Open();
                 SqlDataReader queryResults = sqlCommand.ExecuteReader();
+                // read onto page
                 while (queryResults.Read())
                 {
                     lblDetails.Text = queryResults["Name"].ToString();
@@ -49,6 +53,33 @@ namespace OSAG.jobs
                         lnkbtnApply.OnClientClick = "Navigate('" + queryResults["JobLink"].ToString() + "')";
                     }
                 }
+                sqlConnection.Close(); // marks end of above query run
+
+                // populate radio buttons / bookmark button with current match status
+                int stuID = UsernameToID(Session["Username"].ToString());
+                int[] match = getMatch(stuID, (int)Session["View"]);
+                if (match == null) // no record -> do nothing
+                    return;
+                else // record exists
+                {
+                    if (match[1] == 1)
+                        btnBookmark.Text = "Remove bookmark";
+                    // switch statement for IsInterest record
+                    switch (match[2])
+                    {
+                        case -1:    // NULL
+                            break;
+                        case 0:     // Low
+                            rdoLow.Checked = true;
+                            break;
+                        case 1:     // Medium
+                            rdoMed.Checked = true;
+                            break;
+                        case 2:     // High
+                            rdoHi.Checked = true;
+                            break;
+                    }
+                }
             }
             catch (NullReferenceException)
             {
@@ -56,6 +87,40 @@ namespace OSAG.jobs
                 Response.Redirect("/login/LoginPage.aspx");
                 throw;
             }
+        }
+
+        protected void btnBookmark_Click(object sender, EventArgs e)
+        {
+            // Define btn and retrieve JobID from Session Variable
+            Button btn = (Button)sender;
+            int JobID = Int32.Parse(Session["View"].ToString());
+
+            // define database connection & retrieve StudentID of user
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            int StudentID = UsernameToID(Session["Username"].ToString());
+            string sqlQuery;
+
+            // Insert/Remove bookmark
+            int[] matchRecord = getMatch(StudentID, JobID);
+            if (matchRecord == null)        // add match record for bookmark
+            {
+                sqlQuery = "INSERT INTO JobMatch (IsBookmark, StudentID, JobID) VALUES (1, " + StudentID + ", " + JobID + ")";
+                btn.Text = "Remove Bookmark";
+            }
+            else if (matchRecord[1] == 0)   // set bookmarked in existing match record to true
+            {
+                sqlQuery = "UPDATE JobMatch SET IsBookmark = 1 WHERE JobMatchID = " + matchRecord[0] + ";";
+                btn.Text = "Remove Bookmark";
+            }
+            else                            // set bookmarked in existing match record to false
+            {
+                sqlQuery = "UPDATE JobMatch SET IsBookmark = 0 WHERE JobMatchID = " + matchRecord[0] + ";";
+                btn.Text = "Bookmark";
+            }
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
@@ -116,6 +181,72 @@ namespace OSAG.jobs
             btnDidNotApply.Visible = false;
         }
 
+        // event handler for low selection
+        protected void rdoLow_CheckedChanged(object sender, EventArgs e)
+        {
+            // Retrieve JobID from Session Variable
+            int JobID = Int32.Parse(Session["View"].ToString());
+
+            // Retrieve StudentID of user
+            int StudentID = UsernameToID(Session["Username"].ToString());
+
+            // Insert/Update interestlevel
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            string sqlQuery;
+            int[] matchRecord = getMatch(StudentID, JobID);
+            if (matchRecord == null)    // student has not yet interacted with listing
+                sqlQuery = "INSERT INTO JobMatch (IsInterest, StudentID, JobID) VALUES (0, " + StudentID + ", " + JobID + ")";
+            else  // record of interaction exists
+                sqlQuery = "UPDATE JobMatch SET IsInterest = 0 WHERE JobMatchID = " + matchRecord[0] + ";";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+        }
+
+        // event handler for medium selection
+        protected void rdoMed_CheckedChanged(object sender, EventArgs e)
+        {
+            // Retrieve JobID from Session Variable
+            int JobID = Int32.Parse(Session["View"].ToString());
+
+            // Retrieve StudentID of user
+            int StudentID = UsernameToID(Session["Username"].ToString());
+
+            // Insert/Update interestlevel
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            string sqlQuery;
+            int[] matchRecord = getMatch(StudentID, JobID);
+            if (matchRecord == null)    // student has not yet interacted with listing
+                sqlQuery = "INSERT INTO JobMatch (IsInterest, StudentID, JobID) VALUES (1, " + StudentID + ", " + JobID + ")";
+            else  // record of interaction exists
+                sqlQuery = "UPDATE JobMatch SET IsInterest = 1 WHERE JobMatchID = " + matchRecord[0] + ";";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+        }
+
+        // event handler for high selection
+        protected void rdoHi_CheckedChanged(object sender, EventArgs e)
+        {
+            // Retrieve JobID from Session Variable
+            int JobID = Int32.Parse(Session["View"].ToString());
+
+            // Retrieve StudentID of user
+            int StudentID = UsernameToID(Session["Username"].ToString());
+
+            // Insert/Update interestlevel
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            string sqlQuery;
+            int[] matchRecord = getMatch(StudentID, JobID);
+            if (matchRecord == null)    // student has not yet interacted with listing
+                sqlQuery = "INSERT INTO JobMatch (IsInterest, StudentID, JobID) VALUES (2, " + StudentID + ", " + JobID + ")";
+            else  // record of interaction exists
+                sqlQuery = "UPDATE JobMatch SET IsInterest = 2 WHERE JobMatchID = " + matchRecord[0] + ";";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+        }
+
         // helper method to get matchID and bookmark status
         public bool MatchExists(int stuID, int itemID)
         {
@@ -126,6 +257,48 @@ namespace OSAG.jobs
             if ((int)sqlCommand.ExecuteScalar() < 1)
                 return false;
             return true;
+        }
+
+        // helper method to get matchID and bookmark status
+        public int[] getMatch(int stuID, int itemID)
+        {
+            try
+            {
+                // query for match ID and bookmark status
+                SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                String sqlQuery = "SELECT JobMatchID, IsBookmark, IsInterest FROM JobMatch WHERE StudentID = " + stuID + " AND JobID = " + itemID + ";";
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+                sqlConnection.Open();
+                SqlDataReader queryResults = sqlCommand.ExecuteReader();
+                queryResults.Read();
+                // returns integer array with match ID index 0, bookmark status at 1, and interest level at 2
+                int[] intArr = new int[3];
+                intArr[0] = (int)queryResults["JobMatchID"];
+                // handles null values (null = false/0)
+                if (bitToBoolean(queryResults["IsBookmark"]))
+                    intArr[1] = 1;
+                else
+                    intArr[1] = 0;
+                // handles null values (null = -1)
+                if (queryResults["IsInterest"] == DBNull.Value)
+                    intArr[2] = -1; // for main method handling, prevents null -> int conversion error
+                else
+                    intArr[2] = Convert.ToInt32(queryResults["IsInterest"]);
+                return intArr;
+            }
+            catch (InvalidOperationException)
+            {   // if query results is empty, return null for main method handling
+                return null;
+                throw;
+            }
+        }
+
+        // SQL Server BIT -> Boolean. read above comments for more details
+        private bool bitToBoolean(object o)
+        {
+            if (o == DBNull.Value)
+                return false;
+            return (bool)o;
         }
 
         // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)

@@ -27,6 +27,21 @@
     <asp:Button ID="btnApplied" Text="Yes!" runat="server" Visible="false" OnClick="btnApplied_Click" />
     &nbsp
     <asp:Button ID="btnDidNotApply" Text="No!" runat="server" Visible="false" OnClick="btnDidNotApply_Click" />
+    <%if (Session["UserType"].ToString() == "student")
+            { %>
+    <br />
+    Set Interest Level
+    <br />
+    <asp:RadioButton ID="rdoLow" Text="Low" runat="server" GroupName="InterestLevel"
+        AutoPostBack="true" OnCheckedChanged="rdoLow_CheckedChanged" />
+    <asp:RadioButton ID="rdoMed" Text="Medium" runat="server" GroupName="InterestLevel"
+        AutoPostBack="true" OnCheckedChanged="rdoMed_CheckedChanged" />
+    <asp:RadioButton ID="rdoHi" Text="High" runat="server" GroupName="InterestLevel"
+        AutoPostBack="true" OnCheckedChanged="rdoHi_CheckedChanged" />
+    <br />
+    <br />
+    <asp:Button ID="btnBookmark" runat="server" Text="Add Bookmark" OnClick="btnBookmark_Click" />
+    <%} %>
     <script type="text/javascript" language="javascript">
         function Navigate(s) {
             javascript: window.open(s)

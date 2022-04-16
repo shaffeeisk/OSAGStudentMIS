@@ -43,7 +43,7 @@ namespace OSAG.jobs
                     // Retrieve JobID from row
                     int ItemID = (int)grdvwJobs.DataKeys[gvr.RowIndex]["JobID"];
 
-                    // check bookmark and interest status. get match record (if any)
+                    // check bookmark. get match record (if any)
                     int[] match = getMatch(StudentID, ItemID);
                     // go to next row if no record exists
                     if (match == null)
@@ -51,21 +51,6 @@ namespace OSAG.jobs
                     // if bookmarked, change button text
                     if (match[1] == 1)
                         btn.Text = "Remove Bookmark";
-                    // switch statement for IsInterest record
-                    switch (match[2])
-                    {
-                        case -1:    // NULL
-                            break;
-                        case 0:     // Low
-                            ((RadioButton)grdvwJobs.Rows[i].FindControl("rdoLow")).Checked = true;
-                            break;
-                        case 1:     // Medium
-                            ((RadioButton)grdvwJobs.Rows[i].FindControl("rdoMed")).Checked = true;
-                            break;
-                        case 2:     // High
-                            ((RadioButton)grdvwJobs.Rows[i].FindControl("rdoHi")).Checked = true;
-                            break;
-                    }
                 }
             }
         }
@@ -79,8 +64,7 @@ namespace OSAG.jobs
             // define database connection & retrieve StudentID of user
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             int StudentID = UsernameToID(Session["Username"].ToString());
-            string sqlQuery = "";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            string sqlQuery;
 
             // Insert/Remove bookmark
             int[] matchRecord = getMatch(StudentID, JobID);
@@ -99,7 +83,7 @@ namespace OSAG.jobs
                 sqlQuery = "UPDATE JobMatch SET IsBookmark = 0 WHERE JobMatchID = " + matchRecord[0] + ";";
                 btn.Text = "Bookmark";
             }
-            sqlCommand.CommandText = sqlQuery;
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
             sqlCommand.ExecuteScalar();
             sqlConnection.Close();
@@ -109,72 +93,6 @@ namespace OSAG.jobs
         {
             Session["View"] = grdvwJobs.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
             Response.Redirect("JobDetails.aspx");
-        }
-
-        // event handler for low selection
-        protected void rdoLow_CheckedChanged(object sender, EventArgs e)
-        {
-            // Retrieve JobID from gridview
-            int JobID = (int)grdvwJobs.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
-
-            // Retrieve StudentID of user
-            int StudentID = UsernameToID(Session["Username"].ToString());
-
-            // Insert/Update interestlevel
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            string sqlQuery;
-            int[] matchRecord = getMatch(StudentID, JobID);
-            if (matchRecord == null)    // student has not yet interacted with listing
-                sqlQuery = "INSERT INTO JobMatch (IsInterest, StudentID, JobID) VALUES (0, " + StudentID + ", " + JobID + ")";
-            else  // record of interaction exists
-                sqlQuery = "UPDATE JobMatch SET IsInterest = 0 WHERE JobMatchID = " + matchRecord[0] + ";";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteScalar();
-        }
-
-        // event handler for medium selection
-        protected void rdoMed_CheckedChanged(object sender, EventArgs e)
-        {
-            // Retrieve JobID from gridview
-            int JobID = (int)grdvwJobs.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
-
-            // Retrieve StudentID of user
-            int StudentID = UsernameToID(Session["Username"].ToString());
-
-            // Insert/Update interestlevel
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            string sqlQuery;
-            int[] matchRecord = getMatch(StudentID, JobID);
-            if (matchRecord == null)    // student has not yet interacted with listing
-                sqlQuery = "INSERT INTO JobMatch (IsInterest, StudentID, JobID) VALUES (1, " + StudentID + ", " + JobID + ")";
-            else  // record of interaction exists
-                sqlQuery = "UPDATE JobMatch SET IsInterest = 1 WHERE JobMatchID = " + matchRecord[0] + ";";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteScalar();
-        }
-
-        // event handler for high selection
-        protected void rdoHi_CheckedChanged(object sender, EventArgs e)
-        {
-            // Retrieve JobID from gridview
-            int JobID = (int)grdvwJobs.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
-
-            // Retrieve StudentID of user
-            int StudentID = UsernameToID(Session["Username"].ToString());
-
-            // Insert/Update interestlevel
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            string sqlQuery;
-            int[] matchRecord = getMatch(StudentID, JobID);
-            if (matchRecord == null)    // student has not yet interacted with listing
-                sqlQuery = "INSERT INTO JobMatch (IsInterest, StudentID, JobID) VALUES (2, " + StudentID + ", " + JobID + ")";
-            else  // record of interaction exists
-                sqlQuery = "UPDATE JobMatch SET IsInterest = 2 WHERE JobMatchID = " + matchRecord[0] + ";";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteScalar();
         }
 
         // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)

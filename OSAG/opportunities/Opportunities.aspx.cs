@@ -44,7 +44,7 @@ namespace OSAG.opportunities
                     // Retrieve OpportunityID from row
                     int ItemID = (int)grdvwOpportunities.DataKeys[gvr.RowIndex]["OpportunityID"];
 
-                    // check bookmark and interest status. get match record (if any)
+                    // check bookmark. get match record (if any)
                     int[] match = getMatch(StudentID, ItemID);
                     // go to next row if no record exists
                     if (match == null)
@@ -52,21 +52,6 @@ namespace OSAG.opportunities
                     // if bookmarked, change button text
                     if (match[1] == 1)
                         btn.Text = "Remove Bookmark";
-                    // switch statement for IsInterest record
-                    switch (match[2])
-                    {
-                        case -1:    // NULL
-                            break;
-                        case 0:     // Low
-                            ((RadioButton)grdvwOpportunities.Rows[i].FindControl("rdoLow")).Checked = true;
-                            break;
-                        case 1:     // Medium
-                            ((RadioButton)grdvwOpportunities.Rows[i].FindControl("rdoMed")).Checked = true;
-                            break;
-                        case 2:     // High
-                            ((RadioButton)grdvwOpportunities.Rows[i].FindControl("rdoHi")).Checked = true;
-                            break;
-                    }
                 }
             }
         }
@@ -80,8 +65,7 @@ namespace OSAG.opportunities
             // define database connection & retrieve StudentID of user
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             int StudentID = UsernameToID(Session["Username"].ToString());
-            string sqlQuery = "";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            string sqlQuery;
 
             // Insert/Remove bookmark
             int[] matchRecord = getMatch(StudentID, OpportunityID);
@@ -100,7 +84,7 @@ namespace OSAG.opportunities
                 sqlQuery = "UPDATE OpportunityMatch SET IsBookmark = 0 WHERE OpportunityMatchID = " + matchRecord[0] + ";";
                 btn.Text = "Bookmark";
             }
-            sqlCommand.CommandText = sqlQuery;
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
             sqlCommand.ExecuteScalar();
             sqlConnection.Close();

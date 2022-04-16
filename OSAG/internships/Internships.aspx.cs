@@ -32,7 +32,7 @@ namespace OSAG.internships
 
                 // instantiate objects for queries
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-                string sqlQuery = "";
+                string sqlQuery;
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
 
                 // for each grid row
@@ -45,7 +45,7 @@ namespace OSAG.internships
                     // Retrieve InternshipID from row
                     int ItemID = (int)grdvwInternships.DataKeys[gvr.RowIndex]["InternshipID"];
 
-                    // check bookmark and interest status. get match record (if any)
+                    // check bookmark. get match record (if any)
                     int[] match = getMatch(StudentID, ItemID);
                     // go to next row if no record exists
                     if (match == null)
@@ -53,21 +53,6 @@ namespace OSAG.internships
                     // if bookmarked, change button text
                     if (match[1] == 1)
                         btn.Text = "Remove Bookmark";
-                    // switch statement for IsInterest record
-                    switch (match[2])
-                    {
-                        case -1:    // NULL
-                            break;
-                        case 0:     // Low
-                            ((RadioButton)grdvwInternships.Rows[i].FindControl("rdoLow")).Checked=true;
-                            break;
-                        case 1:     // Medium
-                            ((RadioButton)grdvwInternships.Rows[i].FindControl("rdoMed")).Checked = true;
-                            break;
-                        case 2:     // High
-                            ((RadioButton)grdvwInternships.Rows[i].FindControl("rdoHi")).Checked = true;
-                            break;
-                    }
                 }
             }
         }
@@ -81,8 +66,7 @@ namespace OSAG.internships
             // define database connection & retrieve StudentID of user
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             int StudentID = UsernameToID(Session["Username"].ToString());
-            string sqlQuery = "";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            string sqlQuery;
 
             // Insert/Remove bookmark
             int[] matchRecord = getMatch(StudentID, InternshipID);
@@ -101,7 +85,7 @@ namespace OSAG.internships
                 sqlQuery = "UPDATE InternshipMatch SET IsBookmark = 0 WHERE InternshipMatchID = " + matchRecord[0] + ";";
                 btn.Text = "Bookmark";
             }
-            sqlCommand.CommandText = sqlQuery;
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();
             sqlCommand.ExecuteScalar();
             sqlConnection.Close();
@@ -111,72 +95,6 @@ namespace OSAG.internships
         {
             Session["View"] = grdvwInternships.DataKeys[((GridViewRow)((Button)sender).NamingContainer).RowIndex].Value;
             Response.Redirect("InternshipDetails.aspx");
-        }
-
-        // event handler for low selection
-        protected void rdoLow_CheckedChanged(object sender, EventArgs e)
-        {
-            // Retrieve InternshipID from gridview
-            int InternshipID = (int)grdvwInternships.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
-
-            // Retrieve StudentID of user
-            int StudentID = UsernameToID(Session["Username"].ToString());
-
-            // Insert/Update interestlevel
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            string sqlQuery;
-            int[] matchRecord = getMatch(StudentID, InternshipID);
-            if (matchRecord == null)    // student has not yet interacted with listing
-                sqlQuery = "INSERT INTO InternshipMatch (IsInterest, StudentID, InternshipID) VALUES (0, " + StudentID + ", " + InternshipID + ")";
-            else  // record of interaction exists
-                sqlQuery = "UPDATE InternshipMatch SET IsInterest = 0 WHERE InternshipMatchID = " + matchRecord[0] + ";";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteScalar();
-        }
-
-        // event handler for medium selection
-        protected void rdoMed_CheckedChanged(object sender, EventArgs e)
-        {
-            // Retrieve InternshipID from gridview
-            int InternshipID = (int)grdvwInternships.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
-
-            // Retrieve StudentID of user
-            int StudentID = UsernameToID(Session["Username"].ToString());
-
-            // Insert/Update interestlevel
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            string sqlQuery;
-            int[] matchRecord = getMatch(StudentID, InternshipID);
-            if (matchRecord == null)    // student has not yet interacted with listing
-                sqlQuery = "INSERT INTO InternshipMatch (IsInterest, StudentID, InternshipID) VALUES (1, " + StudentID + ", " + InternshipID + ")";
-            else  // record of interaction exists
-                sqlQuery = "UPDATE InternshipMatch SET IsInterest = 1 WHERE InternshipMatchID = " + matchRecord[0] + ";";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteScalar();
-        }
-
-        // event handler for high selection
-        protected void rdoHi_CheckedChanged(object sender, EventArgs e)
-        {
-            // Retrieve InternshipID from gridview
-            int InternshipID = (int)grdvwInternships.DataKeys[((GridViewRow)((RadioButton)sender).NamingContainer).RowIndex].Value;
-
-            // Retrieve StudentID of user
-            int StudentID = UsernameToID(Session["Username"].ToString());
-
-            // Insert/Update interestlevel
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            string sqlQuery;
-            int[] matchRecord = getMatch(StudentID, InternshipID);
-            if (matchRecord == null)    // student has not yet interacted with listing
-                sqlQuery = "INSERT INTO InternshipMatch (IsInterest, StudentID, InternshipID) VALUES (2, " + StudentID + ", " + InternshipID + ")";
-            else  // record of interaction exists
-                sqlQuery = "UPDATE InternshipMatch SET IsInterest = 2 WHERE InternshipMatchID = " + matchRecord[0] + ";";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteScalar();
         }
 
         // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
