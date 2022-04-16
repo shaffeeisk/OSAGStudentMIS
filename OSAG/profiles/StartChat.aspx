@@ -8,7 +8,7 @@
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <h3>Select a User to Chat With</h3>
         <br />
-        <h3>Current Chats With Students:</h3>
+        <h4>Current Chats With Students:</h4>
         <asp:GridView ID="grdvStudent"
             runat="server"
             DataSourceID="sqlsrcStudent"
@@ -31,7 +31,7 @@
             ConnectionString="<%$ ConnectionStrings:OSAG %>"></asp:SqlDataSource>
 
         <br />
-        <h3>Current Chats With Members:</h3>
+        <h4>Current Chats With Members:</h4>
         <asp:GridView ID="grdvMember"
             runat="server"
             DataSourceID="sqlsrcMember"
