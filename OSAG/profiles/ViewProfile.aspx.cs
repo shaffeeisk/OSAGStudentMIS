@@ -168,7 +168,7 @@ namespace OSAG.profiles
                 "ELSE " +
                 "BEGIN " +
                 "UPDATE Mentorship SET IsRequest = 1 WHERE StudentID = @StudentID AND MemberID = @MemberID " +
-                "AND (EndDate IS NOT NULL OR EndDate < GETDATE()) " +
+                "AND EndDate IS NOT NULL " +
                 "END";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
