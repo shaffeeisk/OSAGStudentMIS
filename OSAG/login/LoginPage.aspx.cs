@@ -77,22 +77,41 @@ namespace OSAG.login
             String sqlQuery = "SELECT COUNT(*) FROM Student WHERE Username = @Username;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
+            sqlCommand.Parameters.AddWithValue("@Username", s);
             sqlConnect.Open();
-            int userType = Convert.ToInt32(sqlCommand.ExecuteScalar());
-            sqlConnect.Close();
+            int userType = (int)sqlCommand.ExecuteScalar();
 
             if (userType == 1) // user is student (found in Student table)
-                Session["UserType"] = "student";
-            else // user is member (not found in Student table)
-                Session["UserType"] = "member";
-
-            // please dont redirect to an unfinished page, i need to be able to test code
-            if ((String) Session["UserType"] == "student")
             {
+                Session["UserType"] = "student";
                 Response.Redirect("/homepages/StudentHome.aspx");
-            } else
+            }
+            else // user is member (not found in Student table)
+            {
+                Session["UserType"] = "member"; // set User type
+                // query for and set Member Type to affect access level
+                sqlCommand.CommandText = "SELECT MemberType FROM Member WHERE Username = '" + s + "';";
+                sqlConnect.Open();
+                int sw = (int)sqlCommand.ExecuteScalar();
+                sqlConnect.Close();
+                switch (sw)
+                {
+                    case 4:
+                        Session["MemberType"] = "member";
+                        break;
+                    case 3:
+                        Session["MemberType"] = "mentor";
+                        break;
+                    case 2:
+                        Session["MemberType"] = "leadership";
+                        break;
+                    case 1:
+                        Session["MemberType"] = "admin";
+                        break;
+                }
                 Response.Redirect("/homepages/MemberHome.aspx");
+            }
+
         }
 
         protected void declareUnapprovedUserType(String s)
@@ -100,15 +119,37 @@ namespace OSAG.login
             String sqlQuery = "SELECT COUNT(*) FROM Student WHERE Username = @Username;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
+            sqlCommand.Parameters.AddWithValue("@Username", s);
             sqlConnect.Open();
-            int userType = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            int userType = (int)sqlCommand.ExecuteScalar();
             sqlConnect.Close();
 
             if (userType == 1) // user is student (found in Student table)
                 Session["UserType"] = "student";
             else // user is member (not found in Student table)
-                Session["UserType"] = "member";
+            {
+                Session["UserType"] = "member"; // set User type
+                // query for and set Member Type to affect access level
+                sqlCommand.CommandText = "SELECT MemberType FROM Member WHERE Username = '" + s + "';";
+                sqlConnect.Open();
+                int sw = (int)sqlCommand.ExecuteScalar();
+                sqlConnect.Close();
+                switch (sw)
+                {
+                    case 4:
+                        Session["MemberType"] = "member";
+                        break;
+                    case 3:
+                        Session["MemberType"] = "mentor";
+                        break;
+                    case 2:
+                        Session["MemberType"] = "leadership";
+                        break;
+                    case 1:
+                        Session["MemberType"] = "admin";
+                        break;
+                }
+            }
         }
 
 
