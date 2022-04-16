@@ -344,7 +344,7 @@ namespace OSAG.profiles
                 else // user is Member
                 {
                     int id = UsernameToID(Session["Username"].ToString());
-                    string fpath = Request.PhysicalApplicationPath + "_images\\sPFP\\" + id + ".jpg";
+                    string fpath = Request.PhysicalApplicationPath + "_images\\mPFP\\" + id + ".jpg";
                     if (File.Exists(fpath))
                     {
                         File.Delete(fpath);
