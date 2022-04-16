@@ -19,13 +19,15 @@ namespace OSAG.profiles
                 Session["MustLogin"] = "You must log in to access that page.";
                 Response.Redirect("/login/LoginPage.aspx");
             }
-            sqlsrcStudent.SelectCommand = "Select distinct StudentID,FirstName,LastName FROM Student s LEFT JOIN ChatMessage cm ON (cm.StudentReceiverID = s.StudentID OR cm.StudentSenderID = s.StudentID)  where Username != '" + Session["Username"].ToString() + "' " +
+            sqlsrcStudent.SelectCommand = "Select StudentID,FirstName,LastName,CASE WHEN MIN(IsRead+0) = 1 THEN 'True' ELSE 'False' END AS IsRead FROM Student s LEFT JOIN ChatMessage cm ON (cm.StudentReceiverID = s.StudentID OR cm.StudentSenderID = s.StudentID)  where Username != '" + Session["Username"].ToString() + "' " +
                 "AND (" + Session["UserType"].ToString() + "ReceiverID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "')" +
-                " OR " + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))";
+                " OR " + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))" +
+                " GROUP BY StudentID,FirstName,LastName";
             
-            sqlsrcMember.SelectCommand = "Select distinct MemberID,FirstName,LastName FROM Member s LEFT JOIN ChatMessage cm ON (cm.MemberReceiverID = s.MemberID OR cm.MemberSenderID = s.MemberID)  where Username != '" + Session["Username"].ToString() + "' " +
+            sqlsrcMember.SelectCommand = "Select MemberID,FirstName,LastName,CASE WHEN MIN(IsRead+0) = 1 THEN 'True' ELSE 'False' END AS IsRead FROM Member s LEFT JOIN ChatMessage cm ON (cm.MemberReceiverID = s.MemberID OR cm.MemberSenderID = s.MemberID)  where Username != '" + Session["Username"].ToString() + "' " +
                 "AND (" + Session["UserType"].ToString() + "ReceiverID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "')" +
-                " OR " + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))";
+                " OR " + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))" +
+                " GROUP BY MemberID, FirstName, LastName";
         }
 
         protected void btn_studentChat_Click(object sender, EventArgs e)
