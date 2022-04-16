@@ -18,6 +18,12 @@ namespace OSAG.member
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Username"] == null)
+            {
+                // return; <-- alternative solution (Master Page_Load runs instead)
+                Session["MustLogin"] = "You must log in to access that page.";
+                Response.Redirect("/login/LoginPage.aspx");
+            }
 
         }
         protected void btnSaveJob_Click(object sender, EventArgs e)

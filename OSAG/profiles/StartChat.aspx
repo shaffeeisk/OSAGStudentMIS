@@ -1,4 +1,5 @@
 ﻿<%--Start chat page--%>
+
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="StartChat.aspx.cs" Inherits="OSAG.profiles.StartChat" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -7,12 +8,12 @@
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <h3>Select a User to Chat With</h3>
         <br />
-        <h3>Students:</h3>
+        <h3>Current Chats With Students:</h3>
         <asp:GridView ID="grdvStudent"
             runat="server"
             DataSourceID="sqlsrcStudent"
             AllowSorting="true"
-            AutoGenerateSelectButton="false" 
+            AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
             AutoGenerateColumns="false" DataKeyNames="StudentID">
             <Columns>
@@ -27,14 +28,14 @@
         </asp:GridView>
         <asp:SqlDataSource ID="sqlsrcStudent" runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"></asp:SqlDataSource>
-        
+
         <br />
-        <h3>Members:</h3>
+        <h3>Current Chats With Members:</h3>
         <asp:GridView ID="grdvMember"
             runat="server"
             DataSourceID="sqlsrcMember"
             AllowSorting="true"
-            AutoGenerateSelectButton="false" 
+            AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
             AutoGenerateColumns="false" DataKeyNames="MemberID">
             <Columns>
@@ -49,5 +50,9 @@
         </asp:GridView>
         <asp:SqlDataSource ID="sqlsrcMember" runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"></asp:SqlDataSource>
+
+        <br />
+        <br />
+        <asp:Button ID="btn_newChat" runat="server" Text="Start a new chat" OnClick="btn_newChat_Click" />
     </div>
 </asp:Content>
