@@ -181,6 +181,7 @@
     <Content Include="_images\homepage.png" />
     <Content Include="_images\jmu.jfif" />
     <Content Include="_images\jmubackground.png" />
+    <Content Include="_images\jobbanner.png" />
     <Content Include="_images\logo.png" />
     <Content Include="_images\user.png" />
     <Content Include="Scripts\bootstrap.min.js.map" />

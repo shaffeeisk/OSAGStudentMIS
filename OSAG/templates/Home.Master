@@ -97,7 +97,7 @@
                         <% } %>
 
                         <!--Only members-->
-                        <% if (Session["UserType"].ToString() == "member")
+                        <% if (Session["UserType"].ToString() == "mentor")
                             { %>
                         <li>
                             <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
