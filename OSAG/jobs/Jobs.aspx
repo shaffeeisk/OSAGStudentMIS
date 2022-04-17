@@ -69,7 +69,7 @@
         <div class="container col-lg-9 px-4"> <!--Search bar starts-->
                 <div class="pt-5 pb-5 px-4">
                     <form action="#">
-                        <div class="input-group">
+                        <div class="input-group"> 
                             <div class="input-group-text">
                                 <div class="icon icon-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -95,7 +95,7 @@
                        RowStyle-CssClass="rows"
                        cellpadding ="25"
                        cellspacing="7"  
-                       font="Roboto"
+                       font="Book Antiqua"
                        ForeColor="black">
                       
                        <Columns>
@@ -103,10 +103,10 @@
                             <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
                             <asp:TemplateField>
                                   <ItemTemplate>
-                                          <asp:Button ID="btnView" runat="server" font="Roboto" Text="View" OnClick="btnView_Click" BackColor="#ccccff"/>
+                                      <asp:Button ID="btnView" runat="server" font="Book Antiqua" Text="View" OnClick="btnView_Click" />
                                                    <%if (Session["UserType"].ToString() == "student")
                                                        {%>
-                                          <asp:Button ID="btnBookmark" runat="server" font="Roboto" Text="Bookmark" OnClick="btnBookmark_Click" BackColor="#ccccff"/>
+                                          <asp:Button ID="btnBookmark" runat="server" font="Book Antiqua" Text="Bookmark" OnClick="btnBookmark_Click" />
                                                     <%} %>
                                   </ItemTemplate>
                             </asp:TemplateField>
