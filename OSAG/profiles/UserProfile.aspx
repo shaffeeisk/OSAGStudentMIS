@@ -13,15 +13,19 @@
             }
         </script>
 
-        <asp:Label ID="lblApprove" runat="server" Text=""></asp:Label>
-        <br />
-
         <!-- VIEW MODE STARTS -->
         <div id="divModeView" runat="server" class="container">
             <div class="main-body pt-4 px-5">
                 <div class="row">
                     <div class="col-lg-4 px-3 pb-2">
-                        <h2>Student Profile</h2>
+                        <%if (Session["UserType"].ToString() == "student")
+                            {%>
+                        <h2>Student Profile </h2>
+                        <%} %>
+                        <%else
+                            {%>
+                        <h2>Member Profile</h2>
+                        <% } %>
                     </div>
                 </div>
                 <div class="row gutters-sm">
@@ -33,6 +37,9 @@
                                     <div class="mt-3">
                                         <h4 class="studentname">
                                             <asp:Label ID="lblViewName" runat="server"></asp:Label>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="35" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                <path id="isApproved" runat="server" d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                            </svg>
                                         </h4>
                                         <p class="text-secondary mb-4 px-3">
                                             <asp:Label ID="lblViewDesc" runat="server"></asp:Label>
@@ -327,10 +334,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col justify-content-center d-grid pt-5 pb-5 mx-auto">
-                <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Save Changes" OnClick="btnUpdate_Click" Visible="false" />
-            </div>
+        <div style="margin-left: auto; margin-right: auto; align-content: center">
+            <asp:Button ID="btnReturn" class="btn btn-outline-primary" runat="server" Text="Cancel" OnClick="btnReturn_Click" Visible="false" />
+            <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Save Changes" OnClick="btnUpdate_Click" Visible="false" />
         </div>
     </div>
     <!-- EDIT MODE END -->

@@ -76,11 +76,12 @@ namespace OSAG.profiles
                         lblViewGpa.Text = reader["Gpa"].ToString();
                         lblViewPhone.Text = reader["Phone"].ToString();
                         lblViewBio.Text = reader["Bio"].ToString();
+                        lblViewDesc.Text = reader["Class"].ToString() + " ";
 
                         if (bitToBoolean(reader["IsApproved"]))
-                            lblApprove.Text = "User Profile Approved";
+                            isApproved.Visible = true;
                         else
-                            lblApprove.Text = "User Profile Not Yet Approved";
+                            isApproved.Visible = false;
 
                         // load pfp onto page
                         String fpath = "\\_images\\sPFP\\" + reader["RegistrationYear"].ToString() + "\\" + reader["StudentID"].ToString() + ".jpg";
@@ -95,7 +96,10 @@ namespace OSAG.profiles
                         if (bitToBoolean(reader["IsMinor"]))
                             lblViewMinor.Text += reader["MajorName"].ToString() + ", ";
                         else
+                        {
                             lblViewMajor.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewDesc.Text += reader["MajorName"].ToString() + "/";
+                        }
                     }
                     sqlConnect.Close();
                 }
@@ -128,9 +132,9 @@ namespace OSAG.profiles
                         lblViewPhone.Text = reader["Phone"].ToString();
                         lblViewBio.Text = reader["Bio"].ToString();
                         if (bitToBoolean(reader["IsApproved"]))
-                            lblApprove.Text = "User Profile Approved";
+                            isApproved.Visible = true;
                         else
-                            lblApprove.Text = "User Profile Not Yet Approved";
+                            isApproved.Visible = false;
 
                         // load pfp onto page
                         String fpath = "\\_images\\mPFP\\" + reader["MemberID"].ToString() + ".jpg";
@@ -150,6 +154,7 @@ namespace OSAG.profiles
                     sqlConnect.Close();
                 }
                 // clear/format major(s)/minor(s) text
+                lblViewDesc.Text = lblViewDesc.Text.TrimEnd('/') + " Major";
                 lblViewMajor.Text = lblViewMajor.Text.Trim().TrimEnd(',');
                 lblViewMinor.Text = lblViewMinor.Text.Trim().TrimEnd(',');
                 if (lblViewMinor.Text == "")
@@ -218,6 +223,7 @@ namespace OSAG.profiles
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
+            Response.Write("<script>alert('Changes successfully saved.');</script>");
         }
 
         // event handler for resume upload button
@@ -447,6 +453,7 @@ namespace OSAG.profiles
                 txtGradDate.Text = dt.ToString("yyyy-MM-dd");
             lblEditMajor.Text = lblViewMajor.Text;
             lblEditMinor.Text = lblViewMinor.Text;
+            txtBio.Text = lblViewBio.Text;
 
             if (Session["UserType"].ToString() == "student")
             {
@@ -462,6 +469,16 @@ namespace OSAG.profiles
             divModeView.Visible = false;
             divModeEdit.Visible = true;
             btnUpdate.Visible = true;
+            btnReturn.Visible = true;
+        }
+
+        protected void btnReturn_Click(object sender, EventArgs e)
+        {
+            // flip visibility of view/edit
+            divModeView.Visible = true;
+            divModeEdit.Visible = false;
+            btnUpdate.Visible = false;
+            btnReturn.Visible = false;
         }
 
         protected void btnDeclareMajor_Click(object sender, EventArgs e)
