@@ -22,7 +22,7 @@
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" >
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
         <!-- Icons -->
@@ -75,7 +75,6 @@
         <div class="container col-lg-9 px-4">
             <!--Search bar starts-->
             <div class="pt-5 pb-5 px-4">
-
                 <div class="input-group">
                     <div class="input-group-text">
                         <div class="icon icon-lg">
