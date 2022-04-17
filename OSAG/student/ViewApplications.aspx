@@ -53,12 +53,7 @@
                 <asp:BoundField HeaderText="Position" DataField="InternshipName" SortExpression="InternshipName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
                 <asp:BoundField HeaderText="Status" DataField="AppStatus" SortExpression="AppStatus" />
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:Button ID="btnView2" runat="server" Text="View" OnClick="btnView2_Click" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField>
+                <asp:TemplateField HeaderText="Application Status">
                     <ItemTemplate>
                         <asp:DropDownList ID="ddlStatus2" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus2_SelectedIndexChanged">
                             <asp:ListItem Text="Applied" Value="Applied"></asp:ListItem>
@@ -67,6 +62,11 @@
                             <asp:ListItem Text="Accepted" Value="Accepted"></asp:ListItem>
                             <asp:ListItem Text="Declined" Value="Declined"></asp:ListItem>
                         </asp:DropDownList>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="btnView2" runat="server" Text="View" OnClick="btnView2_Click" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -89,12 +89,7 @@
                 <asp:BoundField HeaderText="Opportunity" DataField="OpportunityName" SortExpression="OpportunityName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />
                 <asp:BoundField HeaderText="Status" DataField="AppStatus" SortExpression="AppStatus" />
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:Button ID="btnView3" runat="server" Text="View" OnClick="btnView3_Click" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField>
+                <asp:TemplateField HeaderText="Application Status">
                     <ItemTemplate>
                         <asp:DropDownList ID="ddlStatus3" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus3_SelectedIndexChanged">
                             <asp:ListItem Text="N/A" Value=""></asp:ListItem>
@@ -104,6 +99,11 @@
                             <asp:ListItem Text="Accepted" Value="Accepted"></asp:ListItem>
                             <asp:ListItem Text="Declined" Value="Declined"></asp:ListItem>
                         </asp:DropDownList>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="btnView3" runat="server" Text="View" OnClick="btnView3_Click" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
