@@ -108,10 +108,10 @@
                 <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="btnView" runat="server" font="Roboto" Text="View" OnClick="btnView_Click" BackColor="#ccccff" />
+                        <asp:Button ID="btnView" runat="server" font="Roboto" Text="View" OnClick="btnView_Click" />
                         <%if (Session["UserType"].ToString() == "student")
                             {%>
-                        <asp:Button ID="btnBookmark" runat="server" font="Roboto" Text="Bookmark" OnClick="btnBookmark_Click" BackColor="#ccccff" />
+                        <asp:Button ID="btnBookmark" runat="server" font="Roboto" Text="Bookmark" OnClick="btnBookmark_Click" />
                         <%} %>
                     </ItemTemplate>
                 </asp:TemplateField>
