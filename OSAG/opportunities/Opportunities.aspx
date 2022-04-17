@@ -78,7 +78,8 @@
                 ForeColor="black">
                 <Columns>
                     <asp:BoundField HeaderText="Opportunity Name" DataField="OpportunityName" SortExpression="OpportunityName" />
-                    <asp:BoundField HeaderText="Description" DataField="OpportunityDescription" SortExpression="OpportunityDescription" />
+                    <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />
+                    <asp:BoundField HeaderText="Event Date" DataField="EventDate" DataFormatString="{0:MMMM dd, yyyy}" SortExpression="EventDate" NullDisplayText="N/A" />
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
@@ -97,6 +98,6 @@
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT OpportunityID, OpportunityName, OpportunityDescription FROM Opportunity"></asp:SqlDataSource>
+        SelectCommand="SELECT OpportunityID, OpportunityName, EventDate, CompanyName FROM Opportunity o LEFT JOIN Company c on o.CompanyID = c.CompanyID"></asp:SqlDataSource>
     </html>
 </asp:Content>
