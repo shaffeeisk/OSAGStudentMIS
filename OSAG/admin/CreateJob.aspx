@@ -1,4 +1,5 @@
 ﻿<%--Page for creating job--%>
+
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="CreateJob.aspx.cs" Inherits="OSAG.member.CreateJob" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -12,7 +13,7 @@
             return true;
         }
     </script>
-    <div style="margin-left: auto; margin-right: auto; text-align: center;">
+    <div class="container text-center px-5 pt-5 pb-5">
         <asp:Label ID="lblJobName" runat="server" Text="Job Name: " Width="160px"></asp:Label>
         <asp:TextBox ID="txtJobName" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator
@@ -112,31 +113,36 @@
         <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" OnClick="btnClear_Click" Font-Bold="true" BackColor="OrangeRed" />
         <br />
         <br />
-        <asp:GridView ID="grdvwJobs"
-            runat="server"
-            DataSourceID="sqlsrc"
-            AllowSorting="true"
-            AutoGenerateSelectButton="false"
-            AutoGenerateColumns="false"
-            DataKeyNames="JobID">
-            <Columns>
-                <asp:CommandField  ShowEditButton="true" ShowDeleteButton="true" CausesValidation="False"/>
-                <asp:BoundField HeaderText="JobName" DataField="JobName" SortExpression="JobName" />
-                <asp:BoundField HeaderText="JobDescription" DataField="JobDescription" SortExpression="JobDescription" />
-                <asp:BoundField HeaderText="ApplicationDeadline" DataField="ApplicationDeadline" SortExpression="ApplicationDeadline" />
-                <asp:BoundField HeaderText="StartDate" DataField="StartDate" SortExpression="StartDate" />
-                <asp:BoundField HeaderText="WeeklyHours" DataField="WeeklyHours" SortExpression="WeeklyHours" />
-                <asp:BoundField HeaderText="Payment" DataField="Payment" SortExpression="Payment" />
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
+        <asp:DataList ID="dlistJobs" runat="server" DataSourceID="sqlsrc"
+            EnableViewState="False">
+            <HeaderTemplate>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Job Name</th>
+                            <th scope="col">Job Description</th>
+                            <th scope="col">Application Deadline</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Weekly Hours</th>
+                            <th scope="col">Payment</th>
+                            <th scope="col">Edit</th>
+                        </tr>
+                    </thead>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <%# Eval("JobName") %>
+                <td><%# Eval("JobDescription") %></td>
+                <td><%# Eval("ApplicationDeadline") %></td>
+                <td><%# Eval("StartDate") %></td>
+                <td><%# Eval("WeeklyHours") %></td>
+                <td><%# Eval("Payment") %></td>
+                <td><a href="/login/LoginPage.aspx/?id=<%# Eval("JobID") %>">Edit</a></td>
+            </ItemTemplate>
+        </asp:DataList>
+
         <asp:SqlDataSource ID="sqlsrc" runat="server"
             ConnectionString="<%$ ConnectionStrings:OSAG %>"
-            SelectCommand="SELECT JobID, JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment FROM Job" 
+            SelectCommand="SELECT JobID, JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment FROM Job"
             UpdateCommand="UPDATE Job SET JobName = @JobName, JobDescription = @JobDescription, ApplicationDeadline = @ApplicationDeadline, StartDate = @StartDate, WeeklyHours = @WeeklyHours, Payment = @Payment WHERE JobID=@JobID "
             DeleteCommand="Delete from JobMatch  Where JobID = @JobID Delete FROM Job where JobID = @JobID"></asp:SqlDataSource>
     </div>

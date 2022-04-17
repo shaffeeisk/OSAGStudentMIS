@@ -103,7 +103,7 @@ namespace OSAG.member
             // display success message and reset input
             lblSuccess.Text = "New job successfully created";
             ClearJobData();
-            grdvwJobs.DataBind();
+            dlistJobs.DataBind();
         }
 
         protected void ClearJobData()
