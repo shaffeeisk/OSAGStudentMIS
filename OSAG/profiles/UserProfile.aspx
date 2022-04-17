@@ -327,12 +327,13 @@
                 </div>
             </div>
         </div>
-    <div class="row">
+        <div class="row">
             <div class="col justify-content-center d-grid pt-5 pb-5 mx-auto">
-                <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Save Changes" OnClick="btnUpdate_Click" />
+                <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Save Changes" OnClick="btnUpdate_Click" Visible="false" />
             </div>
         </div>
-        <!-- EDIT MODE END -->
-        <br />
-        <br />
+    </div>
+    <!-- EDIT MODE END -->
+    <br />
+    <br />
 </asp:Content>

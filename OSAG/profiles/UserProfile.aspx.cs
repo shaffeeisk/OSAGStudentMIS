@@ -461,6 +461,7 @@ namespace OSAG.profiles
             // then flip visibility of view/edit
             divModeView.Visible = false;
             divModeEdit.Visible = true;
+            btnUpdate.Visible = true;
         }
 
         protected void btnDeclareMajor_Click(object sender, EventArgs e)
