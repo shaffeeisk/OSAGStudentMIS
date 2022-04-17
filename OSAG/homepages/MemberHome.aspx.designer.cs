@@ -13,23 +13,5 @@ namespace OSAG.homepages
 
     public partial class MemberHome
     {
-
-        /// <summary>
-        /// btnInternships control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInternships;
-
-        /// <summary>
-        /// btnJobs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnJobs;
     }
 }
