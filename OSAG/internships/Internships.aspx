@@ -31,7 +31,7 @@
     <div class="container">
         <!--Banner starts-->
         <div class="p-5 text-center bg-image"
-            style="background-image: url('/_images/jobbanner.png'); height: 400px;">
+            style="background-image: url('/_images/banners/jobbanner.png'); height: 400px;">
         </div>
     </div>
     <!--Banner ends-->
@@ -46,16 +46,16 @@
     <div class="container col-lg-9 px-4">
         <!--Search bar starts-->
         <div class="pt-5 pb-5 px-4">
-           
-                <div class="input-group">
-                    <div class="input-group-text">
-                        <div class="icon icon-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
-                                <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        </div>
+
+            <div class="input-group">
+                <div class="input-group-text">
+                    <div class="icon icon-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </div>
-                    <input type="text" class="form-control form-control-lg ps-3" placeholder="Search internships" aria-label="Search internships">
                 </div>
+                <input type="text" class="form-control form-control-lg ps-3" placeholder="Search internships" aria-label="Search internships">
+            </div>
 
         </div>
     </div>
@@ -82,14 +82,22 @@
     <!--Info labels ends-->
 
 
-            <asp:GridView ID="grdvwInternships"
-                runat="server"
-                DataSourceID="sqlsrc"
-                AllowSorting="true"
-                AutoGenerateSelectButton="false"
-                HorizontalAlign="Center"
-                AutoGenerateColumns="false"
-                DataKeyNames="InternshipID">
+    <asp:GridView ID="grdvwInternships"
+        runat="server"
+        DataSourceID="sqlsrc"
+        AllowSorting="true"
+        AutoGenerateSelectButton="false"
+        HorizontalAlign="Center"
+        AutoGenerateColumns="false"
+        DataKeyNames="InternshipID"
+        CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded bg-body rounded shadow--on-hover"
+        PagerStyle-CssClass="pager"
+        HeaderStyle-CssClass="header"
+        RowStyle-CssClass="rows"
+        CellPadding="25"
+        CellSpacing="7"
+        font="Roboto"
+        ForeColor="black">
                 <Columns>
                     <asp:BoundField HeaderText="InternshipName" DataField="InternshipName" SortExpression="InternshipName" />
                     <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
@@ -103,7 +111,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-            </asp:GridView>
+    </asp:GridView>
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"

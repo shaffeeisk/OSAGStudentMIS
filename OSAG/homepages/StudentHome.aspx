@@ -9,7 +9,7 @@
     <div class="container col-lg-8 px-2 py-3">
         <div class="row flex-lg-row-reverse align-items-center g-4 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="/_images/homepage.png" class="d-block mx-lg-auto img-fluid" alt="Header" width="2000" height="1500">
+                <img src="/_images/banners/homepage.png" class="d-block mx-lg-auto img-fluid" alt="Header" width="2000" height="1500">
             </div>
 
             <div class="col-lg-6">

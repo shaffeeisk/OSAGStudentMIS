@@ -58,7 +58,7 @@
 	</head>
     <body style="background-color:white;"> 
         <div style="text-align:center">
-            <asp:Image ID="Image1" runat="server" ImageUrl="/_images/jobbanner.png" Height="400px" />
+            <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/jobbanner.png" Height="400px" />
             <br /><br />  
         </div>
 
