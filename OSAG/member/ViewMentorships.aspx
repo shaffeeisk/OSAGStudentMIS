@@ -12,7 +12,7 @@
             <Columns>
                 <asp:BoundField HeaderText="Student Name" DataField="FullName" />
                 <asp:BoundField HeaderText="GPA" DataField="Gpa" />
-                <asp:BoundField HeaderText="Graduation Date" DataField="GradDate" DataFormatString="{0:MMMM yyyy}"/>
+                <asp:BoundField HeaderText="Graduation Date" DataField="GradDate" DataFormatString="{0:MMMM, yyyy}"/>
             </Columns>
         </asp:GridView>
     <asp:SqlDataSource ID="sqlsrcMentorships" runat="server"

@@ -80,6 +80,7 @@ namespace OSAG.login
             sqlCommand.Parameters.AddWithValue("@Username", s);
             sqlConnect.Open();
             int userType = (int)sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
 
             if (userType == 1) // user is student (found in Student table)
             {
@@ -92,7 +93,7 @@ namespace OSAG.login
                 // query for and set Member Type to affect access level
                 sqlCommand.CommandText = "SELECT MemberType FROM Member WHERE Username = '" + s + "';";
                 sqlConnect.Open();
-                int sw = (int)sqlCommand.ExecuteScalar();
+                int sw = (int)(byte)sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
                 switch (sw)
                 {
@@ -132,7 +133,7 @@ namespace OSAG.login
                 // query for and set Member Type to affect access level
                 sqlCommand.CommandText = "SELECT MemberType FROM Member WHERE Username = '" + s + "';";
                 sqlConnect.Open();
-                int sw = (int)sqlCommand.ExecuteScalar();
+                int sw = (int)(byte)sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
                 switch (sw)
                 {
