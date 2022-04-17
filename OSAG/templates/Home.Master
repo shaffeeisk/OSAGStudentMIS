@@ -99,7 +99,7 @@
                         </li>
                         <% } %>
 
-                        <!--Only members-->
+                        <!--Only mentors or above-->
                         <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3)
                             { %>
                         <li>
@@ -120,6 +120,13 @@
                         <li>
                             <a class="dropdown-item" href="/admin/CreateAnnouncement.aspx">CREATE ANNOUNCEMENT</a>
                         </li>
+                        <% } %>
+
+
+                        <!--Only leadership or above-->
+                        <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 2)
+                            { %>
+                        
                         <% } %>
 
                         <!--Only admin-->
