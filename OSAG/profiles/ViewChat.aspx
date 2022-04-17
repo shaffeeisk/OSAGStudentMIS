@@ -26,6 +26,11 @@
         <br />
         <asp:TextBox ID="txtChatBox" TextMode="MultiLine"
             Rows="5" Height="100" Width="200" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator
+            ID="RequiredFieldValidator1"
+            ControlToValidate="txtChatBox"
+            Text="(Required)"
+            runat="server" />
         <br />
         <asp:Button ID="btn_Send" runat="server" Text="Send Message" OnClick="btn_Send_Click" />
         <asp:SqlDataSource ID="sqlsrc" runat="server"

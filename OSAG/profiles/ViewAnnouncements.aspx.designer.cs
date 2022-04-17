@@ -11,52 +11,34 @@ namespace OSAG.profiles
 {
 
 
-    public partial class ViewChat
+    public partial class ViewAnnouncements
     {
 
         /// <summary>
-        /// grdvChat control.
+        /// lblTest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdvChat;
+        protected global::System.Web.UI.WebControls.Label lblTest;
 
         /// <summary>
-        /// txtChatBox control.
+        /// gv_Announcements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChatBox;
+        protected global::System.Web.UI.WebControls.GridView gv_Announcements;
 
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// sqlsrcAnnouncements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-
-        /// <summary>
-        /// btn_Send control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Send;
-
-        /// <summary>
-        /// sqlsrc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrc;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcAnnouncements;
     }
 }

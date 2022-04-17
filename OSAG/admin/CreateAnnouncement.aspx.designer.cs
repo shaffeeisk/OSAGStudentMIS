@@ -7,93 +7,84 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OSAG.profiles
+namespace OSAG.admin
 {
 
 
-    public partial class NewChat
+    public partial class CreateAnnouncement
     {
 
         /// <summary>
-        /// lblAddStudentRecipient control.
+        /// lblUserType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddStudentRecipient;
+        protected global::System.Web.UI.WebControls.Label lblUserType;
 
         /// <summary>
-        /// ddl_StudentRecipient control.
+        /// ddl_UserType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_StudentRecipient;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_UserType;
 
         /// <summary>
-        /// txtStudents control.
+        /// lblMemberType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStudents;
+        protected global::System.Web.UI.WebControls.Label lblMemberType;
 
         /// <summary>
-        /// lblStudentMax control.
+        /// ddl_MemberType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStudentMax;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_MemberType;
 
         /// <summary>
-        /// lblAddMemberRecipient control.
+        /// lblMajor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddMemberRecipient;
+        protected global::System.Web.UI.WebControls.Label lblMajor;
 
         /// <summary>
-        /// ddl_MemberRecipient control.
+        /// ddl_Major control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_MemberRecipient;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_Major;
 
         /// <summary>
-        /// txtMembers control.
+        /// lblHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMembers;
+        protected global::System.Web.UI.WebControls.Label lblHeader;
 
         /// <summary>
-        /// lblMemberMax control.
+        /// txtHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMemberMax;
-
-        /// <summary>
-        /// txtChatBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChatBox;
+        protected global::System.Web.UI.WebControls.TextBox txtHeader;
 
         /// <summary>
         /// RequiredFieldValidator1 control.
@@ -105,6 +96,51 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
+        /// lblBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBody;
+
+        /// <summary>
+        /// txtBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBody;
+
+        /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+
+        /// <summary>
+        /// lblLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLink;
+
+        /// <summary>
+        /// txtLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLink;
+
+        /// <summary>
         /// btn_Send control.
         /// </summary>
         /// <remarks>
@@ -114,21 +150,21 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.Button btn_Send;
 
         /// <summary>
-        /// sqlsrcStudents control.
+        /// lblSent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcStudents;
+        protected global::System.Web.UI.WebControls.Label lblSent;
 
         /// <summary>
-        /// sqlsrcMembers control.
+        /// sqlsrcMajor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMembers;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcMajor;
     }
 }

@@ -63,6 +63,9 @@
                     <li>
                         <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">USER LIST</a>
                     </li>
+                    <li>
+                        <a href="/profiles/ViewAnnouncements.aspx" class="nav-link px-2 link-secondary">ANNOUNCEMENTS</a>
+                    </li>
                     <!--nav bar end-->
 
 
@@ -97,7 +100,7 @@
                         <% } %>
 
                         <!--Only members-->
-                        <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "mentor")
+                        <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3)
                             { %>
                         <li>
                             <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
@@ -113,27 +116,16 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="/admin/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/admin/CreateAnnouncement.aspx">CREATE ANNOUNCEMENT</a>
                         </li>
                         <% } %>
 
                         <!--Only admin-->
-                        <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "admin")
+                        <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "1")
                             { %>
-                        <li>
-                            <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/AssignMentor.aspx">ASSIGN MENTORS</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/CreateJob.aspx">CREATE JOBS</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/CreateInternship.aspx">CREATE INTERNSHIPS</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
-                        </li>
+                        
                         <% } %>
 
                          <li>

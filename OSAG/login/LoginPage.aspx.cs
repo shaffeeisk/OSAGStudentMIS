@@ -98,16 +98,16 @@ namespace OSAG.login
                 switch (sw)
                 {
                     case 4:
-                        Session["MemberType"] = "member";
+                        Session["MemberType"] = "4"; //Member
                         break;
                     case 3:
-                        Session["MemberType"] = "mentor";
+                        Session["MemberType"] = "3"; //Mentor
                         break;
                     case 2:
-                        Session["MemberType"] = "leadership";
+                        Session["MemberType"] = "2"; //Leadership
                         break;
                     case 1:
-                        Session["MemberType"] = "admin";
+                        Session["MemberType"] = "1"; //admin
                         break;
                 }
                 Response.Redirect("/homepages/MemberHome.aspx");
