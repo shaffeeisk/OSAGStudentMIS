@@ -97,7 +97,7 @@
                         <% } %>
 
                         <!--Only members-->
-                        <% if (Session["UserType"].ToString() == "mentor")
+                        <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "mentor")
                             { %>
                         <li>
                             <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
@@ -117,7 +117,7 @@
                         <% } %>
 
                         <!--Only admin-->
-                        <% if (Session["UserType"].ToString() == "admin")
+                        <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "admin")
                             { %>
                         <li>
                             <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
