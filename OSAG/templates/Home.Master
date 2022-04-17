@@ -61,7 +61,7 @@
                         <a href="/opportunities/Opportunities.aspx" class="nav-link px-2 link-secondary">OPPORTUNITIES</a>
                     </li>
                     <li>
-                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">USER LIST</a>
+                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">USER SEARCH</a>
                     </li>
                     <li>
                         <a href="/profiles/ViewAnnouncements.aspx" class="nav-link px-2 link-secondary">ANNOUNCEMENTS</a>

@@ -7,14 +7,15 @@
             DataSourceID="sqlsrcAnnouncements"
             AutoGenerateColumns="false"
             AllowPaging="true"
+            CellPadding="10"
             DataKeyNames="AnnouncementID"
             HorizontalAlign="Center"
             ShowHeaderWhenEmpty="true">
             <Columns>
-                <asp:BoundField ReadOnly="true" HeaderText="Sent" DataField="DateCreated" DataFormatString="{0:G}" />
-                <asp:BoundField ReadOnly="true" HeaderText="Header" DataField="Header" />
+                <asp:BoundField ReadOnly="true" HeaderText="Sent" DataField="DateCreated" DataFormatString="{0:MM/dd/yyyy HH:mm tt}" ItemStyle-Wrap="true" ItemStyle-Width="110" />
+                <asp:BoundField ReadOnly="true" HeaderText="Header" DataField="Header" ItemStyle-Font-Bold="true" />
                 <asp:BoundField ReadOnly="true" HeaderText="Body" DataField="Body" />
-                <asp:HyperLinkField  HeaderText="Link" DataNavigateUrlFields="Link" DataTextField="Link" />
+                <asp:HyperLinkField HeaderText="Link" DataNavigateUrlFields="Link" DataTextField="Link" />
             </Columns>
         </asp:GridView>
     <asp:SqlDataSource ID="sqlsrcAnnouncements" runat="server"
