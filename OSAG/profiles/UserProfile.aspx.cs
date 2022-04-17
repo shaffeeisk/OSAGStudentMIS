@@ -25,6 +25,7 @@ namespace OSAG.profiles
 
             // try to stop browser from caching images
             Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.Now.AddSeconds(.1));
 
             // only when loading page for the first time
             if (!IsPostBack)
@@ -49,7 +50,7 @@ namespace OSAG.profiles
                 {
                     // column for resume is probably not a good idea in this query. imagine thousands of page_loads
                     // with Reader being sent in with +100-200 kb due to byte array
-                    sqlQuery = "SELECT StudentID, RegistrationYear, FirstName, LastName, Email, GradDate, Class, Gpa, Phone, Bio, IsApproved " +
+                    sqlQuery = "SELECT StudentID, RegistrationYear, FirstName, LastName, Class, GradDate, Email, Gpa, Phone, Bio, IsApproved " +
                         "FROM Student WHERE Username = '" + Session["Username"].ToString() + "' " +
                         // separate into 2 result sets
                         "SELECT MajorName, IsMinor " +
@@ -64,17 +65,17 @@ namespace OSAG.profiles
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the first record table (student info)
                     {
-                        txtFirstName.Text = reader["FirstName"].ToString();
-                        txtLastName.Text = reader["LastName"].ToString();
-                        txtEmail.Text = reader["Email"].ToString();
+                        lblViewName.Text = reader["FirstName"].ToString();
+                        lblViewName.Text += " " + reader["LastName"].ToString();
+                        lblViewClass.Text = reader["Class"].ToString();
                         if (reader["GradDate"] == DBNull.Value)
-                            txtGradDate.Text = "";
+                            lblViewGradDate.Text = "Unknown";
                         else
-                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
-                        txtClass.Text = reader["Class"].ToString();
-                        txtGpa.Text = reader["Gpa"].ToString();
-                        txtPhone.Text = reader["Phone"].ToString();
-                        txtBio.Text = reader["Bio"].ToString();
+                            lblViewGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("MMMM yyyy");
+                        lblViewEmail.Text = reader["Email"].ToString();
+                        lblViewGpa.Text = reader["Gpa"].ToString();
+                        lblViewPhone.Text = reader["Phone"].ToString();
+                        lblViewBio.Text = reader["Bio"].ToString();
 
                         if (bitToBoolean(reader["IsApproved"]))
                             lblApprove.Text = "User Profile Approved";
@@ -84,32 +85,19 @@ namespace OSAG.profiles
                         // load pfp onto page
                         String fpath = "\\_images\\sPFP\\" + reader["RegistrationYear"].ToString() + "\\" + reader["StudentID"].ToString() + ".jpg";
                         if (File.Exists(Request.PhysicalApplicationPath + fpath))
-                            imgProfile.ImageUrl = fpath;
+                            imgViewPFP.ImageUrl = fpath;
                         else
-                            imgProfile.ImageUrl = "\\_images\\user.png"; // default profile pic
+                            imgViewPFP.ImageUrl = "\\_images\\user.png"; // default profile pic
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
                     {
                         if (bitToBoolean(reader["IsMinor"]))
-                            txtMinor.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewMinor.Text += reader["MajorName"].ToString() + ", ";
                         else
-                            txtMajor.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewMajor.Text += reader["MajorName"].ToString() + ", ";
                     }
-                    txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
-                    txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
-
-                    // maybe instead put button to display or download uploaded resume
-                    // or potentially use above reader to download temp resume file.
-                    // issue with byte array stored file is turning it into a file without saving it.
-                    // see below 
-                    /****************************************
-                     *                populate              *
-                     *                 resume               *
-                     *                 embed                *
-                     *                  here                *
-                     ****************************************/
                 }
                 else if (Session["UserType"].ToString() == "member") // in case there is coder error
                 {
@@ -127,15 +115,18 @@ namespace OSAG.profiles
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the first record table (member info)
                     {
-                        mtxtFirstName.Text = reader["FirstName"].ToString();
-                        mtxtLastName.Text = reader["LastName"].ToString();
-                        txtMemberEmail.Text = reader["Email"].ToString();
-                        txtCity.Text = reader["City"].ToString();
-                        txtState.Text = reader["M_State"].ToString();
-                        txtMemberGrad.Text = reader["GradDate"].ToString();
-                        txtPosition.Text = reader["PositionTitle"].ToString();
-                        txtMemberPhone.Text = reader["Phone"].ToString();
-                        txtMemberBio.Text = reader["Bio"].ToString();
+                        lblViewName.Text = reader["FirstName"].ToString();
+                        lblViewName.Text += " " + reader["LastName"].ToString();
+                        lblViewEmail.Text = reader["Email"].ToString();
+                        lblViewCity.Text = reader["City"].ToString();
+                        lblViewState.Text = reader["M_State"].ToString();
+                        if (reader["GradDate"] == DBNull.Value)
+                            lblViewGradDate.Text = "Unknown";
+                        else
+                            lblViewGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy");
+                        lblViewDesc.Text = reader["PositionTitle"].ToString();
+                        lblViewPhone.Text = reader["Phone"].ToString();
+                        lblViewBio.Text = reader["Bio"].ToString();
                         if (bitToBoolean(reader["IsApproved"]))
                             lblApprove.Text = "User Profile Approved";
                         else
@@ -144,22 +135,27 @@ namespace OSAG.profiles
                         // load pfp onto page
                         String fpath = "\\_images\\mPFP\\" + reader["MemberID"].ToString() + ".jpg";
                         if (File.Exists(Request.PhysicalApplicationPath + fpath))
-                            imgProfile.ImageUrl = fpath;
+                            imgViewPFP.ImageUrl = fpath;
                         else
-                            imgProfile.ImageUrl = "\\_images\\user.png"; // default profile pic
+                            imgViewPFP.ImageUrl = "\\_images\\user.png"; // default profile pic
                     }
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
                     {
                         if (bitToBoolean(reader["IsMinor"])) // read all majors/minors
-                            txtMemberMinor.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewMinor.Text += reader["MajorName"].ToString() + ", ";
                         else
-                            txtMemberMajor.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewMajor.Text += reader["MajorName"].ToString() + ", ";
                     }
-                    txtMemberMajor.Text = txtMemberMajor.Text.Trim().TrimEnd(',');
-                    txtMemberMinor.Text = txtMemberMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
                 }
+                // clear/format major(s)/minor(s) text
+                lblViewMajor.Text = lblViewMajor.Text.Trim().TrimEnd(',');
+                lblViewMinor.Text = lblViewMinor.Text.Trim().TrimEnd(',');
+                if (lblViewMinor.Text == "")
+                    lblViewMinor.Text = "-";
+                if (lblViewMajor.Text == "")
+                    lblViewMajor.Text = "-";
             }
         }
 
@@ -209,16 +205,15 @@ namespace OSAG.profiles
                     "GradDate = @GradDate " +
                     "WHERE Username = '" + Session["Username"].ToString() + "';";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-                sqlCommand.Parameters.AddWithValue("@FirstName", validate(mtxtFirstName.Text));
-                sqlCommand.Parameters.AddWithValue("@LastName", validate(mtxtLastName.Text));
-                sqlCommand.Parameters.AddWithValue("@Email", validate(txtMemberEmail.Text));
+                sqlCommand.Parameters.AddWithValue("@FirstName", validate(txtFirstName.Text));
+                sqlCommand.Parameters.AddWithValue("@LastName", validate(txtLastName.Text));
+                sqlCommand.Parameters.AddWithValue("@Email", validate(txtEmail.Text));
                 sqlCommand.Parameters.AddWithValue("@Phone", validate(txtPhone.Text));
                 sqlCommand.Parameters.AddWithValue("@City", validate(txtCity.Text));
                 sqlCommand.Parameters.AddWithValue("@M_State", validate(txtState.Text));
                 sqlCommand.Parameters.AddWithValue("@PositionTitle", validate(txtPosition.Text));
-                sqlCommand.Parameters.AddWithValue("@Bio", validate(txtMemberBio.Text));
-                sqlCommand.Parameters.AddWithValue("@GradDate", validate(txtMemberGrad.Text));
-
+                sqlCommand.Parameters.AddWithValue("@Bio", validate(txtBio.Text));
+                sqlCommand.Parameters.AddWithValue("@GradDate", validate(txtGradDate.Text));
                 sqlConnect.Open();
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
@@ -229,18 +224,18 @@ namespace OSAG.profiles
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             // upload resume if a file was uploaded
-            if (fileUpload.HasFile)
+            if (fileResume.HasFile)
             {
                 // ensure file is not too large. http error if 4MB+, handled in Global.asax.
                 // do not want to change web.config http timeout settings because DDoS = bad
-                if (fileUpload.PostedFile.ContentLength > 2097152)
+                if (fileResume.PostedFile.ContentLength > 2097152)
                 {
                     // file is too large (>2mb)
                     txtBio.Text = "file larger than 2mb"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
                     return;
                 }
                 // make sure file is pdf
-                string cType = fileUpload.PostedFile.ContentType;
+                string cType = fileResume.PostedFile.ContentType;
                 if (cType != "application/pdf")
                 {
                     // file is not pdf
@@ -249,7 +244,7 @@ namespace OSAG.profiles
                 }
 
                 // define filestream and create binary reader
-                Stream fs = fileUpload.PostedFile.InputStream;
+                Stream fs = fileResume.PostedFile.InputStream;
                 BinaryReader br = new BinaryReader(fs);
 
                 // then insert file into Student table
@@ -278,8 +273,8 @@ namespace OSAG.profiles
             byte[] resumeFile = getResumeBytes(Session["Username"].ToString());
             if (resumeFile == null)
             {
-                // ERROR MESSAGE HANDLING PLEASE (NO RESUME UPLOADED)
-                btnDownloadResume.Text = "no resume uploaded"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                btnDownloadResume.Text = "No Resume Uploaded!";
+                btnDownloadResume.Enabled = false;
                 return;
             }
             // can change file download name, simply change content of filename= below
@@ -288,14 +283,6 @@ namespace OSAG.profiles
             Response.ContentType = "application/octectstream";
             Response.BinaryWrite(resumeFile);
             Response.End();
-        }
-
-        // on click enable picture upload visibility
-        protected void imgProfile_Click(object sender, ImageClickEventArgs e)
-        {
-            lblPFP.Visible = true;
-            filePFP.Visible = true;
-            btnPFP.Visible = true;
         }
 
 
@@ -335,11 +322,11 @@ namespace OSAG.profiles
                     if (File.Exists(fpath)) // delete existing file if exists
                     {
                         File.Delete(fpath);
-                        imgProfile.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // make client look for deleted image
+                        imgViewPFP.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // make client look for deleted image
                     }
                     filePFP.SaveAs(fpath); // save upload
                     Response.Cache.SetLastModified(DateTime.Now); // tell client cached image was modified
-                    imgProfile.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // make client look for new image
+                    imgViewPFP.ImageUrl = "\\_images\\sPFP\\" + arr[1] + "\\" + arr[0] + ".jpg"; // make client look for new image
                 }
                 else // user is Member
                 {
@@ -349,13 +336,13 @@ namespace OSAG.profiles
                     {
                         File.Delete(fpath);
                         Response.Cache.SetLastModified(DateTime.Now); // tell client cached image was modified
-                        imgProfile.ImageUrl = "\\_images\\mPFP\\" + id + ".jpg"; // make client look for deleted image
+                        imgViewPFP.ImageUrl = "\\_images\\mPFP\\" + id + ".jpg"; // make client look for deleted image
                     }
                     filePFP.SaveAs(fpath); // save upload
                     Response.Cache.SetLastModified(DateTime.Now); // tell client cached image was modified
-                    imgProfile.ImageUrl = "\\_images\\mPFP\\" + id + ".jpg"; // set image again
+                    imgViewPFP.ImageUrl = "\\_images\\mPFP\\" + id + ".jpg"; // set image again
                 }
-                
+
                 // remove file upload controls and display success message
                 filePFP.Visible = false;
                 btnPFP.Visible = false;
@@ -446,6 +433,39 @@ namespace OSAG.profiles
             arr[0] = (int)reader["StudentID"];
             arr[1] = (int)(short)reader["RegistrationYear"];
             return arr;
+        }
+
+        protected void btnEditMode_Click(object sender, EventArgs e)
+        {
+            // transfer data over to edit controls
+            imgEditPFP.ImageUrl = imgViewPFP.ImageUrl;
+            txtFirstName.Text = lblViewName.Text.Split(' ')[0];
+            txtLastName.Text = lblViewName.Text.Split(' ')[1];
+            txtEmail.Text = lblViewEmail.Text;
+            txtPhone.Text = lblViewPhone.Text;
+            if (DateTime.TryParse(lblViewGradDate.Text, out DateTime dt))
+                txtGradDate.Text = dt.ToString("yyyy-MM-dd");
+            lblEditMajor.Text = lblViewMajor.Text;
+            lblEditMinor.Text = lblViewMinor.Text;
+
+            if (Session["UserType"].ToString() == "student")
+            {
+                txtClass.Text = lblViewClass.Text;
+                txtGpa.Text = lblViewGpa.Text;
+            }
+            else
+            {
+                txtCity.Text = lblViewCity.Text;
+                txtState.Text = lblViewState.Text;
+            }
+            // then flip visibility of view/edit
+            divModeView.Visible = false;
+            divModeEdit.Visible = true;
+        }
+
+        protected void btnDeclareMajor_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DeclareMajor.aspx");
         }
     }
 }
