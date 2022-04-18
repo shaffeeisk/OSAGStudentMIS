@@ -151,7 +151,7 @@
         </div>
         <div class="row">
             <div class="col justify-content-center d-grid pb-4 mx-auto" style="width: auto">
-                <asp:Button ID="btnClear" runat="server" Text="CLEAR ALL INPUTS" CssClass="btn btn-secondary btn-danger" Width="200px" OnClick="btnClear_Click" />
+                <asp:Button ID="btnClear" runat="server" CausesValidation="false" Text="CLEAR ALL INPUTS" CssClass="btn btn-secondary btn-danger" Width="200px" OnClick="btnClear_Click" />
             </div>
         </div>
         <!--buttons end-->

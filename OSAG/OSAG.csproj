@@ -70,6 +70,7 @@
     <Content Include="admin\AddMember.aspx" />
     <Content Include="admin\ApproveRegistration.aspx" />
     <Content Include="admin\AssignMentor.aspx" />
+    <Content Include="admin\AwardScholarship.aspx" />
     <Content Include="admin\CreateAnnouncement.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -254,6 +255,13 @@
     </Compile>
     <Compile Include="admin\AssignMentor.aspx.designer.cs">
       <DependentUpon>AssignMentor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AwardScholarship.aspx.cs">
+      <DependentUpon>AwardScholarship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AwardScholarship.aspx.designer.cs">
+      <DependentUpon>AwardScholarship.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\CreateAnnouncement.aspx.cs">
       <DependentUpon>CreateAnnouncement.aspx</DependentUpon>
