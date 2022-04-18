@@ -46,7 +46,7 @@
                                         </p>
                                         <%if (Session["UserType"].ToString() == "student")
                                             {%>
-                                        <asp:Button ID="btnDownloadResume" class="btn btn-primary mb-3" runat="server" Text="View Resume" OnClick="btnDownloadResume_Click" />
+                                        <asp:Button ID="btnDownloadResume" class="btn btn-primary mb-3" runat="server" Text="VIEW RESUME" OnClick="btnDownloadResume_Click" />
                                         <%} %>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
 
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <asp:Button ID="btnEditMode" class="btn btn-outline-primary" CausesValidation="false" runat="server" Text="Edit" OnClick="btnEditMode_Click" />
+                                        <asp:Button ID="btnEditMode" class="btn btn-secondary" CausesValidation="false" runat="server" Text="EDIT" OnClick="btnEditMode_Click" />
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
 
         <!-- EDIT MODE START -->
         <div id="divModeEdit" runat="server" class="container justify-content-center px-5 pt-4" visible="false">
-            <h2 class="editprofile text-center pb-5">Edit Profile</h2>
+            <h2 class="editprofile text-center pb-5">EDIT PROFILE</h2>
             <div class="row">
                 <!-- Left edit column starts -->
                 <div class="col-lg-6">
@@ -190,7 +190,9 @@
                         </div>
                         <% if (Session["UserType"].ToString() == "student")
                             { %>
-                        <h6 class="upload pt-1">Upload Resume</h6>
+                        <h6 class="upload pt-1">
+                            <asp:Label ID="lblUploadResume" runat="server" Text="Upload Resume"></asp:Label>
+                        </h6>
                         <div class="input-group mb-5" style="width: 400px; margin-left: auto; margin-right: auto">
                             <asp:FileUpload ID="fileResume" class="form-control" runat="server" />
                             <asp:Button ID="btnUpload" type="submit" Text="Upload" class="input-group-text" runat="server" CausesValidation="false" OnClick="btnUpload_Click"></asp:Button>
@@ -335,8 +337,8 @@
             </div>
         </div>
         <div style="margin-left: auto; margin-right: auto; align-content: center">
-            <asp:Button ID="btnReturn" class="btn btn-outline-primary" runat="server" Text="Cancel" OnClick="btnReturn_Click" Visible="false" />
-            <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Save Changes" OnClick="btnUpdate_Click" Visible="false" />
+            <asp:Button ID="btnReturn" class="btn btn-secondary" runat="server" Text="CANCEL" CausesValidation="false" OnClick="btnReturn_Click" Visible="false" />
+            <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="SAVE CHANGES" OnClick="btnUpdate_Click" Visible="false" />
         </div>
     </div>
     <!-- EDIT MODE END -->

@@ -35,10 +35,8 @@ namespace OSAG.profiles
                 // is in !IsPostBack because error causes Response.Redirect back to page.
                 if (Request.QueryString["Message"] != null) // Request.QueryString["key"] is the .../page.aspx?Message=message%and%etc
                 {
-                    // CODE FOR TESTING ONLY. PLEASE CHANGE. PLEASE FOR THE LOVE OF GOD.
-                    // SERIOUSLY, DO NOT OVERLOOK THIS.
-                    btnUpload.Text = Request.QueryString["Message"]; // text of querystring
-                    // fun fact: do NOT try to clear the querystring. just response.redirect :sob emoji:
+                    string errorMsg = Request.QueryString["Message"]; // text of querystring
+                    Response.Write("<script>alert('" + errorMsg +"');</script>");
                 }
 
                 // define connection to DB and query String
@@ -154,7 +152,8 @@ namespace OSAG.profiles
                     sqlConnect.Close();
                 }
                 // clear/format major(s)/minor(s) text
-                lblViewDesc.Text = lblViewDesc.Text.TrimEnd('/') + " Major";
+                if (Session["UserType"].ToString() == "student")
+                    lblViewDesc.Text = lblViewDesc.Text.TrimEnd('/') + " Major";
                 lblViewMajor.Text = lblViewMajor.Text.Trim().TrimEnd(',');
                 lblViewMinor.Text = lblViewMinor.Text.Trim().TrimEnd(',');
                 if (lblViewMinor.Text == "")
@@ -238,16 +237,14 @@ namespace OSAG.profiles
                 // do not want to change web.config http timeout settings because DDoS = bad
                 if (fileResume.PostedFile.ContentLength > 2097152)
                 {
-                    // file is too large (>2mb)
-                    txtBio.Text = "file larger than 2mb"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    lblUploadResume.Text = "File is larger than 2MB limit";
                     return;
                 }
                 // make sure file is pdf
                 string cType = fileResume.PostedFile.ContentType;
                 if (cType != "application/pdf")
                 {
-                    // file is not pdf
-                    txtBio.Text = "file is not pdf"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    lblUploadResume.Text = "File is not PDF";
                     return;
                 }
 
@@ -269,9 +266,9 @@ namespace OSAG.profiles
             }
             else
             {
-                // display error message or something here
+                lblUploadResume.Text = "No Resume File Uploaded.";
+                lblUploadResume.ForeColor = Color.Red;
             }
-
         }
 
         // writes file directly to client (no hard memory save of resume on server).
@@ -281,8 +278,9 @@ namespace OSAG.profiles
             byte[] resumeFile = getResumeBytes(Session["Username"].ToString());
             if (resumeFile == null)
             {
-                btnDownloadResume.Text = "No Resume Uploaded!";
+                btnDownloadResume.Text = "NO RESUME UPLOADED";
                 btnDownloadResume.Enabled = false;
+                btnDownloadResume.CssClass = "btn btn-alert mb-3";
                 return;
             }
             // can change file download name, simply change content of filename= below
@@ -300,20 +298,17 @@ namespace OSAG.profiles
             // upload resume if a file was uploaded
             if (filePFP.HasFile)
             {
-                // ensure file is not too large. http error if 4MB+, handled in Global.asax.
-                // do not want to change web.config http timeout settings because DDoS = bad
+                // ensure file is not too large.
                 if (filePFP.PostedFile.ContentLength > 2097152)
                 {
-                    // file is too large (>2mb)
-                    lblPFP.Text = "file larger than 2mb"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    lblPFP.Text = "File is larger than 2MB limit";
                     return;
                 }
                 // make sure file is jpg
                 string cType = filePFP.PostedFile.ContentType;
                 if (cType != "image/jpeg")
                 {
-                    // file is not jpg
-                    lblPFP.Text = "file must be jpeg"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                    lblPFP.Text = "File is not JPEG/JPG";
                     return;
                 }
 
@@ -358,8 +353,8 @@ namespace OSAG.profiles
             }
             else
             {
-                // display error message or something here
-                lblPFP.Text = "no image uploaded";
+                lblPFP.Text = "No Profile Picture uploaded";
+                lblPFP.ForeColor = Color.Red;
             }
         }
 

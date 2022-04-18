@@ -37,33 +37,45 @@ namespace OSAG.profiles
                 // define db connection
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
                 String sqlQuery;
+                SqlCommand sqlCommand;
 
-                // if trying to view a student
                 if (Session["ViewProfileUserType"].ToString() == "student")
                 {
-                    // query for student data
-                    sqlQuery = "SELECT StudentID, RegistrationYear, FirstName, LastName, Email, GradDate, Phone, Class, Gpa, Bio FROM Student " +
-                        "WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
-                        "SELECT MajorName, IsMinor FROM Student s " +
-                        "LEFT JOIN HasMajor h ON s.StudentID = h.StudentID " +
-                        "LEFT JOIN Major m ON h.MajorID = m.MajorID " +
+                    // column for resume is probably not a good idea in this query. imagine thousands of page_loads
+                    // with Reader being sent in with +100-200 kb due to byte array
+                    sqlQuery = "SELECT StudentID, RegistrationYear, FirstName, LastName, Class, GradDate, Email, Gpa, Phone, Bio, IsApproved " +
+                        "FROM Student WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
+                        // separate into 2 result sets
+                        "SELECT MajorName, IsMinor " +
+                        "FROM Student s " +
+                        "LEFT JOIN HasMajor h on h.StudentID = s.StudentID " +
+                        "LEFT JOIN Major m on m.MajorID = h.MajorID " +
                         "WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
-                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                    sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
+
+                    // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the first record table (student info)
                     {
-                        // populate student attributes
-                        txtFirstName.Text = reader["FirstName"].ToString();
-                        txtLastName.Text = reader["LastName"].ToString();
-                        txtEmail.Text = reader["Email"].ToString();
-                        if (reader["GradDate"] != DBNull.Value)
-                            txtGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
-                        txtPhone.Text = reader["Phone"].ToString();
-                        txtClass.Text = reader["Class"].ToString();
-                        txtGPA.Text = reader["Gpa"].ToString();
-                        txtBio.Text = reader["Bio"].ToString();
-                        
+                        lblViewName.Text = reader["FirstName"].ToString();
+                        lblViewName.Text += " " + reader["LastName"].ToString();
+                        lblViewClass.Text = reader["Class"].ToString();
+                        if (reader["GradDate"] == DBNull.Value)
+                            lblViewGradDate.Text = "Unknown";
+                        else
+                            lblViewGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("MMMM yyyy");
+                        lblViewEmail.Text = reader["Email"].ToString();
+                        lblViewGpa.Text = reader["Gpa"].ToString();
+                        lblViewPhone.Text = reader["Phone"].ToString();
+                        lblViewBio.Text = reader["Bio"].ToString();
+                        lblViewDesc.Text = reader["Class"].ToString() + " ";
+
+                        if (bitToBoolean(reader["IsApproved"]))
+                            isApproved.Visible = true;
+                        else
+                            isApproved.Visible = false;
+
                         // load pfp onto page
                         String fpath = "\\_images\\sPFP\\" + reader["RegistrationYear"].ToString() + "\\" + reader["StudentID"].ToString() + ".jpg";
                         if (File.Exists(Request.PhysicalApplicationPath + fpath))
@@ -75,40 +87,47 @@ namespace OSAG.profiles
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
                     {
                         if (bitToBoolean(reader["IsMinor"]))
-                            txtMinor.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewMinor.Text += reader["MajorName"].ToString() + ", ";
                         else
-                            txtMajor.Text += reader["MajorName"].ToString() + ", ";
+                        {
+                            lblViewMajor.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewDesc.Text += reader["MajorName"].ToString() + "/";
+                        }
                     }
-                    txtMajor.Text = txtMajor.Text.Trim().TrimEnd(',');
-                    txtMinor.Text = txtMinor.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
                 }
-
-                // otherwise querying member
                 else if (Session["ViewProfileUserType"].ToString() == "member") // in case there is coder error
                 {
-                    sqlQuery = "SELECT MemberID, MemberType, FirstName, LastName, Email, City, M_State, Phone, GradDate, PositionTitle, Bio FROM Member" +
-                        " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
-                        "SELECT FirstName,LastName,Email,City,M_State, m.MajorName, IsMinor FROM Member s LEFT JOIN HasMajor h ON s.MemberID = h.MemberID " +
-                        "LEFT JOIN Major m ON h.MajorID = m.MajorID" +
-                        " WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "';";
-                    SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                    sqlQuery = "SELECT MemberID, MemberType, FirstName, LastName, Email, City, M_State, GradDate, PositionTitle, Phone, Bio, IsApproved " +
+                        "FROM Member " +
+                        "WHERE Username = '" + Session["ViewProfileUsername"].ToString() + "' " +
+                        "SELECT MajorName, IsMinor FROM Member m " +
+                        "LEFT JOIN HasMajor h on h.MemberID = m.MemberID " +
+                        "LEFT JOIN Major z on z.MajorID = h.MajorID " +
+                        "WHERE Username =  '" + Session["ViewProfileUsername"].ToString() + "';";
+                    sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                     sqlConnect.Open();
 
                     // read data onto page
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     while (reader.Read()) // this will read the first record table (member info)
                     {
-                        mtxtFirstName.Text = reader["FirstName"].ToString();
-                        mtxtLastName.Text = reader["LastName"].ToString();
-                        txtMemberEmail.Text = reader["Email"].ToString();
-                        txtCity.Text = reader["City"].ToString();
-                        txtState.Text = reader["M_State"].ToString();
-                        txtMemberPhone.Text = reader["Phone"].ToString();
-                        if (reader["GradDate"] != DBNull.Value)
-                            txtMemberGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy-MM-dd");
-                        txtPositionTitle.Text = reader["PositionTitle"].ToString();
-                        txtMemberBio.Text = reader["Bio"].ToString();
+                        lblViewName.Text = reader["FirstName"].ToString();
+                        lblViewName.Text += " " + reader["LastName"].ToString();
+                        lblViewEmail.Text = reader["Email"].ToString();
+                        lblViewCity.Text = reader["City"].ToString();
+                        lblViewState.Text = reader["M_State"].ToString();
+                        if (reader["GradDate"] == DBNull.Value)
+                            lblViewGradDate.Text = "Unknown";
+                        else
+                            lblViewGradDate.Text = DateTime.Parse(reader["GradDate"].ToString()).ToString("yyyy");
+                        lblViewDesc.Text = reader["PositionTitle"].ToString();
+                        lblViewPhone.Text = reader["Phone"].ToString();
+                        lblViewBio.Text = reader["Bio"].ToString();
+                        if (bitToBoolean(reader["IsApproved"]))
+                            isApproved.Visible = true;
+                        else
+                            isApproved.Visible = false;
 
                         // load pfp onto page
                         String fpath = "\\_images\\mPFP\\" + reader["MemberID"].ToString() + ".jpg";
@@ -127,15 +146,56 @@ namespace OSAG.profiles
                     reader.NextResult(); // go to bext result table (majors/IsMinor)
                     while (reader.Read()) // this will read records of majors and input into the singular textboxes
                     {
-                        if (bitToBoolean(reader["IsMinor"]))
-                            txtMemberMinors.Text += reader["MajorName"].ToString() + ", ";
+                        if (bitToBoolean(reader["IsMinor"])) // read all majors/minors
+                            lblViewMinor.Text += reader["MajorName"].ToString() + ", ";
                         else
-                            txtMemberMajors.Text += reader["MajorName"].ToString() + ", ";
+                            lblViewMajor.Text += reader["MajorName"].ToString() + ", ";
                     }
-                    txtMemberMajors.Text = txtMemberMajors.Text.Trim().TrimEnd(',');
-                    txtMemberMinors.Text = txtMemberMinors.Text.Trim().TrimEnd(',');
                     sqlConnect.Close();
-                    btnDownloadResume.Visible = false;
+                }
+                // clear/format text
+                if (Session["ViewProfileUserType"].ToString() == "student")
+                    lblViewDesc.Text = lblViewDesc.Text.TrimEnd('/') + " Major";
+                lblViewMajor.Text = lblViewMajor.Text.Trim().TrimEnd(',');
+                lblViewMinor.Text = lblViewMinor.Text.Trim().TrimEnd(',');
+                if (lblViewMinor.Text == "")
+                    lblViewMinor.Text = "-";
+                if (lblViewMajor.Text == "")
+                    lblViewMajor.Text = "-";
+                if (lblViewBio.Text == "")
+                    lblViewBio.Text = "User has not yet submitted their biography.";
+
+                // handle viewstate
+                if (Session["UserType"].ToString() == "student")
+                {
+                    if (Session["ViewProfileUserType"].ToString() == "student")
+                    {
+                        lblViewEmail.Text = "-Private-";
+                        lblViewPhone.Text = "-Private-";
+                        lblViewGpa.Text = "-Private-";
+                    }
+                    else
+                        lblViewPhone.Text = "-Private-";
+                }
+                else // (Session["UserType"].ToString() == "member")
+                {
+                    switch (Int32.Parse(Session["MemberType"].ToString())) // provite different access levels
+                    {
+                        case 4: // member
+                            if (Session["ViewProfileUserType"].ToString() == "student")
+                                lblViewGpa.Text = "-Private-";
+                            lblViewEmail.Text = "-Private-";
+                            lblViewPhone.Text = "-Private-";
+                            break;
+                        case 3: // mentor
+                            lblViewPhone.Text = "-Private-";
+                            break;
+                        case 2: // leadership
+                            lblViewPhone.Text = "-Private-";
+                            break;
+                        default: // case: 1 (admin)
+                            break;
+                    }
                 }
             }
         }
@@ -147,8 +207,9 @@ namespace OSAG.profiles
             byte[] resumeFile = getResumeBytes(Session["ViewProfileUsername"].ToString());
             if (resumeFile == null)
             {
-                // ERROR MESSAGE HANDLING PLEASE (NO RESUME UPLOADED)
-                btnDownloadResume.Text = "no resume uploaded"; // TEST CODE REPLACE WITH ACTUAL ERROR MESSAGE
+                btnDownloadResume.Text = "NO RESUME UPLOADED";
+                btnDownloadResume.Enabled = false;
+                btnDownloadResume.CssClass = "btn btn-alert mb-3";
                 return;
             }
             // can change file download name, simply change content of filename= below

@@ -44,14 +44,14 @@ namespace OSAG
             {
                 HttpContext.Current.ClearError();
                 HttpContext.Current.Response.Redirect(
-                    string.Format("/profiles/UserProfile.aspx?Message={0}", "File size too large. File must be less than 2 MB."));
+                    string.Format("/profiles/UserProfile.aspx?Message={0}", "File size too large! Please limit uploads to 2 MB."));
             }
             if (HttpContext.Current.Request.Url.ToString().Contains("/student/OleSchoolScholarship.aspx") &&
         HttpContext.Current.Error.InnerException.Message.Contains("Maximum request length exceeded"))
             {
                 HttpContext.Current.ClearError();
                 HttpContext.Current.Response.Redirect(
-                    string.Format("/student/OleSchoolScholarship.aspx?Message={0}", "File size too large. File must be less than 2 MB."));
+                    string.Format("/student/OleSchoolScholarship.aspx?Message={0}", "File size too large! Please limit uploads to 2 MB."));
             }
         }
 
