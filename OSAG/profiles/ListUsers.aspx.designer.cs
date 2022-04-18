@@ -42,15 +42,6 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.GridView grdvStudent;
 
         /// <summary>
-        /// sqlsrcStudentQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcStudentQuery;
-
-        /// <summary>
         /// searchBar2 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,15 @@ namespace OSAG.profiles
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdvMember;
+
+        /// <summary>
+        /// sqlsrcStudentQuery control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcStudentQuery;
 
         /// <summary>
         /// sqlsrcMemberQuery control.
