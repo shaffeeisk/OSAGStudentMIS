@@ -28,7 +28,7 @@ namespace OSAG.profiles
         protected void btnSearchStu_Click(object sender, EventArgs e)
         {
             String stuFilter = "SELECT Username, FirstName, LastName FROM Student " +
-                   "WHERE FirstName + ' ' + LastName LIKE '%[Search]%'";
+                   "WHERE FirstName LIKE '%[Search]%' OR LastName LIKE '%[Search]%' OR Username LIKE '%[Search]%'";
             if (Session["Username"].ToString() != "admin")
                 stuFilter += " AND IsApproved = '1'";
             sqlsrcStudentQuery.SelectCommand = stuFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
@@ -39,7 +39,7 @@ namespace OSAG.profiles
         protected void btnSearchMent_Click(object sender, EventArgs e)
         {
             String membFilter = "SELECT Username, FirstName, LastName FROM Member " +
-                   "WHERE FirstName + ' ' + LastName LIKE '%[Search]%'";
+                   "WHERE FirstName LIKE '%[Search]%' OR LastName LIKE '%[Search]%' OR Username LIKE '%[Search]%'";
             if (Session["Username"].ToString() != "admin")
                 membFilter += " AND IsApproved = '1'";
             sqlsrcMemberQuery.SelectCommand = membFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar2.Value.Trim()));
