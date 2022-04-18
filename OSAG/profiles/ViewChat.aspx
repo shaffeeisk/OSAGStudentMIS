@@ -8,7 +8,7 @@
     <div class="pt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
         
         <div class="container col-lg-4 text-center pb-4">
-            <h2>CHAT WITH <asp:Label ID="lblChatName" runat="server"></asp:Label></h2>
+            <h3>CHAT WITH <asp:Label ID="lblChatName" runat="server" Font-Underline="true" Text=""></asp:Label></h3>
         </div>
 
         <asp:GridView ID="grdvChat"

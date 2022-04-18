@@ -53,9 +53,9 @@ namespace OSAG.profiles
                 sqlConnect.Open();
                 SqlDataReader reader = sqlCommand.ExecuteReader();
                 reader.Read();
-                lblChatName.Text = "" + reader["FirstName"].ToString().ToUpper();
+                lblChatName.Text += " " + reader["FirstName"].ToString().ToUpper();
                 lblChatName.Text += " " + reader["LastName"].ToString().ToUpper();
-                if (lblChatName.Text == "")
+                if (lblChatName.Text.Trim() == "")
                     lblChatName.Text = "UNKNOWN";
             }
             catch(Exception ex)

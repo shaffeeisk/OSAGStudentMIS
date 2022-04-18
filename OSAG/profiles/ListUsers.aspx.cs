@@ -30,7 +30,9 @@ namespace OSAG.profiles
         {
             String stuFilter = "SELECT Username, FirstName, LastName FROM Student " +
                    "WHERE FirstName LIKE '%[Search]%' OR LastName LIKE '%[Search]%' OR Username LIKE '%[Search]%'";
-            if (!Int32.TryParse(Session["MemberType"].ToString(), out int i) || i >= 2)
+            if (Session["MemberType"] == null)
+                stuFilter += " AND IsApproved = '1'";
+            else if (Session["MemberType"].ToString() != "1")
                 stuFilter += " AND IsApproved = '1'";
 
             sqlsrcStudentQuery.SelectCommand = stuFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
@@ -42,7 +44,9 @@ namespace OSAG.profiles
         {
             String membFilter = "SELECT Username, FirstName, LastName FROM Member " +
                    "WHERE FirstName LIKE '%[Search]%' OR LastName LIKE '%[Search]%' OR Username LIKE '%[Search]%'";
-            if (!Int32.TryParse(Session["MemberType"].ToString(), out int i) || i >= 1)
+            if(Session["MemberType"] == null)
+                membFilter += " AND IsApproved = '1'";
+            else if (Session["MemberType"].ToString() != "1")
                 membFilter += " AND IsApproved = '1'";
             sqlsrcMemberQuery.SelectCommand = membFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar2.Value.Trim()));
             grdvMember.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
