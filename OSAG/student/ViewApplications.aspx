@@ -3,6 +3,30 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style>
+        body {
+            width: 100%;
+            margin: 5px;
+        }
+
+        .table-condensed tr th {
+            border: 0px solid #6e7bd9;
+            color: white;
+            background-color: #6e7bd9;
+        }
+
+        .table-condensed, .table-condensed tr td {
+            border: 0px solid #000;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f7ff
+        }
+
+        tr:nth-child(odd) {
+            background: #fff;
+        }
+    </style>
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <h3>Jobs In Progress:</h3>
         <asp:GridView ID="grdvwJobs"
