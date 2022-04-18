@@ -15,15 +15,6 @@ namespace OSAG.profiles
     {
 
         /// <summary>
-        /// lblAddStudentRecipient control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddStudentRecipient;
-
-        /// <summary>
         /// ddl_StudentRecipient control.
         /// </summary>
         /// <remarks>
@@ -51,15 +42,6 @@ namespace OSAG.profiles
         protected global::System.Web.UI.WebControls.Label lblStudentMax;
 
         /// <summary>
-        /// lblAddMemberRecipient control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddMemberRecipient;
-
-        /// <summary>
         /// ddl_MemberRecipient control.
         /// </summary>
         /// <remarks>
@@ -85,6 +67,15 @@ namespace OSAG.profiles
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMemberMax;
+
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// txtChatBox control.
