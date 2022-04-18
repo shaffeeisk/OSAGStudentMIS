@@ -56,7 +56,7 @@
         </style>
 
     </head>
-    <body style="background-color: white;">
+    <body style="background-color:#FEFEFE;">
         <div style="text-align: center">
             <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/jobbanner.png" Height="400px" />
             <br />
@@ -64,7 +64,7 @@
 
         <div class="container text-center pt-5 ">
             <!--Jobs Header starts-->
-            <h2>Find Jobs</h2>
+            <h2>FIND JOBS</h2>
         </div>
         <!--Jobs Header ends-->
 

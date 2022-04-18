@@ -204,15 +204,6 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
 
         /// <summary>
-        /// Label6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
-
-        /// <summary>
         /// ddlCompany control.
         /// </summary>
         /// <remarks>
@@ -267,6 +258,15 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.Button btnClear;
 
         /// <summary>
+        /// dlistInternships control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dlistInternships;
+
+        /// <summary>
         /// sqlsrcListCompanies control.
         /// </summary>
         /// <remarks>
@@ -274,15 +274,6 @@ namespace OSAG.member
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcListCompanies;
-
-        /// <summary>
-        /// grdvwInternships control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdvwInternships;
 
         /// <summary>
         /// sqlsrc control.
