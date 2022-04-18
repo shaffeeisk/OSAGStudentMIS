@@ -128,8 +128,8 @@
                     { %>
                 <%# Eval("OpportunityName") %>
                 <td><%# (Eval("CompanyName").ToString() == "" ? "N/A" : Eval("CompanyName")) %></td>
-                <td><%# String.Format("{0:M/d/yyyy}", Eval("EventDate")) %></td>
-                <td><%# String.Format("{0:M/d/yyyy}", Eval("ApplicationDeadline")) %></td>
+                <td><%# Eval("EventDate").ToString() == "" ? "N/A" : String.Format("{0:M/d/yyyy}", Eval("EventDate")) %></td>
+                <td><%# Eval("ApplicationDeadline").ToString() == "" ? "N/A" : String.Format("{0:M/d/yyyy}", Eval("ApplicationDeadline")) %></td>
                 <td><a href="/opportunities/OpportunityDetails.aspx?id=<%# Eval("OpportunityID") %>">Edit</a></td>
                 <%}
                     catch (Exception ex)
