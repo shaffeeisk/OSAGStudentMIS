@@ -92,7 +92,6 @@
             <Columns>
                 <asp:BoundField HeaderText="Position" DataField="InternshipName" SortExpression="InternshipName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
-                <asp:BoundField HeaderText="Status" DataField="AppStatus" SortExpression="AppStatus" />
                 <asp:TemplateField HeaderText="Application Status">
                     <ItemTemplate>
                         <asp:DropDownList ID="ddlStatus2" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus2_SelectedIndexChanged">
@@ -136,7 +135,6 @@
             <Columns>
                 <asp:BoundField HeaderText="Opportunity" DataField="OpportunityName" SortExpression="OpportunityName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />
-                <asp:BoundField HeaderText="Status" DataField="AppStatus" SortExpression="AppStatus" />
                 <asp:TemplateField HeaderText="Application Status">
                     <ItemTemplate>
                         <asp:DropDownList ID="ddlStatus3" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatus3_SelectedIndexChanged">

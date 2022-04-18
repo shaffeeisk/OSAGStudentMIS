@@ -59,7 +59,7 @@ namespace OSAG.admin
                 "SELECT FirstName + ' ' + LastName AS FullName, EndDate, x.MemberID " +
                 "FROM Member x JOIN Mentorship y ON x.MemberID = y.MemberID " +
                 "WHERE StudentID = '" + lstStudents.SelectedValue + "' " +
-                "AND IsRequest != 1;";
+                "AND (IsRequest != 1 OR IsRequest IS NULL);";
             sqlsrcMemberList.SelectCommand =
                 "WITH listMentors AS (" +
                 "(SELECT MemberID, FirstName AS MemberName FROM Member WHERE LastName IS NULL) " +
@@ -85,6 +85,7 @@ namespace OSAG.admin
                 {
                     gvr.Cells[1].Text = "Active"; // otherwise mentorship is active
                     btn.Text = "Set Inactive";
+                    btn.CssClass = "btn-secondary";
                 }
             }
         }
@@ -144,6 +145,16 @@ namespace OSAG.admin
         {
             lblMentorshipRequests.Visible = !lblMentorshipRequests.Visible;
             grdvMentorshipRequests.Visible = !grdvMentorshipRequests.Visible;
+            if (btnToggleRequests.Text == "VIEW REQUESTS")
+            {
+                btnToggleRequests.Text = "HIDE REQUESTS";
+                btnToggleRequests.CssClass = "btn btn-secondary";
+            }
+            else
+            {
+                btnToggleRequests.Text = "VIEW REQUESTS";
+                btnToggleRequests.CssClass = "btn btn-primary";
+            }
         }
     }
 }

@@ -16,7 +16,8 @@ namespace OSAG.profiles
             {
                 Session["MustLogin"] = "You must log in to access that page.";
                 Response.Redirect("/login/LoginPage.aspx");
-            }else if (!IsPostBack)
+            }
+            else if (!IsPostBack)
             {
                 if (Session["Username"].ToString() == "admin")
                     sqlsrcStudentQuery.SelectCommand = "SELECT Username, FirstName, LastName FROM Student";
@@ -29,8 +30,9 @@ namespace OSAG.profiles
         {
             String stuFilter = "SELECT Username, FirstName, LastName FROM Student " +
                    "WHERE FirstName LIKE '%[Search]%' OR LastName LIKE '%[Search]%' OR Username LIKE '%[Search]%'";
-            if (Session["Username"].ToString() != "admin")
+            if (!Int32.TryParse(Session["MemberType"].ToString(), out int i) || i >= 2)
                 stuFilter += " AND IsApproved = '1'";
+
             sqlsrcStudentQuery.SelectCommand = stuFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
             grdvStudent.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
         }
@@ -40,20 +42,10 @@ namespace OSAG.profiles
         {
             String membFilter = "SELECT Username, FirstName, LastName FROM Member " +
                    "WHERE FirstName LIKE '%[Search]%' OR LastName LIKE '%[Search]%' OR Username LIKE '%[Search]%'";
-            if (Session["Username"].ToString() != "admin")
+            if (!Int32.TryParse(Session["MemberType"].ToString(), out int i) || i >= 1)
                 membFilter += " AND IsApproved = '1'";
             sqlsrcMemberQuery.SelectCommand = membFilter.Replace("[Search]", HttpUtility.HtmlEncode(searchBar2.Value.Trim()));
             grdvMember.DataBind(); // COMMAND FIXES BUG WHERE PREVIOUS SEARCH PERSISTS AFTER CLEARING SEARCHBAR
-        }
-
-        protected void grdvUser_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='aquamarine';";
-                e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
-                e.Row.ToolTip = "Click \"Select\" to edit this student.";
-            }
         }
 
         protected void grdvStudent_SelectedIndexChanged(object sender, EventArgs e)
