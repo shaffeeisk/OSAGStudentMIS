@@ -148,7 +148,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Internship Name</th>
-                            <th scope="col">Internship Description</th>
+                            <th scope="col">Company</th>
                             <th scope="col">Application Deadline</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">Weekly Hours</th>

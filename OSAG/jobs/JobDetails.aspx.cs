@@ -20,6 +20,8 @@ namespace OSAG.jobs
             {
                 if (!IsPostBack) // check if the webpage is loaded for the first time.
                     ViewState["PreviousPage"] = Request.UrlReferrer; // Saves the Previous page url in ViewState
+                if (ViewState["PreviousPage"] == null) // prevent user from abusing querystring
+                    throw new NullReferenceException();
 
                 // retrieve querystring if it is being used
                 if (Int32.TryParse(Request.QueryString["id"], out int i))

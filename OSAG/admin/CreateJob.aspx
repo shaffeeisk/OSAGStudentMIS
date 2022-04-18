@@ -121,8 +121,9 @@
 
         <div class="row">
             <div class="col justify-content-center d-grid pt-4 pb-2 mx-auto">
+                <asp:Label ID="lblCompany" runat="server" Text="Company: " CssClass="form-label"></asp:Label>
                 <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="400px"
-                    DataSourceID="sqlsrcListCompanys"
+                    DataSourceID="sqlsrcListCompanies"
                     DataTextField="CompanyName"
                     CssClass="form-control"
                     DataValueField="CompanyID"
@@ -162,7 +163,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Job Name</th>
-                            <th scope="col">Job Description</th>
+                            <th scope="col">Company</th>
                             <th scope="col">Application Deadline</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">Weekly Hours</th>
@@ -180,7 +181,7 @@
                 <td><%# String.Format("{0:M/d/yyyy}", Eval("StartDate")) %></td>
                 <td><%# Eval("WeeklyHours") %></td>
                 <td><%# String.Format("{0:C}", Eval("Payment")) %></td>
-                <td><a href="/jobs/JobDetails.aspx/?id=<%# Eval("JobID") %>">Edit</a></td>
+                <td><a href="/jobs/JobDetails.aspx?id=<%# Eval("JobID") %>">Edit</a></td>
                 <%}
                     catch (Exception ex)
                     {
@@ -198,7 +199,7 @@
         DeleteCommand="Delete from JobMatch  Where JobID = @JobID Delete FROM Job where JobID = @JobID"></asp:SqlDataSource>
 
     <asp:SqlDataSource
-        ID="sqlsrcListCompanys"
+        ID="sqlsrcListCompanies"
         runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
         SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>
