@@ -56,7 +56,7 @@
         </style>
 
     </head>
-    <body style="background-color: white;">
+    <body style="background-color:#FEFEFE;">
         <div style="text-align: center">
             <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/jobbanner.png" Height="400px" />
             <br />
