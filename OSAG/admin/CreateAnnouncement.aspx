@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
-        <h3>Select recipients of your announcement:</h3>
+        <h3>SELECT ANNOUNCEMENT RECIPIENTS</h3>
         <br />
         <asp:Label ID="lblUserType" runat="server" Text="User Type:"></asp:Label>
         <asp:DropDownList ID="ddl_UserType" runat="server" AutoPostBack="true" Width="177px"
