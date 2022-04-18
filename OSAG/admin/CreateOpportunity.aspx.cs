@@ -102,7 +102,7 @@ namespace OSAG.member
             // display success message and reset input
             lblSuccess.Text = "New opportunity successfully created";
             ClearOpportunityData();
-            grdvwOpportunities.DataBind();
+            dlistOpportunities.DataBind();
         }
 
         // helper method to clear input
