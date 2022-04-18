@@ -26,7 +26,8 @@
                                 <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         </div>
                     </div>
-                    <input type="text" class="form-control form-control-lg ps-3" placeholder="Search opportunities" aria-label="Search opportunities">
+                    <input id="searchBar" runat="server" type="text" class="form-control form-control-lg ps-3" placeholder="Search opportunities" aria-label="Search opportunities">
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
                 </div>
             </div>
             <!--Search bar ends-->

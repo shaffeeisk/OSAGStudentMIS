@@ -142,5 +142,11 @@ namespace OSAG.opportunities
                 return false;
             return (bool)o;
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            String search = "SELECT OpportunityID, OpportunityName, EventDate, CompanyName FROM Opportunity o LEFT JOIN Company c on o.CompanyID = c.CompanyID WHERE OpportunityName like '%[Search]%' OR CompanyName like '%[Search]%'";
+            sqlsrc.SelectCommand = search.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
+        }
     }
 }
