@@ -5,11 +5,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row pb-5">
-        <div style="text-align:center">
+        <div style="margin-left: auto; margin-right: auto; text-align: center; width: fit-content">
                 <asp:ListBox ID="lstSelectNewUser" font="" runat="server" AutoPostBack="true" Height="200px" Width="200px"
                 DataSourceID="sqlsrcNewUsers"
                 DataTextField="Username"
-                DataValueField="Username"></asp:ListBox>
+                DataValueField="Username"
+                CssClass="form-control">
+                </asp:ListBox>
         </div>
     </div>
     <br />

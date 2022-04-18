@@ -3,9 +3,23 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="margin-left: auto; margin-right: auto; text-align: center; width: fit-content">
+    <div class="row"> <!--Toggle requests button-->
+          <div class="col justify-content-center d-grid pt-5 pb-5 mx-auto">
+              <asp:Button ID="btnToggleRequests" class="btn btn-primary" runat="server" Text="Toggle Requests" OnClick="btnToggleRequests_Click" />
+          </div>
+      </div>
 
-        <asp:Button ID="btnToggleRequests" runat="server" Text="Toggle Requests" OnClick="btnToggleRequests_Click" />
+        <div class="container text-center px-5 pt-5 pb-5"> <!--Header starts-->
+            <div class="row">
+                <div class="col text-center pb-4">
+                    <h2>View Student's Mentorships</h2>
+                </div>
+            </div> 
+
+
+            <!--Header ends-->
+
+    <div style="margin-left: auto; margin-right: auto; text-align: center; width: fit-content">
         <br />
         <asp:Label ID="lblMentorshipRequests" runat="server" Text="Mentorship Requests" CssClass="h2" Font-Names="Raleway" Visible="false"></asp:Label>
         <br />
@@ -16,7 +30,14 @@
             HorizontalAlign="Center"
             DataSourceID="sqlsrcMentorshipRequests"
             DataKeyNames="MemberID, StudentID"
-            AutoGenerateColumns="false">
+            AutoGenerateColumns="false"
+            CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
+            PagerStyle-CssClass="pager"
+            HeaderStyle-CssClass="header"
+            RowStyle-CssClass="rows"
+            CellSpacing="7"
+            font="Roboto"
+            ForeColor="black">
             <Columns>
                 <asp:BoundField HeaderText="Student" DataField="StudentName" />
                 <asp:BoundField HeaderText="Mentor" DataField="MemberName" />
@@ -34,25 +55,38 @@
             FROM Mentorship ms JOIN Student s ON s.StudentID = ms.StudentID JOIN Member m ON m.MemberID = ms.MemberID WHERE IsRequest = 1;">
         </asp:SqlDataSource>
 
-        <h2>View Student's Mentorships:</h2>
         <br />
-        <asp:ListBox ID="lstStudents" runat="server" AutoPostBack="true"
-            DataSourceID="sqlsrcStudentList"
-            DataTextField="StudentName"
-            DataValueField="StudentID"
-            OnSelectedIndexChanged="lstStudents_SelectedIndexChanged"></asp:ListBox>
+        <div class="row justify-content-center">
+            <asp:ListBox ID="lstStudents" runat="server" AutoPostBack="true" Width="177px"
+                DataSourceID="sqlsrcStudentList"
+                DataTextField="StudentName"
+                DataValueField="StudentID"
+                CssClass="form-control"
+                OnSelectedIndexChanged="lstStudents_SelectedIndexChanged"></asp:ListBox>
+            </div>
         <br />
         <br />
+        <div class="row justify-content-center">
+            <asp:Label ID="lblMember" runat="server" Text="Member: " Width="177px"></asp:Label>
+                <asp:DropDownList ID="ddlMember" runat="server"
+                    DataSourceID="sqlsrcMemberList"
+                    DataTextField="MemberName"
+                    DataValueField="MemberID"
+                    CssClass="form-control">
+                </asp:DropDownList>
+        </div>
+
+        <div class="row"> <!--Assign student button-->
+            <div class="col justify-content-center d-grid pt-5 pb-5 mx-auto">
+                <asp:Button ID="btnUpdate"  class="btn btn-primary" runat="server" Text="Assign to Student" OnClick="btnUpdate_Click" />
+            </div>
+        </div>
         <br />
-        <asp:Label ID="lblMember" runat="server" Text="Member: "></asp:Label>
-        <asp:DropDownList ID="ddlMember" runat="server"
-            DataSourceID="sqlsrcMemberList"
-            DataTextField="MemberName"
-            DataValueField="MemberID">
-        </asp:DropDownList>
-        <asp:Button ID="btnUpdate" runat="server" Text="Assign to Student" OnClick="btnUpdate_Click" />
-        <br />
-        <asp:Label ID="lblUpdateStatus" Text="" runat="server" />
+        <div class="row"> <!--Assign student button-->
+            <div class="col justify-content-center d-grid pt-5 pb-5 mx-auto">
+                <asp:Label ID="lblUpdateStatus" Text="" runat="server" />
+            </div>
+        </div>
         <br />
         <br />
         <asp:GridView ID="grdvwMentorships"
@@ -60,7 +94,14 @@
             DataSourceID="sqlsrcMentorships"
             DataKeyNames="MemberID"
             OnRowDataBound="grdvwMentorships_RowDataBound"
-            AutoGenerateColumns="false">
+            AutoGenerateColumns="false"
+            CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
+            PagerStyle-CssClass="pager"
+            HeaderStyle-CssClass="header"
+            RowStyle-CssClass="rows"
+            CellSpacing="7"
+            font="Roboto"
+            ForeColor="black">
             <Columns>
                 <asp:BoundField HeaderText="Mentor Name" DataField="FullName" />
                 <asp:BoundField HeaderText="Mentorship Status" DataField="EndDate" />
@@ -72,6 +113,7 @@
             </Columns>
         </asp:GridView>
     </div>
+</div>
     <asp:SqlDataSource ID="sqlsrcMemberList" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
         SelectCommand="(SELECT MemberID, FirstName AS MemberName FROM Member WHERE LastName IS NULL)
