@@ -4,6 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="col text-center pb-4">
+        <h2>Total Amount in Scholarships Given: </h2>
+        <asp:Label Font-Size="XX-Large" ID="lblScholarship" runat="server" Text="100"></asp:Label>
+        <br />
+        <br />
         <h2>Total Members: </h2>
         <asp:Label Font-Size="XX-Large" ID="lblMembers" runat="server" Text="100"></asp:Label>
         <br />

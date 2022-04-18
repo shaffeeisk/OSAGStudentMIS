@@ -15,6 +15,7 @@ namespace OSAG.member
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblScholarship.Text = Scholarships().ToString();
             lblMembers.Text = MemberCount().ToString();
             lblStudents.Text = StudentCount().ToString();
             lblJobs.Text = Jobs().ToString();
@@ -83,6 +84,16 @@ namespace OSAG.member
             int internshipCount = (int)sqlCommand.ExecuteScalar();
             sqlConnect.Close();
             return internshipCount;
+        }
+        protected String Scholarships()
+        {
+            String sqlQuery = "SELECT FORMAT(SUM(AwardAmount),'C') FROM Scholarship;";
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlConnect.Open();
+            String scholarshipAmount = (String)sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
+            return scholarshipAmount;
         }
     }
 }

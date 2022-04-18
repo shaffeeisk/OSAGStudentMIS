@@ -142,7 +142,9 @@
                         <!--Only admin-->
                         <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "1")
                             { %>
-
+                        <li>
+                            <a class="dropdown-item" href="/admin/AwardScholarship.aspx">AWARD SCHOLARSHIP</a>
+                        </li>
                         <% } %>
 
                         <li>
