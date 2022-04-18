@@ -238,6 +238,7 @@ namespace OSAG.profiles
                 if (fileResume.PostedFile.ContentLength > 2097152)
                 {
                     lblUploadResume.Text = "File is larger than 2MB limit";
+                    lblUploadResume.ForeColor = Color.Red;
                     return;
                 }
                 // make sure file is pdf
@@ -245,6 +246,7 @@ namespace OSAG.profiles
                 if (cType != "application/pdf")
                 {
                     lblUploadResume.Text = "File is not PDF";
+                    lblUploadResume.ForeColor = Color.Red;
                     return;
                 }
 
@@ -302,6 +304,7 @@ namespace OSAG.profiles
                 if (filePFP.PostedFile.ContentLength > 2097152)
                 {
                     lblPFP.Text = "File is larger than 2MB limit";
+                    lblPFP.ForeColor = Color.Red;
                     return;
                 }
                 // make sure file is jpg
@@ -309,6 +312,7 @@ namespace OSAG.profiles
                 if (cType != "image/jpeg")
                 {
                     lblPFP.Text = "File is not JPEG/JPG";
+                    lblPFP.ForeColor = Color.Red;
                     return;
                 }
 
