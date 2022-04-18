@@ -28,7 +28,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body style="background-color: white;">
+<body style="background-color:#FEFEFE;">
     <form id="form1" runat="server">
 
         <div class="container">

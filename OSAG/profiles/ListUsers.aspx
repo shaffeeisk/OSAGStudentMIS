@@ -127,4 +127,6 @@
             ConnectionString="<%$ ConnectionStrings:OSAG %>"
             SelectCommand="SELECT Username, FirstName, LastName FROM Member WHERE IsApproved = '1' AND FirstName + ' ' + LastName LIKE '%%';"></asp:SqlDataSource>
     </div>
+    </body>
+    </html>
 </asp:Content>

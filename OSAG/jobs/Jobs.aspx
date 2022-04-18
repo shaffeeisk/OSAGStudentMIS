@@ -3,8 +3,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="Jobs.aspx.cs" Inherits="OSAG.jobs.Jobs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <meta charset="UTF-8">
@@ -30,7 +28,11 @@
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
         <link href="bootstrap.min.css" rel="stylesheet" />
-        <style>
+
+    </head>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style>
             body {
                 width: 100%;
                 margin: 5px;
@@ -53,10 +55,7 @@
             tr:nth-child(odd) {
                 background: #fff;
             }
-        </style>
-
-    </head>
-    <body style="background-color:#FEFEFE;">
+        </style>    
         <div style="text-align: center">
             <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/jobbanner.png" Height="400px" />
             <br />
@@ -118,11 +117,9 @@
             </Columns>
         </asp:GridView>
 
-    </body>
 
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
         SelectCommand="SELECT JobID, j.JobName, c.CompanyName FROM Job j LEFT JOIN Company c on j.CompanyID = c.CompanyID"></asp:SqlDataSource>
-    </html>
 </asp:Content>
