@@ -21,7 +21,7 @@ namespace OSAG.profiles
             // handle invalid access
             if (Session["Username"] == null)
                 return;
-            else if(Session["UserChatType"] == null || Session["UserChatID"] == null)
+            else if (Session["UserChatType"] == null || Session["UserChatID"] == null)
             {
                 Session["AccessDenied"] = "Access Denied: An unknown error occurred.";
                 Response.Redirect("UserProfile.aspx");
@@ -44,6 +44,25 @@ namespace OSAG.profiles
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
+
+            // set chat header
+            try
+            {
+                sqlCommand.CommandText = "SELECT FirstName, LastName FROM " + Session["UserChatType"].ToString() + " WHERE " +
+                    Session["UserChatType"].ToString() + "ID = '" + Session["UserChatID"].ToString() + "';";
+                sqlConnect.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                reader.Read();
+                lblChatName.Text = "" + reader["FirstName"].ToString().ToUpper();
+                lblChatName.Text += " " + reader["LastName"].ToString().ToUpper();
+                if (lblChatName.Text == "")
+                    lblChatName.Text = "UNKNOWN";
+            }
+            catch(Exception ex)
+            {
+                lblChatName.Text = "UNKNOWN";
+                throw ex;
+            }
         }
 
         protected void btn_Send_Click(object sender, EventArgs e)

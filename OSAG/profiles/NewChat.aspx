@@ -15,16 +15,17 @@
 
         <!--student recipient -->
         <div class="row justify-content-center">
-            <asp:DropDownList ID="ddl_StudentRecipient" runat="server" AutoPostBack="true" Width="177px"
+            <asp:DropDownList ID="ddl_StudentRecipient" runat="server" AutoPostBack="true"
                 DataSourceID="sqlsrcStudents"
                 DataTextField="Name"
                 CssClass="form-control"
+                style="width:250px; text-align: center"
                 DataValueField="StudentID"
                 AppendDataBoundItems="true" OnSelectedIndexChanged="ddl_StudentRecipient_SelectedIndexChanged">
                 <asp:ListItem Selected="True" Text="(Add Student Recipient)" Value=""></asp:ListItem>
             </asp:DropDownList>
 
-            <div class="row justify-content-center">
+            <div class="row justify-content-center pt-2">
                 <asp:TextBox ID="txtStudents" Enabled="false" runat="server" Width="700" CssClass="form-control"></asp:TextBox>
                 <asp:Label ID="lblStudentMax" ForeColor="Red" runat="server" CssClass="form-label"></asp:Label>
             </div>
@@ -37,34 +38,39 @@
                 DataSourceID="sqlsrcMembers"
                 DataTextField="Name"
                 CssClass="form-control"
+                style="width:250px; text-align: center"
                 DataValueField="MemberID"
                 AppendDataBoundItems="true" OnSelectedIndexChanged="ddl_MemberRecipient_SelectedIndexChanged">
                 <asp:ListItem Selected="True" Text="(Add Member Recipient)" Value=""></asp:ListItem>
             </asp:DropDownList>
 
-            <div class="row justify-content-center">
+            <div class="row justify-content-center pt-2">
                 <asp:TextBox ID="txtMembers" Enabled="false" runat="server" Width="700" CssClass="form-control"></asp:TextBox>
                 <asp:Label ID="lblMemberMax" ForeColor="Red" runat="server" CssClass="form-label"></asp:Label>
             </div>
         </div>
-        <asp:Label ID="Label1" runat="server" CssClass="form-label" Text="Message" ></asp:Label>
         <!--chat box-->
-        <div class="row justify-content-center">
-            
-
+        <div class="row justify-content-center pt-3">
+            <asp:Label ID="Label1" runat="server" CssClass="form-label" style="text-align: center" Text="Message" ></asp:Label>
             <asp:TextBox ID="txtChatBox" TextMode="MultiLine"
                 Rows="5" Height="100" Width="200" runat="server" CssClass="form-control" BorderColor="Black" ></asp:TextBox>
             <asp:RequiredFieldValidator
                 ID="RequiredFieldValidator1"
                 ControlToValidate="txtChatBox"
                 Text="(Required)"
-                runat="server" />
+                runat="server" 
+                style="text-align: center" />
         </div>
 
         <!--send button-->
         <div class="row">
-            <div class="col justify-content-center d-grid pt-3 pb-5 mx-auto">
-                <asp:Button ID="btn_Send" runat="server" Text="Send Message" CssClass="btn btn-primary" OnClick="btn_Send_Click" />
+            <div class="col justify-content-center d-grid pt-3 mx-auto">
+                <asp:Button ID="btn_Send" runat="server" Text="SEND MESSAGE" CssClass="btn btn-primary" OnClick="btn_Send_Click" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col justify-content-center d-grid pt-5 mx-auto">
+                <asp:Button ID="btnReturn" runat="server" Text="RETURN" CssClass="btn btn-secondary" CausesValidation="false" PostBackUrl="~/profiles/StartChat.aspx" />
             </div>
         </div>
     </div>

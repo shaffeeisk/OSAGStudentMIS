@@ -15,6 +15,15 @@ namespace OSAG.profiles
     {
 
         /// <summary>
+        /// lblChatName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblChatName;
+
+        /// <summary>
         /// grdvChat control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace OSAG.profiles
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Send;
+
+        /// <summary>
+        /// btnReturn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReturn;
 
         /// <summary>
         /// sqlsrc control.
