@@ -33,7 +33,7 @@ h4, h5, h6, p {
     border: none;
 }
 
-    .btn-primary:hover, {
+    .btn-primary:hover {
         color: white;
         background-color: #9D87AE;
     }
