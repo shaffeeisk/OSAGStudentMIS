@@ -17,7 +17,7 @@
                     return true;
                 }
             </script>
-            <asp:Button ID="btn_logOut" runat="server" OnClick="btn_logOut_Click" Text="LOG OUT" CausesValidation="false"/>
+            <asp:Button ID="btn_logOut" runat="server" OnClick="btn_logOut_Click" Text="LOG OUT" CausesValidation="false" />
             User Profile not yet approved. Your Access is limited to editing your profile.
             <br />
             <br />
@@ -88,6 +88,12 @@
                 ControlToValidate="txtPhone"
                 Text="(Required)"
                 runat="server" />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2"
+                runat="server"
+                ErrorMessage="Must be less than 15 digits"
+                ControlToValidate="txtPhone"
+                ValidationExpression="^[0-9]{0,15}$">
+            </asp:RegularExpressionValidator>
             <br />
             <asp:Label ID="Label9" runat="server" Text="GPA"></asp:Label>
             <asp:TextBox ID="txtGpa" runat="server"></asp:TextBox>
@@ -213,6 +219,12 @@
                 ControlToValidate="txtMemberPhone"
                 Text="(Required)"
                 runat="server" />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+                runat="server"
+                ErrorMessage="Must be less than 15 digits"
+                ControlToValidate="txtMemberPhone"
+                ValidationExpression="^[0-9]{0,15}$">
+            </asp:RegularExpressionValidator>
             <br />
             <asp:Label ID="Label15" runat="server" Text="Bio"></asp:Label>
             <asp:TextBox ID="txtMemberBio" TextMode="MultiLine"
