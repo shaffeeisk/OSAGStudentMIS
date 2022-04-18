@@ -73,7 +73,7 @@ namespace OSAG.student
             }
             else
             {
-                // display error message or something here
+                lblTStatus.Text = "An unknown error has occured.";
             }
         }
     }

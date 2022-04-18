@@ -28,7 +28,7 @@
             background: #fff;
         }
     </style>
-    <div style="margin-left:auto;margin-right:auto;text-align:center;">
+    <div class="pt-5" style="margin-left:auto;margin-right:auto;text-align:center;">
     <h3>BOOKMARKED JOBS:</h3>
     <asp:GridView ID="grdvwJobs"
         runat="server"

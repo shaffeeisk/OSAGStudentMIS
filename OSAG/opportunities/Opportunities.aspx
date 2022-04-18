@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <!--Banner starts-->
         <div style="text-align: center">
-            <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/jobbanner.png" Height="400px" />
+            <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/opportunitybanner.png" Height="400px" />
             <br />
         </div>
         <!--Banner ends-->

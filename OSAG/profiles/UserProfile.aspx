@@ -20,11 +20,11 @@
                     <div class="col-lg-4 px-3 pb-2">
                         <%if (Session["UserType"].ToString() == "student")
                             {%>
-                        <h2>Student Profile </h2>
+                        <h2>STUDENT PROFILE</h2>
                         <%} %>
                         <%else
                             {%>
-                        <h2>Member Profile</h2>
+                        <h2>MEMBER PROFILE</h2>
                         <% } %>
                     </div>
                 </div>

@@ -183,9 +183,9 @@
     <Content Include="student\ViewApplications.aspx" />
     <Content Include="_css\custom.css" />
     <Content Include="_images\banners\homepage.png" />
-    <Content Include="_images\banners\internship page  .png" />
+    <Content Include="_images\banners\internshipbanner.png" />
     <Content Include="_images\banners\jobbanner.png" />
-    <Content Include="_images\banners\opportunities banner.png" />
+    <Content Include="_images\banners\opportunitybanner.png" />
     <Content Include="_images\carousel\carousel1.png" />
     <Content Include="_images\carousel\carousel2.png" />
     <Content Include="_images\carousel\carousel5.png" />

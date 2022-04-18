@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div style="margin-left: auto; margin-right: auto; text-align: center;">
+    <div class="pt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
         <h3>SELECT USER TO CHAT WITH</h3>
         <br />
         <h4>Current Chats With Students:</h4>
@@ -74,7 +74,7 @@
         <br />
         <div class="row">
             <div class="col justify-content-center d-grid pt-3 pb-5 mx-auto">
-                <asp:Button ID="btn_newChat" class="btn btn-primary mx-auto" runat="server" Text="Start a new chat" OnClick="btn_newChat_Click" />
+                <asp:Button ID="btn_newChat" class="btn btn-primary mx-auto" runat="server" Text="START A NEW CHAT" OnClick="btn_newChat_Click" />
             </div>
         </div>
     </div>

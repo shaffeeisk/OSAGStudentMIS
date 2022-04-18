@@ -30,7 +30,7 @@
             background: #fff;
         }
     </style>
-    <div style="margin-left: auto; margin-right: auto; text-align: center;">
+    <div class="pt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
         <h2>VIEW USER PROFILES</h2>
         <br />
         <div class="container">
