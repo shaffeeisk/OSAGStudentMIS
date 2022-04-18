@@ -4,14 +4,22 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ListBox ID="lstSelectNewUser" runat="server" AutoPostBack="true" Height="200px" Width="200px"
-        DataSourceID="sqlsrcNewUsers"
-        DataTextField="Username"
-        DataValueField="Username"></asp:ListBox>
+    <div class="row pb-5">
+        <div style="text-align:center">
+                <asp:ListBox ID="lstSelectNewUser" font="" runat="server" AutoPostBack="true" Height="200px" Width="200px"
+                DataSourceID="sqlsrcNewUsers"
+                DataTextField="Username"
+                DataValueField="Username"></asp:ListBox>
+        </div>
+    </div>
     <br />
-    <br />
-    <asp:Label ID="lblStatus" runat="server" Text="" Font-Bold="true"></asp:Label>
-    <asp:Button ID="btnApprove" runat="server" Text="Approve Selected User ->" OnClick="btnApprove_Click" />
+    <div class="row">
+        <div class="col justify-content-center d-grid pt-2 pb-5">
+            <asp:Label ID="lblStatus" runat="server" Text="" Font-Bold="true"></asp:Label>
+            <asp:Button ID="btnApprove" class="btn btn-primary mx-auto" runat="server" Text="Approve Selected User(s)" OnClick="btnApprove_Click" />
+        </div>
+    </div>
+    
     <asp:SqlDataSource
         ID="sqlsrcNewUsers"
         runat="server"
