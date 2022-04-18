@@ -102,7 +102,7 @@
             </div>
 
             <div class="createjobs col px-5 mb-3">
-                <asp:Label ID="Label5" runat="server" Text="Payment: " Width="160px" CssClass="form-label"></asp:Label>
+                <asp:Label ID="Label5" runat="server" Text="Hourly Payment: " Width="160px" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtPayment" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator6"
@@ -167,7 +167,7 @@
                             <th scope="col">Application Deadline</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">Weekly Hours</th>
-                            <th scope="col">Payment</th>
+                            <th scope="col">Hourly Payment</th>
                             <th scope="col">Edit</th>
                         </tr>
                     </thead>
