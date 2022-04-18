@@ -64,7 +64,7 @@
 
         <div class="container text-center pt-5 ">
             <!--Jobs Header starts-->
-            <h2>Find Jobs</h2>
+            <h2>FIND JOBS</h2>
         </div>
         <!--Jobs Header ends-->
 

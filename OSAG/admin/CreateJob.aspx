@@ -22,7 +22,7 @@
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" >
+        <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
         <!-- Icons -->
@@ -41,11 +41,11 @@
             }
         </script>
 
-         <!--Header starts-->
+        <!--Header starts-->
         <div class="container text-center px-5 pt-5 pb-5">
             <div class="row">
                 <div class="col text-center pb-4">
-                    <h2>Create Jobs</h2>
+                    <h2>CREATE JOBS</h2>
                 </div>
             </div>
             <!--Header ends-->
@@ -161,22 +161,25 @@
             </div>
             <!--Inputs ends-->
 
-              <!--butttons start-->
-            <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-                <asp:Button ID="btnSaveJob" Text="Save" runat="server" CssClass="btn btn-primary" OnClick="btnSaveJob_Click" />
-                <br />
-                <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
-                <br />
-                <asp:Button ID="btnOverride" Text="Yes" runat="server" CssClass="btn btn-primary" OnClick="btnOverride_Click" Visible="false" />
-                &nbsp
-                <asp:Button ID="btnCancel" Text="No" runat="server" CssClass="btn btn-primary" OnClick="btnCancel_Click" Visible="false" />
-                <br />
+            <!--butttons start-->
+            <div class="row">
+                <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
+                    <asp:Button ID="btnSaveJob" Text="SAVE" runat="server" CssClass="btn btn-primary" OnClick="btnSaveJob_Click" />
+                    <br />
+                    <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
+                    <br />
+                    <asp:Button ID="btnOverride" Text="YES" runat="server" CssClass="btn btn-primary" OnClick="btnOverride_Click" Visible="false" />
+                    &nbsp
+                <asp:Button ID="btnCancel" Text="NO" runat="server" CssClass="btn btn-primary" OnClick="btnCancel_Click" Visible="false" />
+                    <br />
+                </div>
             </div>
-            <div class="col justify-content-center d-grid pt-2 pb-4 mx-auto">
-                <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" CssClass="btn btn-primary" OnClick="btnClear_Click" Font-Bold="true" BackColor="Red" />
+            <div class="row">
+                <div class="col justify-content-center d-grid pt-2 pb-4 mx-auto">
+                    <asp:Button ID="btnClear" runat="server" Text="CLEAR ALL USER INPUTS" CssClass="btn btn-primary" OnClick="btnClear_Click" Font-Bold="true" BackColor="Red" />
+                </div>
             </div>
             <!--buttons end-->
-
 
             <br />
             <br />
