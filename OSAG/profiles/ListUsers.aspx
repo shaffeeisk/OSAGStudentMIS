@@ -12,6 +12,10 @@
             margin: 5px;
         }
 
+        a:hover{
+            color: #6e7bd9;
+        }
+
         .table-condensed tr th {
             border: 0px solid #6e7bd9;
             color: white;
