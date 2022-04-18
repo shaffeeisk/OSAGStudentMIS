@@ -32,23 +32,23 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="createjobs col px-5 mb-3">
-                <asp:Label ID="Label2" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
-                <asp:TextBox ID="txtApplicationDeadline" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:CompareValidator
-                    ID="CompareValidator2"
-                    ControlToValidate="txtApplicationDeadline"
-                    Text="Use Date Format"
-                    Operator="DataTypeCheck"
-                    Type="Date"
-                    runat="server" />
-                <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator2"
-                    ControlToValidate="txtApplicationDeadline"
-                    Text="(Required)"
-                    runat="server" />
-            </div>
+            <div class="row">
+                <div class="createjobs col px-5 mb-3">
+                    <asp:Label ID="Label2" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
+                    <asp:TextBox ID="txtApplicationDeadline" TextMode="Date"  runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:CompareValidator
+                        ID="CompareValidator2"
+                        ControlToValidate="txtApplicationDeadline"
+                        Text="Use Date Format"
+                        Operator="DataTypeCheck"
+                        Type="Date"
+                        runat="server" />
+                    <asp:RequiredFieldValidator
+                        ID="RequiredFieldValidator2"
+                        ControlToValidate="txtApplicationDeadline"
+                        Text="(Required)"
+                        runat="server" />
+                </div>
 
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label3" runat="server" Text="StartDate: " Width="160px" CssClass="form-label"></asp:Label>

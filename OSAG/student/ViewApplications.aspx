@@ -3,8 +3,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style>
+        body {
+            width: 100%;
+            margin: 5px;
+        }
+
+        .table-condensed tr th {
+            border: 0px solid #6e7bd9;
+            color: white;
+            background-color: #6e7bd9;
+        }
+
+        .table-condensed, .table-condensed tr td {
+            border: 0px solid #000;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f7ff
+        }
+
+        tr:nth-child(odd) {
+            background: #fff;
+        }
+    </style>
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
-        <h3>Jobs In Progress:</h3>
+        <h3>JOBS IN PROGRESS</h3>
         <asp:GridView ID="grdvwJobs"
             runat="server"
             DataSourceID="sqlsrc"
@@ -13,7 +37,15 @@
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
             AutoGenerateColumns="false"
-            DataKeyNames="JobID, AppStatus">
+            DataKeyNames="JobID, AppStatus"
+            CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
+            PagerStyle-CssClass="pager"
+            HeaderStyle-CssClass="header"
+            RowStyle-CssClass="rows"
+            CellPadding="25"
+            CellSpacing="7"
+            font="Roboto"
+            ForeColor="black">
             <Columns>
                 <asp:BoundField HeaderText="Position" DataField="JobName" SortExpression="JobName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
@@ -39,7 +71,7 @@
             ConnectionString="<%$ ConnectionStrings:OSAG %>"></asp:SqlDataSource>
         <br />
         <br />
-        <h3>Internships In Progress:</h3>
+        <h3>INTERNSHIPS IN PROGRESS</h3>
         <asp:GridView ID="grdvwInternships"
             runat="server"
             DataSourceID="sqlsrc2"
@@ -48,7 +80,15 @@
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
             AutoGenerateColumns="false"
-            DataKeyNames="InternshipID, AppStatus">
+            DataKeyNames="InternshipID, AppStatus"
+            CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
+            PagerStyle-CssClass="pager"
+            HeaderStyle-CssClass="header"
+            RowStyle-CssClass="rows"
+            CellPadding="25"
+            CellSpacing="7"
+            font="Roboto"
+            ForeColor="black">
             <Columns>
                 <asp:BoundField HeaderText="Position" DataField="InternshipName" SortExpression="InternshipName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
@@ -75,7 +115,7 @@
             ConnectionString="<%$ ConnectionStrings:OSAG %>"></asp:SqlDataSource>
         <br />
         <br />
-        <h3>Opportunities In Progress:</h3>
+        <h3>OPPORTUNITIES IN PROGRESS</h3>
         <asp:GridView ID="grdvwOpportunities"
             runat="server"
             DataSourceID="sqlsrc3"
@@ -84,7 +124,15 @@
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
             AutoGenerateColumns="false" 
-            DataKeyNames="OpportunityID, AppStatus">
+            DataKeyNames="OpportunityID, AppStatus"
+            CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
+            PagerStyle-CssClass="pager"
+            HeaderStyle-CssClass="header"
+            RowStyle-CssClass="rows"
+            CellPadding="25"
+            CellSpacing="7"
+            font="Roboto"
+            ForeColor="black">
             <Columns>
                 <asp:BoundField HeaderText="Opportunity" DataField="OpportunityName" SortExpression="OpportunityName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />

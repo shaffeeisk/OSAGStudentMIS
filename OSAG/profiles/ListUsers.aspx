@@ -3,9 +3,9 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ListUsers.aspx.cs" Inherits="OSAG.profiles.ListUsers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta charset="UTF-8">
-    <meta name="description" content="Jobs">
-    <meta name="author" content="Madison Solutions">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <br/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs</title>
 
@@ -50,8 +50,6 @@
             background: #fff;
         }
     </style>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <h2>VIEW USER PROFILES</h2>
         <br />
