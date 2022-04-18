@@ -43,16 +43,15 @@
     <div class="container col-lg-9 px-4">
         <!--Search bar starts-->
         <div class="pt-5 pb-5 px-4">
-
-            <div class="input-group">
+            <div class="input-group" style="margin-left: auto; margin-right: auto; text-align: center; padding-right: unset">
                 <div class="input-group-text">
                     <div class="icon icon-lg">
-                        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
-                            <circle  cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </div>
                 </div>
                 <input id="searchBar" runat="server" type="text" class="form-control form-control-lg ps-3" placeholder="Search jobs" aria-label="Search jobs">
-                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                <asp:Button ID="btnSearch" runat="server" CssClass="input-group-text" Text="Search" OnClick="btnSearch_Click" />
             </div>
 
         </div>
