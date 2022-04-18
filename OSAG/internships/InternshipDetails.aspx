@@ -74,7 +74,7 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                         <div class="row">
-                                            <div style="text-align:center">
+                                            <div style="text-align: center;">
                                                   <div class="col-lg-6 offset-lg-3 pt-4">
                                                     <h5>Set Interest Level</h5>
                                                     <asp:RadioButton ID="rdoLow" Text="Low" runat="server" GroupName="InterestLevel"
