@@ -7,66 +7,75 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OSAG.login
+namespace OSAG.student
 {
 
 
-    public partial class RegistrationPage
+    public partial class OleSchoolScholarship
     {
 
         /// <summary>
-        /// form1 control.
+        /// rdoYes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.RadioButton rdoYes;
 
         /// <summary>
-        /// txtFirstName control.
+        /// rdoNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
+        protected global::System.Web.UI.WebControls.RadioButton rdoNo;
 
         /// <summary>
-        /// txtLastName control.
+        /// divApply control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divApply;
 
         /// <summary>
-        /// txtEmail control.
+        /// fileTranscript control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.FileUpload fileTranscript;
 
         /// <summary>
-        /// txtUsername control.
+        /// lblTStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsername;
+        protected global::System.Web.UI.WebControls.Label lblTStatus;
 
         /// <summary>
-        /// txtPassword control.
+        /// fileEssay control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.FileUpload fileEssay;
+
+        /// <summary>
+        /// lblEStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEStatus;
 
         /// <summary>
         /// btnSubmit control.
@@ -76,14 +85,5 @@ namespace OSAG.login
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-
-        /// <summary>
-        /// lblStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatus;
     }
 }

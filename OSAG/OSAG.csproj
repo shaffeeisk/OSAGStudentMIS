@@ -179,6 +179,7 @@
     <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
+    <Content Include="student\OleSchoolScholarship.aspx" />
     <Content Include="student\ViewApplications.aspx" />
     <Content Include="_css\custom.css" />
     <Content Include="_images\banners\homepage.png" />
@@ -459,6 +460,13 @@
     </Compile>
     <Compile Include="student\Bookmarks.aspx.designer.cs">
       <DependentUpon>Bookmarks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\OleSchoolScholarship.aspx.cs">
+      <DependentUpon>OleSchoolScholarship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\OleSchoolScholarship.aspx.designer.cs">
+      <DependentUpon>OleSchoolScholarship.aspx</DependentUpon>
     </Compile>
     <Compile Include="student\ViewApplications.aspx.cs">
       <DependentUpon>ViewApplications.aspx</DependentUpon>

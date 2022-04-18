@@ -1,4 +1,5 @@
 ﻿<%--log in page--%>
+
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoginPage.aspx.cs" Inherits="OSAG.login.LoginPage" %>
 
 <!DOCTYPE html>
@@ -11,9 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
 
-    <!-- Bootstrap v5.0.0-beta3 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="/_css/custom.css" rel="stylesheet" type="text/css" media="screen" />
 
     <!-- Google Fonts -->
@@ -24,7 +25,7 @@
 
 
 
-    <body class="loginbackground">
+<body class="loginbackground">
     <form id="form1" runat="server">
         <div class="modal modal-tour position-static d-block bg-purple py-5" tabindex="-1" role="dialog" id="modalTour">
             <div class="modal-dialog" role="document">

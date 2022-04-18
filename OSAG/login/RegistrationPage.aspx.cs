@@ -95,14 +95,5 @@ namespace OSAG.login
             txtPassword.Text = "";
             txtEmail.Text = "";
         }
-
-        protected void btnDemo_Click(object sender, EventArgs e)
-        {
-            txtFirstName.Text = "Theresa";
-            txtLastName.Text = "Ross";
-            txtUsername.Text = "theresarossdemoaccount";
-            txtPassword.Text = "webdemo12345";
-            txtEmail.Text = "theresarossdemo@fakemail.com";
-        }
     }
 }
