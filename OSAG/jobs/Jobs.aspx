@@ -47,11 +47,12 @@
             <div class="input-group">
                 <div class="input-group-text">
                     <div class="icon icon-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
-                            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle  cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </div>
                 </div>
-                <input type="text" class="form-control form-control-lg ps-3" placeholder="Search jobs" aria-label="Search jobs">
+                <input id="searchBar" runat="server" type="text" class="form-control form-control-lg ps-3" placeholder="Search jobs" aria-label="Search jobs">
+                <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
             </div>
 
         </div>
@@ -76,8 +77,8 @@
         ForeColor="black">
 
         <Columns>
-            <asp:BoundField HeaderText="JobName" DataField="JobName" SortExpression="JobName" />
-            <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
+            <asp:BoundField HeaderText="Job Name" DataField="JobName" SortExpression="JobName" />
+            <asp:BoundField HeaderText="Company Name" DataField="CompanyName" SortExpression="CompanyName" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnView" runat="server" font="Roboto" Text="View" OnClick="btnView_Click" />

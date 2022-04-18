@@ -143,5 +143,10 @@ namespace OSAG.internships
                 return false;
             return (bool)o;
         }
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            String search = "SELECT InternshipID, j.InternshipName, c.CompanyName FROM Internship j LEFT JOIN Company c on j.CompanyID = c.CompanyID WHERE j.InternshipName like '%[Search]%' OR c.CompanyName like '%[Search]%'";
+            sqlsrc.SelectCommand = search.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
+        }
     }
 }

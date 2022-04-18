@@ -57,7 +57,8 @@
                                 <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         </div>
                     </div>
-                    <input type="text" class="form-control form-control-lg ps-3" placeholder="Search internships" aria-label="Search internships">
+                    <input id="searchBar" runat="server" type="text" class="form-control form-control-lg ps-3" placeholder="Search internships" aria-label="Search internships">
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
                 </div>
 
             </div>
@@ -83,8 +84,8 @@
             font="Roboto"
             ForeColor="black">
             <Columns>
-                <asp:BoundField HeaderText="InternshipName" DataField="InternshipName" SortExpression="InternshipName" />
-                <asp:BoundField HeaderText="CompanyName" DataField="CompanyName" SortExpression="CompanyName" />
+                <asp:BoundField HeaderText="Internship Name" DataField="InternshipName" SortExpression="InternshipName" />
+                <asp:BoundField HeaderText="Company Name" DataField="CompanyName" SortExpression="CompanyName" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
