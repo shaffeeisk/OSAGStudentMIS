@@ -67,7 +67,7 @@
 
         <div class="container col-lg-4 text-center pt-5 ">
             <!--Internship header starts-->
-            <h2>Find Internships</h2>
+            <h2>FIND INTERNSHIPS</h2>
         </div>
         <!--Internship header ends-->
 

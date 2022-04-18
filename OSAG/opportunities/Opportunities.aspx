@@ -42,7 +42,7 @@
         <!--Banner ends-->
 
         <div class="container col-lg-4 text-center pt-5 ">
-            <h2>Upcoming Opportunities</h2>
+            <h2>UPCOMING OPPORTUNITES</h2>
         </div>
 
         <div class="container col-lg-9 px-4">

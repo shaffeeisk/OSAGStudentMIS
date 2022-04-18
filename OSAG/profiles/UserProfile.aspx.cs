@@ -161,6 +161,8 @@ namespace OSAG.profiles
                     lblViewMinor.Text = "-";
                 if (lblViewMajor.Text == "")
                     lblViewMajor.Text = "-";
+                if (Request.QueryString["viewstate"] == "edit")
+                    btnEditMode_Click(btnEditMode, e);
             }
         }
 

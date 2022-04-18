@@ -5,33 +5,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Create Jobs">
-        <meta name="author" content="Madison Solutions">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Create Jobs</title>
-
-        <!-- Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-        <!-- CSS -->
-        <link href="/_css/custom.css" rel="stylesheet" type="text/css" media="screen">
-
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" >
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
-
-        <!-- Icons -->
-        <script src="https://kit.fontawesome.com/b51d9e9335.js" crossorigin="anonymous"></script>
-
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    </head>
-
-    <body style="background-color: #FEFEFE;">
         <script language="Javascript">
             function isNumberKey(evt) {
                 var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -40,12 +13,11 @@
                 return true;
             }
         </script>
-
-         <!--Header starts-->
+        <!--Header starts-->
         <div class="container text-center px-5 pt-5 pb-5">
             <div class="row">
                 <div class="col text-center pb-4">
-                    <h2>Create Jobs</h2>
+                    <h2>CREATE JOBS</h2>
                 </div>
             </div>
             <!--Header ends-->
@@ -161,22 +133,25 @@
             </div>
             <!--Inputs ends-->
 
-              <!--butttons start-->
-            <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-                <asp:Button ID="btnSaveJob" Text="Save" runat="server" CssClass="btn btn-primary" OnClick="btnSaveJob_Click" />
-                <br />
-                <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
-                <br />
-                <asp:Button ID="btnOverride" Text="Yes" runat="server" CssClass="btn btn-primary" OnClick="btnOverride_Click" Visible="false" />
-                &nbsp
-                <asp:Button ID="btnCancel" Text="No" runat="server" CssClass="btn btn-primary" OnClick="btnCancel_Click" Visible="false" />
-                <br />
+            <!--butttons start-->
+            <div class="row">
+                <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
+                    <asp:Button ID="btnSaveJob" Text="SAVE" runat="server" CssClass="btn btn-primary" OnClick="btnSaveJob_Click" />
+                    <br />
+                    <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
+                    <br />
+                    <asp:Button ID="btnOverride" Text="YES" runat="server" CssClass="btn btn-primary" OnClick="btnOverride_Click" Visible="false" />
+                    &nbsp
+                <asp:Button ID="btnCancel" Text="NO" runat="server" CssClass="btn btn-primary" OnClick="btnCancel_Click" Visible="false" />
+                    <br />
+                </div>
             </div>
-            <div class="col justify-content-center d-grid pt-2 pb-4 mx-auto">
-                <asp:Button ID="btnClear" runat="server" Text="Clear ALL user inputs" CssClass="btn btn-primary" OnClick="btnClear_Click" Font-Bold="true" BackColor="Red" />
+            <div class="row">
+                <div class="col justify-content-center d-grid pt-2 pb-4 mx-auto">
+                    <asp:Button ID="btnClear" runat="server" Text="CLEAR ALL USER INPUTS" CssClass="btn btn-primary" OnClick="btnClear_Click" Font-Bold="true" BackColor="Red" />
+                </div>
             </div>
             <!--buttons end-->
-
 
             <br />
             <br />
@@ -208,7 +183,6 @@
             </asp:DataList>
         </div>
 
-    </body>
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
@@ -221,5 +195,4 @@
         runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
         SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>
-    </html>
 </asp:Content>

@@ -98,7 +98,7 @@ namespace OSAG.member
             // display success message and reset input
             lblSuccess.Text = "New internship successfully created";
             ClearInternData();
-            grdvwInternships.DataBind();
+            dlistInternships.DataBind();
         }
 
         protected void ClearInternData()
