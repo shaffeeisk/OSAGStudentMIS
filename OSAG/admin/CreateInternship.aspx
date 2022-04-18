@@ -52,7 +52,7 @@
 
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label3" runat="server" Text="StartDate: " Width="160px" CssClass="form-label"></asp:Label>
-                <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtStartDate" TextMode="Date" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:CompareValidator
                     ID="CompareValidator1"
                     ControlToValidate="txtStartDate"
