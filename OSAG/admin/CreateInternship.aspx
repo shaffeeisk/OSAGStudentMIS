@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="createjobs col px-5 mb-3">
                     <asp:Label ID="Label2" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
-                    <asp:TextBox ID="txtApplicationDeadline" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtApplicationDeadline" TextMode="Date"  runat="server" CssClass="form-control"></asp:TextBox>
                     <asp:CompareValidator
                         ID="CompareValidator2"
                         ControlToValidate="txtApplicationDeadline"
@@ -176,5 +176,4 @@
         UpdateCommand="UPDATE Internship SET InternshipName = @InternshipName, InternshipDescription = @InternshipDescription, ApplicationDeadline = @ApplicationDeadline, StartDate = @StartDate, WeeklyHours = @WeeklyHours, Payment = @Payment WHERE InternshipID=@InternshipID "
         DeleteCommand="Delete from InternshipMatch  Where InternshipID = @InternshipID Delete FROM Internship where InternshipID = @InternshipID"></asp:SqlDataSource>
 
-    </html>
 </asp:Content>

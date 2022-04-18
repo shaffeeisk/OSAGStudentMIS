@@ -3,6 +3,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="CreateJob.aspx.cs" Inherits="OSAG.member.CreateJob" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <script language="Javascript">
@@ -49,7 +50,7 @@
             <div class="row">
                 <div class="createjobs col px-5 mb-3">
                     <asp:Label ID="Label2" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
-                    <asp:TextBox ID="txtApplicationDeadline" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtApplicationDeadline" TextMode="Date"  runat="server" CssClass="form-control"></asp:TextBox>
                     <asp:CompareValidator
                         ID="CompareValidator1"
                         ControlToValidate="txtApplicationDeadline"
