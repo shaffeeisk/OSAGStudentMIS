@@ -204,6 +204,15 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
 
         /// <summary>
+        /// lblCompany control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCompany;
+
+        /// <summary>
         /// ddlCompany control.
         /// </summary>
         /// <remarks>
@@ -213,15 +222,6 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.DropDownList ddlCompany;
 
         /// <summary>
-        /// btnSaveIntern control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveIntern;
-
-        /// <summary>
         /// lblSuccess control.
         /// </summary>
         /// <remarks>
@@ -229,6 +229,15 @@ namespace OSAG.member
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSuccess;
+
+        /// <summary>
+        /// btnSaveIntern control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveIntern;
 
         /// <summary>
         /// btnOverride control.

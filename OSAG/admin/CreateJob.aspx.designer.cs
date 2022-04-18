@@ -213,6 +213,15 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
 
         /// <summary>
+        /// lblCompany control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCompany;
+
+        /// <summary>
         /// ddlCompany control.
         /// </summary>
         /// <remarks>
@@ -222,15 +231,6 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.DropDownList ddlCompany;
 
         /// <summary>
-        /// btnSaveJob control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveJob;
-
-        /// <summary>
         /// lblSuccess control.
         /// </summary>
         /// <remarks>
@@ -238,6 +238,15 @@ namespace OSAG.member
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSuccess;
+
+        /// <summary>
+        /// btnSaveJob control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveJob;
 
         /// <summary>
         /// btnOverride control.
@@ -285,12 +294,12 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.SqlDataSource sqlsrc;
 
         /// <summary>
-        /// sqlsrcListCompanys control.
+        /// sqlsrcListCompanies control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcListCompanys;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlsrcListCompanies;
     }
 }

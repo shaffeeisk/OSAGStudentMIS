@@ -2,7 +2,7 @@
 /* Add your custom CSS declarations below  */
 
 .loginbackground {
-    background-image: url(/_images/jmubackground.png);
+    background-image: url(/images/jmubackground.png);
     background-position: left;
 }
 
@@ -29,36 +29,31 @@ h4, h5, h6, p {
 
 .btn-primary {
     font-family: 'Raleway', sans-serif;
-    background-color: #73637F;
+    background-color: #9D87AE;
     border: none;
+    box-shadow: none;
 }
 
-    .btn-primary:hover {
-        color: white;
-        background-color: #9D87AE;
-    }
-
-    .btn-primary:visited {
-        color: white;
-        background-color: #9D87AE;
-    }
-
-
-.btn-outline-primary, .btn-outline-secondary {
-    font-family: 'Raleway', sans-serif;
-    background-color: white;
+.btn-outline-primary {
     color: black;
+    border-color: black;
+    box-shadow: none;
 }
 
-    .btn-outline-primary:hover, .btn-outline-secondary:hover {
-        color: white;
-        background-color: #9D87AE;
-    }
+a.btn-outline-primary:hover {
+    background-color: #9D87AE;
+    box-shadow: none;
+}
 
-    .btn-outline-primary:active, .btn-outline-secondary:active {
-        color: white;
-        background-color: #9D87AE;
-    }
+.btn-primary:hover {
+    background-color: #9D87AE;
+    box-shadow: none;
+}
+
+.btn-primary:visited {
+    background-color: #9D87AE;
+    box-shadow: none;
+}
 
 #errorlabel {
     font-family: 'Roboto', sans-serif;
@@ -68,6 +63,11 @@ h4, h5, h6, p {
     font-family: 'Roboto', sans-serif;
     color: #B2B2B2;
 }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #73637F;
+        box-shadow: none;
+    }
 
 .nav-link {
     font-family: 'Raleway', sans-serif;
@@ -83,6 +83,11 @@ a.nav-link {
 
 .dropdown-item {
     font-family: 'Raleway', sans-serif;
+}
+
+a.dropdown-item:active {
+    font-family: 'Raleway', sans-serif;
+    background-color: #9D87AE;
 }
 
 .headertext {
@@ -102,6 +107,173 @@ a.nav-link {
     font-size: 15px;
     line-height: 0.3cm;
 }
+
+.jobheading {
+    font-family: 'Raleway', sans-serif;
+    color: #450085;
+    text-decoration: underline;
+}
+
+.job-list {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+a.joblink:link, a.joblink:visited, a.opportunity:link, a.opportunity:visited {
+    color: black;
+}
+
+a.joblink:hover, a.opportunity:hover {
+    color: #9D87AE;
+}
+
+.display-5 {
+    font-family: 'Raleway', sans-serif;
+}
+
+.display-6 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 25px;
+    color: #73637F;
+}
+
+
+.scholarshiplist {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+a.email:link, a.email:visited {
+    color: #73637F;
+}
+
+a.email:hover {
+    color: #9D87AE;
+}
+
+.scholarship-card, .scholarship-card-body {
+    margin-top: 10px;
+    margin-left: 50px;
+    width: 60vh;
+    height: 50vh;
+}
+
+.scholarship-card-header {
+    background-color: none;
+}
+
+.mentorname, .studentname {
+    font-family: 'Raleway', sans-serif;
+    color: black;
+}
+
+.text-secondary {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+.contactinfo, .biography {
+    font-family: 'Raleway', sans-serif;
+    color: black;
+}
+
+.bookmarkheader {
+    font-family: 'Raleway', sans-serif;
+    text-decoration: underline;
+    color: #73637F;
+}
+
+.status {
+    font-family: 'Raleway', sans-serif;
+    color: red;
+    text-align: center;
+}
+
+.editprofile {
+    font-family: 'Raleway', sans-serif;
+    color: black;
+}
+
+.input-group {
+    width: 50vh;
+}
+
+.img-thumbnail {
+    width: 30vh;
+    height: 30vh;
+}
+
+.createjobs, .createopps {
+    width: 10px;
+}
+
+.form-select {
+    width: 50vh;
+}
+
+.btn-danger {
+    font-family: 'Raleway', sans-serif;
+}
+
+.table {
+    font-family: 'Roboto', sans-serif;
+}
+
+#searchtable {
+    width: 50vh;
+}
+
+.form-select {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+.option:hover, .memberoption:hover {
+    background-color: #C3B3CF;
+}
+
+.applynow {
+    font-family: 'Raleway', sans-serif;
+}
+
+#scholarshipcard {
+    height: 55vh;
+}
+
+.input-group {
+    width: 50vh;
+    padding-right: 10vh;
+}
+
+.input-group-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+
+.scholarship-card-body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.previous {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+a.previous:hover, a.previous:visited {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+#chatrecipient, #message {
+    font-family: 'Roboto', sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40vh;
+}
+
+
 
 
 .fa-facebook-f {

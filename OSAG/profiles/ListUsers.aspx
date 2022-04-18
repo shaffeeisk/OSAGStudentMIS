@@ -3,7 +3,9 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ListUsers.aspx.cs" Inherits="OSAG.profiles.ListUsers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="bootstrap.min.css" rel="stylesheet" />
+    <title>Ole School User Search</title>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style>
         body {
             width: 100%;
@@ -28,8 +30,6 @@
             background: #fff;
         }
     </style>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="margin-left: auto; margin-right: auto; text-align: center;">
         <h2>VIEW USER PROFILES</h2>
         <br />

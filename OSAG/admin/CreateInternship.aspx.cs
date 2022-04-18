@@ -122,5 +122,10 @@ namespace OSAG.member
                 return (object)DBNull.Value;
             return s;
         }
+
+        protected void dlistInternships_DataBinding(object sender, EventArgs e)
+        {
+
+        }
     }
 }

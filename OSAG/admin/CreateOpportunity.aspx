@@ -75,8 +75,8 @@
 
         <div class="row">
             <div class="col justify-content-center d-grid pt-4 pb-2 mx-auto">
-                <asp:Label ID="Label6" runat="server" Text="CompanyID: " Width="160px" CssClass="form-label"></asp:Label>
-                <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="177px"
+                <asp:Label ID="lblCompany" runat="server" Text="Company: " CssClass="form-label"></asp:Label>
+                <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="400px"
                     DataSourceID="sqlsrcListCompanies"
                     DataTextField="CompanyName"
                     CssClass="form-control"
@@ -88,42 +88,54 @@
         </div>
         <!--Inputs ends-->
 
-        <!--buttons start-->
+        <!--butttons start-->
         <div class="row">
-            <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-                <asp:Button ID="btnSaveOpportunity" Text="SAVE" runat="server" OnClick="btnSaveOpportunity_Click" />
-                <br />
-                <asp:Label ID="lblSuccess" Text="" runat="server"></asp:Label>
-                <br />
-                <asp:Button ID="btnOverride" Text="YES" runat="server" OnClick="btnOverride_Click" Visible="false" />
-                &nbsp
-                    <asp:Button ID="btnCancel" Text="NO" runat="server" OnClick="btnCancel_Click" Visible="false" />
+            <div class="col justify-content-center d-grid pt-4 mx-auto">
+                <asp:Label ID="lblSuccess" CssClass="form-label" Font-Bold="true" runat="server" />
+                <asp:Button ID="btnSaveOpportunity" Text="SAVE" CssClass="btn btn-primary" runat="server" OnClick="btnSaveOpportunity_Click" />
             </div>
         </div>
-        <div>
-            <asp:Button ID="btnClear" runat="server" Text="CLEAR ALL USER INPUTS" OnClick="btnClear_Click" Font-Bold="true" BackColor="OrangeRed" />
+        <div class="row">
+            <div class="col justify-content-end d-grid pb-4 mx-auto">
+                <asp:Button ID="btnOverride" Text="YES" runat="server" CssClass="btn btn-primary justify-content-center" Width="110px" OnClick="btnOverride_Click" Visible="false" />
+            </div>
+            <div class="col justify-content-lg-start d-grid pb-4 mx-auto">
+                <asp:Button ID="btnCancel" Text="NO" runat="server" CssClass="btn btn-secondary" Width="110px" OnClick="btnCancel_Click" Visible="false" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col justify-content-center d-grid pb-4 mx-auto" style="width: auto">
+                <asp:Button ID="btnClear" runat="server" Text="CLEAR ALL INPUTS" CssClass="btn btn-secondary btn-danger" Width="200px" OnClick="btnClear_Click" />
+            </div>
         </div>
         <!--buttons end-->
 
         <asp:DataList ID="dlistOpportunities" runat="server" DataSourceID="sqlsrc"
-            EnableViewState="False">
+            EnableViewState="False" HorizontalAlign="Center">
             <HeaderTemplate>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Opportunity Name</th>
-                            <th scope="col">Opportunity Description</th>
+                            <th scope="col">Company</th>
                             <th scope="col">Event Date</th>
                             <th scope="col">Application Deadline</th>
                         </tr>
                     </thead>
             </HeaderTemplate>
             <ItemTemplate>
+                <%try
+                    { %>
                 <%# Eval("OpportunityName") %>
-                <td><%# Eval("OpportunityDescription") %></td>
-                <td><%# Eval("EventDate") %></td>
-                <td><%# Eval("ApplicationDeadline") %></td>
-                <td><a href="/login/LoginPage.aspx/?id=<%# Eval("OpportunityID") %>">Edit</a></td>
+                <td><%# (Eval("CompanyName").ToString() == "" ? "N/A" : Eval("CompanyName")) %></td>
+                <td><%# Eval("EventDate").ToString() == "" ? "N/A" : String.Format("{0:M/d/yyyy}", Eval("EventDate")) %></td>
+                <td><%# Eval("ApplicationDeadline").ToString() == "" ? "N/A" : String.Format("{0:M/d/yyyy}", Eval("ApplicationDeadline")) %></td>
+                <td><a href="/opportunities/OpportunityDetails.aspx?id=<%# Eval("OpportunityID") %>">Edit</a></td>
+                <%}
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    } %>
             </ItemTemplate>
         </asp:DataList>
     </div>
@@ -135,7 +147,7 @@
         SelectCommand="SELECT CompanyName, CompanyID FROM Company;"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT OpportunityID, OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline FROM Opportunity"
+        SelectCommand="SELECT OpportunityID, OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, CompanyName FROM Opportunity o LEFT JOIN Company c ON o.CompanyID = c.CompanyID;"
         UpdateCommand="UPDATE Opportunity SET OpportunityName = @OpportunityName, OpportunityDescription = @OpportunityDescription, , EventDate = @EventDate, ApplicationDeadline = @ApplicationDeadline, WHERE OpportunityID= @OpportunityID "
         DeleteCommand="DELETE from OpportunityMatch WHERE OpportunityID = @OpportunityID DELETE FROM Opportunity where OpportunityID = @OpportunityID"></asp:SqlDataSource>
 

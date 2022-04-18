@@ -18,8 +18,14 @@ namespace OSAG.opportunities
         {
             try
             {
-                if (!IsPostBack)
-                    ViewState["PreviousPage"] = Request.UrlReferrer;
+                if (!IsPostBack) // check if page is being loaded for the first time
+                    ViewState["PreviousPage"] = Request.UrlReferrer; // Saves the Previous page url in ViewState
+                if (ViewState["PreviousPage"] == null) // prevent user from abusing querystring
+                    throw new NullReferenceException();
+
+                // retrieve querystring if it is being used
+                if (Int32.TryParse(Request.QueryString["id"], out int i))
+                    Session["View"] = i;
 
                 // Query to populate page with data
                 String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, OpportunityLink " +
