@@ -3,8 +3,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="Jobs.aspx.cs" Inherits="OSAG.jobs.Jobs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-    <head>
         <meta charset="UTF-8">
         <meta name="description" content="Jobs">
         <meta name="author" content="Madison Solutions">
@@ -28,8 +26,6 @@
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
         <link href="bootstrap.min.css" rel="stylesheet" />
-
-    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style>
@@ -116,8 +112,6 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
-
-
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
