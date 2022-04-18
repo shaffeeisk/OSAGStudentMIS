@@ -56,11 +56,10 @@ namespace OSAG.login
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
 
-            // clear input and display success message
-            ClearData();
-            lblStatus.ForeColor = Color.Black;
-            lblStatus.Font.Bold = false;
-            lblStatus.Text = "New user successfully created";
+            // redirect to signup complete
+            Session["TempUsername"] = txtUsername.Text;
+            Session["UserType"] = "student";
+            Response.Redirect("SignUpComplete.aspx");
         }
 
         // helper method to query student and member tables for existing username

@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet" />
 </head>
-<body class="loginbackground" >
+<body class="loginbackground">
     <form id="form1" runat="server">
 
         <div class="modal modal-tour positon-static d-block bg-purple py-4" tabindex="-1" role="dialog" id="modalTour">
@@ -48,23 +48,19 @@
                         </div>
 
                         <div class="row">
-                            <div class="col justify-content-center text-center pb-4 px-4 d-grid">
-                                <h6>Your account was successfully submitted for review.
-                                </h6>
-
+                            <div class="col justify-content-center text-center pb-3 px-4 d-grid">
+                                <h6>Your account was successfully submitted for review.</h6>
                                 <br />
-
-                                <h6>Please wait for your account to be approved.</h6>
+                                <h6>Please complete your profile before your account can be approved.</h6>
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
-                                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-                                </svg>
-                                <asp:Button ID="btnArrow" runat="server" xmlns="http://www.w3.org/2000/svg" CssClass="bi bi-arrow-right-circle-fill" Width="60" Height="60" />
+                                <a href="/profiles/UnapprovedUserProfile.aspx" class="text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
