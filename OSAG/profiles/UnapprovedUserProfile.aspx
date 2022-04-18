@@ -17,6 +17,7 @@
                     return true;
                 }
             </script>
+            <asp:Button ID="btn_logOut" runat="server" OnClick="btn_logOut_Click" Text="Log out" CausesValidation="false"/>
             User Profile not yet approved. Your Access is limited to editing your profile.
             <br />
             <br />

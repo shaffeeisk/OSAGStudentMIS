@@ -324,5 +324,11 @@ namespace OSAG.profiles
                 return false;
             return (bool)o;
         }
+
+        protected void btn_logOut_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/login/LoginPage.aspx");
+        }
+
     }
 }
