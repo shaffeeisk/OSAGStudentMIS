@@ -28,8 +28,8 @@ namespace OSAG.internships
                     Session["View"] = i;
 
                 // Query to populate page with data
-                String sqlQuery = "SELECT 'Internship Name: ' + InternshipName AS Name, " +
-                    "'Company Name: ' + CompanyName AS Company, " +
+                String sqlQuery = "SELECT InternshipName AS Name, " +
+                    " CompanyName AS Company, " +
                     " InternshipDescription AS Description, " +
                     "'Application Deadline: ' + CAST(ApplicationDeadline AS varchar) AS Deadline, " +
                     "'Start Date: ' + CAST(StartDate AS VARCHAR) AS Start, " +
@@ -45,8 +45,8 @@ namespace OSAG.internships
                 // read onto page
                 while (queryResults.Read())
                 {
-                    lblName.Text = queryResults["Name"].ToString();
-                    lblCompany.Text = queryResults["Company"].ToString();
+                    lblName.Text = queryResults["Name"].ToString().ToUpper();
+                    lblCompany.Text = queryResults["Company"].ToString().ToUpper();
                     lblDescription.Text = queryResults["Description"].ToString();
                     lblDeadline.Text = queryResults["Deadline"].ToString();
                     lblStart.Text = queryResults["Start"].ToString();
