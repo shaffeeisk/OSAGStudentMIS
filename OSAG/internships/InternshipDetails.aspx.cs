@@ -30,7 +30,7 @@ namespace OSAG.internships
                 // Query to populate page with data
                 String sqlQuery = "SELECT 'Internship Name: ' + InternshipName AS Name, " +
                     "'Company Name: ' + CompanyName AS Company, " +
-                    "'Internship Description: ' +  InternshipDescription AS Description, " +
+                    " InternshipDescription AS Description, " +
                     "'Application Deadline: ' + CAST(ApplicationDeadline AS varchar) AS Deadline, " +
                     "'Start Date: ' + CAST(StartDate AS VARCHAR) AS Start, " +
                     "'Weekly Hours: ' + CAST(WeeklyHours AS VARCHAR) AS Hours, " +
@@ -45,13 +45,13 @@ namespace OSAG.internships
                 // read onto page
                 while (queryResults.Read())
                 {
-                    lblDetails.Text = queryResults["Name"].ToString();
-                    lblDetails1.Text = queryResults["Company"].ToString();
-                    lblDetails2.Text = queryResults["Description"].ToString();
-                    lblDetails3.Text = queryResults["Deadline"].ToString();
-                    lblDetails4.Text = queryResults["Start"].ToString();
-                    lblDetails5.Text = queryResults["Hours"].ToString();
-                    lblDetails6.Text = queryResults["Payment"].ToString();
+                    lblName.Text = queryResults["Name"].ToString();
+                    lblCompany.Text = queryResults["Company"].ToString();
+                    lblDescription.Text = queryResults["Description"].ToString();
+                    lblDeadline.Text = queryResults["Deadline"].ToString();
+                    lblStart.Text = queryResults["Start"].ToString();
+                    lblHours.Text = queryResults["Hours"].ToString();
+                    lblPayment.Text = queryResults["Payment"].ToString();
                     // give the linkbutton the stored URL
                     if (queryResults["InternshipLink"] != DBNull.Value)
                     {
