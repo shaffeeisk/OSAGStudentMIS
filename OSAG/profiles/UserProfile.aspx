@@ -272,6 +272,12 @@
                             ControlToValidate="txtPhone"
                             Text="(Required)"
                             runat="server" />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" 
+                            runat="server" 
+                            ErrorMessage="Must be less than 15 digits"
+                            ControlToValidate="txtPhone"
+                            ValidationExpression="^[0-9]{0,15}$" >
+                        </asp:RegularExpressionValidator>
                     </div>
                     <% if (Session["UserType"].ToString() == "student")
                         { %>
