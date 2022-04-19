@@ -54,7 +54,7 @@ namespace OSAG.jobs
                     // give the linkbutton the stored URL
                     if (queryResults["JobLink"] != DBNull.Value)
                     {
-                        lnkbtnApply.Visible = true;
+                        divApplyButton.Visible = true;
                         lnkbtnApply.OnClientClick = "Navigate('" + queryResults["JobLink"].ToString() + "')";
                     }
                 }
@@ -138,15 +138,13 @@ namespace OSAG.jobs
 
         protected void lnkbtnApply_Click(object sender, EventArgs e)
         {
-            lblStatus.Visible = true;
+            divDidYouApply.Visible = true;
             if (lnkbtnApply.OnClientClick != null)
-            {
-                lnkbtnApply.Visible = false;
-                btnApplied.Visible = true;
-                btnDidNotApply.Visible = true;
-            }
+                divApplyButton.Visible = false;
             else
             {
+                btnApplied.Visible = false;
+                btnDidNotApply.Visible = false;
                 lblStatus.Text = "The link to this form is unavailable. Please contact your administrator for further details.";
                 lblStatus.ForeColor = Color.Red;
                 lblStatus.Font.Bold = true;

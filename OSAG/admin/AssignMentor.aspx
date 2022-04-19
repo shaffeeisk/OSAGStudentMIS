@@ -3,19 +3,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
+    <div class="row">
+            <div class="col text-center pt-5 pb-1">
+                <h2>MENTORSHIP ASSIGNMENTS</h2>
+            </div>
+        </div>
+    
     <!--Toggle requests button-->
     <div class="row">
-        <div class="col justify-content-center d-grid pt-5 mx-auto">
+        <div class="col justify-content-center d-grid pt-3 mx-auto">
             <asp:Button ID="btnToggleRequests" CssClass="btn btn-primary" runat="server" Text="VIEW REQUESTS" OnClick="btnToggleRequests_Click" />
         </div>
     </div>
 
     <div class="row">
         <div class="col justify-content-center d-grid pt-4 mx-auto">
-            <asp:Label ID="lblMentorshipRequests" runat="server" Text="Mentorship Requests" CssClass="h2" Font-Names="Raleway" Visible="false"></asp:Label>
+            <h3><asp:Label ID="lblMentorshipRequests" runat="server" Text="APPROVE REQUESTS" Visible="false"></asp:Label></h3>
         </div>
     </div>
-    <div class="row pb-5">
+    <div class="row pb-4">
         <asp:GridView ID="grdvMentorshipRequests"
             runat="server"
             Visible="false"
@@ -54,8 +61,8 @@
 
     <div class="container text-center px-5 pb-5">
         <div class="row">
-            <div class="col text-center pb-4">
-                <h2>View Student's Mentorships</h2>
+            <div class="col text-center pb-2">
+                <h3>VIEW/EDIT CURRENT MENTORSHIPS</h3>
             </div>
         </div>
         <br />
@@ -68,8 +75,7 @@
                 OnSelectedIndexChanged="lstStudents_SelectedIndexChanged"></asp:ListBox>
         </div>
         <br />
-        <br />
-        <div class="row justify-content-center" style="margin-left: auto; margin-right: auto; text-align: center; width: 400px">
+        <div class="row justify-content-center pb-2" style="margin-left: auto; margin-right: auto; text-align: center; width: 400px">
             <asp:Label ID="lblMember" runat="server" Text="Member: " Width="177px"></asp:Label>
             <asp:DropDownList ID="ddlMember" runat="server"
                 DataSourceID="sqlsrcMemberList"
@@ -81,13 +87,13 @@
 
         <div class="row">
             <!--Assign student button-->
-            <div class="col justify-content-center d-grid pt-5 pb-3 mx-auto">
+            <div class="col justify-content-center d-grid pt-4 pb-2 mx-auto">
                 <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="ASSIGN TO STUDENT" OnClick="btnUpdate_Click" />
             </div>
         </div>
         <br />
         <div class="row">
-            <div class="col justify-content-center d-grid pt-5 mx-auto">
+            <div class="col justify-content-center d-grid pt-3 mx-auto">
                 <asp:Label ID="lblUpdateStatus" Text="" runat="server" />
             </div>
         </div>

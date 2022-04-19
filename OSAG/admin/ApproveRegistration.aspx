@@ -4,6 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
+    <div class="row">
+            <div class="col text-center pt-5 pb-4">
+                <h2>APPROVE REGISTRATIONS</h2>
+            </div>
+        </div>
     <div class="row pb-5">
         <div style="margin-left: auto; margin-right: auto; text-align: center; width: fit-content">
                 <asp:ListBox ID="lstSelectNewUser" font="" runat="server" AutoPostBack="true" Height="200px" Width="200px"
@@ -18,7 +24,7 @@
     <div class="row">
         <div class="col justify-content-center d-grid pt-2 pb-5">
             <asp:Label ID="lblStatus" runat="server" Text="" Font-Bold="true"></asp:Label>
-            <asp:Button ID="btnApprove" class="btn btn-primary mx-auto" runat="server" Text="Approve Selected User(s)" OnClick="btnApprove_Click" />
+            <asp:Button ID="btnApprove" class="btn btn-primary mx-auto" runat="server" Text="APPROVE SELECTED USER" OnClick="btnApprove_Click" />
         </div>
     </div>
     
