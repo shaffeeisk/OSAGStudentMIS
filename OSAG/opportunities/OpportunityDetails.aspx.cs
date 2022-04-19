@@ -56,7 +56,7 @@ namespace OSAG.opportunities
                 else // record exists
                 {
                     if (match[1] == 1)
-                        btnBookmark.Text = "Remove bookmark";
+                        btnBookmark.Text = "REMOVE BOOKMARK";
                     // switch statement for IsInterest record
                     switch (match[2])
                     {
@@ -98,17 +98,17 @@ namespace OSAG.opportunities
             if (matchRecord == null)        // add match record for bookmark
             {
                 sqlQuery = "INSERT INTO OpportunityMatch (IsBookmark, StudentID, OpportunityID) VALUES (1, " + StudentID + ", " + OpportunityID + ")";
-                btn.Text = "Remove Bookmark";
+                btn.Text = "REMOVE BOOKMARK";
             }
             else if (matchRecord[1] == 0)   // set bookmarked in existing match record to true
             {
                 sqlQuery = "UPDATE OpportunityMatch SET IsBookmark = 1 WHERE OpportunityMatchID = " + matchRecord[0] + ";";
-                btn.Text = "Remove Bookmark";
+                btn.Text = "REMOVE BOOKMARK";
             }
             else                            // set bookmarked in existing match record to false
             {
                 sqlQuery = "UPDATE OpportunityMatch SET IsBookmark = 0 WHERE OpportunityMatchID = " + matchRecord[0] + ";";
-                btn.Text = "Bookmark";
+                btn.Text = "BOOKMARK";
             }
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
             sqlConnection.Open();

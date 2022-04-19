@@ -7,13 +7,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container px-5 pt-5 pb-5">
         <!--Header starts-->
-
         <div class="row pb-3">
             <a href="Jobs.aspx" class="previous">&laquo; Back</a>
 
         </div>
-
-
 
         <div class="row">
             <div class="col-lg-6 offset-lg-3 pb-3">
@@ -65,7 +62,7 @@
         <div class="row">
             <!--Save button-->
             <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-                <asp:Button ID="btnBookmark" class="btn btn-primary mx-auto" runat="server" Text="Add Bookmark" OnClick="btnBookmark_Click" />
+                <asp:Button ID="btnBookmark" class="btn btn-primary mx-auto" runat="server" Text="BOOKMARK" OnClick="btnBookmark_Click" />
             </div>
         </div>
 
@@ -79,20 +76,20 @@
         <br />
         <div class="row">
             <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
-                <asp:Button ID="btnApplied" class="btn btn-primary mx-auto" Text="Yes!" runat="server" Visible="false" OnClick="btnApplied_Click" />
+                <asp:Button ID="btnApplied" class="btn btn-primary mx-auto" Text="YES" runat="server" Visible="false" OnClick="btnApplied_Click" />
             </div>
         </div>
 
         <div class="row">
             <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
                 &nbsp
-             <asp:Button ID="btnDidNotApply" class="btn btn-primary mx-auto" Text="No!" runat="server" Visible="false" OnClick="btnDidNotApply_Click" />
+             <asp:Button ID="btnDidNotApply" class="btn btn-primary mx-auto" Text="NO" runat="server" Visible="false" OnClick="btnDidNotApply_Click" />
             </div>
         </div>
-
-        <script type="text/javascript" language="javascript">
-            function Navigate(s) {
-                javascript: window.open(s)
-            }
-        </script>
+    </div>
+    <script type="text/javascript" language="javascript">
+        function Navigate(s) {
+            javascript: window.open(s)
+        }
+    </script>
 </asp:Content>
