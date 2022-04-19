@@ -14,10 +14,6 @@
             <div class="carousel-item">
               <img src="/_images/carousel/carousel2.png" class="d-block w-100" alt="...">
             </div>
-           
-            <div class="carousel-item">
-              <img src="/_images/carousel/carousel3.png" class="d-block w-100" alt="...">
-            </div>
 
             <div class="carousel-item">
               <img src="/_images/carousel/carousel4.png" class="d-block w-100" alt="...">
