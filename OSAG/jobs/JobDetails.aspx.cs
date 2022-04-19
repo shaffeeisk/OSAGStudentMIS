@@ -28,8 +28,8 @@ namespace OSAG.jobs
                     Session["View"] = i;
 
                 // Query to populate page with data
-                String sqlQuery = "Select 'Job Name: ' + JobName AS Name, " +
-                    "'Company Name: ' + CompanyName AS Company, " +
+                String sqlQuery = "Select JobName AS Name, " +
+                    " + CompanyName AS Company, " +
                     "+  JobDescription AS Description, " +
                     "'Application Deadline: ' + CAST(ApplicationDeadline AS VARCHAR) AS Deadline, " +
                     "'Start Date: ' + CAST(StartDate AS VARCHAR) AS Start, " +
@@ -44,8 +44,8 @@ namespace OSAG.jobs
                 // read onto page
                 while (queryResults.Read())
                 {
-                    lblName.Text = queryResults["Name"].ToString();
-                    lblCompany.Text = queryResults["Company"].ToString();
+                    lblName.Text = queryResults["Name"].ToString().ToUpper();
+                    lblCompany.Text = queryResults["Company"].ToString().ToUpper();
                     lblDescription.Text = queryResults["Description"].ToString();
                     lblDeadline.Text = queryResults["Deadline"].ToString();
                     lblStart.Text = queryResults["Start"].ToString();
