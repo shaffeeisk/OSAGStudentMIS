@@ -336,7 +336,7 @@
                             </li>
                         </ul>
                         <asp:Button ID="btnDeclareMajor" runat="server" OnClientClick="javascript:return confirm('You will be redirected to another page.\nAny unsaved changes will be lost!');"
-                            Text="Declare Major(s)/Minor(s)" CausesValidation="false" OnClick="btnDeclareMajor_Click" />
+                            Text="DECLARE MAJOR(S)/MINOR(S)" CausesValidation="false" OnClick="btnDeclareMajor_Click" />
                     </div>
 
                 </div>
