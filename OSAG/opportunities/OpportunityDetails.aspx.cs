@@ -37,7 +37,7 @@ namespace OSAG.opportunities
                 sqlConnection.Open();
                 SqlDataReader queryResults = sqlCommand.ExecuteReader();
                 queryResults.Read();
-                lblName.Text = queryResults["OpportunityName"].ToString();
+                lblName.Text = queryResults["OpportunityName"].ToString().ToUpper();
                 lblDescription.Text =queryResults["OpportunityDescription"].ToString();
                 lblEventDate.Text =queryResults["EventDate"].ToString();
                 // give the linkbutton the stored URL
