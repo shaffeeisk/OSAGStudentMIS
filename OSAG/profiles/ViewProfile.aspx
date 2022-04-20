@@ -16,7 +16,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 px-3 pb-2">
-                        <%if (Session["UserType"].ToString() == "student")
+                        <%if (Session["ViewProfileUserType"].ToString() == "student")
                             {%>
                         <h2>STUDENT PROFILE</h2>
                         <%} %>
