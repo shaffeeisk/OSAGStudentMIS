@@ -8,7 +8,7 @@
     <div class="container text-center px-5 pt-5 pb-5">
         <div class="row">
             <div class="col text-center pb-4">
-                <h2>Select recipients of your announcement:</h2>
+                <h2>SELECT ANNOUNCEMENT RECIPIENT(S):</h2>
             </div>
         </div>
         <!--Header ends-->
