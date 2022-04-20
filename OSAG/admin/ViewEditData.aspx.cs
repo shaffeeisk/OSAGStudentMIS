@@ -47,8 +47,9 @@ namespace OSAG.admin
                         "Email = @Email WHERE ContactID = @ID";
                     break;
                 case "Major":
-                    sqlsrcData.SelectCommand = "SELECT * FROM Major";
-                    sqlsrcData.UpdateCommand = "UPDATE table SET col = @col WHERE id = @id";
+                    sqlsrcData.SelectCommand = "SELECT MajorID AS 'ID', MajorName, DegreeType AS 'Degree', HasMinor, IsMinorOnly FROM Major";
+                    sqlsrcData.UpdateCommand = "UPDATE Major SET MajorName = @MajorName, DegreeType = @Degree, " +
+                        "HasMinor = @HasMinor, IsMinorOnly = @IsMinorOnly WHERE MajorID = @ID";
                     break;
                 case "Announcement":
                     sqlsrcData.SelectCommand = "SELECT * FROM Announcement";

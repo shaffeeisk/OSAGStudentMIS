@@ -31,13 +31,14 @@
             DataSourceID="sqlsrcData"
             OnRowDataBound="grdvwData_RowDataBound"
             PageSize="10"
-            SelectedRowStyle-BackColor="Yellow">
+            CellPadding="5"
+            SelectedRowStyle-BackColor="#9D87AE">
             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
-            <PagerStyle HorizontalAlign="Center" Font-Names="Raleway" Font-Size="Large" />
+            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <Columns>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="btnSelect" runat="server" Text="SELECT" CssClass="btn btn-group btn-sm" CommandName="Select" />
+                        <asp:Button ID="btnSelect" runat="server" Text="SELECT" CssClass="btn btn-primary btn-sm" CommandName="Select" />
                         <asp:Button ID="btnEdit" runat="server" Text="EDIT" CssClass="btn btn-secondary btn-sm" CommandName="Edit" />
                     </ItemTemplate>
                     <EditItemTemplate>
