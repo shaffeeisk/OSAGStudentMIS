@@ -36,9 +36,7 @@
                     <img src="/_images/logo.png" alt="Logo" width="120" height="70">
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li>
-                        <a href="/member/ProgramSuccesses.aspx" class="nav-link px-2 link-secondary">SUCCESSES</a>
-                    </li>
+                    
                     
                     <!--nav bar end-->
 
