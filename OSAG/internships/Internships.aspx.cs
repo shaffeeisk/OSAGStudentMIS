@@ -145,7 +145,7 @@ namespace OSAG.internships
         }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            String search = "SELECT InternshipID, j.InternshipName, c.CompanyName FROM Internship j LEFT JOIN Company c on j.CompanyID = c.CompanyID WHERE j.InternshipName like '%[Search]%' OR c.CompanyName like '%[Search]%'";
+            String search = "SELECT InternshipID, j.InternshipName, c.CompanyName, ApplicationDeadline FROM Internship j LEFT JOIN Company c on j.CompanyID = c.CompanyID WHERE (j.InternshipName like '%[Search]%' OR c.CompanyName like '%[Search]%') AND ApplicationDeadline > GETDATE() ORDER BY ApplicationDeadline ASC";
             sqlsrc.SelectCommand = search.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
         }
     }

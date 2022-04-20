@@ -78,6 +78,7 @@
         <Columns>
             <asp:BoundField HeaderText="Job Name" DataField="JobName" SortExpression="JobName" />
             <asp:BoundField HeaderText="Company Name" DataField="CompanyName" SortExpression="CompanyName" />
+            <asp:BoundField HeaderText="Application Deadline" DataField="ApplicationDeadline" SortExpression="ApplicationDeadline" DataFormatString="{0:M/d/yy}" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnView" runat="server" font="Roboto" Text="View" OnClick="btnView_Click" />
@@ -92,5 +93,5 @@
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT JobID, j.JobName, c.CompanyName FROM Job j LEFT JOIN Company c on j.CompanyID = c.CompanyID"></asp:SqlDataSource>
+        SelectCommand="SELECT JobID, j.JobName, c.CompanyName, j.ApplicationDeadline FROM Job j LEFT JOIN Company c on j.CompanyID = c.CompanyID WHERE ApplicationDeadline > GETDATE() ORDER BY ApplicationDeadline ASC"></asp:SqlDataSource>
 </asp:Content>

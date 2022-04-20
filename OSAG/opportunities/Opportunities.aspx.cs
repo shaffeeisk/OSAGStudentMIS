@@ -145,7 +145,7 @@ namespace OSAG.opportunities
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            String search = "SELECT OpportunityID, OpportunityName, EventDate, CompanyName FROM Opportunity o LEFT JOIN Company c on o.CompanyID = c.CompanyID WHERE OpportunityName like '%[Search]%' OR CompanyName like '%[Search]%'";
+            String search = "SELECT OpportunityID, OpportunityName, EventDate, CompanyName FROM Opportunity o LEFT JOIN Company c on o.CompanyID = c.CompanyID WHERE (OpportunityName like '%[Search]%' OR CompanyName like '%[Search]%') AND EventDate > GETDATE() ORDER BY EventDate ASC";
             sqlsrc.SelectCommand = search.Replace("[Search]", HttpUtility.HtmlEncode(searchBar.Value.Trim()));
         }
     }

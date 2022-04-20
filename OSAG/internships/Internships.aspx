@@ -83,6 +83,7 @@
         <Columns>
             <asp:BoundField HeaderText="Internship Name" DataField="InternshipName" SortExpression="InternshipName" />
             <asp:BoundField HeaderText="Company Name" DataField="CompanyName" SortExpression="CompanyName" />
+            <asp:BoundField HeaderText="Application Deadline" DataField="ApplicationDeadline" SortExpression="ApplicationDeadline" DataFormatString="{0:M/d/yy}" />
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
@@ -97,5 +98,5 @@
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT InternshipID, j.InternshipName, c.CompanyName FROM Internship j LEFT JOIN Company c on j.CompanyID = c.CompanyID"></asp:SqlDataSource>
+        SelectCommand="SELECT InternshipID, j.InternshipName, c.CompanyName, ApplicationDeadline FROM Internship j LEFT JOIN Company c on j.CompanyID = c.CompanyID WHERE ApplicationDeadline > GETDATE() ORDER BY ApplicationDeadline ASC"></asp:SqlDataSource>
 </asp:Content>

@@ -67,5 +67,5 @@
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
-        SelectCommand="SELECT OpportunityID, OpportunityName, EventDate, CompanyName FROM Opportunity o LEFT JOIN Company c on o.CompanyID = c.CompanyID"></asp:SqlDataSource>
+        SelectCommand="SELECT OpportunityID, OpportunityName, EventDate, CompanyName FROM Opportunity o LEFT JOIN Company c on o.CompanyID = c.CompanyID WHERE EventDate > GETDATE() ORDER BY EventDate ASC"></asp:SqlDataSource>
 </asp:Content>
