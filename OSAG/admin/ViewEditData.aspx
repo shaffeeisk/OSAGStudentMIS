@@ -9,17 +9,18 @@
             <h2>ADVANCED ADMIN VIEW/EDIT</h2>
         </div>
     </div>
-
-    <div class="pb-3" style="margin-left: auto; margin-right: auto; text-align: center">
-        <asp:DropDownList ID="ddlSelectTable" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSelectTable_SelectedIndexChanged">
-            <asp:ListItem Text="(Select Table)" Value=""></asp:ListItem>
-            <asp:ListItem Text="Members" Value="Member"></asp:ListItem>
-            <asp:ListItem Text="Students" Value="Student"></asp:ListItem>
-            <asp:ListItem Text="Companies" Value="Company"></asp:ListItem>
-            <asp:ListItem Text="Contacts" Value="Contact"></asp:ListItem>
-            <asp:ListItem Text="Majors" Value="Major"></asp:ListItem>
-            <asp:ListItem Text="Announcements" Value="Announcement"></asp:ListItem>
-        </asp:DropDownList>
+    <div class="row">
+        <div class="col justify-content-center d-grid pb-4" style="margin-left: auto; margin-right: auto; text-align: center">
+            <asp:DropDownList ID="ddlSelectTable" runat="server" CssClass="form-control" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="ddlSelectTable_SelectedIndexChanged">
+                <asp:ListItem Text="(Select Table)" Value=""></asp:ListItem>
+                <asp:ListItem Text="Members" Value="Member"></asp:ListItem>
+                <asp:ListItem Text="Students" Value="Student"></asp:ListItem>
+                <asp:ListItem Text="Companies" Value="Company"></asp:ListItem>
+                <asp:ListItem Text="Contacts" Value="Contact"></asp:ListItem>
+                <asp:ListItem Text="Majors/Minors" Value="Major"></asp:ListItem>
+                <asp:ListItem Text="Announcements" Value="Announcement"></asp:ListItem>
+            </asp:DropDownList>
+        </div>
     </div>
 
     <div class="row">
@@ -32,9 +33,13 @@
             OnRowDataBound="grdvwData_RowDataBound"
             PageSize="10"
             CellPadding="5"
-            SelectedRowStyle-BackColor="#9D87AE">
+            SelectedRowStyle-BackColor="#eddef5" RowStyle-BorderWidth="1"
+            OnDataBound="grdvwData_DataBound">
             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
             <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
+            <HeaderStyle Font-Names="Roboto" ForeColor="#320075" BorderWidth="2" BorderColor="DarkGray" HorizontalAlign="Center" />
+            <RowStyle Font-Names="Roboto" HorizontalAlign="Center" />
+            <EditRowStyle Font-Names="Roboto" BackColor="#eddef5" />
             <Columns>
                 <asp:TemplateField>
                     <ItemTemplate>
@@ -66,6 +71,34 @@
         </div>
     </div>
 
+    <div class="row pt-4" id="DegreeTypeKey" runat="server" visible="false">
+        <table class="table" style="table-layout: fixed; width: 140px;" align="center">
+            <colgroup>
+                <col style="width: 50px">
+                <col style="width: 90px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="2" style="text-align: center">DEGREE KEY</th>
+                </tr>
+            </thead>
+            <tbody style="text-align: center;">
+                <tr>
+                    <td><b>1</b></td>
+                    <td style="text-align: left">Bachelors</td>
+                </tr>
+                <tr>
+                    <td><b>2</b></td>
+                    <td style="text-align: left">Masters</td>
+                </tr>
+                <tr>
+                    <td><b>3</b></td>
+                    <td style="text-align: left">Doctoral</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div class="row pt-4" id="MemberTypeKey" runat="server" visible="false">
         <table class="table" style="table-layout: fixed; width: 140px;" align="center">
             <colgroup>
@@ -74,7 +107,7 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th colspan="2" style="text-align: center">MEMBER KEY</th>
+                    <th colspan="2" style="text-align: center">ACCESS LEVELS</th>
                 </tr>
             </thead>
             <tbody style="text-align: center;">
@@ -97,5 +130,7 @@
             </tbody>
         </table>
     </div>
+
+
     <asp:SqlDataSource ID="sqlsrcData" runat="server" ConnectionString="<%$ ConnectionStrings:OSAG %>"></asp:SqlDataSource>
 </asp:Content>

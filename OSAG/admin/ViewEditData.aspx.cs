@@ -50,35 +50,40 @@ namespace OSAG.admin
                     sqlsrcData.SelectCommand = "SELECT MajorID AS 'ID', MajorName, DegreeType AS 'Degree', HasMinor, IsMinorOnly FROM Major";
                     sqlsrcData.UpdateCommand = "UPDATE Major SET MajorName = @MajorName, DegreeType = @Degree, " +
                         "HasMinor = @HasMinor, IsMinorOnly = @IsMinorOnly WHERE MajorID = @ID";
+                    DegreeTypeKey.Visible = true;
                     break;
                 case "Announcement":
-                    sqlsrcData.SelectCommand = "SELECT * FROM Announcement";
-                    sqlsrcData.UpdateCommand = "UPDATE table SET col = @col WHERE id = @id";
+                    sqlsrcData.SelectCommand = "SELECT AnnouncementID AS 'ID', Header, Body, Link FROM Announcement";
+                    sqlsrcData.UpdateCommand = "UPDATE Announcement SET Header = @Header, Body = @Body, Link= @Link WHERE AnnouncementID = @ID";
                     break;
                 case "Scholarship":
-                    sqlsrcData.SelectCommand = "SELECT * FROM Scholarship";
-                    sqlsrcData.UpdateCommand = "UPDATE table SET col = @col WHERE id = @id";
+                    sqlsrcData.SelectCommand = "SELECT ScholarshipID AS 'ID', AwardYear AS 'Year', AwardAmount AS 'Amount' " +
+                        "ApplicationDeadline AS 'Deadline' FROM Scholarship";
+                    sqlsrcData.UpdateCommand = "UPDATE Scholarship SET AwardYear = @Year, AwardAmount = @Amount, " +
+                        "ApplicationDeadline = @Deadline WHERE ScholarshipID = @ID";
                     break;
                 default:
+                    sqlsrcData.SelectCommand = "";
+                    sqlsrcData.UpdateCommand = "";
                     break;
             }
         }
 
         protected void ddlSelectTable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            grdvwData.DataBind();
-
             if (ddlSelectTable.SelectedValue != "Member")
                 MemberTypeKey.Visible = false;
             if (ddlSelectTable.SelectedValue != "Student")
                 DivDownloadButtons.Visible = false;
             if (ddlSelectTable.SelectedValue != "Member" && ddlSelectTable.SelectedValue != "Student")
                 DivViewProfile.Visible = false;
+            if (ddlSelectTable.SelectedValue != "Major")
+                DegreeTypeKey.Visible = false;
+            grdvwData.DataBind();
         }
 
         protected void grdvwData_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            grdvwData.SelectedIndex = -1;
             foreach (TableCell c in e.Row.Cells)
             {
                 if (DateTime.TryParse(c.Text, out DateTime dt)) // when in view mode
@@ -147,6 +152,12 @@ namespace OSAG.admin
             reader.GetBytes(0, 0, fileBytes, 0, fileBytes.Length);
             sqlConnect.Close();
             return fileBytes;
+        }
+
+        protected void grdvwData_DataBound(object sender, EventArgs e)
+        {
+            grdvwData.SelectedIndex = -1;
+            lblError.Text = "";
         }
     }
 }

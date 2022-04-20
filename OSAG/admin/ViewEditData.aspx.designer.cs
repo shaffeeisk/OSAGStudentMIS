@@ -96,6 +96,15 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.Button btnViewProfile;
 
         /// <summary>
+        /// DegreeTypeKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DegreeTypeKey;
+
+        /// <summary>
         /// MemberTypeKey control.
         /// </summary>
         /// <remarks>
