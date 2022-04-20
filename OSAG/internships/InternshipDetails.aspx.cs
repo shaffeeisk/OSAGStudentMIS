@@ -14,6 +14,7 @@ namespace OSAG.internships
 {
     public partial class InternshipDetails : System.Web.UI.Page
     {
+        String payment = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -23,21 +24,21 @@ namespace OSAG.internships
                 if (ViewState["PreviousPage"] == null) // prevent user from abusing querystring
                     throw new NullReferenceException();
 
-                // retrieve query string if it is being used
+                // retrieve querystring if it is being used
                 if (Int32.TryParse(Request.QueryString["id"], out int i))
                     Session["View"] = i;
 
                 // Query to populate page with data
-                String sqlQuery = "SELECT InternshipName AS Name, " +
-                    " CompanyName AS Company, " +
-                    " InternshipDescription AS Description, " +
-                    "'Application Deadline: ' + CAST(ApplicationDeadline AS varchar) AS Deadline, " +
-                    "'Start Date: ' + CAST(StartDate AS VARCHAR) AS Start, " +
-                    "'Weekly Hours: ' + CAST(WeeklyHours AS VARCHAR) AS Hours, " +
-                    "'Payment: ' + FORMAT(Payment,'C') as Payment, " +
+                String sqlQuery = "Select InternshipName AS Name, " +
+                    " + CompanyName AS Company, " +
+                    "+  InternshipDescription AS Description, " +
+                    "+  Payment AS UnformattedPayment, " +
+                    " CAST(ApplicationDeadline AS VARCHAR) AS Deadline, " +
+                    "CAST(StartDate AS VARCHAR) AS Start, " +
+                    "CAST(WeeklyHours AS VARCHAR) AS Hours, " +
+                    "FORMAT(Payment,'C') AS Payment, " +
                     "InternshipLink " +
-                    "FROM Internship LEFT JOIN Company " +
-                    "ON Company.CompanyID = Internship.CompanyID WHERE InternshipID = '" + Session["View"].ToString() + "'";
+                    "FROM Internship LEFT JOIN Company ON Company.CompanyID = Internship.CompanyID WHERE InternshipID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
                 sqlConnection.Open();
@@ -52,6 +53,7 @@ namespace OSAG.internships
                     lblStart.Text = queryResults["Start"].ToString();
                     lblHours.Text = queryResults["Hours"].ToString();
                     lblPayment.Text = queryResults["Payment"].ToString();
+                    payment = queryResults["UnformattedPayment"].ToString();
                     // give the linkbutton the stored URL
                     if (queryResults["InternshipLink"] != DBNull.Value)
                     {
@@ -97,7 +99,7 @@ namespace OSAG.internships
 
         protected void btnBookmark_Click(object sender, EventArgs e)
         {
-            // Define btn and retrieve InternshipID from Session variable
+            // Define btn and retrieve InternshipID from Session Variable
             Button btn = (Button)sender;
             int InternshipID = Int32.Parse(Session["View"].ToString());
 
@@ -127,6 +129,62 @@ namespace OSAG.internships
             sqlConnection.Open();
             sqlCommand.ExecuteScalar();
             sqlConnection.Close();
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            if (ViewState["PreviousPage"] != null)
+            {
+                Response.Redirect(ViewState["PreviousPage"].ToString());
+            }
+        }
+
+        protected void lnkbtnApply_Click(object sender, EventArgs e)
+        {
+            divDidYouApply.Visible = true;
+            if (lnkbtnApply.OnClientClick != null)
+                divApplyButton.Visible = false;
+            else
+            {
+                btnApplied.Visible = false;
+                btnDidNotApply.Visible = false;
+                lblStatus.Text = "The link to this form is unavailable. Please contact your administrator for further details.";
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Font.Bold = true;
+            }
+        }
+
+        protected void btnApplied_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            int StudentID = UsernameToID(Session["Username"].ToString());
+            string sqlQuery;
+
+            // query based on whether a match exists
+            if (MatchExists(StudentID, (int)Session["View"]))
+            {
+                sqlQuery = "UPDATE InternshipMatch SET AppStatus = 'Applied', ApplicationDate = @ApplicationDate " +
+                    "WHERE StudentID = @StudentID AND InternshipID = @InternshipID;";
+            }
+            else
+            {
+                sqlQuery = "INSERT INTO InternshipMatch (AppStatus, ApplicationDate, StudentID, InternshipID) " +
+                    "VALUES ('Applied', @ApplicationDate, @StudentID, @InternshipID)";
+            }
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@ApplicationDate", DateTime.Now.ToString("yyyy-MM-dd"));
+            sqlCommand.Parameters.AddWithValue("@StudentID", StudentID);
+            sqlCommand.Parameters.AddWithValue("@InternshipID", Session["View"].ToString());
+            sqlConnection.Open();
+            sqlCommand.ExecuteScalar();
+        }
+
+        protected void btnDidNotApply_Click(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Your response has been recorded.";
+            lnkbtnApply.Visible = true;
+            btnApplied.Visible = false;
+            btnDidNotApply.Visible = false;
         }
 
         // event handler for low selection
@@ -195,64 +253,19 @@ namespace OSAG.internships
             sqlCommand.ExecuteScalar();
         }
 
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
-            if (ViewState["PreviousPage"] != null)
-            {
-                Response.Redirect(ViewState["PreviousPage"].ToString());
-            }
-        }
-
-        protected void lnkbtnApply_Click(object sender, EventArgs e)
-        {
-            divDidYouApply.Visible = true;
-            if (lnkbtnApply.OnClientClick != null)
-                divApplyButton.Visible = false;
-            else
-            {
-                btnApplied.Visible = false;
-                btnDidNotApply.Visible = false;
-                lblStatus.Text = "The link to this form is unavailable. Please contact your administrator for further details.";
-                lblStatus.ForeColor = Color.Red;
-                lblStatus.Font.Bold = true;
-            }
-        }
-
-        protected void btnApplied_Click(object sender, EventArgs e)
+        // helper method to get matchID and bookmark status
+        public bool MatchExists(int stuID, int itemID)
         {
             SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            int StudentID = UsernameToID(Session["Username"].ToString());
-            string sqlQuery;
-
-            // query based on whether a match exists
-            if (MatchExists(StudentID, (int)Session["View"]))
-            {
-                sqlQuery = "UPDATE InternshipMatch SET AppStatus = 'Applied', ApplicationDate = @ApplicationDate " +
-                    "WHERE StudentID = @StudentID AND InternshipID = @InternshipID;";
-            }
-            else
-            {
-                sqlQuery = "INSERT INTO InternshipMatch (AppStatus, ApplicationDate, StudentID, InternshipID) " +
-                    "VALUES ('Applied', @ApplicationDate, @StudentID, @InternshipID)";
-            }
+            String sqlQuery = "SELECT COUNT(*) FROM InternshipMatch WHERE StudentID = '" + stuID + "' AND InternshipID = '" + itemID + "';";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@ApplicationDate", DateTime.Now.ToString("yyyy-MM-dd"));
-            sqlCommand.Parameters.AddWithValue("@StudentID", StudentID);
-            sqlCommand.Parameters.AddWithValue("@InternshipID", Session["View"].ToString());
             sqlConnection.Open();
-            sqlCommand.ExecuteScalar();
-        }
-
-        protected void btnDidNotApply_Click(object sender, EventArgs e)
-        {
-            lblStatus.Text = "Your response has been recorded.";
-            lnkbtnApply.Visible = true;
-            btnApplied.Visible = false;
-            btnDidNotApply.Visible = false;
+            if ((int)sqlCommand.ExecuteScalar() < 1)
+                return false;
+            return true;
         }
 
         // helper method to get matchID and bookmark status
-        // returns integer array with match ID index 0, bookmark status at 1, and interest level at 2
         public int[] getMatch(int stuID, int itemID)
         {
             try
@@ -264,6 +277,7 @@ namespace OSAG.internships
                 sqlConnection.Open();
                 SqlDataReader queryResults = sqlCommand.ExecuteReader();
                 queryResults.Read();
+                // returns integer array with match ID index 0, bookmark status at 1, and interest level at 2
                 int[] intArr = new int[3];
                 intArr[0] = (int)queryResults["InternshipMatchID"];
                 // handles null values (null = false/0)
@@ -285,16 +299,12 @@ namespace OSAG.internships
             }
         }
 
-        // helper method to get matchID and bookmark status
-        public bool MatchExists(int stuID, int itemID)
+        // SQL Server BIT -> Boolean. read above comments for more details
+        private bool bitToBoolean(object o)
         {
-            SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            String sqlQuery = "SELECT COUNT(*) FROM InternshipMatch WHERE StudentID = '" + stuID + "' AND InternshipID = '" + itemID + "';";
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
-            sqlConnection.Open();
-            if ((int)sqlCommand.ExecuteScalar() < 1)
+            if (o == DBNull.Value)
                 return false;
-            return true;
+            return (bool)o;
         }
 
         // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
@@ -308,12 +318,67 @@ namespace OSAG.internships
             return (int)sqlCommand.ExecuteScalar();
         }
 
-        // SQL Server BIT -> Boolean. read above comments for more details
-        private bool bitToBoolean(object o)
+        protected void btnEdit_Click(object sender, EventArgs e)
         {
-            if (o == DBNull.Value)
-                return false;
-            return (bool)o;
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            String sqlQuery;
+            sqlQuery = "Select CompanyID From Company WHERE CompanyName = '" + lblCompany.Text + "'";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlConnect.Open();
+            ddlCompany.SelectedValue = sqlCommand.ExecuteScalar().ToString();
+            sqlConnect.Close();
+            Edit.Style.Add("display", "normal");
+            View.Style.Add("display", "none");
+            txtName.Text = lblName.Text;
+            txtDeadline.Text = lblDeadline.Text;
+            txtStart.Text = lblStart.Text;
+            txtHours.Text = lblHours.Text;
+            txtPayment.Text = payment;
+            txtDescription.Text = lblDescription.Text;
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            // define connection to DB and query String
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            String sqlQuery;
+            sqlQuery = "UPDATE Internship SET " +
+                "InternshipName = @InternshipName, " +
+                "InternshipDescription = @InternshipDescription, " +
+                "ApplicationDeadline = @ApplicationDeadline, " +
+                "StartDate = @StartDate, " +
+                "WeeklyHours = @WeeklyHours, " +
+                "Payment = @Payment, " +
+                "CompanyID = @CompanyID " +
+                "WHERE InternshipID = '" + Session["View"].ToString() + "';";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@InternshipName", validate(txtName.Text));
+            sqlCommand.Parameters.AddWithValue("@InternshipDescription", validate(txtDescription.Text));
+            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtDeadline.Text));
+            sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStart.Text));
+            sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtHours.Text));
+            sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
+            if (ddlCompany.SelectedValue != "0")
+                sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
+            else
+                sqlCommand.Parameters.AddWithValue("@CompanyID", DBNull.Value);
+            sqlConnect.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
+            Response.Write("<script>alert('Changes successfully saved.');</script>");
+        }
+
+        protected void btnReturn_Click(object sender, EventArgs e)
+        {
+            View.Style.Add("display", "normal");
+            Edit.Style.Add("display", "none");
+        }
+        private object validate(String s)
+        {
+            s = s.Trim();
+            if (s == "")
+                return (object)DBNull.Value;
+            return s;
         }
     }
 }

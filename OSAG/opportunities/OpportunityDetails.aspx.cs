@@ -14,6 +14,7 @@ namespace OSAG.opportunities
 {
     public partial class OpportunityDetails : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -28,8 +29,8 @@ namespace OSAG.opportunities
                     Session["View"] = i;
 
                 // Query to populate page with data
-                String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, OpportunityLink " +
-                    "FROM Opportunity WHERE Opportunity.OpportunityID = '" + Session["View"].ToString() + "'";
+                String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, OpportunityLink, CompanyName" +
+                    " FROM Opportunity LEFT JOIN Company ON Opportunity.CompanyID = Company.CompanyID WHERE OpportunityID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
 
@@ -38,8 +39,9 @@ namespace OSAG.opportunities
                 SqlDataReader queryResults = sqlCommand.ExecuteReader();
                 queryResults.Read();
                 lblName.Text = queryResults["OpportunityName"].ToString().ToUpper();
-                lblDescription.Text =queryResults["OpportunityDescription"].ToString();
-                lblEventDate.Text =queryResults["EventDate"].ToString();
+                lblCompany.Text = queryResults["CompanyName"].ToString().ToUpper();
+                lblDescription.Text = queryResults["OpportunityDescription"].ToString();
+                lblEventDate.Text = queryResults["EventDate"].ToString();
                 // give the linkbutton the stored URL
                 if (queryResults["OpportunityLink"] != DBNull.Value)
                 {
@@ -302,6 +304,63 @@ namespace OSAG.opportunities
             if (o == DBNull.Value)
                 return false;
             return (bool)o;
+        }
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            //OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, OpportunityLink
+            if (lblCompany.Text != "")
+            {
+                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                String sqlQuery;
+                sqlQuery = "Select CompanyID From Company WHERE CompanyName = '" + lblCompany.Text + "'";
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                sqlConnect.Open();
+                ddlCompany.SelectedValue = sqlCommand.ExecuteScalar().ToString();
+                sqlConnect.Close();
+            }
+            txtName.Text = lblName.Text;
+            txtEventDate.Text = lblEventDate.Text;
+            txtDescription.Text = lblDescription.Text;
+            Edit.Style.Add("display", "normal");
+            View.Style.Add("display", "none");
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            // define connection to DB and query String
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            String sqlQuery;
+            sqlQuery = "UPDATE Opportunity SET " +
+                "OpportunityName = @OpportunityName, " +
+                "CompanyID = @CompanyID, " +
+                "OpportunityDescription = @OpportunityDescription, " +
+                "EventDate = @EventDate " +
+                "WHERE OpportunityID = '" + Session["View"].ToString() + "';";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@OpportunityName", validate(txtName.Text));
+            sqlCommand.Parameters.AddWithValue("@OpportunityDescription", validate(txtDescription.Text));
+            sqlCommand.Parameters.AddWithValue("@EventDate", validate(txtEventDate.Text));
+            if (ddlCompany.SelectedValue != "0")
+                sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
+            else
+                sqlCommand.Parameters.AddWithValue("@CompanyID", DBNull.Value);
+            sqlConnect.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
+            Response.Write("<script>alert('Changes successfully saved.');</script>");
+        }
+
+        protected void btnReturn_Click(object sender, EventArgs e)
+        {
+            View.Style.Add("display", "normal");
+            Edit.Style.Add("display", "none");
+        }
+        private object validate(String s)
+        {
+            s = s.Trim();
+            if (s == "")
+                return (object)DBNull.Value;
+            return s;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace OSAG.jobs
 {
     public partial class JobDetails : System.Web.UI.Page
     {
+        String payment = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -31,10 +32,11 @@ namespace OSAG.jobs
                 String sqlQuery = "Select JobName AS Name, " +
                     " + CompanyName AS Company, " +
                     "+  JobDescription AS Description, " +
-                    "'Application Deadline: ' + CAST(ApplicationDeadline AS VARCHAR) AS Deadline, " +
-                    "'Start Date: ' + CAST(StartDate AS VARCHAR) AS Start, " +
-                    "'Weekly Hours: ' + CAST(WeeklyHours AS VARCHAR) AS Hours, " +
-                    "'Payment: ' + FORMAT(Payment,'C') AS Payment, " +
+                    "+  Payment AS UnformattedPayment, " +
+                    " CAST(ApplicationDeadline AS VARCHAR) AS Deadline, " +
+                    "CAST(StartDate AS VARCHAR) AS Start, " +
+                    "CAST(WeeklyHours AS VARCHAR) AS Hours, " +
+                    "FORMAT(Payment,'C') AS Payment, " +
                     "JobLink " +
                     "FROM Job LEFT JOIN Company ON Company.CompanyID = Job.CompanyID WHERE JobID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
@@ -51,6 +53,7 @@ namespace OSAG.jobs
                     lblStart.Text = queryResults["Start"].ToString();
                     lblHours.Text = queryResults["Hours"].ToString();
                     lblPayment.Text = queryResults["Payment"].ToString();
+                    payment = queryResults["UnformattedPayment"].ToString();
                     // give the linkbutton the stored URL
                     if (queryResults["JobLink"] != DBNull.Value)
                     {
@@ -313,6 +316,69 @@ namespace OSAG.jobs
             sqlCommand.Parameters.AddWithValue("@Username", username);
             sqlConnection.Open();
             return (int)sqlCommand.ExecuteScalar();
+        }
+
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            String sqlQuery;
+            sqlQuery = "Select CompanyID From Company WHERE CompanyName = '" + lblCompany.Text + "'";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlConnect.Open();
+            ddlCompany.SelectedValue = sqlCommand.ExecuteScalar().ToString();
+            sqlConnect.Close();
+            Edit.Style.Add("display", "normal");
+            View.Style.Add("display", "none");
+            txtName.Text = lblName.Text;
+            txtDeadline.Text = lblDeadline.Text;
+            txtStart.Text = lblStart.Text;
+            txtHours.Text = lblHours.Text;
+            txtPayment.Text = payment;
+            txtDescription.Text = lblDescription.Text;
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            // define connection to DB and query String
+            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+            String sqlQuery;
+            sqlQuery = "UPDATE JOB SET " +
+                "JobName = @JobName, " +
+                "JobDescription = @JobDescription, " +
+                "ApplicationDeadline = @ApplicationDeadline, " +
+                "StartDate = @StartDate, " +
+                "WeeklyHours = @WeeklyHours, " +
+                "Payment = @Payment, " +
+                "CompanyID = @CompanyID " +
+                "WHERE JobID = '" + Session["View"].ToString() + "';";
+            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+            sqlCommand.Parameters.AddWithValue("@JobName", validate(txtName.Text));
+            sqlCommand.Parameters.AddWithValue("@JobDescription", validate(txtDescription.Text));
+            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtDeadline.Text));
+            sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStart.Text));
+            sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtHours.Text));
+            sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
+            if (ddlCompany.SelectedValue != "0")
+                sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
+            else
+                sqlCommand.Parameters.AddWithValue("@CompanyID", DBNull.Value);
+            sqlConnect.Open();
+            sqlCommand.ExecuteScalar();
+            sqlConnect.Close();
+            Response.Write("<script>alert('Changes successfully saved.');</script>");
+        }
+
+        protected void btnReturn_Click(object sender, EventArgs e)
+        {
+            View.Style.Add("display", "normal");
+            Edit.Style.Add("display", "none");
+        }
+        private object validate(String s)
+        {
+            s = s.Trim();
+            if (s == "")
+                return (object)DBNull.Value;
+            return s;
         }
     }
 }
