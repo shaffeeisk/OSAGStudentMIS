@@ -112,6 +112,7 @@
     <Content Include="opportunities\Opportunities.aspx" />
     <Content Include="opportunities\OpportunityDetails.aspx" />
     <Content Include="profiles\DeclareMajor.aspx" />
+    <Content Include="profiles\DeclareUnapprovedMajor.aspx" />
     <Content Include="profiles\NewChat.aspx" />
     <Content Include="profiles\UnapprovedUserProfile.aspx" />
     <Content Include="profiles\ViewAnnouncements.aspx" />
@@ -421,6 +422,13 @@
     <Compile Include="profiles\DeclareMajor.aspx.designer.cs">
       <DependentUpon>DeclareMajor.aspx</DependentUpon>
     </Compile>
+    <Compile Include="profiles\DeclareUnapprovedMajor.aspx.cs">
+      <DependentUpon>DeclareUnapprovedMajor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiles\DeclareUnapprovedMajor.aspx.designer.cs">
+      <DependentUpon>DeclareUnapprovedMajor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="profiles\ListUsers.aspx.cs">
       <DependentUpon>ListUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -520,6 +528,13 @@
     <Compile Include="templates\Mentor.Master.designer.cs">
       <DependentUpon>Mentor.Master</DependentUpon>
     </Compile>
+    <Compile Include="templates\Unapproved.Master.cs">
+      <DependentUpon>Unapproved.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="templates\Unapproved.Master.designer.cs">
+      <DependentUpon>Unapproved.Master</DependentUpon>
+    </Compile>
     <Compile Include="_appcode\PasswordHash.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -529,6 +544,7 @@
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="templates\Details.Master" />
+    <Content Include="templates\Unapproved.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
