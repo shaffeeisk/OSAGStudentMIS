@@ -34,7 +34,7 @@ namespace OSAG.admin
         protected void btnApprove_Click(object sender, EventArgs e)
         {
             // update command, helper method used to determine table to be used
-            String sqlQuery = "UPDATE USERTYPE SET IsApproved = 'TRUE' WHERE Username = @Username;";
+            String sqlQuery = "UPDATE UserType SET IsApproved = 'TRUE' WHERE Username = @Username;";
             sqlQuery = sqlQuery.Replace("USERTYPE", ParamUserType(lstSelectNewUser.SelectedValue));
 
             // def connections, create commands, insert parameter, and execute query
@@ -67,6 +67,15 @@ namespace OSAG.admin
                 return "Student";
             else // user is member (not found in Student table)
                 return "Member";
+        }
+
+        protected void btnViewProfile_Click(object sender, EventArgs e)
+        {
+            if (lstSelectNewUser.SelectedValue == "")
+                return;
+            Session["ViewProfileUsername"] = lstSelectNewUser.SelectedValue;
+            Session["ViewProfileUserType"] = "student";
+            Response.Write("<script>window.open('/profiles/ViewProfile.aspx')</script>");
         }
     }
 }

@@ -24,6 +24,15 @@ namespace OSAG.admin
         protected global::System.Web.UI.WebControls.ListBox lstSelectNewUser;
 
         /// <summary>
+        /// btnViewProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewProfile;
+
+        /// <summary>
         /// lblStatus control.
         /// </summary>
         /// <remarks>
