@@ -239,6 +239,7 @@
             <asp:Button ID="btnUpdate2" runat="server" Text="Save Changes" CausesValidation="false" OnClick="btnUpdate_Click" />
 
             <% } %>
+        </div>
     </form>
 </body>
 </html>

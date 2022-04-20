@@ -72,6 +72,7 @@
     <Content Include="admin\AssignMentor.aspx" />
     <Content Include="admin\AwardScholarship.aspx" />
     <Content Include="admin\CreateAnnouncement.aspx" />
+    <Content Include="admin\ViewEditData.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -269,6 +270,13 @@
     </Compile>
     <Compile Include="admin\CreateAnnouncement.aspx.designer.cs">
       <DependentUpon>CreateAnnouncement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ViewEditData.aspx.cs">
+      <DependentUpon>ViewEditData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ViewEditData.aspx.designer.cs">
+      <DependentUpon>ViewEditData.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

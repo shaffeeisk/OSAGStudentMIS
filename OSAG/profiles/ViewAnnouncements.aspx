@@ -15,13 +15,11 @@
         DataKeyNames="AnnouncementID"
         HorizontalAlign="Center"
         ShowHeaderWhenEmpty="true"
-        CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
+        CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow-on-hover"
         PagerStyle-CssClass="pager"
-        HeaderStyle-CssClass="header"
-        RowStyle-CssClass="rows"
-        CellSpacing="7"
-        font="Roboto"
-        ForeColor="black">
+        HeaderStyle-Font-Names="Roboto"
+        RowStyle-Font-Names="Roboto"
+        ForeColor="black" RowStyle-BackColor="#F7F7F7" AlternatingRowStyle-BackColor="#d0c2da">
         <Columns>
             <asp:BoundField ReadOnly="true" HeaderText="Sent" DataField="DateCreated" DataFormatString="{0:MM/dd/yyyy HH:mm tt}" ItemStyle-Wrap="true" ItemStyle-Width="110" />
             <asp:BoundField ReadOnly="true" HeaderText="Subject" DataField="Header" ItemStyle-Font-Bold="true" />

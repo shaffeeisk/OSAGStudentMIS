@@ -31,13 +31,13 @@ namespace OSAG.profiles
             if (Session["UserType"].ToString() == "member")
             {
                 UserType = 2;
-                sqlsrcAnnouncements.SelectCommand = "Select * From Announcement WHERE (MajorID in (" + majors + ") OR MajorID is NULL) AND (UserType = 0 OR UserType = '" + UserType + "')" +
-                    "AND (MemberType >= " + Session["MemberType"] + ")";
+                sqlsrcAnnouncements.SelectCommand = "SELECT TOP 3 * FROM Announcement WHERE (MajorID IN (" + majors + ") OR MajorID IS NULL) AND (UserType = 0 OR UserType = '" + UserType + "') " +
+                    "AND (MemberType >= " + Session["MemberType"] + ") ORDER BY DateCreated DESC";
             }
             else
             {
                 UserType = 1;
-                sqlsrcAnnouncements.SelectCommand = "Select * From Announcement WHERE (MajorID in (" + majors + ") OR MajorID is NULL) AND (UserType = 0 or UserType = '" + UserType + "')";
+                sqlsrcAnnouncements.SelectCommand = "SELECT TOP 3 * FROM Announcement WHERE (MajorID IN (" + majors + ") OR MajorID IS NULL) AND (UserType = 0 OR UserType = '" + UserType + "') ORDER BY DateCreated DESC";
             }
 
         }
