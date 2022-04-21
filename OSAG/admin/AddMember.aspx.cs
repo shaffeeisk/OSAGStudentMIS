@@ -32,15 +32,15 @@ namespace OSAG.admin
                 txtUsername.Text = "";
                 return;
             }
-            String sqlQuery = "INSERT INTO Member (MemberType, FirstName, LastName, Email, PhoneNumber, City, M_State, IsApproved, Username, Pass) " +
-                "VALUES (@MemberType, @FirstName, @LastName, @Email, @PhoneNumber, @City, @M_State, 'FALSE', @Username, @Pass)";
+            String sqlQuery = "INSERT INTO Member (MemberType, FirstName, LastName, Email, Phone, City, M_State, IsApproved, Username, Pass) " +
+                "VALUES (@MemberType, @FirstName, @LastName, @Email, @Phone, @City, @M_State, 'FALSE', @Username, @Pass)";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@MemberType", ddlMemberType.SelectedValue);
             sqlCommand.Parameters.AddWithValue("@FirstName", validate(txtFirstName.Text));
             sqlCommand.Parameters.AddWithValue("@LastName", validate(txtLastName.Text));
             sqlCommand.Parameters.AddWithValue("@Email", validate(txtEmail.Text));
-            sqlCommand.Parameters.AddWithValue("@PhoneNumber", validatePhone(txtPhone.Text));
+            sqlCommand.Parameters.AddWithValue("@Phone", validatePhone(txtPhone.Text));
             sqlCommand.Parameters.AddWithValue("@City", validate(txtCity.Text));
             sqlCommand.Parameters.AddWithValue("@M_State", validate(txtState.Text));
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);

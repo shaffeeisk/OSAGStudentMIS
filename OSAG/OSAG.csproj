@@ -201,7 +201,7 @@
     <Content Include="_images\logo.png" />
     <Content Include="_images\mPFP\1.jpg" />
     <Content Include="_images\public-background.png" />
-    <Content Include="_images\sPFP\2.jpg" />
+    <Content Include="_images\sPFP\2022\1.jpg" />
     <Content Include="_images\user.png" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -564,9 +564,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_images\sPFP\2022\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

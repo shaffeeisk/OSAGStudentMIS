@@ -1,6 +1,6 @@
 ﻿<%--Page to add new members--%>
 
-<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="AddMember.aspx.cs" Inherits="OSAG.admin.AddMember" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="AddMember.aspx.cs" Inherits="OSAG.admin.AddMember" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
