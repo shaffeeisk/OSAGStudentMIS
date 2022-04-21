@@ -70,40 +70,43 @@
             </div>
         </div>
 
+        <% if (Session["UserType"].ToString() == "student")
+            { %>
         <div class="row">
             <!--Save button-->
             <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
                 <asp:Button ID="btnBookmark" class="btn btn-secondary mx-auto" runat="server" CausesValidation="false" Text="BOOKMARK" OnClick="btnBookmark_Click" />
             </div>
         </div>
+        <% } %>
 
         <div class="row">
             <!--Only mentors or above-->
             <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3)
                 { %>
-            <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
+            <div class="col justify-content-center d-grid pb-5 mx-auto">
                 <asp:Button ID="btnEdit" class="btn btn-secondary mx-auto" runat="server" Text="EDIT" CausesValidation="false" OnClick="btnEdit_Click" />
             </div>
             <% } %>
         </div>
     </div>
 
-    <div id="Edit" style="display:none" runat="server" class="container px-5 pt-5 pb-5">
+    <div id="Edit" style="display: none" runat="server" class="container px-5 pt-5 pb-5">
 
         <br />
         <br />
         <div class="col-lg-6 offset-lg-3 pt-4">
-            <h3>Opportunity DETAILS</h3>
+            <h3>OPPORTUNITY DETAILS</h3>
 
-            <h5>
-                Opportunity Name: <asp:TextBox ID="txtName" runat="server"></asp:TextBox></h5>
+            <h5>Opportunity Name:
+            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Width="400px"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator1"
-                    ControlToValidate="txtName"
-                    Text="(Required)"
-                    runat="server" />
-            <h5>
-                Company: <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="400px"
+                ID="RequiredFieldValidator1"
+                ControlToValidate="txtName"
+                Text="(Required)"
+                runat="server" />
+            <h5>Company:
+                <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="400px"
                     DataSourceID="sqlsrcListCompanies"
                     DataTextField="CompanyName"
                     CssClass="form-control"
@@ -111,37 +114,36 @@
                     AppendDataBoundItems="true">
                     <asp:ListItem Selected="True" Text="(Select a company)" Value="0"></asp:ListItem>
                 </asp:DropDownList></h5>
-            <h5> 
-               Event Date: <asp:TextBox ID="txtEventDate" TextMode="Date" runat="server"></asp:TextBox></h5>
+            <h5>Event Date:
+                <asp:TextBox ID="txtEventDate" TextMode="Date" runat="server"></asp:TextBox></h5>
             <asp:CompareValidator
-                    ID="CompareValidator2"
-                    ControlToValidate="txtEventDate"
-                    Text="Use Date Format"
-                    Operator="DataTypeCheck"
-                    Type="Date"
-                    runat="server" />
-                <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator4"
-                    ControlToValidate="txtEventDate"
-                    Text="(Required)"
-                    runat="server" />
-            <h5>
-               Description: <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox></h5>
+                ID="CompareValidator2"
+                ControlToValidate="txtEventDate"
+                Text="Use Date Format"
+                Operator="DataTypeCheck"
+                Type="Date"
+                runat="server" />
             <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator2"
-                    ControlToValidate="txtDescription"
-                    Text="(Required)"
-                    runat="server" />
+                ID="RequiredFieldValidator4"
+                ControlToValidate="txtEventDate"
+                Text="(Required)"
+                runat="server" />
+            <h5>Description:
+                <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox></h5>
+            <asp:RequiredFieldValidator
+                ID="RequiredFieldValidator2"
+                ControlToValidate="txtDescription"
+                Text="(Required)"
+                runat="server" />
         </div>
 
-        <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-            <asp:Button ID="btnUpdate" class="btn btn-secondary mx-auto" runat="server" Text="UPDATE" OnClick="btnUpdate_Click" />
+        <div class="col justify-content-center d-grid pt-4 mx-auto">
+            <asp:Button ID="btnUpdate" class="btn btn-primary mx-auto" runat="server" Text="UPDATE" OnClick="btnUpdate_Click" />
         </div>
-        <br />
+
         <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
             <asp:Button ID="btnReturn" class="btn btn-secondary mx-auto" runat="server" CausesValidation="false" Text="RETURN" OnClick="btnReturn_Click" />
         </div>
-
     </div>
 
 
