@@ -28,7 +28,7 @@
             <Columns>
                 <asp:BoundField HeaderText="FirstName" DataField="FirstName" SortExpression="FirstName" />
                 <asp:BoundField HeaderText="LastName" DataField="LastName" SortExpression="LastName" />
-                <asp:BoundField HeaderText="IsRead" DataField="IsRead" SortExpression="IsRead" />
+                <asp:BoundField HeaderText="Status" DataField="Status" SortExpression="Status" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btn_studentChat" runat="server" Text="Chat" OnClick="btn_studentChat_Click" />
@@ -59,7 +59,7 @@
             <Columns>
                 <asp:BoundField HeaderText="FirstName" DataField="FirstName" SortExpression="FirstName" />
                 <asp:BoundField HeaderText="LastName" DataField="LastName" SortExpression="LastName" />
-                <asp:BoundField HeaderText="IsRead" DataField="IsRead" SortExpression="IsRead" />
+                <asp:BoundField HeaderText="Status" DataField="Status" SortExpression="Status" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btn_memberChat" runat="server" Text="Chat" OnClick="btn_memberChat_Click" />

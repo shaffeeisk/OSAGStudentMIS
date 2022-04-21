@@ -44,7 +44,14 @@ namespace OSAG.profiles
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
-
+            String sqlQuery2;
+            sqlQuery2 = "DELETE FROM ChatNotification WHERE " +
+                Session["UserType"].ToString() + "ReceiverID = '" + userID + "' AND " +
+                 Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "'";
+            SqlCommand sqlCommand2 = new SqlCommand(sqlQuery2, sqlConnect);
+            sqlConnect.Open();
+            sqlCommand2.ExecuteScalar();
+            sqlConnect.Close();
             // set chat header
             try
             {
@@ -72,7 +79,8 @@ namespace OSAG.profiles
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString.ToString());
             String sqlQuery;
             sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, " + Session["UserChatType"].ToString() + "ReceiverID, SenderName, IsRead) " +
-                "VALUES (@MessageText, '" + UsernameToID(Session["Username"].ToString()) + "', '" + Session["UserChatID"].ToString() + "', '" + getName() + "', 0)";
+                "VALUES (@MessageText, '" + UsernameToID(Session["Username"].ToString()) + "', '" + Session["UserChatID"].ToString() + "', '" + getName() + "', 0) " +
+                "INSERT INTO ChatNotification (" + Session["UserType"].ToString() + "SenderID, " + Session["UserChatType"].ToString() + "ReceiverID) VALUES ('" + UsernameToID(Session["Username"].ToString()) + "', '" + Session["UserChatID"].ToString() + "')";
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
             sqlConnect.Open();

@@ -19,14 +19,16 @@ namespace OSAG.profiles
                 Session["MustLogin"] = "You must log in to access that page.";
                 Response.Redirect("/login/LoginPage.aspx");
             }
-            sqlsrcStudent.SelectCommand = "Select StudentID,FirstName,LastName,CASE WHEN MIN(IsRead+0) = 1 THEN 'True' ELSE 'False' END AS IsRead FROM Student s LEFT JOIN ChatMessage cm ON (cm.StudentReceiverID = s.StudentID OR cm.StudentSenderID = s.StudentID)  where Username != '" + Session["Username"].ToString() + "' " +
-                "AND (" + Session["UserType"].ToString() + "ReceiverID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "')" +
-                " OR " + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))" +
+            sqlsrcStudent.SelectCommand = "Select StudentID,FirstName,LastName,CASE WHEN EXISTS(Select " + Session["UserType"] + "ReceiverID FROM ChatNotification LEFT JOIN Student ON Student.StudentID = ChatNotification.StudentSenderID WHERE " + Session["UserType"] + "ReceiverID = " + "(SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "') AND StudentSenderID = StudentID)  THEN 'NEW' ELSE 'Read' END AS Status" +
+                " FROM Student s LEFT JOIN ChatMessage cm ON (cm.StudentReceiverID = s.StudentID OR cm.StudentSenderID = s.StudentID) LEFT JOIN ChatNotification cn ON s.StudentID = cn.StudentSenderID where Username != '" + Session["Username"].ToString() + "' " +
+                "AND (cm." + Session["UserType"].ToString() + "ReceiverID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "')" +
+                " OR cm." + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))" +
                 " GROUP BY StudentID,FirstName,LastName";
-            
-            sqlsrcMember.SelectCommand = "Select MemberID,FirstName,LastName,CASE WHEN MIN(IsRead+0) = 1 THEN 'True' ELSE 'False' END AS IsRead FROM Member s LEFT JOIN ChatMessage cm ON (cm.MemberReceiverID = s.MemberID OR cm.MemberSenderID = s.MemberID)  where Username != '" + Session["Username"].ToString() + "' " +
-                "AND (" + Session["UserType"].ToString() + "ReceiverID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "')" +
-                " OR " + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))" +
+
+            sqlsrcMember.SelectCommand = "Select MemberID,FirstName,LastName,CASE WHEN EXISTS(Select " + Session["UserType"] + "ReceiverID FROM ChatNotification LEFT JOIN Member ON Member.MemberID = ChatNotification.MemberSenderID WHERE " + Session["UserType"] + "ReceiverID = " + "(SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "') AND MemberSenderID = MemberID)  THEN 'NEW' ELSE 'Read' END AS Status" +
+                " FROM Member s LEFT JOIN ChatMessage cm ON (cm.MemberReceiverID = s.MemberID OR cm.MemberSenderID = s.MemberID) LEFT JOIN ChatNotification cn ON s.MemberID = cn.MemberSenderID where Username != '" + Session["Username"].ToString() + "' " +
+                "AND (cm." + Session["UserType"].ToString() + "ReceiverID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "')" +
+                " OR cm." + Session["UserType"].ToString() + "SenderID = (SELECT " + Session["UserType"].ToString() + "ID FROM " + Session["UserType"].ToString() + " WHERE Username = '" + Session["Username"] + "'))" +
                 " GROUP BY MemberID, FirstName, LastName";
         }
 

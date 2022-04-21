@@ -52,7 +52,8 @@ namespace OSAG.profiles
             for(int i = 0; i < s; i++)
             {
                 sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, StudentReceiverID, SenderName, IsRead) " +
-                                "VALUES (@MessageText, '" + senderID + "', '" + studentRecipients[i].ToString() + "', '" + senderName + "', 0)";
+                                "VALUES (@MessageText, '" + senderID + "', '" + studentRecipients[i].ToString() + "', '" + senderName + "', 0)" +
+                                "INSERT INTO ChatNotification (" + Session["UserType"].ToString() +"SenderID, StudentReceiverID) VALUES ('" + senderID + "', '" + studentRecipients[i].ToString() + "')";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
                 sqlConnect.Open();
@@ -62,7 +63,8 @@ namespace OSAG.profiles
             for(int i = 0; i < m; i++)
             {
                 sqlQuery = "INSERT INTO ChatMessage (MessageText, " + Session["UserType"].ToString() + "SenderID, MemberReceiverID, SenderName, IsRead) " +
-                                "VALUES (@MessageText, '" + senderID + "', '" + memberRecipients[i].ToString() + "', '" + senderName + "', 0)";
+                                "VALUES (@MessageText, '" + senderID + "', '" + memberRecipients[i].ToString() + "', '" + senderName + "', 0)" +
+                                 "INSERT INTO ChatNotification (" + Session["UserType"].ToString() + "SenderID, MemberReceiverID) VALUES ('" + senderID + "', '" + memberRecipients[i].ToString() + "')";
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
                 sqlCommand.Parameters.AddWithValue("@MessageText", txtChatBox.Text);
                 sqlConnect.Open();
