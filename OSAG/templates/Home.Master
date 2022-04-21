@@ -67,9 +67,15 @@
                     </li>
                     <% } %>
                     <!--nav bar end-->
-
-
                 </ul>
+
+                <% if ((Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3) || Session["UserType"].ToString() == "student")
+                    { %>
+                <a href="/profiles/StartChat.aspx" style="color: #73637f; font-weight: bold">
+                    <asp:Label ID="lblNewChats" runat="server" Text="0 New Chats"></asp:Label></a>
+                &nbsp&nbsp
+                <% } %>
+
                 Current User:&nbsp&nbsp
         <asp:Label ID="lblUsername" runat="server"></asp:Label>&nbsp&nbsp
                 <br />
@@ -116,7 +122,7 @@
                         <!--Only admin-->
                         <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "1")
                             { %>
-                         <li>
+                        <li>
                             <a class="dropdown-item" href="/admin/AddMember.aspx">ADD MEMBERS</a>
                         </li>
                         <li>
