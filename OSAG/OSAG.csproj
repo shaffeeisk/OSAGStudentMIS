@@ -92,6 +92,7 @@
     <Content Include="Content\select2.css" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="homepages\Dashboard.aspx" />
     <Content Include="homepages\HomePage.aspx" />
     <Content Include="homepages\MemberHome.aspx" />
     <Content Include="homepages\StudentHome.aspx" />
@@ -281,6 +282,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="homepages\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="homepages\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="homepages\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>

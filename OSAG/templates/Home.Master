@@ -57,13 +57,13 @@
                     <% if ((Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3) || Session["UserType"].ToString() == "student")
                         { %>
                     <li>
-                        <a href="/jobs/Jobs.aspx" class="nav-link px-2 link-secondary">JOBS</a>
-                    </li>
-                    <li>
                         <a href="/internships/Internships.aspx" class="nav-link px-2 link-secondary">INTERNSHIPS</a>
                     </li>
                     <li>
                         <a href="/opportunities/Opportunities.aspx" class="nav-link px-2 link-secondary">OPPORTUNITIES</a>
+                    </li>
+                    <li>
+                        <a href="/jobs/Jobs.aspx" class="nav-link px-2 link-secondary">JOBS</a>
                     </li>
                     <% } %>
                     <% if (Session["UserType"].ToString() == "student")

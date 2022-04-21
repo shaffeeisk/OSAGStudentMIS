@@ -13,9 +13,16 @@ namespace OSAG.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Username"] = "admin";
-            Session["UserType"] = "member";
-            Session["MemberType"] = 1;
+            if (Session["MemberType"] == null)
+            {
+                Session["MustLogin"] = "You must log in to access that page";
+                Response.Redirect("/login/LoginPage.aspx");
+            }
+            else if(Session["MemberType"].ToString() != "1")
+            {
+                Session["MustLogin"] = "You must log in to access that page";
+                Response.Redirect("/login/LoginPage.aspx");
+            }    
 
             switch (ddlSelectTable.SelectedValue)
             {
