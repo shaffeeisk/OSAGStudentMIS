@@ -229,7 +229,7 @@ namespace OSAG.profiles
                 "ELSE " +
                 "BEGIN " +
                 "UPDATE Mentorship SET IsRequest = 1 WHERE StudentID = @StudentID AND MemberID = @MemberID " +
-                "AND EndDate IS NOT NULL AND IsRequest IS NULL" + // IsRequest IS NULL prevents re-requesting after request denied
+                "AND EndDate IS NOT NULL AND IsRequest IS NULL " + // IsRequest IS NULL prevents re-requesting after request denied
                 "END";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);

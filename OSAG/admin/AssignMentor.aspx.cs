@@ -115,7 +115,7 @@ namespace OSAG.admin
         {
             // approve mentorship
             Button btn = (Button)sender;
-            string sqlQuery = "UPDATE Mentorship SET IsApproved = NULL, EndDate = NULL WHERE StudentID = @StudentID AND MemberID = @MemberID;";
+            string sqlQuery = "UPDATE Mentorship SET IsRequest = NULL, EndDate = NULL WHERE StudentID = @StudentID AND MemberID = @MemberID;";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@StudentID", grdvMentorshipRequests.DataKeys[((GridViewRow)btn.NamingContainer).RowIndex]["StudentID"]);
