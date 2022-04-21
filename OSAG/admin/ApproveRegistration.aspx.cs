@@ -33,10 +33,11 @@ namespace OSAG.admin
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            // update command, helper method used to determine table to be used
-            String sqlQuery = "UPDATE UserType SET IsApproved = 'TRUE' WHERE Username = @Username;";
-            sqlQuery = sqlQuery.Replace("USERTYPE", ParamUserType(lstSelectNewUser.SelectedValue));
+            if (lstSelectNewUser.SelectedIndex == -1)
+                return;
 
+            // update command, helper method used to determine table to be used
+            String sqlQuery = "UPDATE " + ParamUserType(lstSelectNewUser.SelectedValue) + " SET IsApproved = 'TRUE' WHERE Username = @Username;";
             // def connections, create commands, insert parameter, and execute query
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
