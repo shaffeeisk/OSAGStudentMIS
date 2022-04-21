@@ -29,7 +29,7 @@ namespace OSAG.opportunities
                     Session["View"] = i;
 
                 // Query to populate page with data
-                String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, OpportunityLink, CompanyName" +
+                String sqlQuery = "SELECT  OpportunityName, OpportunityDescription, CAST(EventDate AS VARCHAR) AS EventDate, CAST(ApplicationDeadline AS VARCHAR) AS ApplicationDeadline, OpportunityLink, CompanyName" +
                     " FROM Opportunity LEFT JOIN Company ON Opportunity.CompanyID = Company.CompanyID WHERE OpportunityID = '" + Session["View"].ToString() + "'";
                 SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection);
@@ -322,8 +322,7 @@ namespace OSAG.opportunities
                 sqlConnect.Close();
             }
             txtName.Text = lblName.Text;
-            if (DateTime.TryParse(lblEventDate.Text, out DateTime dt))
-                txtEventDate.Text = dt.ToString();
+            txtEventDate.Text = lblEventDate.Text;
             txtDescription.Text = lblDescription.Text;
             Edit.Style.Add("display", "normal");
             View.Style.Add("display", "none");
