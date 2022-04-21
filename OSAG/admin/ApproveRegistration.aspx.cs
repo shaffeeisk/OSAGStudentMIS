@@ -47,7 +47,7 @@ namespace OSAG.admin
             sqlConnect.Close();
 
             // refresh page and inform the user (admin) that the user was successfully approved
-            Response.Redirect("ApproveRegistration.aspx");
+            lstSelectNewUser.DataBind();
             lblStatus.Text = "User successfully approved.";
         }
 
