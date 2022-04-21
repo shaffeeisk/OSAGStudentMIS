@@ -1,6 +1,6 @@
 ﻿<%--Displays details of selected job--%>
 
-<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Details.Master" AutoEventWireup="true" CodeBehind="JobDetails.aspx.cs" Inherits="OSAG.jobs.JobDetails" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="JobDetails.aspx.cs" Inherits="OSAG.jobs.JobDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
