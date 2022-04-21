@@ -2,7 +2,7 @@
 /* Add your custom CSS declarations below  */
 
 .publicpage {
-    background-image: url(/_images/public-background.png);
+    background-image: url(/_images/wilsonquad.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
@@ -12,6 +12,11 @@
     background-image: url(/_images/jmubackground.png);
     background-position: left;
     background-size: cover;
+}
+
+.bi-arrow-right-circle-fill {
+    font-size: 50px;
+    color: white;
 }
 
 
@@ -344,7 +349,7 @@ s
 
 .counter-section span.counter {
     font-size: 40px;
-    color: black;
+    color: white;
     text-shadow: 1px 1px white;
     line-height: 60px;
     display: block;
@@ -357,9 +362,8 @@ s
     font-size: 20px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-family: Raleway, sans-serif;
-    color: black;
-    text-shadow: 1px 1px white;
+    font-family: 'Raleway,' sans-serif;
+    color: white;
     font-weight: bold;
 }
 
@@ -396,18 +400,18 @@ s
 
 .numbers {
     padding-bottom: 20px;
-    font-family: Raleway, sans-serif;
+    font-family: 'Raleway,' sans-serif;
     font-weight: bold;
     display: flex;
     justify-content: center;
-    color: black;
+    color: white;
 }
 
 .successes {
-    padding-top: 60px;
+    padding-top: 30px;
     height: 300px;
-    color: black;
-    font-family: Raleway, sans-serif;
+    color: white;
+    font-family: 'Raleway,' sans-serif;
 }
 
 
@@ -430,19 +434,18 @@ s
     font-weight: bold;
     display: flex;
     justify-content: center;
-    color: black;
-    text-shadow: 2px 2px white;
+    color: white;
+    text-shadow: 3px 3px black;
 }
 
 .blurb {
     padding-top: 10px;
     padding-bottom: 20px;
-    font-family: Roboto, sans-serif;
+    font-family: 'Roboto,' sans-serif;
     font-size: 25px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     color: black;
-    text-shadow: 1px 1px white;
     font-weight: bold;
 }

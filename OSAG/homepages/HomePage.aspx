@@ -47,66 +47,67 @@
 </head>
 
 <body class="publicpage">
-    <form runat="server">
-        <!--banner blurb-->
-        <div class="findfuture">
-            <h1 class="display-2">FIND YOUR FUTURE</h1>
+
+    <!--banner blurb-->
+    <div class="findfuture">
+        <h1 class="display-2">FIND YOUR FUTURE</h1>
+    </div>
+
+    <div class="row">
+        <div class="text-center">
+            <iframe width="400" height="215" src="https://www.youtube.com/embed/ABiRjz3--10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <p class="blurb text-center px-5">
-            The Ole School Alumni Scholarship Group offers a professional network and recruitment liaison
-            <br>
-            for underrepresented students at James Madison University.
-        </p>
-        <div class="col-md-12 text-center">
-            <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" Text="LOGIN" Style="background-color: black" 
-                PostBackUrl="/login/LoginPage.aspx" />
-            <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary" Text="REGISTER" Style="background-color: black" 
-                PostBackUrl="/login/RegistrationPage.aspx"/>
-        </div>
-        <div class="top" style="margin-top: 15px;">
+    </div>
 
-            <div class="successes px-5 pt-5">
-                <div class="row">
-                    <!-- counter -->
-                    <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="300ms" style="visibility: visible; animation-duration: 300ms; animation-name: fadeInUp;">
-                        <i class="bi bi-cash-coin medium-icon"></i><span id="anim-number-pizza" class="counter-number"></span>
-                        <span class="timer counter alt-font appear" data-to="980" data-speed="7000">
-                            <asp:Label ID="lblScholarship" runat="server" Text=""></asp:Label>
-                        </span>
-                        <span class="counter-title">Given in Scholarships</span>
-                    </div>
-                    <!-- end counter -->
 
-                    <!-- counter -->
-                    <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="600ms" style="visibility: visible; animation-duration: 600ms; animation-name: fadeInUp;">
-                        <i class="bi bi-award medium-icon"></i>
-                        <span class="timer counter alt-font appear" data-to="980" data-speed="7000">
-                            <asp:Label ID="lblJandI" runat="server" Text="Label"></asp:Label>
-                        </span>
-                        <span class="counter-title">Jobs and Internship Opportunities Facilitated </span>
-                    </div>
-                    <!-- end counter -->
 
-                    <!-- counter -->
-                    <div class="col-md-3 col-sm-6 bottom-margin-small text-center counter-section wow fadeInUp xs-margin-bottom-ten animated" data-wow-duration="900ms" style="visibility: visible; animation-duration: 900ms; animation-name: fadeInUp;">
-                        <i class="bi bi-building medium-icon"></i><span class="timer counter alt-font appear" data-to="810" data-speed="7000">
-                            <asp:Label ID="lblCompanies" runat="server" Text=""></asp:Label>
-                        </span><span class="counter-title">Company Partners</span>
-                    </div>
-                    <!-- end counter -->
+    <div class="col-md-12 text-center pt-4">
+        <a href="/login/LoginPage.aspx"><i class="bi bi-arrow-right-circle-fill"></i></a>
+    </div>
+    <div class="top" style="margin-top: 15px;">
 
-                    <!-- counter -->
-                    <div class="col-md-3 col-sm-6 text-center counter-section wow fadeInUp animated" data-wow-duration="1200ms" style="visibility: visible; animation-duration: 1200ms; animation-name: fadeInUp;">
-                        <i class="bi bi-person-fill medium-icon"></i>
-                        <span class="timer counter alt-font appear" data-to="600" data-speed="7000">
-                            <asp:Label ID="lblMembers" runat="server" Text=""></asp:Label>
-                        </span><span class="counter-title">Members</span>
-                    </div>
-                    <!-- end counter -->
-
+        <div class="successes px-5 pt-5">
+            <div class="row">
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="300ms" style="visibility: visible; animation-duration: 300ms; animation-name: fadeInUp;">
+                    <i class="bi bi-cash-coin medium-icon"></i><span id="anim-number-pizza" class="counter-number"></span>
+                    <span class="timer counter alt-font appear" data-to="980" data-speed="7000">
+                        <asp:Label ID="lblScholarship" runat="server" Text=""></asp:Label>
+                    </span>
+                    <span class="counter-title">Given in Scholarships</span>
                 </div>
+                <!-- end counter -->
+
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="600ms" style="visibility: visible; animation-duration: 600ms; animation-name: fadeInUp;">
+                    <i class="bi bi-award medium-icon"></i>
+                    <span class="timer counter alt-font appear" data-to="980" data-speed="7000">
+                        <asp:Label ID="lblJandI" runat="server" Text="Label"></asp:Label>
+                    </span>
+                    <span class="counter-title">Jobs and Internship Opportunities Facilitated </span>
+                </div>
+                <!-- end counter -->
+
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 bottom-margin-small text-center counter-section wow fadeInUp xs-margin-bottom-ten animated" data-wow-duration="900ms" style="visibility: visible; animation-duration: 900ms; animation-name: fadeInUp;">
+                    <i class="bi bi-building medium-icon"></i><span class="timer counter alt-font appear" data-to="810" data-speed="7000">
+                        <asp:Label ID="lblCompanies" runat="server" Text=""></asp:Label>
+                    </span><span class="counter-title">Company Partners</span>
+                </div>
+                <!-- end counter -->
+
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 text-center counter-section wow fadeInUp animated" data-wow-duration="1200ms" style="visibility: visible; animation-duration: 1200ms; animation-name: fadeInUp;">
+                    <i class="bi bi-person-fill medium-icon"></i>
+                    <span class="timer counter alt-font appear" data-to="600" data-speed="7000">
+                        <asp:Label ID="lblMembers" runat="server" Text=""></asp:Label>
+                    </span><span class="counter-title">Members</span>
+                </div>
+                <!-- end counter -->
+
             </div>
         </div>
+    </div>
     </form>
 </body>
 </html>

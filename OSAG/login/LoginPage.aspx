@@ -33,9 +33,8 @@
                     <div class="modal-body pt-2">
 
                         <div class="logo">
-                            <img class="center-block" src="/_images/logo.png" />
+                            <a href="/homepages/HomePage.aspx"><img class="center-block" src="/_images/logo.png" /></a>
                         </div>
-
 
                         <div class="row">
                             <div class="col justify-content-center pb-3 d-grid">
