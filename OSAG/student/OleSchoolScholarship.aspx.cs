@@ -14,14 +14,12 @@ namespace OSAG.student
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void rdoYesNo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdoYes.Checked)
+            if (IsPostBack)
             {
-                divApply.Visible = true;
+                if (rdoYes.Checked)
+                    divApply.Visible = true;
+                else
+                    divApply.Visible = false;
             }
         }
 

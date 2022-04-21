@@ -34,6 +34,8 @@
             DataSourceID="sqlsrc"
             OnRowDataBound="grdvwJobs_RowDataBound"
             AllowSorting="true"
+            AllowPaging="true"
+            PageSize="10"
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
             AutoGenerateColumns="false"
@@ -46,6 +48,8 @@
             CellSpacing="7"
             font="Roboto"
             ForeColor="black">
+            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <Columns>
                 <asp:BoundField HeaderText="Position" DataField="JobName" SortExpression="JobName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
@@ -88,7 +92,11 @@
             CellPadding="25"
             CellSpacing="7"
             font="Roboto"
-            ForeColor="black">
+            ForeColor="black"
+            AllowPaging="true"
+            PageSize="10">
+            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <Columns>
                 <asp:BoundField HeaderText="Position" DataField="InternshipName" SortExpression="InternshipName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" />
@@ -122,7 +130,7 @@
             AllowSorting="true"
             AutoGenerateSelectButton="false"
             HorizontalAlign="Center"
-            AutoGenerateColumns="false" 
+            AutoGenerateColumns="false"
             DataKeyNames="OpportunityID, AppStatus"
             CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
             PagerStyle-CssClass="pager"
@@ -131,7 +139,11 @@
             CellPadding="25"
             CellSpacing="7"
             font="Roboto"
-            ForeColor="black">
+            ForeColor="black"
+            AllowPaging="true"
+            PageSize="10">
+            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <Columns>
                 <asp:BoundField HeaderText="Opportunity" DataField="OpportunityName" SortExpression="OpportunityName" />
                 <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />

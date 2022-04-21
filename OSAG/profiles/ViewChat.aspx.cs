@@ -43,14 +43,10 @@ namespace OSAG.profiles
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
-            sqlConnect.Close();
-            String sqlQuery2;
-            sqlQuery2 = "DELETE FROM ChatNotification WHERE " +
+            sqlCommand.CommandText = "DELETE FROM ChatNotification WHERE " +
                 Session["UserType"].ToString() + "ReceiverID = '" + userID + "' AND " +
                  Session["UserChatType"].ToString() + "SenderID = '" + Session["UserChatID"] + "'";
-            SqlCommand sqlCommand2 = new SqlCommand(sqlQuery2, sqlConnect);
-            sqlConnect.Open();
-            sqlCommand2.ExecuteScalar();
+            sqlCommand.ExecuteScalar();
             sqlConnect.Close();
             // set chat header
             try

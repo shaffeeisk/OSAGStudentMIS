@@ -28,7 +28,7 @@ namespace OSAG
             *  do here before you abandon session       *
             *********************************************/
             Session.Abandon();
-            Response.Redirect("/login/LoginPage.aspx");
+            Response.Redirect("/homepages/HomePage.aspx");
         }
     }
 }

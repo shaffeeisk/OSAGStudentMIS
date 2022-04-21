@@ -11,7 +11,7 @@ namespace OSAG.homepages
 {
 
 
-    public partial class HomePage
+    public partial class HomePage2
     {
 
         /// <summary>

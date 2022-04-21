@@ -25,7 +25,7 @@
 
 
 
-<body class="loginbackground">
+<body class="publicpage">
     <form id="form1" runat="server">
         <div class="modal modal-tour position-static d-block bg-purple py-5" tabindex="-1" role="dialog" id="modalTour">
             <div class="modal-dialog" role="document">
@@ -51,40 +51,30 @@
                         </div>
 
                         <div class="row">
-                            <div class="col justify-content-center pt-3 d-grid mx-auto">
+                            <div class="col justify-content-center pt-4 pb-3 d-grid mx-auto">
                                 <asp:TextBox ID="txtUsername" runat="server" class="form-control pb-1" placeholder="Username" aria-label="Username"></asp:TextBox>
-                                <asp:RequiredFieldValidator
-                                    ID="RequiredFieldValidator1"
-                                    ControlToValidate="txtUsername"
-                                    Text="(Required)"
-                                    runat="server" />
                             </div>
                         </div>
 
                         <div class="row; align-content-center">
-                            <div class="col justify-content-center pt-3 d-grid mx-auto">
+                            <div class="col justify-content-center pt-3 pb-2 d-grid mx-auto">
                                 <asp:TextBox ID="txtPassword" class="form-control pb-1" placeholder="Password" aria-label="Password" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator
-                                    ID="RequiredFieldValidator2"
-                                    ControlToValidate="txtPassword"
-                                    Text="(Required)"
-                                    runat="server" />
                             </div>
 
                             <div id="errorlabel" class="row">
-                                <div class="col justify-content-center pb-2 d-grid mx-auto">
+                                <div class="col justify-content-center pt-2 pb-2 d-grid mx-auto">
                                     <asp:Label ID="lblStatus" CssClass="justify-content-between" runat="server"></asp:Label>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col justify-content-center d-grid pt-4 pb-3 mx-auto">
+                                <div class="col justify-content-center d-grid pt-2 pb-3 mx-auto">
                                     <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" OnClick="btnLogin_Click" Text="LOGIN" />
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col justify-content-center d-grid pt-2 pb-5">
+                                <div class="col justify-content-center d-grid pt-3 pb-5">
                                     <p>Don't have an account already?</p>
                                     <asp:Button ID="btnCreate" class="btn btn-primary mx-auto" runat="server" Text="SIGN UP" CausesValidation="false" OnClick="btnCreate_Click" />
                                 </div>

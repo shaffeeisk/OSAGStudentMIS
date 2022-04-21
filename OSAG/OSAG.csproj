@@ -94,6 +94,7 @@
     <Content Include="Global.asax" />
     <Content Include="homepages\Dashboard.aspx" />
     <Content Include="homepages\HomePage.aspx" />
+    <Content Include="homepages\HomePage2.aspx" />
     <Content Include="homepages\MemberHome.aspx" />
     <Content Include="homepages\StudentHome.aspx" />
     <Content Include="internships\InternshipDetails.aspx" />
@@ -199,6 +200,9 @@
     <Content Include="_images\jmu.jfif" />
     <Content Include="_images\jmubackground.png" />
     <Content Include="_images\logo.png" />
+    <Content Include="_images\mPFP\1.jpg" />
+    <Content Include="_images\public-background.png" />
+    <Content Include="_images\sPFP\2.jpg" />
     <Content Include="_images\user.png" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -296,6 +300,13 @@
     </Compile>
     <Compile Include="homepages\HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="homepages\HomePage2.aspx.cs">
+      <DependentUpon>HomePage2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="homepages\HomePage2.aspx.designer.cs">
+      <DependentUpon>HomePage2.aspx</DependentUpon>
     </Compile>
     <Compile Include="homepages\MemberHome.aspx.cs">
       <DependentUpon>MemberHome.aspx</DependentUpon>
@@ -561,7 +572,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="_images\mPFP\" />
     <Folder Include="_images\sPFP\2022\" />
   </ItemGroup>
   <PropertyGroup>

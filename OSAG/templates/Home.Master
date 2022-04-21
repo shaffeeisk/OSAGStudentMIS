@@ -26,6 +26,7 @@
     <script src="https://kit.fontawesome.com/b51d9e9335.js" crossorigin="anonymous"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -35,25 +36,14 @@
         <div class="container">
             <!--Navigation starts-->
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start pt-3">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/homepages/Dashboard.aspx">
                     <img src="/_images/logo.png" alt="Logo" width="120" height="70">
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <% if (Session["UserType"].ToString() == "student")
-                        { %>
                     <li>
-                        <a href="/homepages/StudentHome.aspx" class="nav-link px-2 link-secondary">HOME</a>
+                        <a href="/homepages/Dashboard.aspx" class="nav-link px-2 link-secondary">HOME</a>
                     </li>
-                    <% } %>
-                    <% if (Session["UserType"].ToString() == "member")
-                        { %>
-                    <li>
-                        <a href="/homepages/MemberHome.aspx" class="nav-link px-2 link-secondary">HOME</a>
-                    </li>
-                    <li>
-                        <a href="/member/ProgramSuccesses.aspx" class="nav-link px-2 link-secondary">SUCCESSES</a>
-                    </li>
-                    <% } %>
+                    <!--Not Members-->
                     <% if ((Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3) || Session["UserType"].ToString() == "student")
                         { %>
                     <li>
@@ -65,27 +55,17 @@
                     <li>
                         <a href="/jobs/Jobs.aspx" class="nav-link px-2 link-secondary">JOBS</a>
                     </li>
+                    <li>
+                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">USER SEARCH</a>
+                    </li>
                     <% } %>
+                    <!--only students-->
                     <% if (Session["UserType"].ToString() == "student")
                         { %>
                     <li>
                         <a href="/student/OleSchoolScholarship.aspx" class="nav-link px-2 link-secondary">SCHOLARSHIP</a>
                     </li>
-                    <li>
-                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">USER SEARCH</a>
-                    </li>
                     <% } %>
-                    <!--Only mentors or above-->
-                    <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3)
-                        { %>
-                    <li>
-                        <a href="/profiles/ListUsers.aspx" class="nav-link px-2 link-secondary">USER SEARCH</a>
-                    </li>
-                    <% } %>
-
-                    <li>
-                        <a href="/profiles/ViewAnnouncements.aspx" class="nav-link px-2 link-secondary">ANNOUNCEMENTS</a>
-                    </li>
                     <!--nav bar end-->
 
 
@@ -103,15 +83,17 @@
                         <li>
                             <a class="dropdown-item" href="/profiles/UserProfile.aspx">PROFILE</a>
                         </li>
-
-                        
-
-                        <!--Only students-->
-                        <% if (Session["UserType"].ToString() == "student")
+                        <% if ((Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3) || Session["UserType"].ToString() == "student")
                             { %>
                         <li>
                             <a class="dropdown-item" href="/profiles/StartChat.aspx">CHAT</a>
                         </li>
+                        <% } %>
+
+                        <!--Only students-->
+                        <% if (Session["UserType"].ToString() == "student")
+                            { %>
+
                         <li>
                             <a class="dropdown-item" href="/student/Bookmarks.aspx">BOOKMARKS</a>
                         </li>
@@ -124,40 +106,25 @@
                         <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3)
                             { %>
                         <li>
-                            <a class="dropdown-item" href="/profiles/StartChat.aspx">CHAT</a>
+                            <a class="dropdown-item" href="/member/ViewMentorships.aspx">MENTORSHIPS</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/admin/ApproveRegistration.aspx">APPROVE REGISTRATIONS</a>
+                            <a class="dropdown-item" href="/member/ViewStudentInterests.aspx">STUDENT INTERESTS</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/AssignMentor.aspx">ASSIGN MENTORS</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/CreateJob.aspx">CREATE JOBS</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/CreateInternship.aspx">CREATE INTERNSHIPS</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/CreateOpportunity.aspx">CREATE OPPORTUNITIES</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/CreateAnnouncement.aspx">CREATE ANNOUNCEMENT</a>
-                        </li>
-                        <% } %>
-
-
-                        <!--Only leadership or above-->
-                        <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 2)
-                            { %>
-
                         <% } %>
 
                         <!--Only admin-->
                         <% if (Session["UserType"].ToString() == "member" && Session["MemberType"].ToString() == "1")
                             { %>
+                         <li>
+                            <a class="dropdown-item" href="/admin/AddMember.aspx">ADD MEMBERS</a>
+                        </li>
                         <li>
                             <a class="dropdown-item" href="/admin/AwardScholarship.aspx">AWARD SCHOLARSHIP</a>
+                        </li>
+                        <!--POWER USER PAGE-->
+                        <li>
+                            <a class="dropdown-item" href="/admin/ViewEditData.aspx">VIEW/EDIT DATA</a>
                         </li>
                         <% } %>
 

@@ -24,49 +24,13 @@ namespace OSAG.member
         protected global::System.Web.UI.WebControls.Label lblScholarship;
 
         /// <summary>
-        /// lblMembers control.
+        /// lblJandI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMembers;
-
-        /// <summary>
-        /// lblStudents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStudents;
-
-        /// <summary>
-        /// lblJobs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblJobs;
-
-        /// <summary>
-        /// lblInternship control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInternship;
-
-        /// <summary>
-        /// lblMentors control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMentors;
+        protected global::System.Web.UI.WebControls.Label lblJandI;
 
         /// <summary>
         /// lblCompanies control.
@@ -76,5 +40,14 @@ namespace OSAG.member
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCompanies;
+
+        /// <summary>
+        /// lblMembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMembers;
     }
 }

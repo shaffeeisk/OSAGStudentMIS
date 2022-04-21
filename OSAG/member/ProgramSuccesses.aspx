@@ -1,35 +1,73 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ProgramSuccesses.aspx.cs" Inherits="OSAG.member.ProgramSuccesses" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!--Java Script for counter feature-->
+    <script>
+        $(document).ready(function () {
+
+            $('.counter').each(function () {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: 4000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="col text-center pb-4">
-        <h2>Total Amount in Scholarships Given: </h2>
-        <asp:Label Font-Size="XX-Large" ID="lblScholarship" runat="server" Text="100"></asp:Label>
-        <br />
-        <br />
-        <h2>Total Members: </h2>
-        <asp:Label Font-Size="XX-Large" ID="lblMembers" runat="server" Text="100"></asp:Label>
-        <br />
-        <br />
-        <h2>Total Students: </h2>
-        <asp:Label Font-Size="XX-Large" ID="lblStudents" runat="server" Text="100"></asp:Label>
-        <br />
-        <br />
-        <h2>Job Opportunities Facilitated: </h2>
-        <asp:Label Font-Size="XX-Large" ID="lblJobs" runat="server" Text="100"></asp:Label>
-        <br />
-        <br />
-        <h2>Internship Opportunities Facilitated: </h2>
-        <asp:Label Font-Size="XX-Large" ID="lblInternship" runat="server" Text="100"></asp:Label>
-        <br />
-        <br />
-        <h2>Total Mentors: </h2>
-        <asp:Label Font-Size="XX-Large" ID="lblMentors" runat="server" Text="100"></asp:Label>
-        <br />
-        <br />
-        <h2>Companies Partnered With: </h2>
-        <asp:Label Font-Size="XX-Large" ID="lblCompanies" runat="server" Text="100"></asp:Label>
-    </div>
 
+
+    <div class="top" style="margin-top: 15px;">
+        <div class="successes px-5 pt-5">
+            <div class="row">
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="300ms" style="visibility: visible; animation-duration: 300ms; animation-name: fadeInUp;">
+                    <i class="bi bi-cash-coin medium-icon"></i><span id="anim-number-pizza" class="counter-number"></span>
+                    <span class="timer counter alt-font appear" data-to="980" data-speed="7000">
+                        <asp:Label ID="lblScholarship" runat="server" Text=""></asp:Label>
+                    </span>
+                    <span class="counter-title">Given in Scholarships</span>
+                </div>
+                <!-- end counter -->
+
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="600ms" style="visibility: visible; animation-duration: 600ms; animation-name: fadeInUp;">
+                    <i class="bi bi-award medium-icon"></i>
+                    <span class="timer counter alt-font appear" data-to="980" data-speed="7000">
+                        <asp:Label ID="lblJandI" runat="server" Text="Label"></asp:Label>
+                    </span>
+                    <span class="counter-title">Jobs and Internship Opportunities Facilitated </span>
+                </div>
+                <!-- end counter -->
+
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 bottom-margin-small text-center counter-section wow fadeInUp xs-margin-bottom-ten animated" data-wow-duration="900ms" style="visibility: visible; animation-duration: 900ms; animation-name: fadeInUp;">
+                    <i class="bi bi-building medium-icon"></i><span class="timer counter alt-font appear" data-to="810" data-speed="7000">
+                        <asp:Label ID="lblCompanies" runat="server" Text=""></asp:Label>
+                    </span><span class="counter-title">Company Partners</span>
+                </div>
+                <!-- end counter -->
+
+                <!-- counter -->
+                <div class="col-md-3 col-sm-6 text-center counter-section wow fadeInUp animated" data-wow-duration="1200ms" style="visibility: visible; animation-duration: 1200ms; animation-name: fadeInUp;">
+                    <i class="bi bi-person-fill medium-icon"></i>
+                    <span class="timer counter alt-font appear" data-to="600" data-speed="7000">
+                        <asp:Label ID="lblMembers" runat="server" Text=""></asp:Label>
+                    </span><span class="counter-title">Members</span>
+                </div>
+                <!-- end counter -->
+
+            </div>
+        </div>
+    </div>
 </asp:Content>

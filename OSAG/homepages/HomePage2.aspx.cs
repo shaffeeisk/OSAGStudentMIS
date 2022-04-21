@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web.Configuration;
-using System.Drawing;
 
-namespace OSAG.member
+namespace OSAG.homepages
 {
-    public partial class ProgramSuccesses : System.Web.UI.Page
+    public partial class HomePage2 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

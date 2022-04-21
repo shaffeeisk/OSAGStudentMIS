@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="OSAG.homepages.HomePage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HomePage2.aspx.cs" Inherits="OSAG.homepages.HomePage2" %>
 
 <!doctype html>
 <html lang="en">
@@ -49,7 +49,7 @@
 <body class="publicpage">
     <form runat="server">
         <!--banner blurb-->
-        <div class="findfuture">
+        <div class="findfuture pt-3">
             <h1 class="display-2">FIND YOUR FUTURE</h1>
         </div>
         <p class="blurb text-center px-5">
@@ -57,11 +57,18 @@
             <br>
             for underrepresented students at James Madison University.
         </p>
+        <div class="row">
+            <div class="pb-4" style="align-content:center; text-align:center">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ABiRjz3--10" 
+            title="Ole School Alumni Scholarship Group" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen="true"></iframe>
+            </div>
+        </div>
         <div class="col-md-12 text-center">
-            <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" Text="LOGIN" Style="background-color: black" 
+            <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" Text="LOGIN" Style="background-color: black"
                 PostBackUrl="/login/LoginPage.aspx" />
-            <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary" Text="REGISTER" Style="background-color: black" 
-                PostBackUrl="/login/RegistrationPage.aspx"/>
+            <asp:Button ID="btnRegister" runat="server" CssClass="btn btn-primary" Text="REGISTER" Style="background-color: black"
+                PostBackUrl="/login/RegistrationPage.aspx" />
         </div>
         <div class="top" style="margin-top: 15px;">
 

@@ -6,9 +6,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pt-5" style="margin-left: auto; margin-right: auto; text-align: center;">
-        
+
         <div class="container col-lg-4 text-center pb-4">
-            <h3>CHAT WITH <asp:Label ID="lblChatName" runat="server" Font-Underline="true" Text=""></asp:Label></h3>
+            <h3>CHAT WITH
+                <asp:Label ID="lblChatName" runat="server" Font-Underline="true" Text=""></asp:Label></h3>
         </div>
 
         <asp:GridView ID="grdvChat"
@@ -19,18 +20,21 @@
             HorizontalAlign="Center"
             AutoGenerateColumns="false"
             CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
-            PagerStyle-CssClass="pager"
             HeaderStyle-CssClass="header"
             RowStyle-CssClass="rows"
             CellPadding="25"
             CellSpacing="7"
             font="Roboto"
-            ForeColor="black">
+            ForeColor="black"
+            AllowPaging="true"
+            PageSize="10">
+            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <Columns>
                 <asp:BoundField HeaderText="Date Created" DataField="DateCreated" SortExpression="DateCreated" DataFormatString="{0:M/d/yy a\t HH:mmtt}" />
                 <asp:BoundField HeaderText="Sent By" DataField="SenderName" SortExpression="SenderName" />
                 <asp:BoundField HeaderText="MessageText" DataField="MessageText" SortExpression="MessageText" />
-                <asp:CheckboxField HeaderText="Read" DataField="IsRead" SortExpression="IsRead" />
+                <asp:CheckBoxField HeaderText="Read" DataField="IsRead" SortExpression="IsRead" />
             </Columns>
         </asp:GridView>
         <br />

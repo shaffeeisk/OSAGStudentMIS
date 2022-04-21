@@ -31,13 +31,12 @@ namespace OSAG.login
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            // check to make sure user is approved first, if not do not attempt login
-            if (!isApproved(txtUsername.Text))
+            // removed required field validators for aesthetics
+            if (txtUsername.Text.Trim() == "" || txtPassword.Text.Trim() == "")
             {
-                Session["TempUsername"] = txtUsername.Text;
-                declareUnapprovedUserType(txtUsername.Text);
-                Session["MustLogin"] = "Your account is pending approval. Please try again at a later time.";
-                Response.Redirect("/profiles/UnapprovedUserProfile.aspx");
+                lblStatus.Text = "Please enter both your username and password.";
+                lblStatus.ForeColor = Color.Red;
+                lblStatus.Font.Bold = true;
                 return;
             }
 
@@ -48,6 +47,16 @@ namespace OSAG.login
                 lblStatus.ForeColor = Color.Red;
                 lblStatus.Font.Bold = true;
                 lblStatus.Text = "Username and/or password was incorrect. Please try again.";
+                return;
+            }
+
+            // check to make sure user is approved first, if not do not attempt login
+            if (!isApproved(txtUsername.Text))
+            {
+                Session["TempUsername"] = txtUsername.Text;
+                declareUnapprovedUserType(txtUsername.Text);
+                Session["MustLogin"] = "Your account is pending approval. Please try again at a later time.";
+                Response.Redirect("/profiles/UnapprovedUserProfile.aspx");
                 return;
             }
 
@@ -85,7 +94,7 @@ namespace OSAG.login
             if (userType == 1) // user is student (found in Student table)
             {
                 Session["UserType"] = "student";
-                Response.Redirect("/homepages/StudentHome.aspx");
+                Response.Redirect("/homepages/Dashboard.aspx");
             }
             else // user is member (not found in Student table)
             {
@@ -110,9 +119,8 @@ namespace OSAG.login
                         Session["MemberType"] = "1"; //admin
                         break;
                 }
-                Response.Redirect("/homepages/MemberHome.aspx");
+                Response.Redirect("/homepages/Dashboard.aspx");
             }
-
         }
 
         protected void declareUnapprovedUserType(String s)

@@ -12,7 +12,7 @@
             margin: 5px;
         }
 
-        a:hover{
+        a:hover {
             color: #6e7bd9;
         }
 
@@ -55,13 +55,14 @@
                         HorizontalAlign="Center"
                         ShowHeaderWhenEmpty="true"
                         CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
-                        PagerStyle-CssClass="pager"
                         HeaderStyle-CssClass="header"
                         RowStyle-CssClass="rows"
                         CellPadding="25"
                         CellSpacing="7"
                         font="Roboto"
                         ForeColor="black">
+                        <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+                        <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
                         <Columns>
                             <asp:BoundField ReadOnly="true" HeaderText="Username" DataField="Username" />
                             <asp:BoundField ReadOnly="true" HeaderText="First Name" DataField="FirstName" />
@@ -92,7 +93,10 @@
                         CellPadding="25"
                         CellSpacing="7"
                         font="Roboto"
-                        ForeColor="black">
+                        ForeColor="black"
+                        PageSize="10">
+                        <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+                        <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
                         <Columns>
                             <asp:BoundField ReadOnly="true" HeaderText="Username" DataField="Username" />
                             <asp:BoundField ReadOnly="true" HeaderText="First Name" DataField="FirstName" />

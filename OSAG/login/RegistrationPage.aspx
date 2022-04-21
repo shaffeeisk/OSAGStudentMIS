@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet" />
 </head>
 
-<body class="loginbackground" >
+<body class="publicpage" >
     <form id="form1" runat="server">
         <div class="modal modal-tour position-static d-block bg-purple py-4" tabindex="-1" role="dialog" id="modalTour">
             <div class="modal-dialog" role="document">

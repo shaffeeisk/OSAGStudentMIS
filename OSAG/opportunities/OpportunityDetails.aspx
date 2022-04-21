@@ -10,7 +10,6 @@
 
         <div class="row pb-3">
             <a href="Opportunities.aspx" class="previous">&laquo; Back</a>
-
         </div>
 
 
@@ -91,9 +90,9 @@
     </div>
 
     <div id="Edit" style="display: none" runat="server" class="container px-5 pt-5 pb-5">
-
-        <br />
-        <br />
+        <div class="row pb-3">
+            <a href="/admin/CreateOpportunity.aspx" class="previous">&laquo; Return to Create Opportunities</a>
+        </div>
         <div class="col-lg-6 offset-lg-3 pt-4">
             <h3>OPPORTUNITY DETAILS</h3>
 

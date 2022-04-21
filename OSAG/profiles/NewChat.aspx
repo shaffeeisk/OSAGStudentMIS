@@ -19,7 +19,7 @@
                 DataSourceID="sqlsrcStudents"
                 DataTextField="Name"
                 CssClass="form-control"
-                style="width:250px; text-align: center"
+                style="width:200px; text-align: center"
                 DataValueField="StudentID"
                 AppendDataBoundItems="true" OnSelectedIndexChanged="ddl_StudentRecipient_SelectedIndexChanged">
                 <asp:ListItem Selected="True" Text="(Add Student Recipient)" Value=""></asp:ListItem>
@@ -38,7 +38,7 @@
                 DataSourceID="sqlsrcMembers"
                 DataTextField="Name"
                 CssClass="form-control"
-                style="width:250px; text-align: center"
+                style="width:200px; text-align: center"
                 DataValueField="MemberID"
                 AppendDataBoundItems="true" OnSelectedIndexChanged="ddl_MemberRecipient_SelectedIndexChanged">
                 <asp:ListItem Selected="True" Text="(Add Member Recipient)" Value=""></asp:ListItem>

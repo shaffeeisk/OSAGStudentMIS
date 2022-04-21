@@ -18,13 +18,16 @@
             HorizontalAlign="Center"
             AutoGenerateColumns="false" DataKeyNames="StudentID"
             CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
-            PagerStyle-CssClass="pager"
             HeaderStyle-CssClass="header"
             RowStyle-CssClass="rows"
             CellPadding="25"
             CellSpacing="7"
             font="Roboto"
-            ForeColor="black">
+            ForeColor="black"
+            AllowPaging="true"
+            PageSize="10">
+            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <Columns>
                 <asp:BoundField HeaderText="FirstName" DataField="FirstName" SortExpression="FirstName" />
                 <asp:BoundField HeaderText="LastName" DataField="LastName" SortExpression="LastName" />
@@ -49,13 +52,16 @@
             HorizontalAlign="Center"
             AutoGenerateColumns="false" DataKeyNames="MemberID"
             CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
-            PagerStyle-CssClass="pager"
             HeaderStyle-CssClass="header"
             RowStyle-CssClass="rows"
             CellPadding="25"
             CellSpacing="7"
             font="Roboto"
-            ForeColor="black">
+            ForeColor="black"
+            AllowPaging="true"
+            PageSize="10">
+            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <Columns>
                 <asp:BoundField HeaderText="FirstName" DataField="FirstName" SortExpression="FirstName" />
                 <asp:BoundField HeaderText="LastName" DataField="LastName" SortExpression="LastName" />

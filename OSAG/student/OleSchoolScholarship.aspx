@@ -56,12 +56,12 @@
                 <div class="scholarship-card-body pt-2" style="width: 25rem; margin-left: auto; margin-right: auto; text-align:center;">
                     <p>Would you like to apply?</p>
                     <div>
-                        <asp:RadioButton ID="rdoYes" AutoPostBack="true" GroupName="YesNo" runat="server" OnCheckedChanged="rdoYesNo_CheckedChanged" />
+                        <asp:RadioButton ID="rdoYes" AutoPostBack="true" GroupName="YesNo" runat="server" />
                         <label class="form-check-label" for="twoFactorOn">Yes</label>
                     </div>
 
                     <div class="pb-4">
-                        <asp:RadioButton ID="rdoNo" AutoPostBack="true" GroupName="YesNo" runat="server" OnCheckedChanged="rdoYesNo_CheckedChanged" />
+                        <asp:RadioButton ID="rdoNo" AutoPostBack="true" GroupName="YesNo" runat="server" />
                         <label class="form-check-label" for="twoFactorOff">No</label>
                     </div>
 

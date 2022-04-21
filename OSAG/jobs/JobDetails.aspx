@@ -102,10 +102,11 @@
             <% } %>
         </div>
     </div>
-    <div id="Edit" style="display: none" runat="server" class="container px-5 pt-5 pb-5">
 
-        <br />
-        <br />
+    <div id="Edit" style="display: none" runat="server" class="container px-5 pt-5 pb-5">
+        <div class="row pb-3">
+            <a href="/admin/CreateJobs.aspx" class="previous">&laquo; Return to Create Jobs</a>
+        </div>
         <div class="col-lg-6 offset-lg-3 pt-4">
             <h3>JOB DETAILS</h3>
 
@@ -126,7 +127,7 @@
                     <asp:ListItem Selected="True" Text="(Select a company)" Value="0"></asp:ListItem>
                 </asp:DropDownList></h5>
             <h5>Deadline:
-                <asp:TextBox ID="txtDeadline" TextMode="Date" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDeadline" TextMode="Date" CssClass="form-control" runat="server"></asp:TextBox>
                 <asp:CompareValidator
                     ID="CompareValidator1"
                     ControlToValidate="txtDeadline"
@@ -141,7 +142,7 @@
                     runat="server" />
             </h5>
             <h5>Start Date:
-                <asp:TextBox ID="txtStart" TextMode="Date" runat="server"></asp:TextBox></h5>
+                <asp:TextBox ID="txtStart" TextMode="Date" CssClass="form-control" runat="server"></asp:TextBox></h5>
             <asp:CompareValidator
                 ID="CompareValidator2"
                 ControlToValidate="txtStart"
@@ -155,7 +156,7 @@
                 Text="(Required)"
                 runat="server" />
             <h5>Weekly Hours:
-                <asp:TextBox ID="txtHours" runat="server"></asp:TextBox></h5>
+                <asp:TextBox ID="txtHours" CssClass="form-control" runat="server"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
                 ID="RequiredFieldValidator5"
                 ControlToValidate="txtHours"
@@ -169,7 +170,7 @@
                 ErrorMessage="Invalid Entry">
             </asp:RegularExpressionValidator>
             <h5>Hourly Payment:
-                <asp:TextBox ID="txtPayment" runat="server"></asp:TextBox></h5>
+                <asp:TextBox ID="txtPayment" CssClass="form-control" runat="server"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
                 ID="RequiredFieldValidator6"
                 ControlToValidate="txtPayment"
@@ -183,7 +184,7 @@
                 ErrorMessage="Invalid Entry">
             </asp:RegularExpressionValidator>
             <h5>Description:
-                <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox></h5>
+                <asp:TextBox ID="txtDescription" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
                 ID="RequiredFieldValidator2"
                 ControlToValidate="txtDescription"

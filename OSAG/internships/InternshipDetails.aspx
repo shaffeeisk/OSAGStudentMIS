@@ -103,9 +103,9 @@
     </div>
 
     <div id="Edit" style="display: none" runat="server" class="container px-5 pt-5 pb-5">
-
-        <br />
-        <br />
+        <div class="row pb-3">
+            <a href="/admin/CreateInternship.aspx" class="previous">&laquo; Return to Create Internships</a>
+        </div>
         <div class="col-lg-6 offset-lg-3 pt-4">
             <h3>Internship DETAILS</h3>
 
