@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-   <div id="View" runat="server" class="container px-5 pt-5 pb-5">
+    <div id="View" runat="server" class="container px-5 pt-5 pb-5">
         <!--Header starts-->
         <div class="row pb-3">
             <a href="Internships.aspx" class="previous">&laquo; Back</a>
@@ -71,51 +71,53 @@
             </div>
         </div>
 
+        <% if (Session["UserType"].ToString() == "student")
+            { %>
         <div class="row">
             <div class="col-lg-7 align-content-center pt-4 pb-3" style="text-align: center; margin-left: auto; margin-right: auto">
                 <h4>Set Interest Level</h4>
                 <h5>
                     <asp:RadioButton ID="rdoLow" Text="Low" runat="server" GroupName="InterestLevel"
-                        AutoPostBack="true" OnCheckedChanged="rdoLow_CheckedChanged" CausesValidation="false" />
+                        AutoPostBack="true" OnCheckedChanged="rdoLow_CheckedChanged" />
                     <asp:RadioButton ID="rdoMed" Text="Medium" runat="server" GroupName="InterestLevel"
-                        AutoPostBack="true" OnCheckedChanged="rdoMed_CheckedChanged" CausesValidation="false" />
+                        AutoPostBack="true" OnCheckedChanged="rdoMed_CheckedChanged" />
                     <asp:RadioButton ID="rdoHi" Text="High" runat="server" GroupName="InterestLevel"
-                        AutoPostBack="true" OnCheckedChanged="rdoHi_CheckedChanged" CausesValidation="false" /></h5>
+                        AutoPostBack="true" OnCheckedChanged="rdoHi_CheckedChanged" /></h5>
             </div>
         </div>
-
         <div class="row">
             <!--Save button-->
             <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-                <asp:Button ID="btnBookmark" class="btn btn-secondary mx-auto" runat="server" Text="BOOKMARK" CausesValidation="false" OnClick="btnBookmark_Click" />
+                <asp:Button ID="btnBookmark" class="btn btn-secondary mx-auto" runat="server" CausesValidation="false" Text="BOOKMARK" OnClick="btnBookmark_Click" />
             </div>
         </div>
-        <div class="row">
-            <!--Only mentors or above-->
-            <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3)
-                { %>
-            <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-                <asp:Button ID="btnEdit" class="btn btn-secondary mx-auto" runat="server" Text="EDIT" CausesValidation="false" OnClick="btnEdit_Click" />
-            </div>
-            <% } %>
+        <% } %>
+
+        <!--Only mentors or above-->
+        <% if (Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3)
+            { %>
+        <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
+            <asp:Button ID="btnEdit" class="btn btn-secondary mx-auto" runat="server" Text="EDIT" CausesValidation="false" OnClick="btnEdit_Click" />
         </div>
+        <% } %>
     </div>
-    <div id="Edit" style="display:none" runat="server" class="container px-5 pt-5 pb-5">
+
+    <div id="Edit" style="display: none" runat="server" class="container px-5 pt-5 pb-5">
 
         <br />
         <br />
         <div class="col-lg-6 offset-lg-3 pt-4">
             <h3>Internship DETAILS</h3>
 
-            <h5>
-                Internship Name: <asp:TextBox ID="txtName" runat="server"></asp:TextBox></h5>
+            <h5>Internship Name:
+                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Width="400px"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator1"
-                    ControlToValidate="txtName"
-                    Text="(Required)"
-                    runat="server" />
-            <h5>
-                Company: <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="400px"
+                ID="RequiredFieldValidator1"
+                ControlToValidate="txtName"
+                Text="(Required)"
+                runat="server" />
+            <h5>Company:
+                <asp:DropDownList ID="ddlCompany" runat="server" AutoPostBack="true" Width="400px"
                     DataSourceID="sqlsrcListCompanies"
                     DataTextField="CompanyName"
                     CssClass="form-control"
@@ -123,81 +125,81 @@
                     AppendDataBoundItems="true">
                     <asp:ListItem Selected="True" Text="(Select a company)" Value="0"></asp:ListItem>
                 </asp:DropDownList></h5>
-            <h5>
-                Deadline: <asp:TextBox ID="txtDeadline" TextMode="Date" runat="server"></asp:TextBox>
+            <h5>Deadline:
+                <asp:TextBox ID="txtDeadline" TextMode="Date" runat="server"></asp:TextBox>
                 <asp:CompareValidator
-                        ID="CompareValidator1"
-                        ControlToValidate="txtDeadline"
-                        Text="Use Date Format"
-                        Operator="DataTypeCheck"
-                        Type="Date"
-                        runat="server" />
-                    <asp:RequiredFieldValidator
-                        ID="RequiredFieldValidator3"
-                        ControlToValidate="txtDeadline"
-                        Text="(Required)"
-                        runat="server" />
-            </h5>
-            <h5> 
-               Start Date: <asp:TextBox ID="txtStart" TextMode="Date" runat="server"></asp:TextBox></h5>
-            <asp:CompareValidator
-                    ID="CompareValidator2"
-                    ControlToValidate="txtStart"
+                    ID="CompareValidator1"
+                    ControlToValidate="txtDeadline"
                     Text="Use Date Format"
                     Operator="DataTypeCheck"
                     Type="Date"
                     runat="server" />
                 <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator4"
-                    ControlToValidate="txtStart"
+                    ID="RequiredFieldValidator3"
+                    ControlToValidate="txtDeadline"
                     Text="(Required)"
                     runat="server" />
-            <h5>
-                Weekly Hours: <asp:TextBox ID="txtHours" runat="server"></asp:TextBox></h5>
+            </h5>
+            <h5>Start Date:
+                <asp:TextBox ID="txtStart" TextMode="Date" runat="server"></asp:TextBox></h5>
+            <asp:CompareValidator
+                ID="CompareValidator2"
+                ControlToValidate="txtStart"
+                Text="Use Date Format"
+                Operator="DataTypeCheck"
+                Type="Date"
+                runat="server" />
             <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator5"
-                    ControlToValidate="txtHours"
-                    Text="(Required)"
-                    runat="server" />
-                <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator1"
-                    runat="server"
-                    ControlToValidate="txtHours"
-                    ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
-                    ErrorMessage="Invalid Entry">
-                    </asp:RegularExpressionValidator>
-            <h5>
-               Hourly Payment: <asp:TextBox ID="txtPayment" runat="server"></asp:TextBox></h5>
+                ID="RequiredFieldValidator4"
+                ControlToValidate="txtStart"
+                Text="(Required)"
+                runat="server" />
+            <h5>Weekly Hours:
+                <asp:TextBox ID="txtHours" runat="server"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator6"
-                    ControlToValidate="txtPayment"
-                    Text="(Required)"
-                    runat="server" />
-                <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator6"
-                    runat="server"
-                    ControlToValidate="txtPayment"
-                    ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
-                    ErrorMessage="Invalid Entry">
-                    </asp:RegularExpressionValidator>
-            <h5>
-               Description: <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox></h5>
+                ID="RequiredFieldValidator5"
+                ControlToValidate="txtHours"
+                Text="(Required)"
+                runat="server" />
+            <asp:RegularExpressionValidator
+                ID="RegularExpressionValidator1"
+                runat="server"
+                ControlToValidate="txtHours"
+                ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
+                ErrorMessage="Invalid Entry">
+            </asp:RegularExpressionValidator>
+            <h5>Hourly Payment:
+                <asp:TextBox ID="txtPayment" runat="server"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidator2"
-                    ControlToValidate="txtDescription"
-                    Text="(Required)"
-                    runat="server" />
+                ID="RequiredFieldValidator6"
+                ControlToValidate="txtPayment"
+                Text="(Required)"
+                runat="server" />
+            <asp:RegularExpressionValidator
+                ID="RegularExpressionValidator6"
+                runat="server"
+                ControlToValidate="txtPayment"
+                ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
+                ErrorMessage="Invalid Entry">
+            </asp:RegularExpressionValidator>
+            <h5>Description:
+                <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox></h5>
+            <asp:RequiredFieldValidator
+                ID="RequiredFieldValidator2"
+                ControlToValidate="txtDescription"
+                Text="(Required)"
+                runat="server" />
         </div>
 
-        <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
-            <asp:Button ID="btnUpdate" class="btn btn-secondary mx-auto" runat="server" Text="UPDATE" OnClick="btnUpdate_Click" />
+        <div class="col justify-content-center d-grid pt-4 mx-auto">
+            <asp:Button ID="btnUpdate" class="btn btn-primary mx-auto" runat="server" Text="UPDATE" OnClick="btnUpdate_Click" />
         </div>
-        <br />
+
         <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
             <asp:Button ID="btnReturn" class="btn btn-secondary mx-auto" runat="server" CausesValidation="false" Text="RETURN" OnClick="btnReturn_Click" />
         </div>
-
     </div>
+
     <script type="text/javascript" language="javascript">
         function Navigate(s) {
             javascript: window.open(s)

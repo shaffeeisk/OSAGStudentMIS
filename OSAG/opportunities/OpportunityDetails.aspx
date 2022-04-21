@@ -57,6 +57,8 @@
             </div>
         </div>
 
+        <% if (Session["UserType"].ToString() == "student")
+            { %>
         <div class="row">
             <div class="col-lg-7 align-content-center pt-4 pb-3" style="text-align: center; margin-left: auto; margin-right: auto">
                 <h4>Set Interest Level</h4>
@@ -69,9 +71,6 @@
                         AutoPostBack="true" OnCheckedChanged="rdoHi_CheckedChanged" /></h5>
             </div>
         </div>
-
-        <% if (Session["UserType"].ToString() == "student")
-            { %>
         <div class="row">
             <!--Save button-->
             <div class="col justify-content-center d-grid pt-4 pb-5 mx-auto">
@@ -115,7 +114,7 @@
                     <asp:ListItem Selected="True" Text="(Select a company)" Value="0"></asp:ListItem>
                 </asp:DropDownList></h5>
             <h5>Event Date:
-                <asp:TextBox ID="txtEventDate" TextMode="Date" runat="server"></asp:TextBox></h5>
+                <asp:TextBox ID="txtEventDate" TextMode="Date" runat="server" CssClass="form-control" Width="200px"></asp:TextBox></h5>
             <asp:CompareValidator
                 ID="CompareValidator2"
                 ControlToValidate="txtEventDate"
@@ -123,13 +122,8 @@
                 Operator="DataTypeCheck"
                 Type="Date"
                 runat="server" />
-            <asp:RequiredFieldValidator
-                ID="RequiredFieldValidator4"
-                ControlToValidate="txtEventDate"
-                Text="(Required)"
-                runat="server" />
             <h5>Description:
-                <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox></h5>
+                <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox></h5>
             <asp:RequiredFieldValidator
                 ID="RequiredFieldValidator2"
                 ControlToValidate="txtDescription"

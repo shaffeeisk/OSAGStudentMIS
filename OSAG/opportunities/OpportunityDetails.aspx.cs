@@ -14,7 +14,7 @@ namespace OSAG.opportunities
 {
     public partial class OpportunityDetails : System.Web.UI.Page
     {
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -41,7 +41,10 @@ namespace OSAG.opportunities
                 lblName.Text = queryResults["OpportunityName"].ToString().ToUpper();
                 lblCompany.Text = queryResults["CompanyName"].ToString().ToUpper();
                 lblDescription.Text = queryResults["OpportunityDescription"].ToString();
-                lblEventDate.Text = queryResults["EventDate"].ToString();
+                if (queryResults["EventDate"] != DBNull.Value)
+                    lblEventDate.Text = queryResults["EventDate"].ToString();
+                else
+                    lblEventDate.Text = "N/A";
                 // give the linkbutton the stored URL
                 if (queryResults["OpportunityLink"] != DBNull.Value)
                 {
@@ -319,7 +322,8 @@ namespace OSAG.opportunities
                 sqlConnect.Close();
             }
             txtName.Text = lblName.Text;
-            txtEventDate.Text = lblEventDate.Text;
+            if (DateTime.TryParse(lblEventDate.Text, out DateTime dt))
+                txtEventDate.Text = dt.ToString();
             txtDescription.Text = lblDescription.Text;
             Edit.Style.Add("display", "normal");
             View.Style.Add("display", "none");
