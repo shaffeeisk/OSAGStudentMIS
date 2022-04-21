@@ -66,7 +66,7 @@
                     </div>
 
                     <div id="divApply" runat="server" visible="false">
-                        <p>Upload Resume</p>
+                        <p>Upload Transcript</p>
                         <div class="input-group" style="width: 29.7rem; margin-left: auto; margin-right: auto">
                             <asp:FileUpload ID="fileTranscript" class="form-control" runat="server" />
                         </div>

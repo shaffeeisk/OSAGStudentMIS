@@ -84,8 +84,8 @@ namespace OSAG.profiles
 
         protected void ddl_MemberRecipient_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (txtMembers.Text.Contains(ddl_MemberRecipient.SelectedItem.Text))
-                return;
+            if (txtMembers.Text.Contains(ddl_MemberRecipient.SelectedItem.Text) || ddl_MemberRecipient.SelectedValue == "")
+                    return;
             if (m < 10)
             {
                 if (m > 0)
@@ -101,7 +101,7 @@ namespace OSAG.profiles
 
         protected void ddl_StudentRecipient_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (txtStudents.Text.Contains(ddl_StudentRecipient.SelectedItem.Text))
+            if (txtStudents.Text.Contains(ddl_StudentRecipient.SelectedItem.Text) || ddl_StudentRecipient.SelectedValue == "")
                 return;
             if (s < 10)
             {

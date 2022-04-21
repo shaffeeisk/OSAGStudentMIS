@@ -71,8 +71,8 @@
 
                 <% if ((Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3) || Session["UserType"].ToString() == "student")
                     { %>
-                <a href="/profiles/StartChat.aspx" style="color: #73637f; font-weight: bold">
-                    <asp:Label ID="lblNewChats" runat="server" Text="0 New Chats"></asp:Label></a>
+                <a id="anchNewChats" runat="server" href="/profiles/StartChat.aspx">
+                    <asp:Label ID="lblNewChats" runat="server" Text="0 New Messages"></asp:Label></a>
                 &nbsp&nbsp
                 <% } %>
 
@@ -92,7 +92,7 @@
                         <% if ((Session["UserType"].ToString() == "member" && Int32.Parse(Session["MemberType"].ToString()) <= 3) || Session["UserType"].ToString() == "student")
                             { %>
                         <li>
-                            <a class="dropdown-item" href="/profiles/StartChat.aspx">CHAT</a>
+                            <a class="dropdown-item" href="/profiles/StartChat.aspx">MESSAGES</a>
                         </li>
                         <% } %>
 

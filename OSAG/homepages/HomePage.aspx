@@ -53,21 +53,20 @@
         <h1 class="display-2">FIND YOUR FUTURE</h1>
     </div>
 
-    <div class="row">
+    <div class="row gx-0">
         <div class="text-center">
-            <iframe width="400" height="215" src="https://www.youtube.com/embed/ABiRjz3--10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="547" height="308" src="https://www.youtube.com/embed/ABiRjz3--10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
-
-
-    <div class="col-md-12 text-center pt-4">
+    <div class="col-md-12 text-center pt-5">
+        <p class="findfuture" style="padding: unset; margin: unset; font-size: x-large">GET STARTED</p>
         <a href="/login/LoginPage.aspx"><i class="bi bi-arrow-right-circle-fill"></i></a>
     </div>
     <div class="top" style="margin-top: 15px;">
 
-        <div class="successes px-5 pt-5">
-            <div class="row">
+        <div class="successes px-5 pt-4">
+            <div class="row gx-0">
                 <!-- counter -->
                 <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="300ms" style="visibility: visible; animation-duration: 300ms; animation-name: fadeInUp;">
                     <i class="bi bi-cash-coin medium-icon"></i><span id="anim-number-pizza" class="counter-number"></span>
@@ -108,6 +107,5 @@
             </div>
         </div>
     </div>
-    </form>
 </body>
 </html>

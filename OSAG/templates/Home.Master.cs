@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -28,9 +29,13 @@ namespace OSAG
                 Session["UserType"].ToString() + "ReceiverID = '" +
                 UsernameToID(Session["Username"].ToString()) + "';", sqlConnect);
             sqlConnect.Open();
-            lblNewChats.Text = sqlCommand.ExecuteScalar().ToString() + " New Chats";
-            if (lblNewChats.Text == "1 New Chats")
-                lblNewChats.Text = "1 New Chat";
+            lblNewChats.Text = sqlCommand.ExecuteScalar().ToString() + " New Messages";
+            if (lblNewChats.Text == "0 New Messages")
+                anchNewChats.Style.Value = "color: #250340; font-weight: normal;";
+            else
+                anchNewChats.Style.Value = "color: #73637f; font-weight: bold";
+            if (lblNewChats.Text == "1 New Messages")
+                lblNewChats.Text = "1 New Message";
         }
 
         protected void lnkbtnSignOut_Click(object sender, EventArgs e)
