@@ -32,7 +32,7 @@ namespace OSAG.member
                 sqlsrcListStu.SelectCommand = "SELECT FirstName + ' ' + LastName AS Name, StudentID FROM Student;";
             else
             {
-                sqlsrcListStu.SelectCommand = "SELECT FirstName + ' ' + LastName AS Name, StudentID " +
+                sqlsrcListStu.SelectCommand = "SELECT FirstName + ' ' + LastName AS Name, s.StudentID " +
                 "FROM Student s JOIN Mentorship ms ON s.StudentID = ms.StudentID " +
                 "WHERE ms.MemberID = '" + UsernameToID(Session["Username"].ToString()) + "' AND EndDate IS NULL AND IsRequest IS NULL;";
             }
