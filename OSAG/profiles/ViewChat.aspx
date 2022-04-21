@@ -27,14 +27,10 @@
             font="Roboto"
             ForeColor="black">
             <Columns>
-                <asp:BoundField HeaderText="DateCreated" DataField="DateCreated" SortExpression="DateCreated" DataFormatString="{0:M/d/yy a\t HH:mmtt}" />
+                <asp:BoundField HeaderText="Date Created" DataField="DateCreated" SortExpression="DateCreated" DataFormatString="{0:M/d/yy a\t HH:mmtt}" />
                 <asp:BoundField HeaderText="Sent By" DataField="SenderName" SortExpression="SenderName" />
                 <asp:BoundField HeaderText="MessageText" DataField="MessageText" SortExpression="MessageText" />
-                <asp:BoundField HeaderText="IsRead" DataField="IsRead" SortExpression="IsRead" />
-                <asp:TemplateField>
-                    <ItemTemplate>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:CheckboxField HeaderText="Read" DataField="IsRead" SortExpression="IsRead" />
             </Columns>
         </asp:GridView>
         <br />
