@@ -14,12 +14,12 @@ Above message is for the project collaborators only. Below is for users.
 Usage:
 -------------------------------------------------------------------------
 Start page:
-    /login/LoginPage.aspx
+    /homepages/HomePage.aspx
 Credentials:
   Admin Member Account:
     Username: admin
     Password: password
-  Mentor Member Account:
+  Member Account:
     Username: patel3f
     Password: 38349vj
   Student Account:

@@ -57,7 +57,7 @@
 
                         <div class="row; align-content-center">
                             <div class="col justify-content-center pt-3 pb-2 d-grid mx-auto">
-                                <asp:TextBox ID="txtPassword" class="form-control pb-1" placeholder="Password" aria-label="Password" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtPassword" class="form-control pb-1" TextMode="Password" placeholder="Password" aria-label="Password" runat="server"></asp:TextBox>
                             </div>
 
                             <div id="errorlabel" class="row">
