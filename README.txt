@@ -23,8 +23,8 @@ Credentials:
     Username: patel3f
     Password: 38349vj
   Student Account:
-    Username: bsterling
-    Password: potatoes68!
+    Username: mhilling
+    Password: greenbeans68!
 
 
 SQL Statements for dbo.OSAG
