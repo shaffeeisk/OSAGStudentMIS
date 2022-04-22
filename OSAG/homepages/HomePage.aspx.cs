@@ -15,6 +15,8 @@ namespace OSAG.homepages
         {
             if (!IsPostBack)
             {
+                if (Session["Username"] != null)
+                    Response.Redirect("Dashboard.aspx");
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 string sqlQuery = 
                     "SELECT(SELECT COUNT(*) FROM JobMatch WHERE AppStatus IS NOT NULL) + (SELECT COUNT(*) FROM JobMatch WHERE AppStatus IS NOT NULL) AS 'a'; " +

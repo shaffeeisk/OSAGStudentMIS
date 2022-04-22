@@ -91,6 +91,8 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\select2.min.css" />
+    <Content Include="errorpages\404.aspx" />
+    <Content Include="errorpages\Oops.aspx" />
     <Content Include="Global.asax" />
     <Content Include="homepages\Dashboard.aspx" />
     <Content Include="homepages\HomePage.aspx" />
@@ -187,6 +189,8 @@
     <Content Include="student\OleSchoolScholarship.aspx" />
     <Content Include="student\ViewApplications.aspx" />
     <Content Include="_css\custom.css" />
+    <Content Include="_css\temp404.css" />
+    <Content Include="_css\tempOops.css" />
     <Content Include="_images\banners\homepage.png" />
     <Content Include="_images\banners\internshipbanner.png" />
     <Content Include="_images\banners\jobbanner.png" />
@@ -284,6 +288,20 @@
     </Compile>
     <Compile Include="admin\ViewEditData.aspx.designer.cs">
       <DependentUpon>ViewEditData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="errorpages\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="errorpages\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="errorpages\Oops.aspx.cs">
+      <DependentUpon>Oops.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="errorpages\Oops.aspx.designer.cs">
+      <DependentUpon>Oops.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

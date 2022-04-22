@@ -362,7 +362,7 @@ s
     font-size: 20px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-family: 'Raleway,' sans-serif;
+    font-family: Raleway, sans-serif;
     color: white;
     font-weight: bold;
 }
@@ -400,7 +400,7 @@ s
 
 .numbers {
     padding-bottom: 20px;
-    font-family: 'Raleway,' sans-serif;
+    font-family: Raleway, sans-serif;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -411,7 +411,7 @@ s
     padding-top: 30px;
     height: 300px;
     color: white;
-    font-family: 'Raleway,' sans-serif;
+    font-family: Raleway, sans-serif;
 }
 
 
@@ -441,7 +441,7 @@ s
 .blurb {
     padding-top: 10px;
     padding-bottom: 20px;
-    font-family: 'Roboto,' sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 25px;
     font-weight: bold;
     display: flex;
