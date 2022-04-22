@@ -33,7 +33,7 @@
             <div class="error__description">It looks like one of the developers fell asleep
                 <br />
                 <br />
-                Page Author: Ethan <a style="" href="https://codepen.io/purplexmoss/pen/PoPyzMW">(Link to source)</a>
+                Page Author: Ethan <a style="" href="https://codepen.io/eroxburgh/pen/zYYyEPg">(Link to source)</a>
             </div>
             <asp:Button ID="btnLogin" runat="server" Text="LOGIN" CssClass="error__button error__button--active" PostBackUrl="/login/LoginPage.aspx" />
             <asp:Button ID="btnHome" runat="server" Text="RETURN HOME" CssClass="error__button" PostBackUrl="/homepages/HomePage.aspx" />
