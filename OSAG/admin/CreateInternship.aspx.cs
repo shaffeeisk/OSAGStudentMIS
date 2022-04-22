@@ -75,30 +75,38 @@ namespace OSAG.member
                 return true;
             return false;
         }
-        
+
         // helper method to save internship
         protected void SaveInternship()
         {
-            // execute parameterized insert statement
-            String sqlQuery = "INSERT INTO Internship (InternshipName, InternshipDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
-                "VALUES (@InternshipName, @InternshipDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@InternshipName", txtInternshipName.Text);
-            sqlCommand.Parameters.AddWithValue("@InternshipDescription", validate(txtInternshipDescription.Text));
-            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
-            sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStartDate.Text));
-            sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtWeeklyHours.Text));
-            sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
-            sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
-            sqlConnect.Open();
-            sqlCommand.ExecuteScalar();
-            sqlConnect.Close();
-            
-            // display success message and reset input
-            lblSuccess.Text = "New internship successfully created";
-            ClearInternData();
-            dlistInternships.DataBind();
+            try
+            {
+                // execute parameterized insert statement
+                String sqlQuery = "INSERT INTO Internship (InternshipName, InternshipDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
+                    "VALUES (@InternshipName, @InternshipDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
+                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                sqlCommand.Parameters.AddWithValue("@InternshipName", txtInternshipName.Text);
+                sqlCommand.Parameters.AddWithValue("@InternshipDescription", validate(txtInternshipDescription.Text));
+                sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
+                sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStartDate.Text));
+                sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtWeeklyHours.Text));
+                sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
+                sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
+                sqlConnect.Open();
+                sqlCommand.ExecuteScalar();
+                sqlConnect.Close();
+
+                // display success message and reset input
+                lblSuccess.Text = "New internship successfully created";
+                ClearInternData();
+                dlistInternships.DataBind();
+            }
+            catch (SqlException ex)
+            {
+                lblSuccess.Text = "Unable to save. Please make sure all inputs are valid.";
+                throw ex;
+            }
         }
 
         protected void ClearInternData()

@@ -8,12 +8,12 @@
     <div class="container text-center px-5 pt-5 pb-5">
         <div class="row">
             <div class="col text-center pb-4">
-                <h2>SELECT ANNOUNCEMENT RECIPIENT(S):</h2>
+                <h2>CREATE ANNOUNCEMENT:</h2>
             </div>
         </div>
         <!--Header ends-->
         <div class="col justify-content-center pt-1 d-grid">
-            <asp:Label ID="lblUserType" runat="server" Text="User Type:" CssClass="form-label"></asp:Label>
+            <asp:Label ID="lblUserType" runat="server" Text="Announce to users:" CssClass="form-label"></asp:Label>
             <div class="col justify-content-center pt-1 d-grid">
                 <asp:DropDownList ID="ddl_UserType" runat="server" AutoPostBack="true" Width="177px" CssClass="form-control"
                     AppendDataBoundItems="true" OnSelectedIndexChanged="ddl_UserType_SelectedIndexChanged">
@@ -22,11 +22,12 @@
                     <asp:ListItem Selected="False" Text="Member" Value="2"></asp:ListItem>
                 </asp:DropDownList>
             </div>
+            <div class="pt-1">
+                <asp:Label ID="lblMemberType" Visible="false" runat="server" Text="Member Type:" CssClass="form-label"></asp:Label>
 
-            <asp:Label ID="lblMemberType" Visible="false" runat="server" Text="Member Type:" CssClass="form-label"></asp:Label>
-            <div class="col justify-content-center pt-1 d-grid">
-                <asp:DropDownList ID="ddl_MemberType" Visible="false" runat="server" AutoPostBack="true" Width="177px" CssClass="form-control"
-                    AppendDataBoundItems="true">
+            </div>
+            <div class="col justify-content-center pb-2 d-grid">
+                <asp:DropDownList ID="ddl_MemberType" Visible="false" runat="server" AutoPostBack="true" Width="177px" CssClass="form-control">
                     <asp:ListItem Selected="True" Text="All" Value="4"></asp:ListItem>
                     <asp:ListItem Selected="False" Text="Mentors" Value="3"></asp:ListItem>
                     <asp:ListItem Selected="False" Text="Leadership" Value="2"></asp:ListItem>
@@ -34,8 +35,8 @@
                 </asp:DropDownList>
             </div>
 
-            <asp:Label ID="lblMajor" runat="server" Text="Major:" CssClass="form-label"></asp:Label>
-            <div class="col justify-content-center pt-1 d-grid">
+            <asp:Label ID="lblMajor" runat="server" Text="With Major(s):" CssClass="form-label pt-1"></asp:Label>
+            <div class="col justify-content-center d-grid">
                 <asp:DropDownList ID="ddl_Major" runat="server" AutoPostBack="true" Width="177px"
                     DataSourceID="sqlsrcMajor"
                     DataTextField="MajorName"
@@ -54,16 +55,16 @@
                 ID="RequiredFieldValidator1"
                 ControlToValidate="txtHeader"
                 Text="(Required)"
-                runat="server" />
+                runat="server" ForeColor="Red" />
 
             <asp:Label ID="lblBody" runat="server" Text="Body" CssClass="form-label"></asp:Label>
             <asp:TextBox ID="txtBody" runat="server" TextMode="MultiLine" CssClass="form-control" BorderColor="Black"
-                Rows="10" Height="400" Width="800"></asp:TextBox>
+                Rows="10" Height="200" Width="800"></asp:TextBox>
             <asp:RequiredFieldValidator
                 ID="RequiredFieldValidator2"
                 ControlToValidate="txtBody"
                 Text="(Required)"
-                runat="server" />
+                runat="server" ForeColor="Red" />
             <br />
 
             <asp:Label ID="lblLink" runat="server" Text="Link (optional)" CssClass="form-label"></asp:Label>
@@ -74,7 +75,6 @@
         <asp:Button ID="btn_Send" runat="server" Text="Send" OnClick="btn_Send_Click" CssClass="btn btn-primary" />
         <asp:Label ID="lblSent" runat="server" CssClass="form-label"></asp:Label>
     </div>
-
 
     <asp:SqlDataSource
         ID="sqlsrcMajor"

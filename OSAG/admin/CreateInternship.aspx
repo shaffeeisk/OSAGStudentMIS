@@ -23,67 +23,51 @@
                     ID="RequiredFieldValidator1"
                     ControlToValidate="txtInternshipName"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
 
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label1" runat="server" Text="Internship Description: " Width="160px" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtInternshipDescription" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator
+                    ID="RequiredFieldValidator6"
+                    ControlToValidate="txtInternshipDescription"
+                    Text="(Required)"
+                    runat="server" ForeColor="Red" />
             </div>
         </div>
 
-            <div class="row">
-                <div class="createjobs col px-5 mb-3">
-                    <asp:Label ID="Label2" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
-                    <asp:TextBox ID="txtApplicationDeadline" TextMode="Date"  runat="server" CssClass="form-control"></asp:TextBox>
-                    <asp:CompareValidator
-                        ID="CompareValidator2"
-                        ControlToValidate="txtApplicationDeadline"
-                        Text="Use Date Format"
-                        Operator="DataTypeCheck"
-                        Type="Date"
-                        runat="server" />
-                    <asp:RequiredFieldValidator
-                        ID="RequiredFieldValidator2"
-                        ControlToValidate="txtApplicationDeadline"
-                        Text="(Required)"
-                        runat="server" />
-                </div>
+        <div class="row">
+            <div class="createjobs col px-5 mb-3">
+                <asp:Label ID="Label2" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
+                <asp:TextBox ID="txtApplicationDeadline" TextMode="Date" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator
+                    ID="RequiredFieldValidator2"
+                    ControlToValidate="txtApplicationDeadline"
+                    Text="(Required)"
+                    runat="server" ForeColor="Red" />
+            </div>
 
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label3" runat="server" Text="StartDate: " Width="160px" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtStartDate" TextMode="Date" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:CompareValidator
-                    ID="CompareValidator1"
-                    ControlToValidate="txtStartDate"
-                    Text="Use Date Format"
-                    Operator="DataTypeCheck"
-                    Type="Date"
-                    runat="server" />
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator3"
                     ControlToValidate="txtStartDate"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red"  />
             </div>
         </div>
 
         <div class="row">
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label4" runat="server" Text="Weekly Hours: " Width="160px" CssClass="form-label"></asp:Label>
-                <asp:TextBox ID="txtWeeklyHours" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtWeeklyHours" TextMode="Number" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator5"
                     ControlToValidate="txtWeeklyHours"
-                    Text="(Required)"
-                    runat="server" />
-                <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator1"
-                    runat="server"
-                    ControlToValidate="txtWeeklyHours"
-                    ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
-                    ErrorMessage="Invalid Entry">
-                </asp:RegularExpressionValidator>
+                    ErrorMessage="(Required)"
+                    runat="server" ForeColor="Red"  />
             </div>
 
             <div class="createjobs col px-5 mb-3">
@@ -93,14 +77,7 @@
                     ID="RequiredFieldValidator4"
                     ControlToValidate="txtPayment"
                     Text="(Required)"
-                    runat="server" />
-                <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator2"
-                    runat="server"
-                    ControlToValidate="txtPayment"
-                    ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
-                    ErrorMessage="Invalid Entry">
-                </asp:RegularExpressionValidator>
+                    runat="server" ForeColor="Red"  />
             </div>
         </div>
 
@@ -120,12 +97,19 @@
         <!--Inputs ends-->
 
         <!--buttons start-->
+        
         <div class="row">
             <div class="col justify-content-center d-grid pt-4 mx-auto">
                 <asp:Label ID="lblSuccess" CssClass="form-label" Font-Bold="true" runat="server" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col justify-content-center d-grid pt-1 mx-auto">
                 <asp:Button ID="btnSaveIntern" Text="SAVE" CssClass="btn btn-primary" runat="server" OnClick="btnSaveIntern_Click" />
             </div>
         </div>
+
         <div class="row">
             <div class="col justify-content-end d-grid pb-4 mx-auto">
                 <asp:Button ID="btnOverride" Text="YES" runat="server" CssClass="btn btn-primary justify-content-center" Width="110px" OnClick="btnOverride_Click" Visible="false" />
@@ -136,7 +120,7 @@
         </div>
         <div class="row">
             <div class="col justify-content-center d-grid pb-4 mx-auto" style="width: auto">
-                <asp:Button ID="btnClear" runat="server" Text="CLEAR ALL INPUTS" CssClass="btn btn-secondary btn-danger" Width="200px" OnClick="btnClear_Click" />
+                <asp:Button ID="btnClear" runat="server" Text="CLEAR ALL INPUTS" CssClass="btn btn-secondary btn-danger" Width="200px" CausesValidation="false" OnClick="btnClear_Click" />
             </div>
         </div>
         <!--buttons end-->

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" CodeBehind="ViewEditData.aspx.cs" Inherits="OSAG.admin.ViewEditData" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/templates/Home.Master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="ViewEditData.aspx.cs" Inherits="OSAG.admin.ViewEditData" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

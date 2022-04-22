@@ -50,16 +50,6 @@ namespace OSAG.login
                 return;
             }
 
-            // check to make sure user is approved first, if not do not attempt login
-            if (!isApproved(txtUsername.Text))
-            {
-                Session["TempUsername"] = txtUsername.Text;
-                declareUnapprovedUserType(txtUsername.Text);
-                Session["MustLogin"] = "Your account is pending approval. Please try again at a later time.";
-                Response.Redirect("/profiles/UnapprovedUserProfile.aspx");
-                return;
-            }
-
             // Ensure login was successful, if not update status text
             String correctPassword = getHashedPass(txtUsername.Text);
 
@@ -67,10 +57,19 @@ namespace OSAG.login
             {
                 // ensure there are no lingering MustLogin/AccessDenied by setting them to null
                 // session not wiped here in case later funtionality requires session data
-                Session["Username"] = txtUsername.Text;
                 Session["MustLogin"] = null;
                 Session["AccessDenied"] = null;
-                declareUserType(txtUsername.Text);
+                // handle approval redirect
+                if (!isApproved(txtUsername.Text))
+                {
+                    Session["TempUsername"] = txtUsername.Text;
+                    declareUnapprovedUserType(txtUsername.Text);
+                }
+                else
+                {
+                    Session["Username"] = txtUsername.Text;
+                    declareUserType(txtUsername.Text);
+                }
             }
             else
             {
@@ -134,7 +133,10 @@ namespace OSAG.login
             sqlConnect.Close();
 
             if (userType == 1) // user is student (found in Student table)
+            {
                 Session["UserType"] = "student";
+                Response.Redirect("/profiles/UnapprovedUserProfile.aspx");
+            }
             else // user is member (not found in Student table)
             {
                 Session["UserType"] = "member"; // set User type
@@ -146,18 +148,19 @@ namespace OSAG.login
                 switch (sw)
                 {
                     case 4:
-                        Session["MemberType"] = "member";
+                        Session["MemberType"] = "4";
                         break;
                     case 3:
-                        Session["MemberType"] = "mentor";
+                        Session["MemberType"] = "3";
                         break;
                     case 2:
-                        Session["MemberType"] = "leadership";
+                        Session["MemberType"] = "2";
                         break;
                     case 1:
-                        Session["MemberType"] = "admin";
+                        Session["MemberType"] = "1";
                         break;
                 }
+                Response.Redirect("/login/CompleteRegistration.aspx");
             }
         }
 

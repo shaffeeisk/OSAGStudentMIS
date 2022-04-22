@@ -21,11 +21,16 @@ namespace OSAG.student
                 else
                     divApply.Visible = false;
             }
+            if (Request.QueryString["Message"] != null) // Request.QueryString["key"] is the .../page.aspx?Message=message%and%etc
+            {
+                string errorMsg = Request.QueryString["Message"]; // text of querystring
+                Response.Write("<script>alert('" + errorMsg + "');</script>");
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(fileTranscript.HasFile && fileEssay.HasFile)
+            if (fileTranscript.HasFile && fileEssay.HasFile)
             {
                 // transcript file validation
                 if (fileTranscript.PostedFile.ContentLength > 2097152) // file is too large (>2mb)
@@ -46,7 +51,7 @@ namespace OSAG.student
                 }
                 if (fileTranscript.PostedFile.ContentType != "application/pdf") // file is not pdf
                 {
-                    
+
                     lblEStatus.Text = "File must be in PDF format.";
                     return;
                 }

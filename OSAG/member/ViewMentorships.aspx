@@ -9,7 +9,7 @@
             <h2>MY MENTORSHIPS</h2>
         </div>
     </div>
-    
+
     <asp:GridView ID="grdvwMentorships"
         runat="server"
         HorizontalAlign="Center"
@@ -20,6 +20,8 @@
         AllowPaging="true"
         AllowSorting="true"
         PageSize="10"
+        ShowHeaderWhenEmpty="true" EmptyDataRowStyle-HorizontalAlign="Center"
+        EmptyDataText ="No Active Mentees"
         SelectedRowStyle-BackColor="#eddef5" RowStyle-BorderWidth="1">
         <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
         <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />

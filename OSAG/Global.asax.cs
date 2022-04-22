@@ -39,14 +39,21 @@ namespace OSAG
         // Fired when an unhandled exception is encountered within the application.
         protected void Application_Error(object sender, EventArgs e)
         {
-            if (HttpContext.Current.Request.Url.ToString().Contains("/profiles/UserProfile.aspx") &&
+            if (HttpContext.Current.Request.Url.ToString().Contains("profiles/UserProfile.aspx") &&
         HttpContext.Current.Error.InnerException.Message.Contains("Maximum request length exceeded"))
             {
                 HttpContext.Current.ClearError();
                 HttpContext.Current.Response.Redirect(
-                    string.Format("/profiles/UserProfile.aspx?Message={0}", "File size too large! Please limit uploads to 2 MB."));
+                    string.Format("/profiles/UserProfile.aspx?Message={0}&viewstate=edit", "File size too large! Please limit uploads to 2 MB."));
             }
-            if (HttpContext.Current.Request.Url.ToString().Contains("/student/OleSchoolScholarship.aspx") &&
+            else if (HttpContext.Current.Request.Url.ToString().Contains("UnapprovedUserProfile.aspx") &&
+        HttpContext.Current.Error.InnerException.Message.Contains("Maximum request length exceeded"))
+            {
+                HttpContext.Current.ClearError();
+                HttpContext.Current.Response.Redirect(
+                    string.Format("/profiles/UnapprovedUserProfile.aspx?Message={0}&viewstate=edit", "File size too large! Please limit uploads to 2 MB."));
+            }
+            else if (HttpContext.Current.Request.Url.ToString().Contains("OleSchoolScholarship.aspx") &&
         HttpContext.Current.Error.InnerException.Message.Contains("Maximum request length exceeded"))
             {
                 HttpContext.Current.ClearError();

@@ -29,11 +29,13 @@
             background: #fff;
         }
     </style>
+    <%if (Session["UserType"].ToString() == "student")
+        { %>
     <div style="text-align: center">
         <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/jobbanner.png" Height="400px" />
         <br />
     </div>
-
+    <%} %>
     <div class="container text-center pt-5 ">
         <!--Jobs Header starts-->
         <h2>FIND JOBS</h2>
@@ -67,14 +69,16 @@
         AutoGenerateColumns="false"
         DataKeyNames="JobID"
         CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
-        PagerStyle-CssClass="pager"
         HeaderStyle-CssClass="header"
         RowStyle-CssClass="rows"
         CellPadding="25"
         CellSpacing="7"
         font="Roboto"
-        ForeColor="black">
-
+        ForeColor="black"
+        AllowPaging="true"
+        PageSize="10">
+        <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+        <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
         <Columns>
             <asp:BoundField HeaderText="Job Name" DataField="JobName" SortExpression="JobName" />
             <asp:BoundField HeaderText="Company Name" DataField="CompanyName" SortExpression="CompanyName" />

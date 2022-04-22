@@ -15,6 +15,8 @@ namespace OSAG.profiles
 {
     public partial class UnapprovedUserProfile : System.Web.UI.Page
     {
+        private static bool LoadData = false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["TempUsername"] == null)
@@ -28,8 +30,10 @@ namespace OSAG.profiles
             Response.Cache.SetExpires(DateTime.Now.AddSeconds(.1));
 
             // only when loading page for the first time
-            if (!IsPostBack)
+            if (!IsPostBack || LoadData)
             {
+                LoadData = false;
+
                 // Global.asax -> Application_Error Message Handler. Expected error is "File size too large."
                 //      Max file size (default) is 4MB but user is told 2MB.
                 // is in !IsPostBack because error causes Response.Redirect back to page.
@@ -160,7 +164,7 @@ namespace OSAG.profiles
                     lblViewMinor.Text = "-";
                 if (lblViewMajor.Text == "")
                     lblViewMajor.Text = "-";
-                if (Request.QueryString["viewstate"] == "edit")
+                if (Request.QueryString["viewstate"] == "edit")  // switch to edit mode
                     btnEditMode_Click(btnEditMode, e);
             }
         }
@@ -224,7 +228,8 @@ namespace OSAG.profiles
                 sqlCommand.ExecuteScalar();
                 sqlConnect.Close();
             }
-            Response.Write("<script>alert('Changes successfully saved.');</script>");
+            LoadData = true;
+            SwapModes();
         }
 
         // event handler for resume upload button
@@ -362,6 +367,15 @@ namespace OSAG.profiles
             }
         }
 
+        // helper method to switch viewstate between view/edit
+        protected void SwapModes()
+        {
+            divModeEdit.Visible = !divModeEdit.Visible;
+            divModeView.Visible = !divModeView.Visible;
+            btnUpdate.Visible = !btnUpdate.Visible;
+            btnReturn.Visible = !btnReturn.Visible;
+        }
+
         // helper method that queries for resume file and returns byte array
         protected byte[] getResumeBytes(string s)
         {
@@ -450,8 +464,12 @@ namespace OSAG.profiles
             txtLastName.Text = lblViewName.Text.Split(' ')[1];
             txtEmail.Text = lblViewEmail.Text;
             txtPhone.Text = lblViewPhone.Text;
+            
             if (DateTime.TryParse(lblViewGradDate.Text, out DateTime dt))
                 txtGradDate.Text = dt.ToString("yyyy-MM-dd");
+            else if (int.TryParse(lblViewGradDate.Text, out int i)) // only year displays (member)
+                txtGradDate.Text = i + "-01-01";
+
             lblEditMajor.Text = lblViewMajor.Text;
             lblEditMinor.Text = lblViewMinor.Text;
             txtBio.Text = lblViewBio.Text;
@@ -467,19 +485,13 @@ namespace OSAG.profiles
                 txtState.Text = lblViewState.Text;
             }
             // then flip visibility of view/edit
-            divModeView.Visible = false;
-            divModeEdit.Visible = true;
-            btnUpdate.Visible = true;
-            btnReturn.Visible = true;
+            SwapModes();
         }
 
         protected void btnReturn_Click(object sender, EventArgs e)
         {
             // flip visibility of view/edit
-            divModeView.Visible = true;
-            divModeEdit.Visible = false;
-            btnUpdate.Visible = false;
-            btnReturn.Visible = false;
+            SwapModes();
         }
 
         protected void btnDeclareMajor_Click(object sender, EventArgs e)

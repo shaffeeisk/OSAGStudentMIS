@@ -26,6 +26,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <div class="row pt-5 pb-5">
+        <div class="col text-center">
+            <h2>PROGRAM SUCCESSES</h2>
+        </div>
+    </div>
 
     <div class="top" style="margin-top: 15px;">
         <div class="successes px-5 pt-5">

@@ -31,7 +31,7 @@
                     ID="RequiredFieldValidator1"
                     ControlToValidate="txtJobName"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
 
             <div class="createjobs col px-5 mb-3">
@@ -41,7 +41,7 @@
                     ID="RequiredFieldValidator2"
                     ControlToValidate="txtJobDescription"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
         </div>
 
@@ -50,35 +50,21 @@
                 <div class="createjobs col px-5 mb-3">
                     <asp:Label ID="Label2" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
                     <asp:TextBox ID="txtApplicationDeadline" TextMode="Date"  runat="server" CssClass="form-control"></asp:TextBox>
-                    <asp:CompareValidator
-                        ID="CompareValidator1"
-                        ControlToValidate="txtApplicationDeadline"
-                        Text="Use Date Format"
-                        Operator="DataTypeCheck"
-                        Type="Date"
-                        runat="server" />
                     <asp:RequiredFieldValidator
                         ID="RequiredFieldValidator3"
                         ControlToValidate="txtApplicationDeadline"
                         Text="(Required)"
-                        runat="server" />
+                        runat="server" ForeColor="Red" />
                 </div>
 
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label3" runat="server" Text="StartDate: " Width="160px" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtStartDate" TextMode="Date" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:CompareValidator
-                    ID="CompareValidator2"
-                    ControlToValidate="txtStartDate"
-                    Text="Use Date Format"
-                    Operator="DataTypeCheck"
-                    Type="Date"
-                    runat="server" />
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator4"
                     ControlToValidate="txtStartDate"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
         </div>
 
@@ -86,36 +72,22 @@
         <div class="row">
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label4" runat="server" Text="Weekly Hours: " Width="160px" CssClass="form-label"></asp:Label>
-                <asp:TextBox ID="txtWeeklyHours" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtWeeklyHours" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator5"
                     ControlToValidate="txtWeeklyHours"
                     Text="(Required)"
-                    runat="server" />
-                <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator1"
-                    runat="server"
-                    ControlToValidate="txtWeeklyHours"
-                    ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
-                    ErrorMessage="Invalid Entry">
-                </asp:RegularExpressionValidator>
+                    runat="server" ForeColor="Red" />
             </div>
 
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="Label5" runat="server" Text="Hourly Payment: " Width="160px" CssClass="form-label"></asp:Label>
-                <asp:TextBox ID="txtPayment" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtPayment" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator6"
                     ControlToValidate="txtPayment"
                     Text="(Required)"
-                    runat="server" />
-                <asp:RegularExpressionValidator
-                    ID="RegularExpressionValidator6"
-                    runat="server"
-                    ControlToValidate="txtPayment"
-                    ValidationExpression="([0-9])[0-9]*[.]?[0-9]*"
-                    ErrorMessage="Invalid Entry">
-                </asp:RegularExpressionValidator>
+                    runat="server" ForeColor="Red" />
             </div>
         </div>
 
@@ -138,9 +110,15 @@
         <div class="row">
             <div class="col justify-content-center d-grid pt-4 mx-auto">
                 <asp:Label ID="lblSuccess" CssClass="form-label" Font-Bold="true" runat="server" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col justify-content-center d-grid pt-1 mx-auto">
                 <asp:Button ID="btnSaveJob" Text="SAVE" CssClass="btn btn-primary" runat="server" OnClick="btnSaveJob_Click" />
             </div>
         </div>
+
         <div class="row">
             <div class="col justify-content-end d-grid pb-4 mx-auto">
                 <asp:Button ID="btnOverride" Text="YES" runat="server" CssClass="btn btn-primary justify-content-center" Width="110px" OnClick="btnOverride_Click" Visible="false" />

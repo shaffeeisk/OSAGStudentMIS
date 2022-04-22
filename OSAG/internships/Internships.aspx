@@ -29,14 +29,15 @@
             background: #fff;
         }
     </style>
-
+    <%if (Session["UserType"].ToString() == "student")
+        { %>
     <!--Banner starts-->
     <div style="text-align: center">
         <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/internshipbanner.png" Height="400px" />
         <br />
     </div>
     <!--Banner ends-->
-
+    <%} %>
     <div class="container col-lg-4 text-center pt-5 ">
         <!--Internship header starts-->
         <h2>FIND INTERNSHIPS</h2>
@@ -49,7 +50,7 @@
         <div class="pt-5 pb-5 px-4">
             <div class="input-group" style="margin-left: auto; margin-right: auto; text-align: center; padding-right: unset">
                 <div class="input-group-text">
-                    <div class="icon icon-lg" >
+                    <div class="icon icon-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
                             <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </div>
@@ -73,13 +74,16 @@
         AutoGenerateColumns="false"
         DataKeyNames="InternshipID"
         CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded bg-body rounded shadow--on-hover"
-        PagerStyle-CssClass="pager"
         HeaderStyle-CssClass="header"
         RowStyle-CssClass="rows"
         CellPadding="25"
         CellSpacing="7"
         font="Roboto"
-        ForeColor="black">
+        ForeColor="black"
+        AllowPaging="true"
+        PageSize="10">
+        <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+        <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
         <Columns>
             <asp:BoundField HeaderText="Internship Name" DataField="InternshipName" SortExpression="InternshipName" />
             <asp:BoundField HeaderText="Company Name" DataField="CompanyName" SortExpression="CompanyName" />

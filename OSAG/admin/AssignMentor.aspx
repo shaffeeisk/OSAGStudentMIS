@@ -38,7 +38,9 @@
             RowStyle-CssClass="rows"
             CellSpacing="7"
             font="Roboto"
-            ForeColor="black">
+            ForeColor="black"
+            EmptyDataRowStyle-HorizontalAlign="Center"
+            EmptyDataText="No new requests! :)">
             <Columns>
                 <asp:BoundField HeaderText="Student" DataField="StudentName" />
                 <asp:BoundField HeaderText="Mentor" DataField="MemberName" />
@@ -97,6 +99,7 @@
                 <asp:Label ID="lblUpdateStatus" Text="" runat="server" />
             </div>
         </div>
+
         <asp:GridView ID="grdvwMentorships"
             runat="server"
             DataSourceID="sqlsrcMentorships"
@@ -110,7 +113,9 @@
             RowStyle-CssClass="rows"
             CellPadding="10"
             font="Roboto"
-            ForeColor="black">
+            ForeColor="black"
+            ShowHeaderWhenEmpty="true"
+            EmptyDataText="No Mentorship History">
             <Columns>
                 <asp:BoundField HeaderText="Mentor Name" DataField="FullName" />
                 <asp:BoundField HeaderText="Mentorship Status" DataField="EndDate" />

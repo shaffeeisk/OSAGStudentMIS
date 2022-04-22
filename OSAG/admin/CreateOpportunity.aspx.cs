@@ -20,7 +20,7 @@ namespace OSAG.member
         {
 
         }
-        
+
         // event handler for save opportunity button. executes query and clears input, displaying success message
         protected void btnSaveOpportunity_Click(object sender, EventArgs e)
         {
@@ -32,7 +32,7 @@ namespace OSAG.member
                 btnSaveOpportunity.Visible = false;
             }
             else
-                SaveOpportunity(); 
+                SaveOpportunity();
         }
 
         // event handler for override button
@@ -84,25 +84,33 @@ namespace OSAG.member
         // helper method to save opportunity
         protected void SaveOpportunity()
         {
-            String sqlQuery = "INSERT INTO Opportunity " +
-                "(OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, CompanyID) " +
-                "VALUES " +
-                "(@OpportunityName, @OpportunityDescription, @EventDate, @ApplicationDeadline, @CompanyID);";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@OpportunityName", validate(txtOpportunityName.Text));
-            sqlCommand.Parameters.AddWithValue("@OpportunityDescription", validate(txtDescription.Text));
-            sqlCommand.Parameters.AddWithValue("@EventDate", validate(txtEventDate.Text));
-            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtDeadline.Text));
-            sqlCommand.Parameters.AddWithValue("@CompanyID", validate(ddlCompany.SelectedValue));
-            sqlConnect.Open();
-            sqlCommand.ExecuteScalar();
-            sqlConnect.Close();
-            
-            // display success message and reset input
-            lblSuccess.Text = "New opportunity successfully created";
-            ClearOpportunityData();
-            dlistOpportunities.DataBind();
+            try
+            {
+                String sqlQuery = "INSERT INTO Opportunity " +
+                    "(OpportunityName, OpportunityDescription, EventDate, ApplicationDeadline, CompanyID) " +
+                    "VALUES " +
+                    "(@OpportunityName, @OpportunityDescription, @EventDate, @ApplicationDeadline, @CompanyID);";
+                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                sqlCommand.Parameters.AddWithValue("@OpportunityName", validate(txtOpportunityName.Text));
+                sqlCommand.Parameters.AddWithValue("@OpportunityDescription", validate(txtDescription.Text));
+                sqlCommand.Parameters.AddWithValue("@EventDate", validate(txtEventDate.Text));
+                sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtDeadline.Text));
+                sqlCommand.Parameters.AddWithValue("@CompanyID", validate(ddlCompany.SelectedValue));
+                sqlConnect.Open();
+                sqlCommand.ExecuteScalar();
+                sqlConnect.Close();
+
+                // display success message and reset input
+                lblSuccess.Text = "New opportunity successfully created";
+                ClearOpportunityData();
+                dlistOpportunities.DataBind();
+            }
+            catch (SqlException ex)
+            {
+                lblSuccess.Text = "Unable to save. Please make sure all inputs are valid.";
+                throw ex;
+            }
         }
 
         // helper method to clear input

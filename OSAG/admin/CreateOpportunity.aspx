@@ -23,7 +23,7 @@
                     ID="RequiredFieldValidator3"
                     ControlToValidate="txtOpportunityName"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
 
             <div class="createopps col px-5 mb-3">
@@ -33,7 +33,7 @@
                     ID="RequiredFieldValidator4"
                     ControlToValidate="txtDescription"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
         </div>
 
@@ -41,35 +41,21 @@
             <div class="createopps col px-5 mb-3">
                 <asp:Label ID="lblEventDate" runat="server" Text="Event Date: " Width="160px" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtEventDate" TextMode="Date" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:CompareValidator
-                    ID="CompareValidator2"
-                    ControlToValidate="txtEventDate"
-                    Text="Use Date Format"
-                    Operator="DataTypeCheck"
-                    Type="Date"
-                    runat="server" />
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator2"
                     ControlToValidate="txtEventDate"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
 
             <div class="createjobs col px-5 mb-3">
                 <asp:Label ID="lblAppDeadline" runat="server" Text="Application Deadline: " Width="160px" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtDeadline" TextMode="Date" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:CompareValidator
-                    ID="CompareValidator1"
-                    ControlToValidate="txtDeadline"
-                    Text="Use Date Format"
-                    Operator="DataTypeCheck"
-                    Type="Date"
-                    runat="server" />
                 <asp:RequiredFieldValidator
                     ID="RequiredFieldValidator1"
                     ControlToValidate="txtDeadline"
                     Text="(Required)"
-                    runat="server" />
+                    runat="server" ForeColor="Red" />
             </div>
         </div>
 
@@ -92,9 +78,15 @@
         <div class="row">
             <div class="col justify-content-center d-grid pt-4 mx-auto">
                 <asp:Label ID="lblSuccess" CssClass="form-label" Font-Bold="true" runat="server" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col justify-content-center d-grid pt-1 mx-auto">
                 <asp:Button ID="btnSaveOpportunity" Text="SAVE" CssClass="btn btn-primary" runat="server" OnClick="btnSaveOpportunity_Click" />
             </div>
         </div>
+
         <div class="row">
             <div class="col justify-content-end d-grid pb-4 mx-auto">
                 <asp:Button ID="btnOverride" Text="YES" runat="server" CssClass="btn btn-primary justify-content-center" Width="110px" OnClick="btnOverride_Click" Visible="false" />

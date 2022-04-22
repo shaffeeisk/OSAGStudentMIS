@@ -43,7 +43,9 @@
             PageSize="10"
             CellPadding="5"
             SelectedRowStyle-BackColor="#eddef5" RowStyle-BorderWidth="1"
-            DataSourceID="sqlsrcViewInterests" OnRowDataBound="grdvwData_RowDataBound" ShowHeaderWhenEmpty="true">
+            DataSourceID="sqlsrcViewInterests" OnRowDataBound="grdvwData_RowDataBound"
+            ShowHeaderWhenEmpty="true"
+            EmptyDataText="Nothing to see here!" EmptyDataRowStyle-HorizontalAlign="Center">
             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
             <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
             <HeaderStyle Font-Names="Roboto" ForeColor="#320075" BorderWidth="2" BorderColor="DarkGray" HorizontalAlign="Center" />

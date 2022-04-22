@@ -84,26 +84,34 @@ namespace OSAG.member
         // helper method to save job
         protected void SaveJob()
         {
-            // execute parameterized insert statement
-            String sqlQuery = "INSERT INTO Job (JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
-                "VALUES (@JobName, @JobDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
-            SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
-            sqlCommand.Parameters.AddWithValue("@JobName", txtJobName.Text);
-            sqlCommand.Parameters.AddWithValue("@JobDescription", validate(txtJobDescription.Text));
-            sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
-            sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStartDate.Text));
-            sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtWeeklyHours.Text));
-            sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
-            sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
-            sqlConnect.Open();
-            sqlCommand.ExecuteScalar();
-            sqlConnect.Close();
+            try
+            {
+                // execute parameterized insert statement
+                String sqlQuery = "INSERT INTO Job (JobName, JobDescription, ApplicationDeadline, StartDate, WeeklyHours, Payment, CompanyID) " +
+                    "VALUES (@JobName, @JobDescription, @ApplicationDeadline, @StartDate, @WeeklyHours, @Payment, @CompanyID);";
+                SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
+                sqlCommand.Parameters.AddWithValue("@JobName", txtJobName.Text);
+                sqlCommand.Parameters.AddWithValue("@JobDescription", validate(txtJobDescription.Text));
+                sqlCommand.Parameters.AddWithValue("@ApplicationDeadline", validate(txtApplicationDeadline.Text));
+                sqlCommand.Parameters.AddWithValue("@StartDate", validate(txtStartDate.Text));
+                sqlCommand.Parameters.AddWithValue("@WeeklyHours", validate(txtWeeklyHours.Text));
+                sqlCommand.Parameters.AddWithValue("@Payment", validate(txtPayment.Text));
+                sqlCommand.Parameters.AddWithValue("@CompanyID", ddlCompany.SelectedValue.ToString());
+                sqlConnect.Open();
+                sqlCommand.ExecuteScalar();
+                sqlConnect.Close();
 
-            // display success message and reset input
-            lblSuccess.Text = "New job successfully created";
-            ClearJobData();
-            dlistJobs.DataBind();
+                // display success message and reset input
+                lblSuccess.Text = "New job successfully created";
+                ClearJobData();
+                dlistJobs.DataBind();
+            }
+            catch (SqlException ex)
+            {
+                lblSuccess.Text = "Unable to save. Please make sure all inputs are valid.";
+                throw ex;
+            }
         }
 
         protected void ClearJobData()

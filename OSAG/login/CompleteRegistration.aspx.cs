@@ -19,7 +19,7 @@ namespace OSAG.login
         {
             if (Session["Username"] == null)
                 return; // runs .master page_load instead
-            if(isApproved(Session["Username"].ToString()) || Session["UserType"].ToString() != "member")
+            if (isApproved(Session["Username"].ToString()) || Session["UserType"].ToString() != "member")
             {   // send user to profile if student or acc already approved
                 Session["AccessDenied"] = "You do not have access to that page.";
                 Response.Redirect("/profiles/UserProfile.aspx");
@@ -36,16 +36,17 @@ namespace OSAG.login
                 return;
             }
 
-            if (usernameExists(txtUsername.Text))
-            {
-                lblStatus.ForeColor = Color.Red;
-                lblStatus.Font.Bold = true;
-                lblStatus.Text = "Username " + txtUsername.Text + " has already been taken";
-                txtUsername.Text = "";
-                return;
-            }
+            if (txtUsername.Text != Session["TempUsername"].ToString()) // if member username desired is one set by admin
+                if (usernameExists(txtUsername.Text)) // do not run this code
+                {
+                    lblStatus.ForeColor = Color.Red;
+                    lblStatus.Font.Bold = true;
+                    lblStatus.Text = "Username " + txtUsername.Text + " has already been taken";
+                    txtUsername.Text = "";
+                    return;
+                }
 
-            String sqlQuery = "UPDATE Member SET (Username = @Username, Pass = @Password) WHERE Username = '" + Session["Username"] + "';";
+            String sqlQuery = "UPDATE Member SET Username = @Username, Pass = @Password, IsApproved = 'TRUE' WHERE Username = '" + Session["TempUsername"] + "';";
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
             sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text);
@@ -53,7 +54,6 @@ namespace OSAG.login
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
-            Session["Username"] = txtUsername.Text;
             lblStatus.Text = "Registration successfully completed. Click the button below to view your profile.";
             btnSubmit.Visible = false;
             btnContinue.Visible = true;
@@ -61,6 +61,8 @@ namespace OSAG.login
 
         protected void btnContinue_Click(object sender, EventArgs e)
         {
+            Session["TempUsername"] = null;
+            Session["Username"] = txtUsername.Text;
             Response.Redirect("/profiles/UserProfile.aspx");
         }
 

@@ -15,8 +15,12 @@ namespace OSAG.homepages
         {
             if (!IsPostBack)
             {
+                // redirect from Oops.aspx to user "home"
                 if (Session["Username"] != null)
-                    Response.Redirect("Dashboard.aspx");
+                    Response.Redirect("/homepages/Dashboard.aspx");
+                else if(Session["UnapprovedUsername"] != null)
+                    Response.Redirect("/profiles/UnapprovedUserProfile.aspx");
+
                 SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
                 string sqlQuery = 
                     "SELECT(SELECT COUNT(*) FROM JobMatch WHERE AppStatus IS NOT NULL) + (SELECT COUNT(*) FROM JobMatch WHERE AppStatus IS NOT NULL) AS 'a'; " +

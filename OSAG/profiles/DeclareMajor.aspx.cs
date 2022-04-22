@@ -15,22 +15,30 @@ namespace OSAG.profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Username"] == null)
-                return;
+            if (!IsPostBack)
+                if (Session["Username"] == null)
+                    return;
 
-            if (Session["UserType"].ToString() == "student")
+            int id = UsernameToID(Session["Username"].ToString());
+
+            // data bind gridview
+            sqlsrcHasMajor.SelectCommand = "SELECT h.MajorID, StudentID, MemberID, MajorName, IsMinor FROM HasMajor h " +
+                    "JOIN Major m ON h.MajorID = m.MajorID WHERE " + Session["UserType"].ToString() + "ID = '" + id + "';";
+
+            // data bind dropdown list
+            if (lblHead.Text == "Add Major(s)") // adding majors
             {
-                sqlsrcHasMajor.SelectCommand = "SELECT h.MajorID, StudentID, MemberID, MajorName, IsMinor FROM HasMajor h " +
-                    "JOIN Major m ON h.MajorID = m.MajorID WHERE StudentID = '" + UsernameToID(Session["Username"].ToString()) + "';";
+                sqlsrcMajors.SelectCommand = "SELECT * FROM Major WHERE (IsMinorOnly IS NULL OR IsMinorOnly = 0) " +
+                    "AND MajorID NOT IN (SELECT MajorID FROM HasMajor " +
+                    "WHERE " + Session["UserType"].ToString() + "ID = '" + id + "') ORDER BY MajorName;";
             }
-            else // (Session["UserType"].ToString() == "member")
+            else // adding minors
             {
-                sqlsrcHasMajor.SelectCommand = "SELECT h.MajorID, StudentID, MemberID, MajorName, IsMinor FROM HasMajor h " +
-                    "JOIN Major m ON h.MajorID = m.MajorID WHERE MemberID = '" + UsernameToID(Session["Username"].ToString()) + "';";
+                sqlsrcMajors.SelectCommand = "SELECT * FROM Major WHERE (HasMinor = 1 OR IsMinorOnly = 1) " +
+                    "AND MajorID NOT IN (SELECT MajorID FROM HasMajor " +
+                    "WHERE " + Session["UserType"].ToString() + "ID = '" + id + "') ORDER BY MajorName;";
             }
         }
-
-
 
         // helper method to execute stored procedure (username [GUID within program] -> StudentID/MemberID)
         protected int UsernameToID(string username)
@@ -46,7 +54,17 @@ namespace OSAG.profiles
         protected void btnAddMajor_Click(object sender, EventArgs e)
         {
             SqlConnection sqlConnect = new SqlConnection(WebConfigurationManager.ConnectionStrings["OSAG"].ConnectionString);
-            string sqlQuery = "INSERT INTO HasMajor (StudentID, MemberID, MajorID, IsMinor) VALUES (@StudentID, @MemberID, @MajorID, @IsMinor)";
+            string sqlQuery = "IF NOT EXISTS(SELECT * FROM HasMajor WHERE " +
+                Session["UserType"].ToString() + "ID = @" + Session["UserType"].ToString() + "ID " +
+                "AND MajorID = @MajorID AND ";
+            if (lblHead.Text == "Add Major(s)") // adding major or minor
+                sqlQuery += "IsMinor IS NULL) ";
+            else
+                sqlQuery += "IsMinor = @IsMinor) ";
+            sqlQuery += "BEGIN " +
+                "INSERT INTO HasMajor (StudentID, MemberID, MajorID, IsMinor) VALUES (@StudentID, @MemberID, @MajorID, @IsMinor) " +
+                "END";
+
             SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnect);
 
             sqlCommand.Parameters.AddWithValue("@MajorID", ddlMajors.SelectedValue); // majorID from ddl
@@ -67,18 +85,29 @@ namespace OSAG.profiles
             sqlConnect.Open();
             sqlCommand.ExecuteScalar();
             sqlConnect.Close();
+
             grdvHasMajor.DataBind();
+            ddlMajors.DataBind();
         }
 
         protected void btnDoneMajors_Click(object sender, EventArgs e)
         {
             if (lblHead.Text == "Add Major(s)")
-            {
                 lblHead.Text = "Add Minor(s)";
-                sqlsrcMajors.SelectCommand = "SELECT * FROM Major WHERE HasMinor = 1 OR IsMinorOnly = 1 ORDER BY MajorName;";
-            }
             else
                 Response.Redirect("UserProfile.aspx?viewstate=edit");
+        }
+
+        protected void grdvHasMajor_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            foreach (TableCell c in e.Row.Cells)
+                if (c.Text == "True")
+                    c.Text = "Minor";
+        }
+
+        protected void grdvHasMajor_RowDeleted(object sender, GridViewDeletedEventArgs e)
+        {
+            ddlMajors.DataBind();
         }
     }
 }

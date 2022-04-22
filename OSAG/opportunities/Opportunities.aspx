@@ -5,12 +5,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <%if (Session["UserType"].ToString() == "student")
+        { %>
     <!--Banner starts-->
     <div style="text-align: center">
         <asp:Image ID="Image1" runat="server" ImageUrl="/_images/banners/opportunitybanner.png" Height="400px" />
         <br />
     </div>
     <!--Banner ends-->
+    <%} %>
 
     <div class="container col-lg-4 text-center pt-5 ">
         <h2>UPCOMING OPPORTUNITIES</h2>
@@ -31,43 +35,42 @@
             </div>
         </div>
         <!--Search bar ends-->
-
-        <asp:GridView ID="grdvwOpportunities"
-            runat="server"
-            DataSourceID="sqlsrc"
-            AllowSorting="true"
-            AutoGenerateSelectButton="false"
-            AutoGenerateColumns="false"
-            HorizontalAlign="Center"
-            DataKeyNames="OpportunityID"
-            CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded bg-body rounded shadow--on-hover"
-            PagerStyle-CssClass="pager"
-            HeaderStyle-CssClass="header"
-            RowStyle-CssClass="rows"
-            CellPadding="25"
-            CellSpacing="7"
-            font="Roboto"
-            ForeColor="black"
-            AllowPaging="true"
-            PageSize="10">
-            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
-            <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
-            <Columns>
-                <asp:BoundField HeaderText="Opportunity Name" DataField="OpportunityName" SortExpression="OpportunityName" />
-                <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />
-                <asp:BoundField HeaderText="Event Date" DataField="EventDate" DataFormatString="{0:MMMM dd, yyyy}" SortExpression="EventDate" NullDisplayText="N/A" />
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
-                        <%if (Session["UserType"].ToString() == "student")
-                            {%>
-                        <asp:Button ID="btnBookmark" runat="server" Text="Bookmark" OnClick="btnBookmark_Click" />
-                        <%} %>
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
     </div>
+
+    <asp:GridView ID="grdvwOpportunities"
+        runat="server"
+        DataSourceID="sqlsrc"
+        AllowSorting="true"
+        AutoGenerateSelectButton="false"
+        AutoGenerateColumns="false"
+        HorizontalAlign="Center"
+        DataKeyNames="OpportunityID"
+        CssClass="card-body border-0 shadow p-3 mb-2 bg-body rounded shadow--on-hover"
+        HeaderStyle-CssClass="header"
+        RowStyle-CssClass="rows"
+        CellPadding="25"
+        CellSpacing="7"
+        font="Roboto"
+        ForeColor="black"
+        AllowPaging="true"
+        PageSize="10" RowStyle-BackColor="#f8f7ff" AlternatingRowStyle-BackColor="#ffffff">
+        <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="<<" LastPageText=">>" />
+        <PagerStyle HorizontalAlign="Center" Font-Names="Roboto" Font-Size="Large" Font-Bold="true" ForeColor="#73637F" />
+        <Columns>
+            <asp:BoundField HeaderText="Opportunity Name" DataField="OpportunityName" SortExpression="OpportunityName" />
+            <asp:BoundField HeaderText="Company" DataField="CompanyName" SortExpression="CompanyName" NullDisplayText="N/A" />
+            <asp:BoundField HeaderText="Event Date" DataField="EventDate" DataFormatString="{0:MMMM dd, yyyy}" SortExpression="EventDate" NullDisplayText="N/A" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button ID="btnView" runat="server" Text="View" OnClick="btnView_Click" />
+                    <%if (Session["UserType"].ToString() == "student")
+                        {%>
+                    <asp:Button ID="btnBookmark" runat="server" Text="Bookmark" OnClick="btnBookmark_Click" />
+                    <%} %>
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
 
     <asp:SqlDataSource ID="sqlsrc" runat="server"
         ConnectionString="<%$ ConnectionStrings:OSAG %>"
