@@ -15,7 +15,7 @@
 
         <div class="row">
             <div class="col-lg-6 offset-lg-3 pb-3">
-                <h5>Internship</h5>
+                <h5>INTERNSHIP</h5>
                 <h1>
                     <asp:Label ID="lblName" runat="server" Text=""></asp:Label></h1>
                 <h3>
@@ -25,7 +25,7 @@
 
         <div class="row">
             <div class="col-lg-6 offset-lg-3 pt-4">
-                <h3>Internship DETAILS</h3>
+                <h3>INTERNSHIP DETAILS</h3>
 
                 <h5>DEADLINE:
                     <asp:Label ID="lblDeadline" runat="server" Text=""></asp:Label></h5>
@@ -43,7 +43,7 @@
 
         <div class="row">
             <div class="col-lg-7 offset-lg-3 pt-4 pb-3">
-                <h3>Internship DESCRIPTION</h3>
+                <h3>INTERNSHIP DESCRIPTION</h3>
                 <h5>
 
                     <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label></h5>
@@ -107,7 +107,7 @@
             <a href="/admin/CreateInternship.aspx" class="previous">&laquo; Return to Create Internships</a>
         </div>
         <div class="col-lg-6 offset-lg-3 pt-4">
-            <h3>Internship DETAILS</h3>
+            <h3>INTERNSHIP DETAILS</h3>
 
             <h5>Internship Name:
                 <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Width="400px"></asp:TextBox></h5>
